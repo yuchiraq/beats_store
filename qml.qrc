@@ -54,5 +54,6 @@
         <file>png/temp/covers/trap-no-hook.jpg</file>
         <file>ui/Tracks/BlockRandomAuthors.qml</file>
         <file>png/temp/authors/ava.png</file>
+        <file>png/temp/authors/cq.png</file>
     </qresource>
 </RCC>

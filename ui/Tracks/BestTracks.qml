@@ -22,6 +22,7 @@ ScrollView {
     ScrollBar.vertical.interactive: true
 
     contentWidth: width
+    contentHeight: blockRandomBeats.height * 5
 
     property int blockMargin: mainScreen.width / 40
 
