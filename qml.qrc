@@ -55,5 +55,7 @@
         <file>ui/Tracks/BlockRandomAuthors.qml</file>
         <file>png/temp/authors/ava.png</file>
         <file>png/temp/authors/cq.png</file>
+        <file>ui/Cards/AuthorMiniCard.qml</file>
+        <file>ui/Cards/BeatLine.qml</file>
     </qresource>
 </RCC>
