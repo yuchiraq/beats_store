@@ -8,7 +8,7 @@ Rectangle {
     id: blockRandomBeats
 
     width: mainScreen.width - (blockMargin * 2)
-    height: randomBeat1.height * 5 + 5 + headerRandomBeats.height + 30
+    height: headerRandomBeats.anchors.leftMargin * 3 * 5 + 5 + headerRandomBeats.height + 30
     radius: width / 20
 
     color: "#333333"
@@ -43,6 +43,7 @@ Rectangle {
         }
 
         BeatLine {
+            id: dff
             cover: "qrc:/png/temp/covers/2.png"
             title: "Roll up dat zaza shit"
             author: "1swif"
@@ -56,6 +57,7 @@ Rectangle {
         }
 
         BeatLine {
+            id:kndf
             cover: "qrc:/png/temp/covers/balenciaga.jpg"
             title: "Balenciaga"
             author: "Ebone Hoodrich"
@@ -69,6 +71,7 @@ Rectangle {
         }
 
         BeatLine {
+            id: kfmfksd
             cover: "qrc:/png/temp/covers/PLINOFFICIAL - Cocaina80%.jpg"
             title: "Cocaina"
             author: "Plinofficial"

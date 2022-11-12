@@ -53,33 +53,32 @@ Rectangle {
             spacing: blockMargin
 
             AuthorMiniCard {
-                id: testRandomAuthorCard0
+
                 style: "Trap/EDM"
                 name: "Niki-Y On Da Track"
                 cover: "qrc:/png/temp/authors/ava.png"
             }
 
             AuthorMiniCard {
-                id: testRandomAuthorCard1
+
                 style: "Boss design"
                 name: "Chiraq Concept"
                 cover: "qrc:/png/temp/authors/cq.png"
             }
 
             AuthorMiniCard {
-                id: testRandomAuthorCard2
+
                 style: "Shit"
                 name: "ogbogtoy"
                 cover: "qrc:/png/temp/covers/cover.jpg"
             }
 
-            AuthorMiniCard {
-
-            }
-
-            AuthorMiniCard {
-
-            }
+            AuthorMiniCard {}
+            AuthorMiniCard {}
+            AuthorMiniCard {}
+            AuthorMiniCard {}
+            AuthorMiniCard {}
+            AuthorMiniCard {}
         }
     }
 
