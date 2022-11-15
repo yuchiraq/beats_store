@@ -1,68 +1,85 @@
 import QtQuick 2.15
-import QtQuick.Controls
+import QtQuick.Controls.Material
 
 import "qrc:/TextStyles"
 import "qrc:/ui/Tracks"
 import "qrc:/ui"
 
-
-ScrollView {
+Flickable {
     id: centralScreen
 
-    anchors {
-        top: parent.top
-        left: parent.left
-        right: parent.right
-    }
-
-    ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-    ScrollBar.vertical.policy: ScrollBar.AlwaysOff
-
-    ScrollBar.horizontal.interactive: false
-    ScrollBar.vertical.interactive: true
-
-    contentWidth: width
-    contentHeight: blockRandomBeats.height * 5
+    contentHeight: bestTracksColumn.height
+    anchors.fill: parent
+    anchors.topMargin: topLogo.height
+    anchors.bottomMargin: bottomBar.height
 
     property int blockMargin: mainScreen.width / 40
 
-    Column {
-        id: bestTracksColumn
+//    Pane {
+//        id: centralScreen
 
-        anchors.fill: parent
-        anchors.topMargin: topLogo.height
-
-        spacing: blockMargin * 1.5
-
-        BlockNewRealise {
-            id: blockNewRealise
-
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
+//        //    anchors {
+//        //        top: parent.top
+//        //        left: parent.left
+//        //        right: parent.right
+//        //    }
+//        anchors.fill: parent
+//        anchors.topMargin: topLogo.height
+//        anchors.bottomMargin: topLogo.height
 
 
-        BlockRandomBeats {
-            id: blockRandomBeats
+        //    ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+        //    ScrollBar.vertical.policy: ScrollBar.AlwaysOff
 
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
+        //    ScrollBar.horizontal.interactive: false
+        //    ScrollBar.vertical.interactive: true
 
-        BlockRandomAuthors {
-            id: blockRandomAuthors
+        //    contentWidth: width
+        //    contentHeight: blockRandomBeats.height * 5
 
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-
-        BasicTextStyle {
-            text: "by Chiraq Concept"
+        Column {
+            id: bestTracksColumn
 
             anchors {
-                right: parent.right
-                rightMargin: blockMargin
+                top: mainScreen.top
+                //left: mainScreen.left
+                //right: mainScreen.right
+                topMargin: topLogo.height
+                bottomMargin: topLogo.height
+                horizontalCenter: parent.horizontalCenter
             }
+
+            spacing: blockMargin
+
+            BlockNewRealise {
+                id: blockNewRealise
+
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
+
+            BlockRandomBeats {
+                id: blockRandomBeats
+
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
+            BlockRandomAuthors {
+                id: blockRandomAuthors
+
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
+            BasicTextStyle {
+                text: "by Chiraq Concept"
+
+                anchors {
+                    right: parent.right
+                    rightMargin: blockMargin
+                }
+            }
+
         }
-
     }
-}
 
-
+//}

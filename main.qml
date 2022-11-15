@@ -3,7 +3,6 @@ import QtQuick.Window
 import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick.Controls.Material
-import QtQuick.Controls.Universal
 
 import "ui/BottomBar"
 import "ui/Tracks"
@@ -14,16 +13,21 @@ import "qrc:/ui"
 
 ApplicationWindow {
 
+    property string darkest: "#1f1f1f"
+    property string dark: "#292A29"
+    property string light: "#CCD7CC"
+
     id: mainScreen
 
-    width: 1600
-    height: 900
+    width: 1080/2
+    height: 1920/2
     visible: true
     title: qsTr("beats")
 
     contentOrientation: "PortraitOrientation"
 
-    color: "#282323"
+    //color: "#282323"
+    color: darkest
 
     StackView {
 
@@ -53,7 +57,6 @@ ApplicationWindow {
         id: rightScreen
 
         visible: false
-
     }
 
     BottomBar {
@@ -75,7 +78,8 @@ ApplicationWindow {
             right: parent.right
         }
 
-        color: "#282323"
+        //color: "#282323"
+        color: darkest
 
         Splash{}
 

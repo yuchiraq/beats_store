@@ -12,11 +12,13 @@ Rectangle {
     height: parent.height - 10
     width: height / 12 * 9
     radius: height / 20
-    color: "#333"
-    border.color: "#282323"
+    //color: "#333"
+    color: "#0028292A"
+    //border.color: "#282323"
+    border.color: light
     border.width: 1
 
-    property string cover: "qrc:/png/OG_2.png"
+    property string cover: ""
     property string name: "Beatmaker"
     property string style: "music style"
 
@@ -27,7 +29,10 @@ Rectangle {
         height: width
         radius: width / 20
 
-        color: "#333"
+        //color: "#333"
+        color: darkest
+        border.color: light
+        border.width: 1
 
         anchors {
             horizontalCenter: parent.horizontalCenter

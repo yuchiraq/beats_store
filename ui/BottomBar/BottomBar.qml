@@ -16,7 +16,7 @@ Rectangle {
     height: parent.height / 14
     width: parent.width
 
-    color: "#df282323"
+    color: darkest
 
     property int buttonMin: height * 0.4
     property int buttonMax: height * 0.45

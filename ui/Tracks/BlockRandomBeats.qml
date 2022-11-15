@@ -11,7 +11,8 @@ Rectangle {
     height: headerRandomBeats.anchors.leftMargin * 3 * 5 + 5 + headerRandomBeats.height + 30
     radius: width / 20
 
-    color: "#333333"
+    //color: "#333333"
+    color: dark
 
     HeaderTextStyle {
         id: headerRandomBeats
@@ -21,7 +22,7 @@ Rectangle {
             top: parent.top
             topMargin: 10
             left: parent.left
-            leftMargin: blockNewRealise.height * 0.1
+            leftMargin: blockMargin * 2
         }
     }
 
@@ -38,12 +39,12 @@ Rectangle {
         Rectangle {
             width: parent.width - headerRandomBeats.anchors.leftMargin
             height: 1
-            color: "#777"
+            color: light
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
         BeatLine {
-            id: dff
+
             cover: "qrc:/png/temp/covers/2.png"
             title: "Roll up dat zaza shit"
             author: "1swif"
@@ -52,21 +53,22 @@ Rectangle {
         Rectangle {
             width: parent.width - headerRandomBeats.anchors.leftMargin
             height: 1
-            color: "#777"
+            color: light
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
         BeatLine {
-            id:kndf
+
             cover: "qrc:/png/temp/covers/balenciaga.jpg"
             title: "Balenciaga"
             author: "Ebone Hoodrich"
         }
 
         Rectangle {
+
             width: parent.width - headerRandomBeats.anchors.leftMargin
             height: 1
-            color: "#777"
+            color: light
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
@@ -79,8 +81,8 @@ Rectangle {
 
         Rectangle {
             width: parent.width - headerRandomBeats.anchors.leftMargin
-            height: 1
-            color: "#777"
+            height: 0.5
+            color: light
             anchors.horizontalCenter: parent.horizontalCenter
         }
 

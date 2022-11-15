@@ -1,4 +1,5 @@
 import QtQuick 2.15
+import QtQuick.Controls
 
 Rectangle {
     id: topBar
@@ -12,7 +13,8 @@ Rectangle {
     height: parent.height / 14
     width: parent.width
 
-    color: "#df282323"
+    //color: "#fd282323"
+    color: darkest
 
     Image {
 
@@ -44,7 +46,7 @@ Rectangle {
         height: width / (2308 / 392)
 
         onClicked:
-            topBar.color = "#282323"
+            topBar.color = dark
     }
 
 }

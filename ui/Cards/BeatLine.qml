@@ -10,7 +10,7 @@ Rectangle {
 
     color: "#00333333"
 
-    property string cover: "qrc:/png/OG_1.png"
+    property string cover: ""
     property string title: "Track name"
     property string author: "Beatmaker"
     property string time: "0:00"
@@ -18,7 +18,10 @@ Rectangle {
 
     Rectangle {
         id: beatLineCoverMask
-        color: "#282323"
+        //color: "#282323"
+        color: darkest
+        border.width: 1
+        border.color: light
         width: parent.height * 0.8
         height: width
         anchors.left: parent.left
