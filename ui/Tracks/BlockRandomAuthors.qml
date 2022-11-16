@@ -9,11 +9,14 @@ Rectangle {
     id: blockRandomAuthors
 
     width: mainScreen.width - (blockMargin * 2)
-    height: blockMargin * 20
+    height: headerRandomAuthors.height + 30 + blockMargin * 12
     radius: width / 20
 
     //color: "#333333"
     color: dark
+
+    border.color: outline
+    border.width: 1
 
     HeaderTextStyle {
         id: headerRandomAuthors
@@ -42,14 +45,6 @@ Rectangle {
 
         width: parent.width
         height: parent.height - headerRandomAuthors.height - 20
-
-//        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-//        ScrollBar.vertical.policy: ScrollBar.AlwaysOff
-
-//        ScrollBar.horizontal.interactive: true
-//        ScrollBar.vertical.interactive: false
-
-//        contentHeight: height
 
         Row {
             id: randomAuthors

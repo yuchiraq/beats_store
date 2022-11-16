@@ -6,7 +6,7 @@ Rectangle {
     id: beatLine
 
     width: parent.width
-    height: headerRandomBeats.anchors.leftMargin * 3
+    height: blockMargin * 6
 
     color: "#00333333"
 
@@ -19,9 +19,9 @@ Rectangle {
     Rectangle {
         id: beatLineCoverMask
         //color: "#282323"
-        color: darkest
+        color: darkVariant
         border.width: 1
-        border.color: light
+        border.color: outline
         width: parent.height * 0.8
         height: width
         anchors.left: parent.left
@@ -47,32 +47,46 @@ Rectangle {
         maskSource: beatLineCoverMask
     }
 
-    BasicTextStyle {
-        id: beatLineName
-        text: beatLine.title
-        anchors.left: beatLineCoverMask.right
-        anchors.leftMargin: headerRandomBeats.anchors.leftMargin / 2
-        anchors.verticalCenter: parent.verticalCenter
-        color: "white"
-    }
+    Item {
 
-    BasicTextStyle {
-        id: beatLineAuthor
-        text: beatLine.author
-        anchors.left: beatLineName.right
-        anchors.leftMargin: 5
+        anchors.left: beatLineCoverMask.right
+        anchors.leftMargin: blockMargin
         anchors.verticalCenter: parent.verticalCenter
-        color: "#D7CCCC"
+
+        height: beatLineAuthor.height + beatLineName.height
+
+        BasicTextStyle {
+            id: beatLineName
+            text: beatLine.title
+            //anchors.left: beatLineCoverMask.right
+            //anchors.leftMargin: headerRandomBeats.anchors.leftMargin / 2
+            //anchors.verticalCenter: parent.verticalCenter
+            //anchors.bottomMargin: height / 2
+            color: "white"
+        }
+
+        BasicTextStyle {
+            id: beatLineAuthor
+            text: beatLine.author
+    //        anchors.left: beatLineName.right
+    //        anchors.leftMargin: 5
+            //anchors.left: beatLineCoverMask.right
+            //anchors.leftMargin: headerRandomBeats.anchors.leftMargin / 2
+            //anchors.verticalCenter: parent.verticalCenter
+            anchors.top: beatLineName.bottom
+            //anchors.topMargin: height / 2
+        }
     }
 
     BasicTextStyle {
         id: beatLineBPMTime
-        text: "140bpm\n2:48"
+        text: time + "\n" + bpm
         anchors.right: parent.right
-        anchors.rightMargin: headerRandomBeats.anchors.leftMargin
+        anchors.rightMargin: blockMargin
         anchors.verticalCenter: parent.verticalCenter
-        horizontalAlignment: Text.AlignHCenter
+        horizontalAlignment: Text.AlignHRight
         verticalAlignment: Text.AlignVCenter
+        color: secondary
     }
 
 }

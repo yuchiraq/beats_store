@@ -4,6 +4,7 @@ import QtQuick.Controls.Material
 import "qrc:/TextStyles"
 import "qrc:/ui/Tracks"
 import "qrc:/ui"
+import "qrc:/ui/Cards"
 
 Flickable {
     id: centralScreen
@@ -13,73 +14,68 @@ Flickable {
     anchors.topMargin: topLogo.height
     anchors.bottomMargin: bottomBar.height
 
-    property int blockMargin: mainScreen.width / 40
+    Column {
+        id: bestTracksColumn
 
-//    Pane {
-//        id: centralScreen
+        anchors {
+            top: mainScreen.top
+            //left: mainScreen.left
+            //right: mainScreen.right
+            topMargin: topLogo.height
+            bottomMargin: topLogo.height
+            horizontalCenter: parent.horizontalCenter
+        }
 
-//        //    anchors {
-//        //        top: parent.top
-//        //        left: parent.left
-//        //        right: parent.right
-//        //    }
-//        anchors.fill: parent
-//        anchors.topMargin: topLogo.height
-//        anchors.bottomMargin: topLogo.height
+        spacing: blockMargin
+
+        BlockNewRealise {
+            id: blockNewRealise
+
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
 
 
-        //    ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-        //    ScrollBar.vertical.policy: ScrollBar.AlwaysOff
+        BlockRandomBeats {
+            id: blockRandomBeats
 
-        //    ScrollBar.horizontal.interactive: false
-        //    ScrollBar.vertical.interactive: true
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
 
-        //    contentWidth: width
-        //    contentHeight: blockRandomBeats.height * 5
+        BlockRandomAuthors {
+            id: blockRandomAuthors
 
-        Column {
-            id: bestTracksColumn
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        BeatLine {
+            time: "2:54"
+            bpm: "15bpm"
+            cover: "qrc:/png/temp/covers/balenciaga.jpg"
+            title: "Balenciaga"
+            author: "Ebone Hoodrich"
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        BeatLine {
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        BeatLine {
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        BeatLine {
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        BasicTextStyle {
+            text: "by Chiraq Concept"
 
             anchors {
-                top: mainScreen.top
-                //left: mainScreen.left
-                //right: mainScreen.right
-                topMargin: topLogo.height
-                bottomMargin: topLogo.height
-                horizontalCenter: parent.horizontalCenter
+                right: parent.right
+                rightMargin: blockMargin
             }
-
-            spacing: blockMargin
-
-            BlockNewRealise {
-                id: blockNewRealise
-
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-
-
-            BlockRandomBeats {
-                id: blockRandomBeats
-
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-
-            BlockRandomAuthors {
-                id: blockRandomAuthors
-
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-
-            BasicTextStyle {
-                text: "by Chiraq Concept"
-
-                anchors {
-                    right: parent.right
-                    rightMargin: blockMargin
-                }
-            }
-
         }
-    }
 
-//}
+    }
+}

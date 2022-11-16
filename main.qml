@@ -13,9 +13,15 @@ import "qrc:/ui"
 
 ApplicationWindow {
 
-    property string darkest: "#1f1f1f"
-    property string dark: "#292A29"
-    property string light: "#CCD7CC"
+    property string darkest: "#1C1B1F"
+    property string dark: "#313033"
+    property string light: "#CAC4D0"
+    property string outline: "#49454F"
+    property string secondary: "#FFD8E4"
+
+    property string darkVariant: "#633B48"
+
+    property int blockMargin: mainScreen.width / 40
 
     id: mainScreen
 

@@ -9,13 +9,13 @@ import "qrc:/ui"
 Rectangle {
     id: authorMiniCard
 
-    height: parent.height - 10
+    height: blockMargin * 12
     width: height / 12 * 9
     radius: height / 20
     //color: "#333"
     color: "#0028292A"
     //border.color: "#282323"
-    border.color: light
+    border.color: outline
     border.width: 1
 
     property string cover: ""
@@ -30,8 +30,8 @@ Rectangle {
         radius: width / 20
 
         //color: "#333"
-        color: darkest
-        border.color: light
+        color: darkVariant
+        border.color: outline
         border.width: 1
 
         anchors {

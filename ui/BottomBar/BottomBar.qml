@@ -19,7 +19,7 @@ Rectangle {
     color: darkest
 
     property int buttonMin: height * 0.4
-    property int buttonMax: height * 0.45
+    property int buttonMax: height * 0.5
 
     Button {
 

@@ -8,11 +8,13 @@ Rectangle {
     id: blockRandomBeats
 
     width: mainScreen.width - (blockMargin * 2)
-    height: headerRandomBeats.anchors.leftMargin * 3 * 5 + 5 + headerRandomBeats.height + 30
+    height: blockMargin * 6 * 5 + 5 + headerRandomBeats.height + 30
     radius: width / 20
 
     //color: "#333333"
     color: dark
+    border.color: outline
+    border.width: 1
 
     HeaderTextStyle {
         id: headerRandomBeats
@@ -37,9 +39,9 @@ Rectangle {
         spacing: 0
 
         Rectangle {
-            width: parent.width - headerRandomBeats.anchors.leftMargin
+            width: parent.width
             height: 1
-            color: light
+            color: outline
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
@@ -52,13 +54,14 @@ Rectangle {
 
         Rectangle {
             width: parent.width - headerRandomBeats.anchors.leftMargin
-            height: 1
-            color: light
+            height: 0.5
+            color: outline
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
         BeatLine {
-
+            time: "2:54"
+            bpm: "15bpm"
             cover: "qrc:/png/temp/covers/balenciaga.jpg"
             title: "Balenciaga"
             author: "Ebone Hoodrich"
@@ -67,8 +70,8 @@ Rectangle {
         Rectangle {
 
             width: parent.width - headerRandomBeats.anchors.leftMargin
-            height: 1
-            color: light
+            height: 0.5
+            color: outline
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
@@ -82,7 +85,7 @@ Rectangle {
         Rectangle {
             width: parent.width - headerRandomBeats.anchors.leftMargin
             height: 0.5
-            color: light
+            color: outline
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
@@ -92,8 +95,8 @@ Rectangle {
 
         Rectangle {
             width: parent.width - headerRandomBeats.anchors.leftMargin
-            height: 1
-            color: "#777"
+            height: 0.5
+            color: outline
             anchors.horizontalCenter: parent.horizontalCenter
         }
 

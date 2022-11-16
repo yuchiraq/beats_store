@@ -16,7 +16,7 @@ Rectangle {
 
     color: dark
 
-    border.color: light
+    border.color: outline
     border.width: 1
 
     property string author: "Beatmaker"
@@ -43,7 +43,7 @@ Rectangle {
     BasicTextStyle {
         id: newBeatAuthor
 
-        color: "white"
+        color: light
         anchors {
             left: parent.left
             leftMargin: blockMargin * 2

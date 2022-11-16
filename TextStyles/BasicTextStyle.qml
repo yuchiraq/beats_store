@@ -2,7 +2,7 @@ import QtQuick 2.12
 
 Text {
 
-    color: "#D7CCCC"
+    color: light
 
     font: localFontRegular.font
     FontLoader { id: localFontRegular; source: "qrc:/TextStyles/Montserrat-Medium.ttf" }
