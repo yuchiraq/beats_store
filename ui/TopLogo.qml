@@ -2,6 +2,8 @@ import QtQuick 2.15
 import QtQuick.Controls
 import Qt5Compat.GraphicalEffects
 
+import "qrc:/ui/BottomBar"
+
 Rectangle {
     id: topBar
 
@@ -11,13 +13,13 @@ Rectangle {
         top: parent.top
     }
 
-    height: parent.height / 14
+    height: 60
     width: parent.width
 
     //color: "#fd282323"
     color: darkest
 
-    Image {
+    /*Image {
 
         source: "qrc:/png/fullLOGO.png"
 
@@ -31,6 +33,11 @@ Rectangle {
         width: parent.width * 0.3
         height: width / (2308 / 392)
 
+    }*/
+
+    ProgressBar {
+        indeterminate: true
+        anchors.centerIn: parent
     }
 
     MouseArea {
@@ -46,8 +53,19 @@ Rectangle {
         width: parent.width * 0.3
         height: width / (2308 / 392)
 
-        onClicked:
+        onClicked:{
+            bottomBar.color = dark
             topBar.color = dark
+        }
+    }
+
+    Rectangle {
+        height: 1
+        width: parent.width
+        color: outline
+
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 
 }

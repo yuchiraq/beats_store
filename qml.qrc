@@ -58,5 +58,13 @@
         <file>ui/Cards/AuthorMiniCard.qml</file>
         <file>ui/Cards/BeatLine.qml</file>
         <file>ui/Cards/NewBeat.qml</file>
+        <file>png/interface/next.png</file>
+        <file>png/interface/heart.svg</file>
+        <file>png/interface/heart (1).svg</file>
+        <file>png/interface/exit.svg</file>
+        <file>png/interface/music-alt.svg</file>
+        <file>png/interface/music-alt (1).svg</file>
+        <file>png/interface/user.svg</file>
+        <file>png/interface/user (1).svg</file>
     </qresource>
 </RCC>

@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import Qt5Compat.GraphicalEffects
+
 import "qrc:/TextStyles"
 
 Rectangle {
@@ -25,7 +26,7 @@ Rectangle {
         width: parent.height * 0.8
         height: width
         anchors.left: parent.left
-        anchors.leftMargin: blockNewRealise.height * 0.05
+        anchors.leftMargin: blockMargin
         anchors.verticalCenter: parent.verticalCenter
         radius: height / 20
     }
@@ -36,7 +37,7 @@ Rectangle {
         width: parent.height * 0.8
         height: width
         anchors.left: parent.left
-        anchors.leftMargin: headerRandomBeats.anchors.leftMargin / 2
+        anchors.leftMargin: blockMargin
         anchors.verticalCenter: parent.verticalCenter
         visible: false
     }

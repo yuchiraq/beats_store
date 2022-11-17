@@ -8,7 +8,7 @@ Rectangle {
     id: blockRandomBeats
 
     width: mainScreen.width - (blockMargin * 2)
-    height: blockMargin * 6 * 5 + 5 + headerRandomBeats.height + 30
+    height: blockMargin * 6 * 5 + 5 + headerRandomBeats.height + 20 + blockMargin
     radius: width / 20
 
     //color: "#333333"
@@ -61,7 +61,7 @@ Rectangle {
 
         BeatLine {
             time: "2:54"
-            bpm: "15bpm"
+            bpm: "159bpm"
             cover: "qrc:/png/temp/covers/balenciaga.jpg"
             title: "Balenciaga"
             author: "Ebone Hoodrich"

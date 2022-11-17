@@ -25,7 +25,7 @@ Rectangle {
     Rectangle {
         id: authorMiniCardCoverMask
 
-        width: parent.width - blockMargin
+        width: parent.width
         height: width
         radius: width / 20
 
@@ -37,7 +37,7 @@ Rectangle {
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
-            topMargin: blockMargin / 2
+            //topMargin: blockMargin / 2
         }
     }
 
@@ -45,13 +45,13 @@ Rectangle {
         id: authorMiniCardCover
         source: authorMiniCard.cover
 
-        width: parent.width - blockMargin
+        width: parent.width
         height: width
 
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
-            topMargin: blockMargin / 2
+            //topMargin: blockMargin / 2
         }
 
         visible: false
@@ -66,7 +66,7 @@ Rectangle {
     HeaderTextStyle {
         id: authorMiniCardName
         color: "white"
-        text: authorMiniCard.name
+        text: "<b>" + authorMiniCard.name + "</b>"
 
         font.pointSize: (authorMiniCard.height - authorMiniCardCoverMask.height) / 4
 

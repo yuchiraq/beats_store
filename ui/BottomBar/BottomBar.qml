@@ -13,7 +13,7 @@ Rectangle {
         bottom: parent.bottom
     }
 
-    height: parent.height / 14
+    height: 60
     width: parent.width
 
     color: darkest
@@ -33,7 +33,7 @@ Rectangle {
         contentItem: Image {
             id: leftBottomBarButtonImg
             fillMode: Image.PreserveAspectFit
-            source: "qrc:/png/interface/user.png"
+            source: "qrc:/png/interface/user.svg"
 
             anchors.centerIn: parent
             height: buttonMin
@@ -48,9 +48,9 @@ Rectangle {
             centralBottomBarButtonImg.height = buttonMin
             rightBottomBarButtonImg.height = buttonMin
 
-            leftBottomBarButtonImg.source = "qrc:/png/interface/userActive.png"
-            centralBottomBarButtonImg.source = "qrc:/png/interface/music.png"
-            rightBottomBarButtonImg.source = "qrc:/png/interface/heart.png"
+            leftBottomBarButtonImg.source = "qrc:/png/interface/user (1).svg"
+            centralBottomBarButtonImg.source = "qrc:/png/interface/music-alt.svg"
+            rightBottomBarButtonImg.source = "qrc:/png/interface/heart.svg"
 
             stackView.clear()
             stackView.push(leftScreen)
@@ -68,7 +68,7 @@ Rectangle {
 
         contentItem: Image {
             id: centralBottomBarButtonImg
-            source: "qrc:/png/interface/musicActive.png"
+            source: "qrc:/png/interface/music-alt (1).svg"
             fillMode: Image.PreserveAspectFit
 
             anchors.centerIn: parent
@@ -92,9 +92,9 @@ Rectangle {
             centralBottomBarButtonImg.height = buttonMax
             rightBottomBarButtonImg.height = buttonMin
 
-            leftBottomBarButtonImg.source = "qrc:/png/interface/user.png"
-            centralBottomBarButtonImg.source = "qrc:/png/interface/musicActive.png"
-            rightBottomBarButtonImg.source = "qrc:/png/interface/heart.png"
+            leftBottomBarButtonImg.source = "qrc:/png/interface/user.svg"
+            centralBottomBarButtonImg.source = "qrc:/png/interface/music-alt (1).svg"
+            rightBottomBarButtonImg.source = "qrc:/png/interface/heart.svg"
 
             stackView.clear()
             stackView.push(centralScreen)
@@ -111,11 +111,12 @@ Rectangle {
 
         contentItem: Image {
             id: rightBottomBarButtonImg
-            source: "qrc:/png/interface/heart.png"
+            source: "qrc:/png/interface/heart.svg"
             fillMode: Image.PreserveAspectFit
 
             anchors.centerIn: parent
             height: buttonMin
+            //sourceSize: buttonMin
 
             ColorOverlay {
                 id: rightBottomBarButtonImgOverlay
@@ -134,14 +135,23 @@ Rectangle {
             centralBottomBarButtonImg.height = buttonMin
             rightBottomBarButtonImg.height = buttonMax
 
-            leftBottomBarButtonImg.source = "qrc:/png/interface/user.png"
-            centralBottomBarButtonImg.source = "qrc:/png/interface/music.png"
-            rightBottomBarButtonImg.source = "qrc:/png/interface/heartActive.png"
+            leftBottomBarButtonImg.source = "qrc:/png/interface/user.svg"
+            centralBottomBarButtonImg.source = "qrc:/png/interface/music-alt.svg"
+            rightBottomBarButtonImg.source = "qrc:/png/interface/heart (1).svg"
 
             stackView.clear()
             stackView.push(rightScreen)
         }
 
+    }
+
+    Rectangle {
+        height: 1
+        width: parent.width
+        color: outline
+
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 
 }

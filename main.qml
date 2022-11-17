@@ -19,7 +19,8 @@ ApplicationWindow {
     property string outline: "#49454F"
     property string secondary: "#FFD8E4"
 
-    property string darkVariant: "#633B48"
+    property string darkVariant: "#4F1C30"
+    property string alert: "#E91E63"
 
     property int blockMargin: mainScreen.width / 40
 

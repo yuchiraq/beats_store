@@ -10,7 +10,7 @@ Flickable {
     id: centralScreen
 
     contentHeight: bestTracksColumn.height
-    anchors.fill: parent
+    anchors.fill: stackView
     anchors.topMargin: topLogo.height
     anchors.bottomMargin: bottomBar.height
 
@@ -34,7 +34,6 @@ Flickable {
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
-
         BlockRandomBeats {
             id: blockRandomBeats
 
@@ -49,7 +48,7 @@ Flickable {
 
         BeatLine {
             time: "2:54"
-            bpm: "15bpm"
+            bpm: "150bpm"
             cover: "qrc:/png/temp/covers/balenciaga.jpg"
             title: "Balenciaga"
             author: "Ebone Hoodrich"

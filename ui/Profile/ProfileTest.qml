@@ -4,12 +4,13 @@ import QtQuick.Controls.Material
 import "qrc:/TextStyles"
 import "qrc:/ui/Tracks"
 import "qrc:/ui"
+import "qrc:/ui/Cards"
 
 Flickable {
     id: leftScreen
 
     contentHeight: profileColumn.height
-    anchors.fill: parent
+    anchors.fill: stackView
     anchors.topMargin: topLogo.height
     anchors.bottomMargin: bottomBar.height
 
@@ -26,6 +27,8 @@ Flickable {
         spacing: blockMargin
 
         Rectangle {
+            border.color: outline
+            border.width: 1
             width: mainScreen.width - (blockMargin * 2)
             height: width / 2 * 1
 
@@ -55,6 +58,9 @@ Flickable {
         Rectangle {
             id: profileMenu
 
+            border.color: outline
+            border.width: 1
+
             width: mainScreen.width - blockMargin * 2
             height: blockMargin * 6 * 3 + 2
 
@@ -82,10 +88,20 @@ Flickable {
                         anchors.left: parent.left
                         anchors.leftMargin: blockMargin * 2
                     }
+
+                    Image {
+                        source: "qrc:/png/interface/next.png"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        anchors.rightMargin: blockMargin * 2
+
+                        height: parent.height / 5
+                        width: height
+                    }
                 }
 
                 Rectangle {
-                    width: parent.width - blockMargin * 2
+                    width: parent.width
                     height: 0.5
                     color: outline
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -105,16 +121,27 @@ Flickable {
                         anchors.left: parent.left
                         anchors.leftMargin: blockMargin * 2
                     }
+
+                    Image {
+                        source: "qrc:/png/interface/next.png"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        anchors.rightMargin: blockMargin * 2
+
+                        height: parent.height / 5
+                        width: height
+                    }
                 }
 
                 Rectangle {
-                    width: parent.width - blockMargin * 2
+                    width: parent.width
                     height: 0.5
                     color: outline
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
 
                 Button {
+
                     width: parent.width
                     height: blockMargin * 6
 
@@ -122,12 +149,34 @@ Flickable {
                         color: "#00000000"
                     }
 
-                    BasicTextStyle {
-                        text: "Выход"
+                    Image {
+                        id: exitImg
+
+                        source: "qrc:/png/interface/exit.svg"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: blockMargin * 2
-                        color: "#F00"
+                        sourceSize.width: blockMargin * 2.5
+                        sourceSize.height: blockMargin * 2.5
+                        //fillMode: Image.PreserveAspectFit
+                    }
+
+                    BasicTextStyle {
+                        text: "Выход"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: exitImg.right
+                        anchors.leftMargin: blockMargin * 2
+                        color: alert
+                    }
+
+                    Image {
+                        source: "qrc:/png/interface/next.png"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        anchors.rightMargin: blockMargin * 2
+
+                        height: parent.height / 5
+                        width: height
                     }
 
                     onClicked: {
@@ -139,11 +188,6 @@ Flickable {
 
             }
 
-        }
-
-        ProgressBar {
-            indeterminate: true
-            anchors.horizontalCenter: parent.horizontalCenter
         }
 
         BasicTextStyle {

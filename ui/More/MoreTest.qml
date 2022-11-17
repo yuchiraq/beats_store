@@ -9,7 +9,7 @@ Flickable {
 
     width: parent
 
-    anchors.fill: parent
+    anchors.fill: stackView
     anchors.topMargin: topLogo.height
     anchors.bottomMargin: bottomBar.height
 
@@ -18,15 +18,12 @@ Flickable {
     Column {
         id: likedColumn
 
-//        anchors {
-//            top: mainScreen.top
-//            //left: mainScreen.left
-//            //right: mainScreen.right
-//            topMargin: topLogo.height
-//            bottomMargin: topLogo.height
-//            horizontalCenter: parent.horizontalCenter
-//        }
-        anchors.centerIn: parent
+        anchors {
+            top: mainScreen.top
+            topMargin: topLogo.height
+            bottomMargin: topLogo.height
+            horizontalCenter: parent.horizontalCenter
+        }
 
         spacing: blockMargin
 
@@ -41,6 +38,7 @@ Flickable {
             anchors {
                 top: likedText.bottom
                 topMargin: 20
+                horizontalCenter: parent.horizontalCenter
             }
         }
     }
