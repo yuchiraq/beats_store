@@ -10,7 +10,7 @@ Item {
 
     //property int logoOGwidth: splashScreen.width / 38 * 18
     property int logoOGwidth: splashScreen.width / 2.5
-    property int timeAnimation: 100
+    property int timeAnimation: 110
 
     Image {
         id: fullLogoSplash

@@ -1,7 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls.Material
 
-import "qrc:/TextStyles"
 import "qrc:/ui/Tracks"
 import "qrc:/ui"
 import "qrc:/ui/Cards"
@@ -46,8 +45,9 @@ Flickable {
                 radius: parent.radius
             }
 
-            HeaderTextStyle {
-                text: "Account Name"
+            Text {
+                font.family: appFont
+                text: "<strong>Account Name</strong>"
                 anchors.left: avaMask.right
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.leftMargin: blockMargin * 2
@@ -62,7 +62,7 @@ Flickable {
             border.width: 1
 
             width: mainScreen.width - blockMargin * 2
-            height: blockMargin * 6 * 3 + 2
+            height: blockMargin * 5 * 3 + 2
 
             anchors.horizontalCenter: parent.horizontalCenter
 
@@ -76,13 +76,15 @@ Flickable {
                 spacing: 0
                 Button {
                     width: parent.width
-                    height: blockMargin * 6
+                    height: blockMargin * 5
 
                     background: Rectangle {
                         color: "#00000000"
                     }
 
-                    BasicTextStyle {
+                    Text {
+                        font.family: appFont
+                        color: light
                         text: "шото"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
@@ -109,50 +111,16 @@ Flickable {
 
                 Button {
                     width: parent.width
-                    height: blockMargin * 6
-
-                    background: Rectangle {
-                        color: dark
-                    }
-
-                    BasicTextStyle {
-                        text: "шото"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: blockMargin * 2
-                    }
-
-                    Image {
-                        source: "qrc:/png/interface/next.png"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.right: parent.right
-                        anchors.rightMargin: blockMargin * 2
-
-                        height: parent.height / 5
-                        width: height
-                    }
-                }
-
-                Rectangle {
-                    width: parent.width
-                    height: 0.5
-                    color: outline
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-
-                Button {
-
-                    width: parent.width
-                    height: blockMargin * 6
+                    height: blockMargin * 5
 
                     background: Rectangle {
                         color: "#00000000"
                     }
 
                     Image {
-                        id: exitImg
+                        id: settingsImg
 
-                        source: "qrc:/png/interface/exit.svg"
+                        source: "qrc:/png/interface/settings (1).svg"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: blockMargin * 2
@@ -161,7 +129,56 @@ Flickable {
                         //fillMode: Image.PreserveAspectFit
                     }
 
-                    BasicTextStyle {
+                    Text {
+                        font.family: appFont
+                        text: "Настройки"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: settingsImg.right
+                        anchors.leftMargin: blockMargin * 2
+                        color: secondary
+                    }
+
+                    Image {
+                        source: "qrc:/png/interface/next.png"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        anchors.rightMargin: blockMargin * 2
+
+                        height: parent.height / 5
+                        width: height
+                    }
+                }
+
+                Rectangle {
+                    width: parent.width
+                    height: 0.5
+                    color: outline
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+
+                Button {
+
+                    width: parent.width
+                    height: blockMargin * 5
+
+                    background: Rectangle {
+                        color: "#00000000"
+                    }
+
+                    Image {
+                        id: exitImg
+
+                        source: "qrc:/png/interface/power.svg"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: blockMargin * 2
+                        sourceSize.width: blockMargin * 2.5
+                        sourceSize.height: blockMargin * 2.5
+                        //fillMode: Image.PreserveAspectFit
+                    }
+
+                    Text {
+                        font.family: appFont
                         text: "Выход"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: exitImg.right
@@ -190,8 +207,11 @@ Flickable {
 
         }
 
-        BasicTextStyle {
-            text: "by Chiraq Concept"
+        Text {
+            font.family: appFont
+            color: secondary
+            text: "<strong>by Chiraq Concept</strong>"
+
             anchors {
                 right: parent.right
                 rightMargin: blockMargin

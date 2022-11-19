@@ -1,7 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls.Material
 
-import "qrc:/TextStyles"
 import "qrc:/ui/Tracks"
 import "qrc:/ui"
 import "qrc:/ui/Cards"
@@ -19,8 +18,6 @@ Flickable {
 
         anchors {
             top: mainScreen.top
-            //left: mainScreen.left
-            //right: mainScreen.right
             topMargin: topLogo.height
             bottomMargin: topLogo.height
             horizontalCenter: parent.horizontalCenter
@@ -46,33 +43,49 @@ Flickable {
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
-        BeatLine {
-            time: "2:54"
-            bpm: "150bpm"
-            cover: "qrc:/png/temp/covers/balenciaga.jpg"
-            title: "Balenciaga"
-            author: "Ebone Hoodrich"
+        Column {
             anchors.horizontalCenter: parent.horizontalCenter
-        }
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-        BeatLine {
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
+            Text {
+                text: "<b>Последние релизы</b>"
+                color: light
+                anchors.horizontalCenter: parent.horizontalCenter
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
 
-        BeatLine {
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
+            BeatLine {
+                time: "2:54"
+                bpm: "150bpm"
+                cover: "qrc:/png/temp/covers/balenciaga.jpg"
+                title: "Balenciaga"
+                author: "Ebone Hoodrich"
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
 
-        BeatLine {
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
+            BeatLine {
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
 
-        BasicTextStyle {
-            text: "by Chiraq Concept"
+            BeatLine {
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
 
-            anchors {
-                right: parent.right
-                rightMargin: blockMargin
+            BeatLine {
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
+            Text {
+                font.family: appFont
+                color: secondary
+                text: "<strong>by Chiraq Concept</strong>"
+
+                anchors {
+                    right: parent.right
+                    rightMargin: blockMargin
+                }
             }
         }
 

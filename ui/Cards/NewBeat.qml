@@ -2,7 +2,6 @@ import QtQuick 2.15
 import Qt5Compat.GraphicalEffects
 import QtQuick.Controls
 
-import "qrc:/TextStyles"
 
 Rectangle {
     id: newRealise
@@ -11,8 +10,8 @@ Rectangle {
     height: width / 2 * 1
 
 
-
-    radius: width / 20
+    radius: blockMargin * 2
+    //radius: width / 20
 
     color: dark
 
@@ -30,6 +29,7 @@ Rectangle {
 
         width: height / 9 * 16
         height: parent.height
+        fillMode: Image.TileVertically
         anchors.centerIn: parent
         visible: false
     }
@@ -40,8 +40,9 @@ Rectangle {
         maskSource: newRealise
     }
 
-    BasicTextStyle {
+    Text {
         id: newBeatAuthor
+        font.family: appFont
 
         color: light
         anchors {
@@ -50,11 +51,13 @@ Rectangle {
             bottom: newBeatName.top
             bottomMargin: 2
         }
+
         text: author
     }
 
-    HeaderTextStyle {
+    Text {
         id: newBeatName
+        font.family: appFont
 
         color: "white"
         anchors {
@@ -63,7 +66,7 @@ Rectangle {
             bottom: parent.bottom
             bottomMargin: blockMargin
         }
-
+        font.bold: true
         text: title
 
     }

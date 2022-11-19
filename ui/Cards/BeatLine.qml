@@ -1,8 +1,6 @@
 import QtQuick 2.15
 import Qt5Compat.GraphicalEffects
 
-import "qrc:/TextStyles"
-
 Rectangle {
     id: beatLine
 
@@ -56,37 +54,36 @@ Rectangle {
 
         height: beatLineAuthor.height + beatLineName.height
 
-        BasicTextStyle {
+        Text {
             id: beatLineName
             text: beatLine.title
-            //anchors.left: beatLineCoverMask.right
-            //anchors.leftMargin: headerRandomBeats.anchors.leftMargin / 2
-            //anchors.verticalCenter: parent.verticalCenter
-            //anchors.bottomMargin: height / 2
+
+            font.family: appFont
+
             color: "white"
         }
 
-        BasicTextStyle {
+        Text {
+            font.pointSize: beatLineName.height / 1.5
             id: beatLineAuthor
             text: beatLine.author
-    //        anchors.left: beatLineName.right
-    //        anchors.leftMargin: 5
-            //anchors.left: beatLineCoverMask.right
-            //anchors.leftMargin: headerRandomBeats.anchors.leftMargin / 2
-            //anchors.verticalCenter: parent.verticalCenter
+            font.family: appFont
+            color: light
             anchors.top: beatLineName.bottom
-            //anchors.topMargin: height / 2
         }
     }
 
-    BasicTextStyle {
+    Text {
         id: beatLineBPMTime
         text: time + "\n" + bpm
+        font.family: appFont
+
         anchors.right: parent.right
         anchors.rightMargin: blockMargin
         anchors.verticalCenter: parent.verticalCenter
-        horizontalAlignment: Text.AlignHRight
+        horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+
         color: secondary
     }
 

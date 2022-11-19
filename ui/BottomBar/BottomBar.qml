@@ -1,6 +1,6 @@
 import QtQuick
 import Qt5Compat.GraphicalEffects
-import QtQuick.Controls
+import QtQuick.Controls.Material
 
 import "qrc:/ui/Tracks"
 
@@ -19,7 +19,7 @@ Rectangle {
     color: darkest
 
     property int buttonMin: height * 0.4
-    property int buttonMax: height * 0.5
+    property int buttonMax: height * 0.45
 
     Button {
 

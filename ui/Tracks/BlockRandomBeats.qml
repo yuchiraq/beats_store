@@ -1,7 +1,6 @@
 import QtQuick 2.15
 import Qt5Compat.GraphicalEffects
 
-import "qrc:/TextStyles"
 import "qrc:/ui/Cards"
 
 Rectangle {
@@ -9,16 +8,18 @@ Rectangle {
 
     width: mainScreen.width - (blockMargin * 2)
     height: blockMargin * 6 * 5 + 5 + headerRandomBeats.height + 20 + blockMargin
-    radius: width / 20
-
+    //radius: width / 20
+    radius: blockMargin
     //color: "#333333"
     color: dark
     border.color: outline
     border.width: 1
 
-    HeaderTextStyle {
+    Text {
         id: headerRandomBeats
-        text: "Биты"
+        font.family: appFont
+        text: "<b>Биты</b>"
+        color: light
 
         anchors {
             top: parent.top

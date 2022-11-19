@@ -1,5 +1,5 @@
 import QtQuick 2.15
-import QtQuick.Controls
+import QtQuick.Controls.Material
 import Qt5Compat.GraphicalEffects
 
 import "qrc:/ui/BottomBar"
@@ -16,7 +16,6 @@ Rectangle {
     height: 60
     width: parent.width
 
-    //color: "#fd282323"
     color: darkest
 
     /*Image {
@@ -59,13 +58,13 @@ Rectangle {
         }
     }
 
-    Rectangle {
-        height: 1
-        width: parent.width
-        color: outline
+//    Rectangle {
+//        height: 1
+//        width: parent.width
+//        color: outline
 
-        anchors.bottom: parent.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-    }
+//        anchors.bottom: parent.bottom
+//        anchors.horizontalCenter: parent.horizontalCenter
+//    }
 
 }

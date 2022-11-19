@@ -1,4 +1,4 @@
-QT += quick quickcontrols2 widgets core
+QT += quick quickcontrols2 widgets core svg
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.

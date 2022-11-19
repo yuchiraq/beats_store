@@ -1,17 +1,18 @@
 import QtQuick
 import QtQuick.Window
 import QtQuick.Layouts
-import QtQuick.Controls
+//import QtQuick.Controls
 import QtQuick.Controls.Material
 
 import "ui/BottomBar"
 import "ui/Tracks"
 import "ui/More"
 import "ui/Profile"
-import "qrc:/TextStyles"
 import "qrc:/ui"
 
 ApplicationWindow {
+
+    property string appFont: "Helvetica"
 
     property string darkest: "#1C1B1F"
     property string dark: "#313033"
@@ -31,17 +32,15 @@ ApplicationWindow {
     visible: true
     title: qsTr("beats")
 
-    contentOrientation: "PortraitOrientation"
+    //contentOrientation: "PortraitOrientation"
 
     //color: "#282323"
     color: darkest
 
     StackView {
-
         id: stackView
 
         anchors.fill: parent
-
 
         initialItem: centralScreen
     }

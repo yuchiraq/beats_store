@@ -12,7 +12,6 @@
         <file>png/OG_2.png</file>
         <file>ui/More/MoreTest.qml</file>
         <file>ui/Profile/ProfileTest.qml</file>
-        <file>TextStyles/BasicTextStyle.qml</file>
         <file>png/interface/heart.png</file>
         <file>png/interface/heartActive.png</file>
         <file>png/interface/music.png</file>
@@ -22,25 +21,6 @@
         <file>ui/TopLogo.qml</file>
         <file>png/beats.png</file>
         <file>ui/Tracks/BlockNewRealise.qml</file>
-        <file>TextStyles/Montserrat-Black.ttf</file>
-        <file>TextStyles/Montserrat-BlackItalic.ttf</file>
-        <file>TextStyles/Montserrat-Bold.ttf</file>
-        <file>TextStyles/Montserrat-BoldItalic.ttf</file>
-        <file>TextStyles/Montserrat-ExtraBold.ttf</file>
-        <file>TextStyles/Montserrat-ExtraBoldItalic.ttf</file>
-        <file>TextStyles/Montserrat-ExtraLight.ttf</file>
-        <file>TextStyles/Montserrat-ExtraLightItalic.ttf</file>
-        <file>TextStyles/Montserrat-Italic.ttf</file>
-        <file>TextStyles/Montserrat-Light.ttf</file>
-        <file>TextStyles/Montserrat-LightItalic.ttf</file>
-        <file>TextStyles/Montserrat-Medium.ttf</file>
-        <file>TextStyles/Montserrat-MediumItalic.ttf</file>
-        <file>TextStyles/Montserrat-Regular.ttf</file>
-        <file>TextStyles/Montserrat-SemiBold.ttf</file>
-        <file>TextStyles/Montserrat-SemiBoldItalic.ttf</file>
-        <file>TextStyles/Montserrat-Thin.ttf</file>
-        <file>TextStyles/Montserrat-ThinItalic.ttf</file>
-        <file>TextStyles/HeaderTextStyle.qml</file>
         <file>png/interface/overlay.png</file>
         <file>png/temp/162-2.jpg</file>
         <file>png/temp/162-3.jpg</file>
@@ -66,5 +46,10 @@
         <file>png/interface/music-alt (1).svg</file>
         <file>png/interface/user.svg</file>
         <file>png/interface/user (1).svg</file>
+        <file>png/interface/arrows-repeat.svg</file>
+        <file>png/interface/mode-landscape.svg</file>
+        <file>png/interface/power.svg</file>
+        <file>png/interface/settings.svg</file>
+        <file>png/interface/settings (1).svg</file>
     </qresource>
 </RCC>

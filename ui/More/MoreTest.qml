@@ -1,7 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls.Material
 
-import "qrc:/TextStyles"
 import "qrc:/ui/Tracks"
 
 Flickable {
@@ -27,10 +26,15 @@ Flickable {
 
         spacing: blockMargin
 
-        BasicTextStyle {
-            id: likedText
-            text: "Liked test view"
-            anchors.centerIn: parent
+        Text {
+            font.family: appFont
+            color: secondary
+            text: "<strong>by Chiraq Concept</strong>"
+
+            anchors {
+                right: parent.right
+                rightMargin: blockMargin
+            }
         }
 
         ProgressBar {

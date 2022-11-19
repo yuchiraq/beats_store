@@ -2,26 +2,28 @@ import QtQuick 2.15
 import Qt5Compat.GraphicalEffects
 import QtQuick.Controls
 
-import "qrc:/TextStyles"
 import "qrc:/ui/Cards"
 
 Rectangle {
     id: blockRandomAuthors
 
-    width: mainScreen.width - (blockMargin * 2)
+    width: mainScreen.width //- (blockMargin * 2)
     height: headerRandomAuthors.height + 20 + blockMargin + blockMargin * 12
-    radius: width / 20
-
-    //color: "#333333"
-    color: dark
+    //radius: width / 20
+    radius: blockMargin
+    color: "#00333333"
+    //color: dark
 
     border.color: outline
-    border.width: 1
+    border.width: 0
 
-    HeaderTextStyle {
+    Text {
         id: headerRandomAuthors
 
-        text: "Авторы"
+        font.family: appFont
+        color: light
+
+        text: "<b>Авторы</b>"
         anchors {
             top: parent.top
             topMargin: 10
