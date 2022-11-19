@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import Qt5Compat.GraphicalEffects
 import QtQuick.Controls
 
@@ -27,9 +27,9 @@ Rectangle {
 
         source: cover
 
-        width: height / 9 * 16
+        width: parent.width
         height: parent.height
-        fillMode: Image.TileVertically
+
         anchors.centerIn: parent
         visible: false
     }

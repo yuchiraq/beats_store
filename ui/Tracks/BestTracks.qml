@@ -45,8 +45,7 @@ Flickable {
 
         Column {
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.left: parent.left
-            anchors.right: parent.right
+            width: blockRandomAuthors.width
 
             Text {
                 text: "<b>Последние релизы</b>"

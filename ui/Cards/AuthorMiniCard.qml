@@ -84,10 +84,10 @@ Rectangle {
 
         text: authorMiniCard.style
 
-        //font.pointSize: (authorMiniCard.height - authorMiniCardCoverMask.height) / 4
+        font.pointSize: (authorMiniCard.height - authorMiniCardCoverMask.height) / 4
 
         font.family: appFont
-        font.pointSize: 4
+
         color: light
 
         anchors {
