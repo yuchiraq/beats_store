@@ -14,9 +14,9 @@ Rectangle {
     }
 
     height: 60
-    width: parent.width
+    width: mainScreen.width
 
-    color: darkest
+    color: darkestTransparency
 
     property int buttonMin: height * 0.4
     property int buttonMax: height * 0.45

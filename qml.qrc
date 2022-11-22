@@ -10,7 +10,7 @@
         <file>png/logo.png</file>
         <file>png/OG_1.png</file>
         <file>png/OG_2.png</file>
-        <file>ui/More/MoreTest.qml</file>
+        <file>ui/More/Liked.qml</file>
         <file>ui/Profile/ProfileTest.qml</file>
         <file>png/interface/heart.png</file>
         <file>png/interface/heartActive.png</file>
@@ -51,5 +51,13 @@
         <file>png/interface/power.svg</file>
         <file>png/interface/settings.svg</file>
         <file>png/interface/settings (1).svg</file>
+        <file>ui/Profile/BlockProfile.qml</file>
+        <file>png/interface/exclamation.svg</file>
+        <file>png/interface/file-invoice-dollar.svg</file>
+        <file>png/interface/fingerprint.svg</file>
+        <file>png/interface/info.svg</file>
+        <file>png/interface/money-check-edit.svg</file>
+        <file>png/interface/search.svg</file>
+        <file>ui/BottomBar/MusicPlayer.qml</file>
     </qresource>
 </RCC>

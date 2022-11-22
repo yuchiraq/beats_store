@@ -60,6 +60,7 @@ Rectangle {
         font.family: appFont
 
         color: "white"
+
         anchors {
             left: parent.left
             leftMargin: blockMargin * 2

@@ -16,7 +16,7 @@ Rectangle {
     height: 60
     width: parent.width
 
-    color: darkest
+    color: darkestTransparency
 
     /*Image {
 

@@ -25,34 +25,8 @@ Flickable {
 
         spacing: blockMargin
 
-        Rectangle {
-            border.color: outline
-            border.width: 1
-            width: mainScreen.width - (blockMargin * 2)
-            height: width / 2 * 1
-
-            color: dark
-
-            radius: width / 20
-
-            Rectangle {
-                id: avaMask
-                width: parent.height
-                height: width
-                color: darkVariant
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-                radius: parent.radius
-            }
-
-            Text {
-                font.family: appFont
-                text: "<strong>Account Name</strong>"
-                anchors.left: avaMask.right
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.leftMargin: blockMargin * 2
-                color: "white"
-            }
+        BlockProfile{
+            anchors.horizontalCenter: parent.horizontalCenter
         }
 
         Rectangle {
@@ -62,7 +36,7 @@ Flickable {
             border.width: 1
 
             width: mainScreen.width - blockMargin * 2
-            height: blockMargin * 5 * 3 + 2
+            height: blockMargin * 5 * 4 + 3
 
             anchors.horizontalCenter: parent.horizontalCenter
 
@@ -82,13 +56,72 @@ Flickable {
                         color: "#00000000"
                     }
 
-                    Text {
-                        font.family: appFont
-                        color: light
-                        text: "шото"
+                    Image {
+                        id: infoServiceImg
+
+                        source: "qrc:/png/interface/info.svg"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: blockMargin * 2
+                        sourceSize.width: blockMargin * 2.5
+                        sourceSize.height: blockMargin * 2.5
+                        //fillMode: Image.PreserveAspectFit
+                    }
+
+                    Text {
+                        font.family: appFont
+                        text: "Информация о сервисе"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: infoServiceImg.right
+                        anchors.leftMargin: blockMargin * 2
+                        color: secondary
+                    }
+
+                    Image {
+                        source: "qrc:/png/interface/next.png"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        anchors.rightMargin: blockMargin * 2
+
+                        height: parent.height / 5
+                        width: height
+                    }
+                }
+
+                Rectangle {
+                    width: parent.width
+                    height: 0.5
+                    color: outline
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+
+                Button {
+                    width: parent.width
+                    height: blockMargin * 5
+
+                    background: Rectangle {
+                        color: "#00000000"
+                    }
+
+                    Image {
+                        id: infoBuyImg
+
+                        source: "qrc:/png/interface/file-invoice-dollar.svg"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: blockMargin * 2
+                        sourceSize.width: blockMargin * 2.5
+                        sourceSize.height: blockMargin * 2.5
+                        //fillMode: Image.PreserveAspectFit
+                    }
+
+                    Text {
+                        font.family: appFont
+                        text: "Информация о покупках"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: infoBuyImg.right
+                        anchors.leftMargin: blockMargin * 2
+                        color: secondary
                     }
 
                     Image {
@@ -147,6 +180,7 @@ Flickable {
                         height: parent.height / 5
                         width: height
                     }
+
                 }
 
                 Rectangle {
@@ -157,7 +191,6 @@ Flickable {
                 }
 
                 Button {
-
                     width: parent.width
                     height: blockMargin * 5
 
@@ -166,9 +199,9 @@ Flickable {
                     }
 
                     Image {
-                        id: exitImg
+                        id: infoProfileImg
 
-                        source: "qrc:/png/interface/power.svg"
+                        source: "qrc:/png/interface/fingerprint.svg"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: blockMargin * 2
@@ -179,11 +212,11 @@ Flickable {
 
                     Text {
                         font.family: appFont
-                        text: "Выход"
+                        text: "Хранящиеся данные пользователя"
                         anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: exitImg.right
+                        anchors.left: infoProfileImg.right
                         anchors.leftMargin: blockMargin * 2
-                        color: alert
+                        color: secondary
                     }
 
                     Image {
@@ -196,13 +229,69 @@ Flickable {
                         width: height
                     }
 
-                    onClicked: {
-                        mainScreen.close()
-                        mainScreen.destroy()
-                    }
-
                 }
 
+            }
+
+        }
+
+        Button {
+
+            width: mainScreen.width - blockMargin * 2
+            height: blockMargin * 5
+
+            background: Rectangle {
+                anchors.fill: parent
+
+                border.color: outline
+                border.width: 1
+
+                //width: mainScreen.width - blockMargin * 2
+                //height: blockMargin * 5
+
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                radius: width / 20
+
+                color: dark
+            }
+
+            Image {
+                id: exitImg
+
+                source: "qrc:/png/interface/power.svg"
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: blockMargin * 2
+                sourceSize.width: blockMargin * 2.5
+                sourceSize.height: blockMargin * 2.5
+                //fillMode: Image.PreserveAspectFit
+            }
+
+            Text {
+                font.family: appFont
+                text: "Выход"
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: exitImg.right
+                anchors.leftMargin: blockMargin * 2
+                color: alert
+            }
+
+            Image {
+                source: "qrc:/png/interface/next.png"
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.rightMargin: blockMargin * 2
+
+                height: parent.height / 5
+                width: height
+
+                visible: false
+            }
+
+            onClicked: {
+                mainScreen.close()
+                mainScreen.destroy()
             }
 
         }

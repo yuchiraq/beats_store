@@ -12,10 +12,12 @@ import "qrc:/ui"
 
 ApplicationWindow {
 
-    property string appFont: "Helvetica"
+    property string appFont: "Roboto"
 
     property string darkest: "#1C1B1F"
     property string dark: "#313033"
+    property string darkestTransparency: "#DF1C1B1F"
+
     property string light: "#CAC4D0"
     property string outline: "#49454F"
     property string secondary: "#FFD8E4"
@@ -59,7 +61,7 @@ ApplicationWindow {
 
     }
 
-    MoreTest {
+    Liked {
         id: rightScreen
 
         visible: false
@@ -67,6 +69,10 @@ ApplicationWindow {
 
     BottomBar {
         id: bottomBar
+    }
+
+    MusicPlayer {
+        id: musicPlayerMin
     }
 
     TopLogo {
