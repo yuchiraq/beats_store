@@ -5,10 +5,16 @@ import "qrc:/"
 
 Rectangle {
     id: musicPlayerMin
+
+    property string titlePlayer: "Title"
+    property string authorPlayer: "Author"
+
     width: mainScreen.width
     height: 40
 
     color: darkestTransparency
+
+    visible: false
 
     anchors {
         bottom: bottomBar.top
@@ -19,7 +25,7 @@ Rectangle {
     Text {
         id: musicPlayerMinTitle
 
-        text: "Beat title"
+        text: titlePlayer
 
         font.family: appFont
 
@@ -36,7 +42,7 @@ Rectangle {
     Text {
         id: musicPlayerMinAuthor
 
-        text: "Author"
+        text: authorPlayer
 
         font.family: appFont
 

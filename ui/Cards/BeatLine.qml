@@ -87,4 +87,14 @@ Rectangle {
         color: secondary
     }
 
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            musicPlayerMin.titlePlayer = title
+            musicPlayerMin.authorPlayer = author
+            musicPlayerMin.visible = true
+        }
+
+    }
+
 }

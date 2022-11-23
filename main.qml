@@ -16,7 +16,7 @@ ApplicationWindow {
 
     property string darkest: "#1C1B1F"
     property string dark: "#313033"
-    property string darkestTransparency: "#DF1C1B1F"
+    property string darkestTransparency: "#EF1C1B1F"
 
     property string light: "#CAC4D0"
     property string outline: "#49454F"
