@@ -59,5 +59,6 @@
         <file>png/interface/money-check-edit.svg</file>
         <file>png/interface/search.svg</file>
         <file>ui/BottomBar/MusicPlayer.qml</file>
+        <file>ui/Profile/InfoServicePage.qml</file>
     </qresource>
 </RCC>

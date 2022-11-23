@@ -40,7 +40,7 @@ Flickable {
         ProgressBar {
             indeterminate: true
             anchors {
-                top: likedText.bottom
+
                 topMargin: 20
                 horizontalCenter: parent.horizontalCenter
             }

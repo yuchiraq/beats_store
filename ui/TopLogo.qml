@@ -18,7 +18,7 @@ Rectangle {
 
     color: darkestTransparency
 
-    /*Image {
+    Image {
 
         source: "qrc:/png/fullLOGO.png"
 
@@ -32,12 +32,12 @@ Rectangle {
         width: parent.width * 0.3
         height: width / (2308 / 392)
 
-    }*/
-
-    ProgressBar {
-        indeterminate: true
-        anchors.centerIn: parent
     }
+
+//    ProgressBar {
+//        indeterminate: true
+//        anchors.centerIn: parent
+//    }
 
     MouseArea {
         id: logoButton

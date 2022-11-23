@@ -86,6 +86,10 @@ Flickable {
                         height: parent.height / 5
                         width: height
                     }
+
+                    onClicked: {
+                        stackView.push("qrc:/ui/Profile/InfoServicePage.qml")
+                    }
                 }
 
                 Rectangle {
