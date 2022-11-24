@@ -10,7 +10,7 @@ Flickable {
 
     contentHeight: bestTracksColumn.height
     anchors.fill: stackView
-    anchors.topMargin: topLogo.height
+    anchors.topMargin: topBar.height
     anchors.bottomMargin: bottomBar.height
 
     Column {
@@ -18,8 +18,8 @@ Flickable {
 
         anchors {
             top: mainScreen.top
-            topMargin: topLogo.height
-            bottomMargin: topLogo.height
+            topMargin: topBar.height
+            bottomMargin: topBar.height
             horizontalCenter: parent.horizontalCenter
         }
 

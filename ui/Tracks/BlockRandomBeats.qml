@@ -9,11 +9,11 @@ Rectangle {
     width: mainScreen.width - (blockMargin * 2)
     height: blockMargin * 6 * 5 + 5 + headerRandomBeats.height + 20 + blockMargin
     //radius: width / 20
-    radius: blockMargin
+    radius: blockMargin * 2
     //color: "#333333"
     color: dark
     border.color: outline
-    border.width: 1
+    border.width: 0
 
     Text {
         id: headerRandomBeats

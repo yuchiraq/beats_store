@@ -2,7 +2,7 @@ import QtQuick 2.15
 
 Rectangle {
     border.color: outline
-    border.width: 1
+    border.width: 0
     width: mainScreen.width - (blockMargin * 2)
     height: width / 2 * 1
 

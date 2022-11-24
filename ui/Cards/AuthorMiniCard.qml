@@ -113,6 +113,17 @@ Rectangle {
         opacity: 0
     }
 
+    Rectangle {
+        id: likeAuthorOverlay
+
+        color: outline
+
+        anchors.fill: parent
+        radius: parent.radius
+
+        opacity: 0
+    }
+
     MouseArea {
         anchors.centerIn: parent
         width: parent.width
@@ -129,6 +140,14 @@ Rectangle {
 
     SequentialAnimation {
         id: likeAuthor
+
+        NumberAnimation {
+            target: likeAuthorOverlay
+            property: "opacity"
+            duration: timeAnimation / 2
+            from: 0
+            to: 0.3
+        }
 
         NumberAnimation {
             target: likeAuthorImg
@@ -158,6 +177,14 @@ Rectangle {
             property: "opacity"
             duration: timeAnimation
             from: 1; to: 0
+        }
+
+        NumberAnimation {
+            target: likeAuthorOverlay
+            property: "opacity"
+            duration: timeAnimation / 2
+            from: 0.3
+            to: 0
         }
 
         running: false

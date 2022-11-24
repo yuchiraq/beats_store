@@ -4,7 +4,7 @@ import QtQuick.Controls.Material
 import "qrc:/"
 
 Rectangle {
-    id: musicPlayerMin
+    id: musicPlayer
 
     property string titlePlayer: "Title"
     property string authorPlayer: "Author"
@@ -17,7 +17,8 @@ Rectangle {
     visible: false
 
     anchors {
-        bottom: bottomBar.top
+        bottom: parent.bottom
+        bottomMargin: bottomBar.height
         left: parent.left
         right: parent.right
     }
@@ -32,7 +33,6 @@ Rectangle {
         color: "#FFF"
 
         anchors {
-            //top: musicPlayerMin.top
             verticalCenter: parent.verticalCenter
             left: parent.left
             leftMargin: blockMargin * 2
@@ -49,10 +49,9 @@ Rectangle {
         color: light
 
         anchors {
-            //top: musicPlayerMin.top
             verticalCenter: parent.verticalCenter
             left: musicPlayerMinTitle.right
-            leftMargin: blockMargin * 2
+            leftMargin: blockMargin
         }
     }
 
@@ -61,16 +60,78 @@ Rectangle {
 
         onClicked: {
             if (parent.height === 40) {
-                parent.radius = 2 * blockMargin
-                parent.height = mainScreen.height - 120
-                //parent.bottom = mainScreen.bottom
+                musicPlayerOnMax.running = true
+                parent.color = darkest
             }
             else if (parent.height === mainScreen.height - 120) {
-                parent.radius = 0
-                parent.height = 40
-                //parent.bottom = bottomBar.top
+                musicPlayerOnMin.running = true
+                parent.color = darkestTransparency
             }
         }
+    }
+
+    property int timeAnimation: 200
+
+    ParallelAnimation {
+        id: musicPlayerOnMax
+
+        running: false
+
+        NumberAnimation {
+            target: musicPlayer
+            property: "radius"
+            duration: timeAnimation
+            from: 0
+            to: blockMargin * 2
+        }
+
+        NumberAnimation {
+            target: musicPlayer
+            property: "height"
+            duration: timeAnimation
+            from: 40
+            to: mainScreen.height - 120
+        }
+
+        NumberAnimation {
+            target: musicPlayer
+            property: "anchors.bottomMargin"
+            duration: timeAnimation
+            from: bottomBar.height
+            to: 0
+        }
+
+    }
+
+    ParallelAnimation {
+        id: musicPlayerOnMin
+
+        running: false
+
+        NumberAnimation {
+            target: musicPlayer
+            property: "radius"
+            duration: timeAnimation
+            from: blockMargin * 2
+            to: 0
+        }
+
+        NumberAnimation {
+            target: musicPlayer
+            property: "height"
+            duration: timeAnimation
+            from: mainScreen.height - 120
+            to: 40
+        }
+
+        NumberAnimation {
+            target: musicPlayer
+            property: "anchors.bottomMargin"
+            duration: timeAnimation
+            from: 0
+            to: bottomBar.height
+        }
+
     }
 
 }

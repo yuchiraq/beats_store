@@ -10,7 +10,7 @@ Flickable {
 
     contentHeight: profileColumn.height
     anchors.fill: stackView
-    anchors.topMargin: topLogo.height
+    anchors.topMargin: topBar.height
     anchors.bottomMargin: bottomBar.height
 
     Column {
@@ -18,8 +18,8 @@ Flickable {
 
         anchors {
             top: mainScreen.top
-            topMargin: topLogo.height
-            bottomMargin: topLogo.height
+            topMargin: topBar.height
+            bottomMargin: topBar.height
             horizontalCenter: parent.horizontalCenter
         }
 
@@ -33,7 +33,7 @@ Flickable {
             id: profileMenu
 
             border.color: outline
-            border.width: 1
+            border.width: 0
 
             width: mainScreen.width - blockMargin * 2
             height: blockMargin * 5 * 4 + 3
@@ -89,6 +89,7 @@ Flickable {
 
                     onClicked: {
                         stackView.push("qrc:/ui/Profile/InfoServicePage.qml")
+                        topBar.backSwitch()
                     }
                 }
 
@@ -248,7 +249,7 @@ Flickable {
                 anchors.fill: parent
 
                 border.color: outline
-                border.width: 1
+                border.width: 0
 
                 //width: mainScreen.width - blockMargin * 2
                 //height: blockMargin * 5

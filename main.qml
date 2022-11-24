@@ -14,8 +14,10 @@ ApplicationWindow {
 
     property string appFont: "Roboto"
 
+    //property string dark: "#2D2D2D"
     property string darkest: "#1C1B1F"
-    property string dark: "#313033"
+    //property string dark: "#313033"
+    property string dark: "#2E2A31"
     property string darkestTransparency: "#EF1C1B1F"
 
     property string light: "#CAC4D0"
@@ -71,12 +73,12 @@ ApplicationWindow {
         id: bottomBar
     }
 
-    MusicPlayer {
-        id: musicPlayerMin
+    TopLogo {
+        id: topBar
     }
 
-    TopLogo {
-        id: topLogo
+    MusicPlayer {
+        id: musicPlayer
     }
 
     Rectangle {

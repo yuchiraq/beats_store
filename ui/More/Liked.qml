@@ -9,7 +9,7 @@ Flickable {
     width: parent
 
     anchors.fill: stackView
-    anchors.topMargin: topLogo.height
+    anchors.topMargin: topBar.height
     anchors.bottomMargin: bottomBar.height
 
     contentHeight: likedColumn.height
@@ -19,8 +19,8 @@ Flickable {
 
         anchors {
             top: mainScreen.top
-            topMargin: topLogo.height
-            bottomMargin: topLogo.height
+            topMargin: topBar.height
+            bottomMargin: topBar.height
             horizontalCenter: parent.horizontalCenter
         }
 

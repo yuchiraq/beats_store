@@ -87,14 +87,97 @@ Rectangle {
         color: secondary
     }
 
-    MouseArea {
+    Rectangle {
+        id: likeBeatOverlay
+
+        color: outline
+
         anchors.fill: parent
-        onClicked: {
-            musicPlayerMin.titlePlayer = title
-            musicPlayerMin.authorPlayer = author
-            musicPlayerMin.visible = true
+
+        opacity: 0
+    }
+
+    Image {
+        id: likeBeatImg
+
+        source: "qrc:/png/interface/heart (1).svg"
+
+        anchors.centerIn: beatLineCoverMask
+
+        width: likeMin
+        height: width
+
+        opacity: 0
+    }
+
+    property int likeMin: beatLineCoverMask.width / 2
+    property int likeMax: beatLineCoverMask.width / 1.5
+    property int timeAnimation: 100
+
+    SequentialAnimation {
+        id: likeBeat
+
+        NumberAnimation {
+            target: likeBeatOverlay
+            property: "opacity"
+            duration: timeAnimation / 2
+            from: 0
+            to: 0.3
         }
 
+        NumberAnimation {
+            target: likeBeatImg
+            property: "opacity"
+            duration: timeAnimation
+            from: 0; to: 1
+        }
+
+        NumberAnimation {
+            target: likeBeatImg
+            property: "width"
+            duration: timeAnimation
+            from: likeMin
+            to: likeMax
+        }
+
+        NumberAnimation {
+            target: likeBeatImg
+            property: "width"
+            duration: timeAnimation
+            from: likeMax
+            to: likeMin
+        }
+
+        NumberAnimation {
+            target: likeBeatImg
+            property: "opacity"
+            duration: timeAnimation
+            from: 1; to: 0
+        }
+
+        NumberAnimation {
+            target: likeBeatOverlay
+            property: "opacity"
+            duration: timeAnimation / 2
+            from: 0.3
+            to: 0
+        }
+
+        running: false
+    }
+
+    MouseArea {
+        anchors.fill: parent
+
+        onDoubleClicked: {
+            likeBeat.running = true
+        }
+
+        onClicked: {
+            musicPlayer.titlePlayer = title
+            musicPlayer.authorPlayer = author
+            musicPlayer.visible = true
+        }
     }
 
 }
