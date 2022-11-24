@@ -5,8 +5,9 @@ Flickable {
     id: infoService
 
     contentHeight: infoServiceColumn.height
-    anchors.fill: stackView
-    anchors.topMargin: topBar.height
+    anchors.fill: parent
+
+    //anchors.topMargin: topBar.height
     anchors.bottomMargin: bottomBar.height
 
     Column {
@@ -14,7 +15,9 @@ Flickable {
         id: infoServiceColumn
 
         anchors.fill: parent
-        anchors.bottomMargin: bottomBar.height * 2
+
+        anchors.topMargin: topBar.height
+        anchors.bottomMargin: bottomBar.height
 
         spacing: blockMargin
 

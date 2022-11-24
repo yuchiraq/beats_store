@@ -18,8 +18,10 @@ Rectangle {
 
     color: darkestTransparency
 
-    property int buttonMin: height * 0.4
-    property int buttonMax: height * 0.45
+    property int buttonMin: 24
+    property int buttonMax: 27
+
+    property int active: 2
 
     Button {
 
@@ -54,6 +56,8 @@ Rectangle {
 
             stackView.clear()
             stackView.push(leftScreen)
+            active = 1
+            topBar.backSwitch()
         }
 
     }
@@ -98,6 +102,8 @@ Rectangle {
 
             stackView.clear()
             stackView.push(centralScreen)
+            active = 2
+            topBar.backSwitch()
         }
     }
 
@@ -114,6 +120,7 @@ Rectangle {
             source: "qrc:/png/interface/heart.svg"
             fillMode: Image.PreserveAspectFit
 
+            smooth: true
             anchors.centerIn: parent
             height: buttonMin
             //sourceSize: buttonMin
@@ -141,6 +148,8 @@ Rectangle {
 
             stackView.clear()
             stackView.push(rightScreen)
+            active = 3
+            topBar.backSwitch()
         }
 
     }

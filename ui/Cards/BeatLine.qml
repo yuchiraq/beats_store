@@ -176,7 +176,10 @@ Rectangle {
         onClicked: {
             musicPlayer.titlePlayer = title
             musicPlayer.authorPlayer = author
+            musicPlayer.coverPlayer = cover
             musicPlayer.visible = true
+            bottomShadow.enabled = false
+            playerShadow.enabled = true
         }
     }
 

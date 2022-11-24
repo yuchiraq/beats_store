@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls.Material
+import Qt5Compat.GraphicalEffects
 
 import "qrc:/"
 
@@ -8,6 +9,8 @@ Rectangle {
 
     property string titlePlayer: "Title"
     property string authorPlayer: "Author"
+    property string coverPlayer: ""
+    property bool play: true
 
     width: mainScreen.width
     height: 40
@@ -23,50 +26,243 @@ Rectangle {
         right: parent.right
     }
 
-    Text {
-        id: musicPlayerMinTitle
-
-        text: titlePlayer
-
-        font.family: appFont
-
-        color: "#FFF"
-
-        anchors {
-            verticalCenter: parent.verticalCenter
-            left: parent.left
-            leftMargin: blockMargin * 2
-        }
-    }
-
-    Text {
-        id: musicPlayerMinAuthor
-
-        text: authorPlayer
-
-        font.family: appFont
-
-        color: light
-
-        anchors {
-            verticalCenter: parent.verticalCenter
-            left: musicPlayerMinTitle.right
-            leftMargin: blockMargin
-        }
-    }
-
     MouseArea {
         anchors.fill: parent
 
         onClicked: {
-            if (parent.height === 40) {
+            if (parent.height == 40) {
                 musicPlayerOnMax.running = true
                 parent.color = darkest
+                //musicPlayerMax.visible = true
+                musicPlayerMin.visible = false
             }
-            else if (parent.height === mainScreen.height - 120) {
+            else if (parent.height == mainScreen.height - 120) {
                 musicPlayerOnMin.running = true
                 parent.color = darkestTransparency
+                //musicPlayerMax.visible = false
+                musicPlayerMin.visible = true
             }
+        }
+    }
+
+    Item {
+
+        id: musicPlayerMin
+
+        anchors.fill: parent
+
+        Text {
+            id: musicPlayerMinTitle
+
+            text: titlePlayer
+
+            font.family: appFont
+
+            color: "#FFF"
+
+            anchors {
+                verticalCenter: parent.verticalCenter
+                left: parent.left
+                leftMargin: blockMargin * 2
+            }
+        }
+
+        Text {
+            id: musicPlayerMinAuthor
+
+            text: authorPlayer
+
+            font.family: appFont
+
+            color: light
+
+            anchors {
+                verticalCenter: parent.verticalCenter
+                left: musicPlayerMinTitle.right
+                leftMargin: blockMargin
+            }
+        }
+
+        Button {
+            id: musicPlayerMinPP
+
+            width: 40
+            height: width
+
+            anchors {
+                verticalCenter: parent.verticalCenter
+                right: parent.right
+                rightMargin: blockMargin
+            }
+
+            contentItem: Image {
+                id: musicPlayerMinPPImg
+                source: "qrc:/png/interface/play.svg"
+                fillMode: Image.PreserveAspectFit
+                anchors.centerIn: parent
+                height: parent.height
+            }
+
+            background: Rectangle {
+                color: "#00000000"
+            }
+
+            onClicked: {
+                playerPPclick()
+            }
+        }
+    }
+
+
+    function playerPPclick(){
+        if(play){
+            play = false
+            musicPlayerMinPPImg.source = "qrc:/png/interface/pause.svg"
+            musicPlayerMaxPPImg.source = "qrc:/png/interface/pause.svg"
+        }else{
+            play = true
+            musicPlayerMinPPImg.source = "qrc:/png/interface/play.svg"
+            musicPlayerMaxPPImg.source = "qrc:/png/interface/play.svg"
+        }
+    }
+
+    //animation and max from here
+
+
+
+    Item {
+        id: musicPlayerMax
+
+        anchors.fill: parent
+
+        visible: true
+        opacity: 0
+
+        Rectangle {
+            id: topLine
+
+            width: 40
+            height: 4
+
+            color: secondary
+
+            radius: 2
+
+            anchors {
+                top: parent.top
+                topMargin: blockMargin
+                horizontalCenter: parent.horizontalCenter
+            }
+
+        }
+
+        Rectangle {
+            id: musicPlayerMaxCoverMask
+            width: parent.width * 0.8
+            height: width
+
+            radius: blockMargin * 2
+
+            color: darkVariant
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+                topMargin: parent.width * 0.1
+            }
+            smooth: true
+            visible: false
+        }
+
+        DropShadow {
+            anchors.fill: musicPlayerMaxCoverMask
+            horizontalOffset: -8
+            verticalOffset: 8
+            radius: 20.0
+            color: "#80000000"
+            source: musicPlayerMaxCoverMask
+        }
+
+
+        Image {
+            id: musicPlayerMaxCoverImg
+
+            source: coverPlayer
+
+            anchors {
+                fill: musicPlayerMaxCoverMask
+                centerIn: musicPlayerMaxCoverMask
+            }
+
+            visible: false
+        }
+
+        OpacityMask {
+            anchors.fill: musicPlayerMaxCoverMask
+            source: musicPlayerMaxCoverImg
+            maskSource: musicPlayerMaxCoverMask
+        }
+
+        Label {
+            id: musicPlayerMaxTitle
+            text: titlePlayer
+
+            color: "#FFF"
+            font.family: appFont
+            font.bold: true
+            font.pointSize: 20
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: musicPlayerMaxCoverMask.bottom
+                topMargin: 40
+            }
+        }
+
+        Label {
+            id: musicPlayerMaxAuthor
+            text: authorPlayer
+
+            color: secondary
+            font.family: appFont
+            font.bold: false
+            font.pointSize: 15
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: musicPlayerMaxTitle.bottom
+                topMargin: 10
+            }
+        }
+
+        Button {
+            id: musicPlayerMaxPP
+
+            width: parent.width * 0.2
+            height: width
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: musicPlayerMaxAuthor.bottom
+                topMargin: 40
+            }
+
+            contentItem: Image {
+                id: musicPlayerMaxPPImg
+                source: "qrc:/png/interface/play.svg"
+                fillMode: Image.PreserveAspectFit
+                anchors.centerIn: parent
+                height: parent.height
+                smooth: true
+            }
+
+            background: Rectangle {
+                color: "#00000000"
+            }
+
+            onClicked: {
+                playerPPclick()
+            }
+
         }
     }
 
@@ -101,6 +297,22 @@ Rectangle {
             to: 0
         }
 
+        NumberAnimation {
+            target: musicPlayerMax
+            property: "opacity"
+            duration: timeAnimation
+            from: 0
+            to: 1
+        }
+
+        NumberAnimation {
+            target: topLine
+            property: "width"
+            duration: timeAnimation
+            from: 0
+            to: 40
+        }
+
     }
 
     ParallelAnimation {
@@ -130,6 +342,22 @@ Rectangle {
             duration: timeAnimation
             from: 0
             to: bottomBar.height
+        }
+
+        NumberAnimation {
+            target: musicPlayerMax
+            property: "opacity"
+            duration: timeAnimation
+            from: 1
+            to: 0
+        }
+
+        NumberAnimation {
+            target: topLine
+            property: "width"
+            duration: timeAnimation
+            from: 40
+            to: 0
         }
 
     }

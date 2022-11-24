@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Window
 import QtQuick.Layouts
-//import QtQuick.Controls
 import QtQuick.Controls.Material
+import Qt5Compat.GraphicalEffects
 
 import "ui/BottomBar"
 import "ui/Tracks"
@@ -15,10 +15,11 @@ ApplicationWindow {
     property string appFont: "Roboto"
 
     //property string dark: "#2D2D2D"
-    property string darkest: "#1C1B1F"
-    //property string dark: "#313033"
-    property string dark: "#2E2A31"
-    property string darkestTransparency: "#EF1C1B1F"
+    property string dark: "#1C1B1F"
+    property string darkest: "#171717"
+    //property string dark: "#2E2A31"
+    property string darkTransparency: "#EF1C1B1F"
+    property string darkestTransparency: "#EF171717"
 
     property string light: "#CAC4D0"
     property string outline: "#49454F"

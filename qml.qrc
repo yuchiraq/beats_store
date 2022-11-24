@@ -60,5 +60,8 @@
         <file>png/interface/search.svg</file>
         <file>ui/BottomBar/MusicPlayer.qml</file>
         <file>ui/Profile/InfoServicePage.qml</file>
+        <file>png/interface/angle-right.svg</file>
+        <file>png/interface/pause.svg</file>
+        <file>png/interface/play.svg</file>
     </qresource>
 </RCC>

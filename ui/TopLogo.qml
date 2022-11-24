@@ -36,11 +36,6 @@ Rectangle {
 
     }
 
-//    ProgressBar {
-//        indeterminate: true
-//        anchors.centerIn: parent
-//    }
-
     MouseArea {
         id: searchTopBar
 
@@ -71,7 +66,7 @@ Rectangle {
             running: false
             target: searchTopBarImg
             property: "rotation"
-            duration: timeAnimation
+            duration: timeAnimation * 5
             from: 0
             to: 360
         }
@@ -93,22 +88,26 @@ Rectangle {
 
         Image {
             anchors.centerIn: parent
-            source: "qrc:/png/interface/next.png"
+            source: "qrc:/png/interface/angle-right.svg"
             width: parent.width
             height: width
             rotation: 180
         }
 
         onClicked: {
-            stackView.pop()
+            if(bottomBar.active == 1){
+                leftScreen.pop()
+            }
+
             backOff.running = true
+
         }
 
     }
 
-    property int timeAnimation: 100
+    property int timeAnimation: 150
 
-    SequentialAnimation {
+    ParallelAnimation {
         id: backOn
 
         running: false
@@ -153,8 +152,15 @@ Rectangle {
     }
 
     function backSwitch(){
-        if(stackView.depth > 1) {
-            backOn.running = true
+        if(bottomBar.active == 1){
+            if(leftScreen.depth > 1) {
+                backOn.running = true
+            }
+        } else {
+            if(backTopBar.width != 0)
+                backOff.running = true
         }
+
+
     }
 }

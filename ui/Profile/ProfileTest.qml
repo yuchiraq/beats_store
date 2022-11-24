@@ -5,312 +5,318 @@ import "qrc:/ui/Tracks"
 import "qrc:/ui"
 import "qrc:/ui/Cards"
 
-Flickable {
+StackView {
     id: leftScreen
 
+    anchors.fill: parent
+
+    initialItem: Flickable {
+
     contentHeight: profileColumn.height
-    anchors.fill: stackView
+    anchors.fill: parent
     anchors.topMargin: topBar.height
     anchors.bottomMargin: bottomBar.height
 
     Column {
-        id: profileColumn
+            id: profileColumn
 
-        anchors {
-            top: mainScreen.top
-            topMargin: topBar.height
-            bottomMargin: topBar.height
-            horizontalCenter: parent.horizontalCenter
-        }
-
-        spacing: blockMargin
-
-        BlockProfile{
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-
-        Rectangle {
-            id: profileMenu
-
-            border.color: outline
-            border.width: 0
-
-            width: mainScreen.width - blockMargin * 2
-            height: blockMargin * 5 * 4 + 3
-
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            radius: width / 20
-
-            color: dark
-
-            Column {
-                anchors.fill: parent
-
-                spacing: 0
-                Button {
-                    width: parent.width
-                    height: blockMargin * 5
-
-                    background: Rectangle {
-                        color: "#00000000"
-                    }
-
-                    Image {
-                        id: infoServiceImg
-
-                        source: "qrc:/png/interface/info.svg"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: blockMargin * 2
-                        sourceSize.width: blockMargin * 2.5
-                        sourceSize.height: blockMargin * 2.5
-                        //fillMode: Image.PreserveAspectFit
-                    }
-
-                    Text {
-                        font.family: appFont
-                        text: "Информация о сервисе"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: infoServiceImg.right
-                        anchors.leftMargin: blockMargin * 2
-                        color: secondary
-                    }
-
-                    Image {
-                        source: "qrc:/png/interface/next.png"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.right: parent.right
-                        anchors.rightMargin: blockMargin * 2
-
-                        height: parent.height / 5
-                        width: height
-                    }
-
-                    onClicked: {
-                        stackView.push("qrc:/ui/Profile/InfoServicePage.qml")
-                        topBar.backSwitch()
-                    }
-                }
-
-                Rectangle {
-                    width: parent.width
-                    height: 0.5
-                    color: outline
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-
-                Button {
-                    width: parent.width
-                    height: blockMargin * 5
-
-                    background: Rectangle {
-                        color: "#00000000"
-                    }
-
-                    Image {
-                        id: infoBuyImg
-
-                        source: "qrc:/png/interface/file-invoice-dollar.svg"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: blockMargin * 2
-                        sourceSize.width: blockMargin * 2.5
-                        sourceSize.height: blockMargin * 2.5
-                        //fillMode: Image.PreserveAspectFit
-                    }
-
-                    Text {
-                        font.family: appFont
-                        text: "Информация о покупках"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: infoBuyImg.right
-                        anchors.leftMargin: blockMargin * 2
-                        color: secondary
-                    }
-
-                    Image {
-                        source: "qrc:/png/interface/next.png"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.right: parent.right
-                        anchors.rightMargin: blockMargin * 2
-
-                        height: parent.height / 5
-                        width: height
-                    }
-                }
-
-                Rectangle {
-                    width: parent.width
-                    height: 0.5
-                    color: outline
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-
-                Button {
-                    width: parent.width
-                    height: blockMargin * 5
-
-                    background: Rectangle {
-                        color: "#00000000"
-                    }
-
-                    Image {
-                        id: settingsImg
-
-                        source: "qrc:/png/interface/settings (1).svg"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: blockMargin * 2
-                        sourceSize.width: blockMargin * 2.5
-                        sourceSize.height: blockMargin * 2.5
-                        //fillMode: Image.PreserveAspectFit
-                    }
-
-                    Text {
-                        font.family: appFont
-                        text: "Настройки"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: settingsImg.right
-                        anchors.leftMargin: blockMargin * 2
-                        color: secondary
-                    }
-
-                    Image {
-                        source: "qrc:/png/interface/next.png"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.right: parent.right
-                        anchors.rightMargin: blockMargin * 2
-
-                        height: parent.height / 5
-                        width: height
-                    }
-
-                }
-
-                Rectangle {
-                    width: parent.width
-                    height: 0.5
-                    color: outline
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-
-                Button {
-                    width: parent.width
-                    height: blockMargin * 5
-
-                    background: Rectangle {
-                        color: "#00000000"
-                    }
-
-                    Image {
-                        id: infoProfileImg
-
-                        source: "qrc:/png/interface/fingerprint.svg"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: blockMargin * 2
-                        sourceSize.width: blockMargin * 2.5
-                        sourceSize.height: blockMargin * 2.5
-                        //fillMode: Image.PreserveAspectFit
-                    }
-
-                    Text {
-                        font.family: appFont
-                        text: "Хранящиеся данные пользователя"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: infoProfileImg.right
-                        anchors.leftMargin: blockMargin * 2
-                        color: secondary
-                    }
-
-                    Image {
-                        source: "qrc:/png/interface/next.png"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.right: parent.right
-                        anchors.rightMargin: blockMargin * 2
-
-                        height: parent.height / 5
-                        width: height
-                    }
-
-                }
-
+            anchors {
+                top: mainScreen.top
+                topMargin: topBar.height
+                bottomMargin: topBar.height
+                horizontalCenter: parent.horizontalCenter
             }
 
-        }
+            spacing: blockMargin
 
-        Button {
+            BlockProfile{
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
 
-            width: mainScreen.width - blockMargin * 2
-            height: blockMargin * 5
-
-            background: Rectangle {
-                anchors.fill: parent
+            Rectangle {
+                id: profileMenu
 
                 border.color: outline
                 border.width: 0
 
-                //width: mainScreen.width - blockMargin * 2
-                //height: blockMargin * 5
+                width: mainScreen.width - blockMargin * 2
+                height: blockMargin * 5 * 4 + 3
 
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 radius: width / 20
 
                 color: dark
+
+                Column {
+                    anchors.fill: parent
+
+                    spacing: 0
+                    Button {
+                        width: parent.width
+                        height: blockMargin * 5
+
+                        background: Rectangle {
+                            color: "#00000000"
+                        }
+
+                        Image {
+                            id: infoServiceImg
+
+                            source: "qrc:/png/interface/info.svg"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            anchors.leftMargin: blockMargin * 2
+                            sourceSize.width: blockMargin * 2.5
+                            sourceSize.height: blockMargin * 2.5
+                            //fillMode: Image.PreserveAspectFit
+                        }
+
+                        Text {
+                            font.family: appFont
+                            text: "Информация о сервисе"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: infoServiceImg.right
+                            anchors.leftMargin: blockMargin * 2
+                            color: secondary
+                        }
+
+                        Image {
+                            source: "qrc:/png/interface/next.png"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.right: parent.right
+                            anchors.rightMargin: blockMargin * 2
+
+                            height: parent.height / 5
+                            width: height
+                        }
+
+                        onClicked: {
+                            leftScreen.push("qrc:/ui/Profile/InfoServicePage.qml")
+                            topBar.backSwitch()
+                        }
+                    }
+
+                    Rectangle {
+                        width: parent.width
+                        height: 0.5
+                        color: outline
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+
+                    Button {
+                        width: parent.width
+                        height: blockMargin * 5
+
+                        background: Rectangle {
+                            color: "#00000000"
+                        }
+
+                        Image {
+                            id: infoBuyImg
+
+                            source: "qrc:/png/interface/file-invoice-dollar.svg"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            anchors.leftMargin: blockMargin * 2
+                            sourceSize.width: blockMargin * 2.5
+                            sourceSize.height: blockMargin * 2.5
+                            //fillMode: Image.PreserveAspectFit
+                        }
+
+                        Text {
+                            font.family: appFont
+                            text: "Информация о покупках"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: infoBuyImg.right
+                            anchors.leftMargin: blockMargin * 2
+                            color: secondary
+                        }
+
+                        Image {
+                            source: "qrc:/png/interface/next.png"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.right: parent.right
+                            anchors.rightMargin: blockMargin * 2
+
+                            height: parent.height / 5
+                            width: height
+                        }
+                    }
+
+                    Rectangle {
+                        width: parent.width
+                        height: 0.5
+                        color: outline
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+
+                    Button {
+                        width: parent.width
+                        height: blockMargin * 5
+
+                        background: Rectangle {
+                            color: "#00000000"
+                        }
+
+                        Image {
+                            id: settingsImg
+
+                            source: "qrc:/png/interface/settings (1).svg"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            anchors.leftMargin: blockMargin * 2
+                            sourceSize.width: blockMargin * 2.5
+                            sourceSize.height: blockMargin * 2.5
+                            //fillMode: Image.PreserveAspectFit
+                        }
+
+                        Text {
+                            font.family: appFont
+                            text: "Настройки"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: settingsImg.right
+                            anchors.leftMargin: blockMargin * 2
+                            color: secondary
+                        }
+
+                        Image {
+                            source: "qrc:/png/interface/next.png"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.right: parent.right
+                            anchors.rightMargin: blockMargin * 2
+
+                            height: parent.height / 5
+                            width: height
+                        }
+
+                    }
+
+                    Rectangle {
+                        width: parent.width
+                        height: 0.5
+                        color: outline
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+
+                    Button {
+                        width: parent.width
+                        height: blockMargin * 5
+
+                        background: Rectangle {
+                            color: "#00000000"
+                        }
+
+                        Image {
+                            id: infoProfileImg
+
+                            source: "qrc:/png/interface/fingerprint.svg"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            anchors.leftMargin: blockMargin * 2
+                            sourceSize.width: blockMargin * 2.5
+                            sourceSize.height: blockMargin * 2.5
+                            //fillMode: Image.PreserveAspectFit
+                        }
+
+                        Text {
+                            font.family: appFont
+                            text: "Хранящиеся данные пользователя"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: infoProfileImg.right
+                            anchors.leftMargin: blockMargin * 2
+                            color: secondary
+                        }
+
+                        Image {
+                            source: "qrc:/png/interface/next.png"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.right: parent.right
+                            anchors.rightMargin: blockMargin * 2
+
+                            height: parent.height / 5
+                            width: height
+                        }
+
+                    }
+
+                }
+
             }
 
-            Image {
-                id: exitImg
+            Button {
 
-                source: "qrc:/png/interface/power.svg"
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: blockMargin * 2
-                sourceSize.width: blockMargin * 2.5
-                sourceSize.height: blockMargin * 2.5
-                //fillMode: Image.PreserveAspectFit
+                width: mainScreen.width - blockMargin * 2
+                height: blockMargin * 5
+
+                background: Rectangle {
+                    anchors.fill: parent
+
+                    border.color: outline
+                    border.width: 0
+
+                    //width: mainScreen.width - blockMargin * 2
+                    //height: blockMargin * 5
+
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    radius: width / 20
+
+                    color: dark
+                }
+
+                Image {
+                    id: exitImg
+
+                    source: "qrc:/png/interface/power.svg"
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: blockMargin * 2
+                    sourceSize.width: blockMargin * 2.5
+                    sourceSize.height: blockMargin * 2.5
+                    //fillMode: Image.PreserveAspectFit
+                }
+
+                Text {
+                    font.family: appFont
+                    text: "Выход"
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: exitImg.right
+                    anchors.leftMargin: blockMargin * 2
+                    color: alert
+                }
+
+                Image {
+                    source: "qrc:/png/interface/next.png"
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: parent.right
+                    anchors.rightMargin: blockMargin * 2
+
+                    height: parent.height / 5
+                    width: height
+
+                    visible: false
+                }
+
+                onClicked: {
+                    mainScreen.close()
+                    mainScreen.destroy()
+                }
+
             }
 
             Text {
                 font.family: appFont
-                text: "Выход"
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: exitImg.right
-                anchors.leftMargin: blockMargin * 2
-                color: alert
-            }
+                color: secondary
+                text: "<strong>by Chiraq Concept</strong>"
 
-            Image {
-                source: "qrc:/png/interface/next.png"
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.right: parent.right
-                anchors.rightMargin: blockMargin * 2
-
-                height: parent.height / 5
-                width: height
-
-                visible: false
-            }
-
-            onClicked: {
-                mainScreen.close()
-                mainScreen.destroy()
+                anchors {
+                    right: parent.right
+                    rightMargin: blockMargin
+                }
             }
 
         }
-
-        Text {
-            font.family: appFont
-            color: secondary
-            text: "<strong>by Chiraq Concept</strong>"
-
-            anchors {
-                right: parent.right
-                rightMargin: blockMargin
-            }
-        }
-
     }
+
 }
