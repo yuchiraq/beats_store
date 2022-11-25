@@ -51,6 +51,9 @@ Rectangle {
             cover: "qrc:/png/temp/covers/2.png"
             title: "Roll up dat zaza shit"
             author: "1swif"
+
+            time: "2:54"
+            timeSec: 174
         }
 
         Rectangle {
@@ -62,6 +65,7 @@ Rectangle {
 
         BeatLine {
             time: "2:54"
+            timeSec: 174
             bpm: "159bpm"
             cover: "qrc:/png/temp/covers/balenciaga.jpg"
             title: "Balenciaga"
@@ -81,6 +85,9 @@ Rectangle {
             cover: "qrc:/png/temp/covers/PLINOFFICIAL - Cocaina80%.jpg"
             title: "Cocaina"
             author: "Plinofficial"
+
+            time: "2:22"
+            timeSec: 142
         }
 
         Rectangle {

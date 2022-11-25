@@ -44,7 +44,7 @@ StackView {
 
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                radius: width / 20
+                radius: blockMargin * 2
 
                 color: dark
 
@@ -142,6 +142,11 @@ StackView {
                             height: parent.height / 5
                             width: height
                         }
+
+                        onClicked: {
+                            leftScreen.push("qrc:/ui/Profile/InfoBuyPage.qml")
+                            topBar.backSwitch()
+                        }
                     }
 
                     Rectangle {
@@ -188,6 +193,11 @@ StackView {
 
                             height: parent.height / 5
                             width: height
+                        }
+
+                        onClicked: {
+                            leftScreen.push("qrc:/ui/Profile/SettingsPage.qml")
+                            topBar.backSwitch()
                         }
 
                     }
@@ -255,12 +265,9 @@ StackView {
                     border.color: outline
                     border.width: 0
 
-                    //width: mainScreen.width - blockMargin * 2
-                    //height: blockMargin * 5
-
                     anchors.horizontalCenter: parent.horizontalCenter
 
-                    radius: width / 20
+                    radius: blockMargin * 2
 
                     color: dark
                 }

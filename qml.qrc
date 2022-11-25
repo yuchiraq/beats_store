@@ -64,5 +64,12 @@
         <file>png/interface/pause.svg</file>
         <file>png/interface/play.svg</file>
         <file>png/interface/shadow.png</file>
+        <file>png/logowCrop.png</file>
+        <file>png/logow.png</file>
+        <file>ui/Profile/InfoBuyPage.qml</file>
+        <file>ui/BottomBar/BeatFunctions.qml</file>
+        <file>png/interface/arrows-repeat (1).svg</file>
+        <file>png/interface/menu-burger.svg</file>
+        <file>ui/Profile/SettingsPage.qml</file>
     </qresource>
 </RCC>

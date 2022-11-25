@@ -1,8 +1,5 @@
 import QtQuick
-import Qt5Compat.GraphicalEffects
 import QtQuick.Controls.Material
-
-import "qrc:/ui/Tracks"
 
 Rectangle {
     id: bottomBar
@@ -77,12 +74,6 @@ Rectangle {
 
             anchors.centerIn: parent
             height: buttonMax
-
-            ColorOverlay {
-                id: centralBottomBarButtonImgOverlay
-
-                color: "#00000000"
-            }
         }
 
         background: Rectangle {
@@ -123,13 +114,6 @@ Rectangle {
             smooth: true
             anchors.centerIn: parent
             height: buttonMin
-            //sourceSize: buttonMin
-
-            ColorOverlay {
-                id: rightBottomBarButtonImgOverlay
-
-                color: "#af000000"
-            }
         }
 
         background: Rectangle {

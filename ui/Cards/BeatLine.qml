@@ -13,6 +13,7 @@ Rectangle {
     property string title: "Track name"
     property string author: "Beatmaker"
     property string time: "0:00"
+    property int timeSec: 0
     property string bpm: "000bpm"
 
     Rectangle {
@@ -178,8 +179,14 @@ Rectangle {
             musicPlayer.authorPlayer = author
             musicPlayer.coverPlayer = cover
             musicPlayer.visible = true
+            musicPlayer.timePlayerString = time
+            musicPlayer.timePlayerSec = timeSec
+            musicPlayer.curTime = 0
+            musicPlayer.resetPlayerSlider()
             bottomBarShadow.anchors.bottom = musicPlayer.top
         }
+
+        onPressAndHold: beatFunctions.starter()
     }
 
 }

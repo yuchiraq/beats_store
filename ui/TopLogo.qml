@@ -22,6 +22,7 @@ Rectangle {
         id: topLogo
 
         source: "qrc:/png/fullLOGO.png"
+        //source: "qrc:/png/logowCrop.png"
 
         anchors {
             left: parent.left
@@ -30,10 +31,8 @@ Rectangle {
             top: parent.top
             topMargin: (parent.height - height) / 2
         }
-
-        width: parent.width * 0.3
-        height: width / (2308 / 392)
-
+        fillMode: Image.PreserveAspectFit
+        height: parent.height * 0.5
     }
 
     MouseArea {
@@ -44,7 +43,7 @@ Rectangle {
 
         anchors {
             right: parent.right
-            rightMargin: blockMargin * 2
+            //rightMargin: blockMargin * 2
             verticalCenter: parent.verticalCenter
         }
 
@@ -82,7 +81,7 @@ Rectangle {
 
         anchors {
             left: parent.left
-            leftMargin: blockMargin
+            //leftMargin: blockMargin
             verticalCenter: parent.verticalCenter
         }
 

@@ -103,6 +103,10 @@ ApplicationWindow {
         opacity: 0.5
     }
 
+    BeatFunctions {
+        id: beatFunctions
+    }
+
     Rectangle {
 
         id: startSplashScreen
@@ -118,6 +122,8 @@ ApplicationWindow {
         color: darkest
 
         Splash{}
+
+
 
     }
 

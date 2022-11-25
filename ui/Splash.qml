@@ -44,6 +44,7 @@ Item {
     }
 
     SequentialAnimation{
+        id: splashAnimation
 
 
         NumberAnimation {
@@ -76,8 +77,20 @@ Item {
             from: 1; to: 0
         }
 
+        NumberAnimation {
+            duration: timeAnimation * 5
+        }
+
+        function closeSplash(){
+            startSplashScreen.destroy()
+            splashClick.destroy()
+        }
+
+        onFinished: closeSplash()
         running: true
 
     }
+
+
 
 }

@@ -10,7 +10,13 @@ Rectangle {
     property string titlePlayer: "Title"
     property string authorPlayer: "Author"
     property string coverPlayer: ""
+
     property bool play: true
+    property bool onRepeat: false
+
+    property string timePlayerString: "0:00"
+    property int timePlayerSec: 200
+    property int curTime: 0
 
     width: mainScreen.width
     height: 40
@@ -31,15 +37,15 @@ Rectangle {
 
         onClicked: {
             if (parent.height == 40) {
+                musicPlayerOnMax.running = true
                 musicPlayerMax.visible = true
                 musicPlayerMin.visible = false
-                musicPlayerOnMax.running = true
                 parent.color = darkest
             }
             else if (parent.height == mainScreen.height - 120) {
+                musicPlayerOnMin.running = true
                 musicPlayerMax.visible = false
                 musicPlayerMin.visible = true
-                musicPlayerOnMin.running = true
                 parent.color = darkestTransparency
             }
         }
@@ -83,11 +89,31 @@ Rectangle {
             }
         }
 
+        Text {
+            id: musicPlayerMinCurTime
+
+            text: timeCorrector(Math.floor(playerSlider.value / 60)) + ":" + timeCorrector(Math.floor(playerSlider.value % 60))
+
+            color: secondary
+
+            anchors {
+                right: musicPlayerMinPP.left
+                rightMargin: blockMargin
+                verticalCenter: parent.verticalCenter
+            }
+
+            function timeCorrector(number) {
+                if (number <= 9)
+                    return "0" + number;
+                return number;
+            }
+        }
+
         Button {
             id: musicPlayerMinPP
 
-            width: parent.height
-            height: width
+            width: 40
+            height: 40
 
             anchors {
                 verticalCenter: parent.verticalCenter
@@ -139,7 +165,7 @@ Rectangle {
         opacity: 0
 
         Rectangle {
-            id: topLine
+            id: topLinePlayer
 
             width: 40
             height: 4
@@ -204,9 +230,9 @@ Rectangle {
         }
 
         Slider {
-            id: seekSlider
-            value: 113
-            to: 261
+            id: playerSlider
+            value: curTime
+            to: timePlayerSec
 
             width: parent.width * 0.6
 
@@ -217,18 +243,52 @@ Rectangle {
             }
 
             ToolTip {
-                parent: seekSlider.handle
-                visible: seekSlider.pressed
+                parent: playerSlider.handle
+                //visible: playerSlider.pressed
+                visible: false
                 text: pad(Math.floor(value / 60)) + ":" + pad(Math.floor(value % 60))
                 y: parent.height
 
-                readonly property int value: seekSlider.valueAt(seekSlider.position)
+                readonly property int value: playerSlider.valueAt(playerSlider.position)
 
                 function pad(number) {
                     if (number <= 9)
                         return "0" + number;
                     return number;
                 }
+            }
+        }
+
+
+        Text {
+            id: musicPlayerMaxCurTime
+
+            text: timeCorrector(Math.floor(playerSlider.value / 60)) + ":" + timeCorrector(Math.floor(playerSlider.value % 60))
+
+            color: secondary
+
+            anchors {
+                right: musicPlayerMaxCoverMask.left
+                verticalCenter: playerSlider.verticalCenter
+            }
+
+            function timeCorrector(number) {
+                if (number <= 9)
+                    return "0" + number;
+                return number;
+            }
+        }
+
+        Text {
+            id: musicPlayerMaxTime
+
+            text: timePlayerString
+
+            color: secondary
+
+            anchors {
+                left: musicPlayerMaxCoverMask.right
+                verticalCenter: playerSlider.verticalCenter
             }
         }
 
@@ -243,8 +303,8 @@ Rectangle {
 
             anchors {
                 horizontalCenter: parent.horizontalCenter
-                top: musicPlayerMaxCoverMask.bottom
-                topMargin: 60
+                top: playerSlider.bottom
+                topMargin: 20
             }
         }
 
@@ -263,36 +323,108 @@ Rectangle {
             }
         }
 
-        Button {
-            id: musicPlayerMaxPP
 
-            width: parent.width * 0.2
-            height: width
+            Button {
+                id: musicPlayerMaxPP
 
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: musicPlayerMaxAuthor.bottom
-                topMargin: 40
+                width: parent.width * 0.15
+                height: width
+
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    top: musicPlayerMaxAuthor.bottom
+                    topMargin: 40
+                }
+
+                contentItem: Image {
+                    id: musicPlayerMaxPPImg
+                    source: "qrc:/png/interface/play.svg"
+                    fillMode: Image.PreserveAspectFit
+                    anchors.centerIn: parent
+                    height: parent.height
+                    smooth: true
+                }
+
+                background: Rectangle {
+                    color: "#00000000"
+                }
+
+                onClicked: {
+                    playerPPclick()
+                }
+
             }
 
-            contentItem: Image {
-                id: musicPlayerMaxPPImg
-                source: "qrc:/png/interface/play.svg"
-                fillMode: Image.PreserveAspectFit
-                anchors.centerIn: parent
-                height: parent.height
-                smooth: true
+            Button {
+                id: playerRepeat
+
+                width: musicPlayerMaxPP.height * 0.7
+                height: width
+
+                anchors {
+                    left: musicPlayerMaxPP.right
+                    leftMargin: parent.width * 0.1
+                    verticalCenter: musicPlayerMaxPP.verticalCenter
+                }
+
+                contentItem: Image {
+                    id: playerRepeatImg
+                    source: "qrc:/png/interface/arrows-repeat (1).svg"
+                    fillMode: Image.PreserveAspectFit
+                    anchors.centerIn: parent
+                    width: parent.height
+                    smooth: true
+                }
+
+                background: Rectangle {
+                    color: "#00000000"
+                }
+
+                onClicked: {
+                    if(onRepeat) {
+                        onRepeat = false
+                        playerRepeatImg.source = "qrc:/png/interface/arrows-repeat (1).svg"
+                    } else {
+                        onRepeat = true
+                        playerRepeatImg.source = "qrc:/png/interface/arrows-repeat.svg"
+                    }
+                }
+
             }
 
-            background: Rectangle {
-                color: "#00000000"
+            Button {
+                id: playerFunctions
+
+                width: musicPlayerMaxPP.height * 0.7
+                height: width
+
+                anchors {
+                    right: musicPlayerMaxPP.left
+                    rightMargin: parent.width * 0.1
+                    verticalCenter: musicPlayerMaxPP.verticalCenter
+                }
+
+                contentItem: Image {
+                    id: playerFunctionsImg
+                    source: "qrc:/png/interface/menu-burger.svg"
+                    fillMode: Image.PreserveAspectFit
+                    anchors.centerIn: parent
+                    width: parent.height
+                    smooth: true
+                }
+
+                background: Rectangle {
+                    color: "#00000000"
+                }
+
+                onClicked: {
+                    beatFunctions.starter()
+                }
+
             }
 
-            onClicked: {
-                playerPPclick()
-            }
 
-        }
+
     }
 
     property int timeAnimation: 200
@@ -335,7 +467,7 @@ Rectangle {
         }
 
         NumberAnimation {
-            target: topLine
+            target: topLinePlayer
             property: "width"
             duration: timeAnimation
             from: 0
@@ -382,7 +514,7 @@ Rectangle {
         }
 
         NumberAnimation {
-            target: topLine
+            target: topLinePlayer
             property: "width"
             duration: timeAnimation
             from: 40
@@ -390,5 +522,10 @@ Rectangle {
         }
 
     }
+
+    function resetPlayerSlider(){
+        playerSlider.value = 0
+    }
+
 
 }
