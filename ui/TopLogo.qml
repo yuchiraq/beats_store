@@ -39,7 +39,7 @@ Rectangle {
     MouseArea {
         id: searchTopBar
 
-        width: parent.height * 0.4
+        width: parent.height
         height: width
 
         anchors {
@@ -53,7 +53,7 @@ Rectangle {
 
             anchors.centerIn: parent
             source: "qrc:/png/interface/search.svg"
-            width: parent.width
+            width: parent.height * 0.4
             height: width
         }
 
@@ -89,8 +89,8 @@ Rectangle {
         Image {
             anchors.centerIn: parent
             source: "qrc:/png/interface/angle-right.svg"
-            width: parent.width
-            height: width
+            width: parent.height * 0.4
+            height: parent.height * 0.4
             rotation: 180
         }
 
@@ -125,11 +125,11 @@ Rectangle {
             property: "width"
             duration: timeAnimation
             from: 0
-            to: topBar.height * 0.4
+            to: topBar.height
         }
     }
 
-    SequentialAnimation {
+    ParallelAnimation {
         id: backOff
 
         running: false
@@ -138,7 +138,7 @@ Rectangle {
             target: backTopBar
             property: "width"
             duration: timeAnimation
-            from: topBar.height * 0.4
+            from: topBar.height
             to: 0
         }
 

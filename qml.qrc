@@ -63,5 +63,6 @@
         <file>png/interface/angle-right.svg</file>
         <file>png/interface/pause.svg</file>
         <file>png/interface/play.svg</file>
+        <file>png/interface/shadow.png</file>
     </qresource>
 </RCC>

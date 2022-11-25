@@ -31,16 +31,16 @@ Rectangle {
 
         onClicked: {
             if (parent.height == 40) {
+                musicPlayerMax.visible = true
+                musicPlayerMin.visible = false
                 musicPlayerOnMax.running = true
                 parent.color = darkest
-                //musicPlayerMax.visible = true
-                musicPlayerMin.visible = false
             }
             else if (parent.height == mainScreen.height - 120) {
+                musicPlayerMax.visible = false
+                musicPlayerMin.visible = true
                 musicPlayerOnMin.running = true
                 parent.color = darkestTransparency
-                //musicPlayerMax.visible = false
-                musicPlayerMin.visible = true
             }
         }
     }
@@ -86,7 +86,7 @@ Rectangle {
         Button {
             id: musicPlayerMinPP
 
-            width: 40
+            width: parent.height
             height: width
 
             anchors {
@@ -100,7 +100,7 @@ Rectangle {
                 source: "qrc:/png/interface/play.svg"
                 fillMode: Image.PreserveAspectFit
                 anchors.centerIn: parent
-                height: parent.height
+                height: 40
             }
 
             background: Rectangle {
@@ -203,6 +203,35 @@ Rectangle {
             maskSource: musicPlayerMaxCoverMask
         }
 
+        Slider {
+            id: seekSlider
+            value: 113
+            to: 261
+
+            width: parent.width * 0.6
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: musicPlayerMaxCoverMask.bottom
+                topMargin: 20
+            }
+
+            ToolTip {
+                parent: seekSlider.handle
+                visible: seekSlider.pressed
+                text: pad(Math.floor(value / 60)) + ":" + pad(Math.floor(value % 60))
+                y: parent.height
+
+                readonly property int value: seekSlider.valueAt(seekSlider.position)
+
+                function pad(number) {
+                    if (number <= 9)
+                        return "0" + number;
+                    return number;
+                }
+            }
+        }
+
         Label {
             id: musicPlayerMaxTitle
             text: titlePlayer
@@ -215,7 +244,7 @@ Rectangle {
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 top: musicPlayerMaxCoverMask.bottom
-                topMargin: 40
+                topMargin: 60
             }
         }
 

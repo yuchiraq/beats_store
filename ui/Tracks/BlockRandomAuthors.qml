@@ -80,7 +80,11 @@ Rectangle {
                 cover: "qrc:/png/temp/covers/cover.jpg"
             }
 
-            AuthorMiniCard {}
+            AuthorMiniCard {
+                style: "Shit"
+                name: "ogbogdsalkdsald toykjadiojdajdosad"
+                cover: "qrc:/png/temp/covers/cover.jpg"
+            }
             AuthorMiniCard {}
             AuthorMiniCard {}
             AuthorMiniCard {}

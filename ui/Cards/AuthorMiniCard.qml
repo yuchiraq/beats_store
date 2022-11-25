@@ -11,10 +11,10 @@ Rectangle {
     height: blockMargin * 12
     width: height / 12 * 9
     radius: height / 20
+    border.color: outline
 
     color: "#0028292A"
 
-    border.color: outline
     border.width: 1
 
     property string cover: ""
@@ -62,20 +62,24 @@ Rectangle {
         maskSource: authorMiniCardCoverMask
     }
 
-    Text {
+    Label {
         id: authorMiniCardName
         color: "white"
 
+        wrapMode: Label.WrapAnywhere
         font.family: appFont
         text: "<strong>" + authorMiniCard.name + "</strong>"
 
         font.pointSize: (authorMiniCard.height - authorMiniCardCoverMask.height) / 3
+        height: (authorMiniCard.height - authorMiniCardCoverMask.height) / 3
 
         anchors {
             top: authorMiniCardCoverMask.bottom
             topMargin: blockMargin / 4
             left: parent.left
             leftMargin: blockMargin / 2
+            right: parent.right
+            rightMargin: blockMargin / 2
         }
     }
 

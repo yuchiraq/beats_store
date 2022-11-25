@@ -5,19 +5,22 @@ Flickable {
     id: infoService
 
     contentHeight: infoServiceColumn.height
-    anchors.fill: parent
-
-    //anchors.topMargin: topBar.height
+    anchors.fill: leftScreen
+    anchors.topMargin: topBar.height
     anchors.bottomMargin: bottomBar.height
 
     Column {
 
         id: infoServiceColumn
 
-        anchors.fill: parent
+        anchors {
+            top: leftScreen.top
+            topMargin: topBar.height
+            bottomMargin: topBar.height
+            horizontalCenter: parent.horizontalCenter
+        }
 
-        anchors.topMargin: topBar.height
-        anchors.bottomMargin: bottomBar.height
+        width: parent.width
 
         spacing: blockMargin
 

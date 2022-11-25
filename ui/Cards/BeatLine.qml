@@ -178,8 +178,7 @@ Rectangle {
             musicPlayer.authorPlayer = author
             musicPlayer.coverPlayer = cover
             musicPlayer.visible = true
-            bottomShadow.enabled = false
-            playerShadow.enabled = true
+            bottomBarShadow.anchors.bottom = musicPlayer.top
         }
     }
 

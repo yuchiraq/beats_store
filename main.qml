@@ -78,8 +78,29 @@ ApplicationWindow {
         id: topBar
     }
 
+    Image {
+        id: topBarShadow
+        source: "qrc:/png/interface/shadow.png"
+        rotation: 180
+        anchors.top: topBar.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        width:parent.width
+        height: width / 1920 * 100
+        opacity: 0.3
+    }
+
     MusicPlayer {
         id: musicPlayer
+    }
+
+    Image {
+        id: bottomBarShadow
+        source: "qrc:/png/interface/shadow.png"
+        anchors.bottom: bottomBar.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        width:parent.width
+        height: width / 1920 * 100
+        opacity: 0.5
     }
 
     Rectangle {
