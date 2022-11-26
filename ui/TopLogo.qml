@@ -32,7 +32,7 @@ Rectangle {
             topMargin: (parent.height - height) / 2
         }
         fillMode: Image.PreserveAspectFit
-        height: parent.height * 0.5
+        height: parent.height * 0.4
     }
 
     MouseArea {
@@ -99,7 +99,7 @@ Rectangle {
             }
 
             backOff.running = true
-
+            backSwitch()
         }
 
     }

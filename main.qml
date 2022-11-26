@@ -19,7 +19,7 @@ ApplicationWindow {
     property string darkest: "#171717"
     //property string dark: "#2E2A31"
     property string darkTransparency: "#EF1C1B1F"
-    property string darkestTransparency: "#EF171717"
+    property string darkestTransparency: "#F6171717"
 
     property string light: "#CAC4D0"
     property string outline: "#49454F"
@@ -72,6 +72,7 @@ ApplicationWindow {
 
     BottomBar {
         id: bottomBar
+        visible: false
     }
 
     TopLogo {
@@ -89,10 +90,6 @@ ApplicationWindow {
         opacity: 0.3
     }
 
-    MusicPlayer {
-        id: musicPlayer
-    }
-
     Image {
         id: bottomBarShadow
         source: "qrc:/png/interface/shadow.png"
@@ -100,12 +97,12 @@ ApplicationWindow {
         anchors.horizontalCenter: parent.horizontalCenter
         width:parent.width
         height: width / 1920 * 100
-        opacity: 0.5
+        opacity: 0.3
     }
 
-    BeatFunctions {
-        id: beatFunctions
-    }
+    MusicPlayer { id: musicPlayer }
+
+    BeatFunctions {id: beatFunctions}
 
     Rectangle {
 

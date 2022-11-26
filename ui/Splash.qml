@@ -82,8 +82,9 @@ Item {
         }
 
         function closeSplash(){
-            startSplashScreen.destroy()
+            bottomBar.visible = true
             splashClick.destroy()
+            startSplashScreen.destroy()
         }
 
         onFinished: closeSplash()

@@ -37,6 +37,9 @@ Flickable {
 
             color: dark
 
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: blockMargin * 2
+
             Text {
                 font.family: appFont
                 text: "Тёмная тема"

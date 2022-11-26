@@ -167,23 +167,37 @@ Rectangle {
         running: false
     }
 
+    function singleClick(){
+        musicPlayer.titlePlayer = title
+        musicPlayer.authorPlayer = author
+        musicPlayer.coverPlayer = cover
+        musicPlayer.visible = true
+        musicPlayer.timePlayerString = time
+        musicPlayer.timePlayerSec = timeSec
+        musicPlayer.curTime = 0
+        musicPlayer.resetPlayerSlider()
+        bottomBarShadow.visible = false
+    }
+    function doubleClick(){
+        likeBeat.running = true
+    }
+
     MouseArea {
         anchors.fill: parent
 
-        onDoubleClicked: {
-            likeBeat.running = true
+        Timer {
+            id: timerBeatLine
+            interval: 250
+            onTriggered: singleClick()
         }
 
         onClicked: {
-            musicPlayer.titlePlayer = title
-            musicPlayer.authorPlayer = author
-            musicPlayer.coverPlayer = cover
-            musicPlayer.visible = true
-            musicPlayer.timePlayerString = time
-            musicPlayer.timePlayerSec = timeSec
-            musicPlayer.curTime = 0
-            musicPlayer.resetPlayerSlider()
-            bottomBarShadow.anchors.bottom = musicPlayer.top
+            if (timerBeatLine.running) {
+                doubleClick()
+                timerBeatLine.stop()
+            } else {
+                timerBeatLine.restart()
+            }
         }
 
         onPressAndHold: beatFunctions.starter()

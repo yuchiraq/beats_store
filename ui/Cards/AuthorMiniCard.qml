@@ -66,7 +66,7 @@ Rectangle {
         id: authorMiniCardName
         color: "white"
 
-        wrapMode: Label.WrapAnywhere
+        //wrapMode: Label.WrapAnywhere
         font.family: appFont
         text: "<strong>" + authorMiniCard.name + "</strong>"
 
