@@ -14,7 +14,7 @@ Rectangle {
     property string author: "Beatmaker"
     property string time: "0:00"
     property int timeSec: 0
-    property string bpm: "000bpm"
+    property string bpm: "000"
 
     Rectangle {
         id: beatLineCoverMask
@@ -76,7 +76,7 @@ Rectangle {
 
     Text {
         id: beatLineBPMTime
-        text: time + "\n" + bpm
+        text: time + "\n" + bpm + "bpm"
         font.family: appFont
 
         anchors.right: parent.right
@@ -174,10 +174,19 @@ Rectangle {
         musicPlayer.visible = true
         musicPlayer.timePlayerString = time
         musicPlayer.timePlayerSec = timeSec
+        musicPlayer.bpmPlayer = bpm
+
+        beatFunctions.title = title
+        beatFunctions.author = author
+        beatFunctions.time = time
+        beatFunctions.bpm = bpm
+
         musicPlayer.curTime = 0
         musicPlayer.resetPlayerSlider()
         bottomBarShadow.visible = false
+
     }
+
     function doubleClick(){
         likeBeat.running = true
     }
@@ -200,7 +209,13 @@ Rectangle {
             }
         }
 
-        onPressAndHold: beatFunctions.starter()
-    }
+        onPressAndHold: {
+            beatFunctions.title = title
+            beatFunctions.author = author
+            beatFunctions.time = time
+            beatFunctions.bpm = bpm
+            beatFunctions.starter()
+        }
 
+    }
 }

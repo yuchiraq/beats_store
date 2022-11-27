@@ -66,7 +66,7 @@ Rectangle {
         BeatLine {
             time: "2:54"
             timeSec: 174
-            bpm: "159bpm"
+            bpm: "159"
             cover: "qrc:/png/temp/covers/balenciaga.jpg"
             title: "Balenciaga"
             author: "Ebone Hoodrich"

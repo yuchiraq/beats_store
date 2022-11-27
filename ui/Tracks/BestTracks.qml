@@ -18,8 +18,8 @@ Flickable {
     DropShadow {
         anchors.fill: blockRandomBeats
         transparentBorder: true
-        horizontalOffset: -4
-        verticalOffset: 4
+        horizontalOffset: -2
+        verticalOffset: 2
         radius: 8.0
         color: "#40000000"
         source: blockRandomBeats
@@ -28,8 +28,8 @@ Flickable {
     DropShadow {
         anchors.fill: blockRandomAuthors
         transparentBorder: true
-        horizontalOffset: -4
-        verticalOffset: 4
+        horizontalOffset: -2
+        verticalOffset: 2
         radius: 8.0
         color: "#40000000"
         source: blockRandomAuthors
@@ -79,7 +79,7 @@ Flickable {
 
             BeatLine {
                 time: "2:54"
-                bpm: "150bpm"
+                bpm: "150"
                 cover: "qrc:/png/temp/covers/balenciaga.jpg"
                 title: "Balenciaga"
                 author: "Ebone Hoodrich"

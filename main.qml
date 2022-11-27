@@ -101,7 +101,7 @@ ApplicationWindow {
 
     MusicPlayer { id: musicPlayer }
 
-    BeatFunctions {id: beatFunctions}
+    BeatFunctions { id: beatFunctions }
 
     Rectangle {
 

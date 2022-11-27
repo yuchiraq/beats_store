@@ -5,7 +5,7 @@ import Qt5Compat.GraphicalEffects
 import "qrc:/"
 
 Rectangle {
-    id: musicPlayerBack
+    id: musicPlayer
 
     property string titlePlayer: "Title"
     property string authorPlayer: "Author"
@@ -17,6 +17,8 @@ Rectangle {
     property string timePlayerString: "0:00"
     property int timePlayerSec: 200
     property int curTime: 0
+
+    property string bpmPlayer: "000"
 
     visible: false
     anchors.fill: parent
@@ -33,7 +35,7 @@ Rectangle {
             musicPlayerMax.visible = false
             musicPlayerShadow.visible = false
             musicPlayerMin.visible = true
-            musicPlayer.color = darkestTransparency
+            musicPlayerBlock.color = darkestTransparency
 
         }
     }
@@ -55,13 +57,13 @@ Rectangle {
     DropShadow {
         id: musicPlayerShadow
 
-        anchors.fill: musicPlayer
+        anchors.fill: musicPlayerBlock
         transparentBorder: true
         horizontalOffset: 0
         verticalOffset: -10
         radius: 12.0
         color: "#40000000"
-        source: musicPlayer
+        source: musicPlayerBlock
 
         visible: false
     }
@@ -69,7 +71,7 @@ Rectangle {
     property int timeAnimation: 100
 
     Rectangle {
-        id: musicPlayer
+        id: musicPlayerBlock
 
 
 
@@ -87,6 +89,91 @@ Rectangle {
 
         MouseArea {
             anchors.fill: parent
+            signal sgSwipeLeft();
+            signal sgSwipeRight();
+            signal sgSwipeDown();
+            signal sgSwipeUp();
+
+            QtObject {
+
+                property bool pTracing: false;
+                property real pXVelocity: 0.0;
+                property real pYVelocity: 0.0;
+                property int pXPrev: 0;
+                property int pYPrev: 0;
+
+                id: oPrivate;
+            }
+
+            id: oRoot;
+            preventStealing: true;
+
+            onPressed: {
+
+                oPrivate.pTracing = true;
+                oPrivate.pXVelocity = 0;
+                oPrivate.pYVelocity = 0;
+                oPrivate.pXPrev = mouse.x;
+                oPrivate.pYPrev = mouse.y;
+            }
+
+            onPositionChanged: {
+
+                if (!oPrivate.pTracing) return;
+
+                var oCurrentXVelocity = (mouse.x - oPrivate.pXPrev);
+                oPrivate.pXVelocity = (oPrivate.pXVelocity + oCurrentXVelocity) / 2.0;
+                oPrivate.pXPrev = mouse.x;
+
+                var oCurrentYVelocity = (mouse.y - oPrivate.pYPrev);
+                oPrivate.pYVelocity = (oPrivate.pXVelocity + oCurrentYVelocity) / 2.0;
+                oPrivate.pYPrev = mouse.y;
+
+                if (oPrivate.pXVelocity > 15 && mouse.x > parent.width * 0.2) {
+                    oPrivate.pTracing = false;
+                    oRoot.sgSwipeRight();
+                } else if (oPrivate.pXVelocity < -15 && mouse.x > parent.width * 0.2) {
+                    oPrivate.pTracing = false;
+                    oRoot.sgSwipeLeft();
+                } else if (oPrivate.pYVelocity > 5 && mouse.y > parent.height * 0.2) {
+                    oPrivate.pTracing = false;
+                    oRoot.sgSwipeDown();
+                } else if (oPrivate.pYVelocity < -2 && mouse.y < parent.height * 0.2) {
+                    oPrivate.pTracing = false;
+                    oRoot.sgSwipeUp();
+                }
+            }
+
+            onPressAndHold: console.log("onPressAndHold");
+            onSgSwipeLeft: console.log("onSgSwipeLeft");
+            onSgSwipeDown: {
+                musicPlayerOnMin.running = true
+                musicPlayerMax.visible = false
+                musicPlayerShadow.visible = false
+                musicPlayerMin.visible = true
+                musicPlayerBlock.color = darkestTransparency
+                console.log("onSgSwipeDown");
+            }
+            onSgSwipeRight: console.log("onSgSwipeRight");
+            onSgSwipeUp: {
+                if (parent.height == 40) {
+                    musicPlayerShadow.visible = true
+                    musicPlayerOnMax.running = true
+                    musicPlayerMax.visible = true
+                    musicPlayerMin.visible = false
+                    parent.color = darkest
+
+                    beatFunctions.title = titlePlayer
+                    beatFunctions.author = authorPlayer
+                    beatFunctions.time = timePlayerString
+                    beatFunctions.bpm = bpmPlayer
+                } else {
+                    beatFunctions.starter()
+                }
+
+                console.log("onSgSwipeUp");
+            }
+            onReleased: console.log("onReleased");
 
             onClicked: {
                 if (parent.height == 40) {
@@ -95,9 +182,16 @@ Rectangle {
                     musicPlayerMax.visible = true
                     musicPlayerMin.visible = false
                     parent.color = darkest
+
+                    beatFunctions.title = titlePlayer
+                    beatFunctions.author = authorPlayer
+                    beatFunctions.time = timePlayerString
+                    beatFunctions.bpm = bpmPlayer
                 }
 
             }
+
+
         }
 
         Item {
@@ -534,7 +628,7 @@ Rectangle {
             running: false
 
             NumberAnimation {
-                target: musicPlayer
+                target: musicPlayerBlock
                 property: "radius"
                 duration: timeAnimation
                 from: 0
@@ -542,7 +636,7 @@ Rectangle {
             }
 
             NumberAnimation {
-                target: musicPlayer
+                target: musicPlayerBlock
                 property: "height"
                 duration: timeAnimation
                 from: 40
@@ -550,7 +644,7 @@ Rectangle {
             }
 
             NumberAnimation {
-                target: musicPlayer
+                target: musicPlayerBlock
                 property: "anchors.bottomMargin"
                 duration: timeAnimation
                 from: bottomBar.height
@@ -586,7 +680,7 @@ Rectangle {
             running: false
 
             NumberAnimation {
-                target: musicPlayer
+                target: musicPlayerBlock
                 property: "radius"
                 duration: timeAnimation
                 from: blockMargin * 2
@@ -594,7 +688,7 @@ Rectangle {
             }
 
             NumberAnimation {
-                target: musicPlayer
+                target: musicPlayerBlock
                 property: "height"
                 duration: timeAnimation
                 from: mainScreen.height - 120
@@ -602,7 +696,7 @@ Rectangle {
             }
 
             NumberAnimation {
-                target: musicPlayer
+                target: musicPlayerBlock
                 property: "anchors.bottomMargin"
                 duration: timeAnimation
                 from: 0

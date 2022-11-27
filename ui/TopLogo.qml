@@ -107,7 +107,7 @@ Rectangle {
             }
 
             backOff.running = true
-            backSwitch()
+
         }
 
     }
@@ -156,6 +156,8 @@ Rectangle {
             from: (topBar.width - topLogo.width) / 2
             to: blockMargin * 2
         }
+
+        onFinished: backSwitch()
     }
 
     function backSwitch(){
