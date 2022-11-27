@@ -1,5 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls.Material
+import Qt5Compat.GraphicalEffects
+//import QtWebChannel
 
 import "qrc:/ui/Tracks"
 import "qrc:/ui"
@@ -10,15 +12,35 @@ Flickable {
 
     contentHeight: bestTracksColumn.height
     anchors.fill: stackView
-    anchors.topMargin: topBar.height
+    anchors.topMargin: topBar.height + blockMargin
     anchors.bottomMargin: bottomBar.height
+
+    DropShadow {
+        anchors.fill: blockRandomBeats
+        transparentBorder: true
+        horizontalOffset: -4
+        verticalOffset: 4
+        radius: 8.0
+        color: "#40000000"
+        source: blockRandomBeats
+    }
+
+    DropShadow {
+        anchors.fill: blockRandomAuthors
+        transparentBorder: true
+        horizontalOffset: -4
+        verticalOffset: 4
+        radius: 8.0
+        color: "#40000000"
+        source: blockRandomAuthors
+    }
 
     Column {
         id: bestTracksColumn
 
         anchors {
             top: mainScreen.top
-            topMargin: topBar.height
+            topMargin: topBar.height + blockMargin
             bottomMargin: topBar.height
             horizontalCenter: parent.horizontalCenter
         }

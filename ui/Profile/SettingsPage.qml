@@ -7,7 +7,7 @@ Flickable {
     width: parent
 
     anchors.fill: leftScreen
-    anchors.topMargin: topBar.height
+    anchors.topMargin: topBar.height + blockMargin
     anchors.bottomMargin: bottomBar.height
 
     contentHeight: settingsColumn.height
@@ -19,7 +19,7 @@ Flickable {
 
         anchors {
             top: leftScreen.top
-            topMargin: topBar.height
+            topMargin: topBar.height + blockMargin
             bottomMargin: topBar.height
             horizontalCenter: parent.horizontalCenter
         }

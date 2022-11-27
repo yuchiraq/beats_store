@@ -72,7 +72,6 @@ ApplicationWindow {
 
     BottomBar {
         id: bottomBar
-        visible: false
     }
 
     TopLogo {

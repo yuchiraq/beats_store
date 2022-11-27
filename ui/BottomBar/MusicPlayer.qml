@@ -43,10 +43,12 @@ Rectangle {
             play = false
             musicPlayerMinPPImg.source = "qrc:/png/interface/pause.svg"
             musicPlayerMaxPPImg.source = "qrc:/png/interface/pause.svg"
+            musicPLayerMaxPPShadow.radius = 4
         }else{
             play = true
             musicPlayerMinPPImg.source = "qrc:/png/interface/play.svg"
             musicPlayerMaxPPImg.source = "qrc:/png/interface/play.svg"
+            musicPLayerMaxPPShadow.radius = 12
         }
     }
 
@@ -64,7 +66,7 @@ Rectangle {
         visible: false
     }
 
-    property int timeAnimation: 200
+    property int timeAnimation: 100
 
     Rectangle {
         id: musicPlayer
@@ -360,6 +362,25 @@ Rectangle {
                 }
             }
 
+            Rectangle {
+                id: musicPlayerMaxPPRectangle
+                anchors.fill: musicPlayerMaxPP
+                anchors.centerIn: musicPlayerMaxPPRectangle
+                radius: blockMargin
+                color: darkest
+                visible: false
+            }
+
+            DropShadow {
+                id: musicPLayerMaxPPShadow
+                anchors.fill: musicPlayerMaxPPRectangle
+                transparentBorder: true
+                horizontalOffset: 0
+                verticalOffset: 2
+                radius: 12.0
+                color: "#40000000"
+                source: musicPlayerMaxPPRectangle
+            }
 
             Button {
                 id: musicPlayerMaxPP
@@ -392,6 +413,26 @@ Rectangle {
 
             }
 
+            Rectangle {
+                id: playerRepeatRectangle
+                anchors.fill: playerRepeat
+                anchors.centerIn: playerRepeat
+                radius: blockMargin
+                color: darkest
+                visible: false
+            }
+
+            DropShadow {
+                id: playerRepeatShadow
+                anchors.fill: playerRepeatRectangle
+                transparentBorder: true
+                horizontalOffset: 2
+                verticalOffset: 2
+                radius: 12.0
+                color: "#40000000"
+                source: playerRepeatRectangle
+            }
+
             Button {
                 id: playerRepeat
 
@@ -421,12 +462,33 @@ Rectangle {
                     if(onRepeat) {
                         onRepeat = false
                         playerRepeatImg.source = "qrc:/png/interface/arrows-repeat (1).svg"
+                        playerRepeatShadow.radius = 12
                     } else {
                         onRepeat = true
                         playerRepeatImg.source = "qrc:/png/interface/arrows-repeat.svg"
+                        playerRepeatShadow.radius = 4
                     }
                 }
+            }
 
+            Rectangle {
+                id: playerFunctionsRectangle
+                anchors.fill: playerFunctions
+                anchors.centerIn: playerFunctions
+                radius: blockMargin
+                color: darkest
+                visible: false
+            }
+
+            DropShadow {
+                id: playerFunctionsShadow
+                anchors.fill: playerFunctionsRectangle
+                transparentBorder: true
+                horizontalOffset: -2
+                verticalOffset: 2
+                radius: 12.0
+                color: "#40000000"
+                source: playerFunctionsRectangle
             }
 
             Button {

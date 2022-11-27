@@ -36,6 +36,14 @@ Rectangle {
     }
 
     MouseArea {
+        anchors.fill: topLogo
+        onClicked: {
+            console.log("TopLogo click!")
+            centralScreen.contentY = centralScreen.top
+        }
+    }
+
+    MouseArea {
         id: searchTopBar
 
         width: parent.height

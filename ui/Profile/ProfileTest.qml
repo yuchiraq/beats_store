@@ -14,7 +14,7 @@ StackView {
 
     contentHeight: profileColumn.height
     anchors.fill: parent
-    anchors.topMargin: topBar.height
+    anchors.topMargin: topBar.height + blockMargin
     anchors.bottomMargin: bottomBar.height
 
     Column {
@@ -22,7 +22,7 @@ StackView {
 
             anchors {
                 top: mainScreen.top
-                topMargin: topBar.height
+                topMargin: topBar.height + blockMargin
                 bottomMargin: topBar.height
                 horizontalCenter: parent.horizontalCenter
             }

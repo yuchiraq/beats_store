@@ -7,12 +7,12 @@ import "qrc:/ui/Cards"
 Rectangle {
     id: blockRandomAuthors
 
-    width: mainScreen.width //- (blockMargin * 2)
+    width: mainScreen.width - (blockMargin * 2)
     height: headerRandomAuthors.height + 20 + blockMargin + blockMargin * 12
     //radius: width / 20
     radius: blockMargin
-    color: "#00333333"
-    //color: dark
+    //color: "#00333333"
+    color: dark
 
     border.color: outline
     border.width: 0
@@ -43,7 +43,7 @@ Rectangle {
             right: parent.right
         }
 
-
+        clip: true
 
         width: parent.width
         height: parent.height - headerRandomAuthors.height - 20
