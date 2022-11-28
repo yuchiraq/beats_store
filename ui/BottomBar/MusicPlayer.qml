@@ -70,6 +70,8 @@ Rectangle {
 
     property int timeAnimation: 100
 
+
+
     Rectangle {
         id: musicPlayerBlock
 
@@ -86,6 +88,52 @@ Rectangle {
             left: parent.left
             right: parent.right
         }
+
+        Image {
+            id: playerCoverBackground
+            source: coverPlayer
+            height: parent.height
+            anchors.centerIn: parent
+            fillMode: Image.PreserveAspectFit
+            smooth: true
+            visible: false
+        }
+
+        OpacityMask {
+            id: playerCoverBackgroundTrimed
+            anchors.fill: musicPlayerBlock
+            source: playerCoverBackgroundBlur
+            maskSource: musicPlayerBlock
+            opacity: 0.15
+            visible: false
+        }
+
+        FastBlur {
+            id: playerCoverBackgroundBlur
+            anchors.fill: playerCoverBackground
+            source: playerCoverBackground
+            radius: 120
+            visible: false
+        }
+
+//        Image {
+//            id: playerCoverBackgroundOverlay
+//            source: "qrc:/png/мягкийСвет20.jpg"
+//            height: parent.height
+//            anchors.centerIn: parent
+//            fillMode: Image.PreserveAspectFit
+//            smooth: true
+//            visible: false
+//        }
+
+//        OpacityMask {
+//            id: playerCoverBackgroundOverlayTrimed
+//            anchors.fill: musicPlayerBlock
+//            source: playerCoverBackgroundOverlay
+//            maskSource: musicPlayerBlock
+//            opacity: 0.05
+//            visible: false
+//        }
 
         MouseArea {
             anchors.fill: parent
@@ -158,6 +206,8 @@ Rectangle {
             onSgSwipeUp: {
                 if (parent.height == 40) {
                     musicPlayerShadow.visible = true
+                    playerCoverBackgroundTrimed.visible = true
+                    //playerCoverBackgroundOverlayTrimed.visible = true
                     musicPlayerOnMax.running = true
                     musicPlayerMax.visible = true
                     musicPlayerMin.visible = false
@@ -178,6 +228,8 @@ Rectangle {
             onClicked: {
                 if (parent.height == 40) {
                     musicPlayerShadow.visible = true
+                    playerCoverBackgroundTrimed.visible = true
+                    //playerCoverBackgroundOverlayTrimed.visible = true
                     musicPlayerOnMax.running = true
                     musicPlayerMax.visible = true
                     musicPlayerMin.visible = false
@@ -472,7 +524,8 @@ Rectangle {
                 horizontalOffset: 0
                 verticalOffset: 2
                 radius: 12.0
-                color: "#40000000"
+                opacity: 0.4
+                color: "#60000000"
                 source: musicPlayerMaxPPRectangle
             }
 
@@ -523,7 +576,8 @@ Rectangle {
                 horizontalOffset: 2
                 verticalOffset: 2
                 radius: 12.0
-                color: "#40000000"
+                opacity: 0.4
+                color: "#60000000"
                 source: playerRepeatRectangle
             }
 
@@ -581,7 +635,8 @@ Rectangle {
                 horizontalOffset: -2
                 verticalOffset: 2
                 radius: 12.0
-                color: "#40000000"
+                opacity: 0.4
+                color: "#60000000"
                 source: playerFunctionsRectangle
             }
 
@@ -722,6 +777,8 @@ Rectangle {
             onFinished: {
                 musicPlayerShadow.visible = true
                 musicPlayerBackMouseArea.visible = false
+                playerCoverBackgroundTrimed.visible = false
+                //playerCoverBackgroundOverlayTrimed.visible = false
             }
         }
 

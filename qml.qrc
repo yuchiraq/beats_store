@@ -71,5 +71,6 @@
         <file>png/interface/arrows-repeat (1).svg</file>
         <file>png/interface/menu-burger.svg</file>
         <file>ui/Profile/SettingsPage.qml</file>
+        <file>png/мягкийСвет20.jpg</file>
     </qresource>
 </RCC>
