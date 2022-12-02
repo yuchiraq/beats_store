@@ -20,6 +20,12 @@ Rectangle {
 
     property int active: 2
 
+    function bottomBarCorrector() {
+        leftBottomBarButtonImg.height = buttonMin
+        centralBottomBarButtonImg.height = buttonMax
+        rightBottomBarButtonImg.height = buttonMin
+    }
+
     Button {
 
         id: leftBottomBarButton

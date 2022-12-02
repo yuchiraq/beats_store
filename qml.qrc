@@ -72,5 +72,6 @@
         <file>png/interface/menu-burger.svg</file>
         <file>ui/Profile/SettingsPage.qml</file>
         <file>png/мягкийСвет20.jpg</file>
+        <file>png/temp/eat.jpg</file>
     </qresource>
 </RCC>

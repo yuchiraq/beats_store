@@ -10,8 +10,7 @@ Rectangle {
     height: width / 2 * 1
 
 
-    radius: blockMargin * 2
-    //radius: width / 20
+    radius: blockMargin * 1.5
 
     color: dark
 
@@ -27,8 +26,7 @@ Rectangle {
 
         source: cover
 
-        width: parent.width
-        height: parent.height
+        anchors.fill: parent
 
         anchors.centerIn: parent
         visible: false
@@ -40,6 +38,32 @@ Rectangle {
         maskSource: newRealise
     }
 
+    Rectangle {
+        id: newBeatTextBackground
+
+        color: dark
+
+        opacity: 0.4
+
+        anchors {
+            bottom: parent.bottom
+            left: parent.left
+        }
+
+        radius: parent.radius
+
+        visible: false
+
+        height: blockMargin + newBeatAuthor.height + newBeatName.height
+        width: newBeatAuthor.width > newBeatName.width ? (newBeatAuthor.width + blockMargin * 2) : (newBeatName.width + blockMargin * 2)
+    }
+
+    FastBlur {
+        anchors.fill: newBeatTextBackground
+        source: newBeatTextBackground
+        radius: 20
+    }
+
     Text {
         id: newBeatAuthor
         font.family: appFont
@@ -47,7 +71,7 @@ Rectangle {
         color: light
         anchors {
             left: parent.left
-            leftMargin: blockMargin * 2
+            leftMargin: blockMargin
             bottom: newBeatName.top
             bottomMargin: 2
         }
@@ -63,13 +87,115 @@ Rectangle {
 
         anchors {
             left: parent.left
-            leftMargin: blockMargin * 2
+            leftMargin: blockMargin
             bottom: parent.bottom
-            bottomMargin: blockMargin
+            bottomMargin: blockMargin * 0.5
         }
         font.bold: true
         text: title
 
+    }
+
+    Rectangle {
+        id: likeNewBeatOverlay
+
+        anchors.fill: parent
+        radius: parent.radius
+
+        color: dark
+
+        opacity: 0
+    }
+
+    property int likeMin: newRealise.height * 0.3
+    property int likeMax: newRealise.height * 0.4
+    property int timeAnimation: 100
+
+    Image {
+        id: likeNewBeatImg
+        source: "qrc:/png/interface/heart (1).svg"
+        anchors.centerIn: parent
+        width: likeMin
+        fillMode: Image.PreserveAspectFit
+    }
+
+    function singleClick(){
+
+    }
+
+    function doubleClick(){
+        likeNewBeat.running = true
+    }
+
+    MouseArea {
+        anchors.fill: parent
+
+        Timer {
+            id: timer
+            interval: 250
+            onTriggered: singleClick()
+        }
+
+        onClicked: {
+            if (timer.running) {
+                doubleClick()
+                timer.stop()
+            } else {
+                timer.restart()
+            }
+        }
+    }
+
+    SequentialAnimation {
+        id: likeNewBeat
+
+        NumberAnimation {
+            target: likeNewBeatOverlay
+            property: "opacity"
+            duration: timeAnimation / 2
+            from: 0
+            to: 0.3
+        }
+
+        NumberAnimation {
+            target: likeNewBeatImg
+            property: "opacity"
+            duration: timeAnimation
+            from: 0; to: 1
+        }
+
+        NumberAnimation {
+            target: likeNewBeatImg
+            property: "width"
+            duration: timeAnimation
+            from: likeMin
+            to: likeMax
+        }
+
+        NumberAnimation {
+            target: likeNewBeatImg
+            property: "width"
+            duration: timeAnimation
+            from: likeMax
+            to: likeMin
+        }
+
+        NumberAnimation {
+            target: likeNewBeatImg
+            property: "opacity"
+            duration: timeAnimation
+            from: 1; to: 0
+        }
+
+        NumberAnimation {
+            target: likeNewBeatImg
+            property: "opacity"
+            duration: timeAnimation / 2
+            from: 0.3
+            to: 0
+        }
+
+        running: false
     }
 
 }

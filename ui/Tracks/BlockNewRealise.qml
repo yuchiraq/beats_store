@@ -31,7 +31,11 @@ Item {
         anchors.fill: parent
         spacing: blockMargin
 
-        NewBeat {}
+        NewBeat {
+            author: "ogbigtoy"
+            title: "TestTestTestTestTestTestTestTest"
+            cover: "qrc:/png/temp/eat.jpg"
+        }
 
         NewBeat{
             author: "Niki-Y On Da Track"

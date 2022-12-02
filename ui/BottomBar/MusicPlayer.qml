@@ -31,23 +31,18 @@ Rectangle {
         visible: false
 
         onClicked: {
-            musicPlayerOnMin.running = true
-            musicPlayerMax.visible = false
-            musicPlayerShadow.visible = false
-            musicPlayerMin.visible = true
-            musicPlayerBlock.color = darkestTransparency
-
+            playerOnMinClick()
         }
     }
 
     function playerPPclick(){
-        if(play){
-            play = false
+        if(!play){
+            play = true
             musicPlayerMinPPImg.source = "qrc:/png/interface/pause.svg"
             musicPlayerMaxPPImg.source = "qrc:/png/interface/pause.svg"
             musicPLayerMaxPPShadow.radius = 4
         }else{
-            play = true
+            play = false
             musicPlayerMinPPImg.source = "qrc:/png/interface/play.svg"
             musicPlayerMaxPPImg.source = "qrc:/png/interface/play.svg"
             musicPLayerMaxPPShadow.radius = 12
@@ -125,13 +120,13 @@ Rectangle {
 //            smooth: true
 //            visible: false
 //        }
-
+                                                            // high perfomance
 //        OpacityMask {
 //            id: playerCoverBackgroundOverlayTrimed
 //            anchors.fill: musicPlayerBlock
 //            source: playerCoverBackgroundOverlay
 //            maskSource: musicPlayerBlock
-//            opacity: 0.05
+//            opacity: 0.01
 //            visible: false
 //        }
 
@@ -195,28 +190,12 @@ Rectangle {
             onPressAndHold: console.log("onPressAndHold");
             onSgSwipeLeft: console.log("onSgSwipeLeft");
             onSgSwipeDown: {
-                musicPlayerOnMin.running = true
-                musicPlayerMax.visible = false
-                musicPlayerShadow.visible = false
-                musicPlayerMin.visible = true
-                musicPlayerBlock.color = darkestTransparency
-                console.log("onSgSwipeDown");
+                playerOnMinClick()
             }
             onSgSwipeRight: console.log("onSgSwipeRight");
             onSgSwipeUp: {
                 if (parent.height == 40) {
-                    musicPlayerShadow.visible = true
-                    playerCoverBackgroundTrimed.visible = true
-                    //playerCoverBackgroundOverlayTrimed.visible = true
-                    musicPlayerOnMax.running = true
-                    musicPlayerMax.visible = true
-                    musicPlayerMin.visible = false
-                    parent.color = darkest
-
-                    beatFunctions.title = titlePlayer
-                    beatFunctions.author = authorPlayer
-                    beatFunctions.time = timePlayerString
-                    beatFunctions.bpm = bpmPlayer
+                    playerOnMaxClick()
                 } else {
                     beatFunctions.starter()
                 }
@@ -227,18 +206,7 @@ Rectangle {
 
             onClicked: {
                 if (parent.height == 40) {
-                    musicPlayerShadow.visible = true
-                    playerCoverBackgroundTrimed.visible = true
-                    //playerCoverBackgroundOverlayTrimed.visible = true
-                    musicPlayerOnMax.running = true
-                    musicPlayerMax.visible = true
-                    musicPlayerMin.visible = false
-                    parent.color = darkest
-
-                    beatFunctions.title = titlePlayer
-                    beatFunctions.author = authorPlayer
-                    beatFunctions.time = timePlayerString
-                    beatFunctions.bpm = bpmPlayer
+                    playerOnMaxClick()
                 }
 
             }
@@ -318,7 +286,7 @@ Rectangle {
 
                 contentItem: Image {
                     id: musicPlayerMinPPImg
-                    source: "qrc:/png/interface/play.svg"
+                    source: "qrc:/png/interface/pause.svg"
                     fillMode: Image.PreserveAspectFit
                     anchors.centerIn: parent
                     height: 40
@@ -335,8 +303,6 @@ Rectangle {
         }
 
         //animation and max from here
-
-
 
         Item {
             id: musicPlayerMax
@@ -543,7 +509,7 @@ Rectangle {
 
                 contentItem: Image {
                     id: musicPlayerMaxPPImg
-                    source: "qrc:/png/interface/play.svg"
+                    source: "qrc:/png/interface/pause.svg"
                     fillMode: Image.PreserveAspectFit
                     anchors.centerIn: parent
                     height: parent.height
@@ -782,9 +748,30 @@ Rectangle {
             }
         }
 
+    }
 
+    function playerOnMaxClick() {
+        musicPlayerShadow.visible = true
+        //playerCoverBackgroundTrimed.visible = true    //high perfomance
+        //playerCoverBackgroundOverlayTrimed.visible = true         //very high perfomance
+        musicPlayerOnMax.running = true
+        musicPlayerMax.visible = true
+        musicPlayerMin.visible = false
+        parent.color = darkest
 
+        beatFunctions.title = titlePlayer
+        beatFunctions.author = authorPlayer
+        beatFunctions.time = timePlayerString
+        beatFunctions.bpm = bpmPlayer
+    }
 
+    function playerOnMinClick() {
+        musicPlayerOnMin.running = true
+        musicPlayerMax.visible = false
+        musicPlayerShadow.visible = false
+        musicPlayerMin.visible = true
+        musicPlayerBlock.color = darkestTransparency
+        console.log("onSgSwipeDown");
     }
 
     function resetPlayerSlider(){

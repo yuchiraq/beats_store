@@ -9,7 +9,7 @@ Rectangle {
     width: mainScreen.width - (blockMargin * 2)
     height: blockMargin * 6 * 5 + 5 + headerRandomBeats.height + 20 + blockMargin
     //radius: width / 20
-    radius: blockMargin * 2
+    radius: blockMargin * 1.5
     //color: "#333333"
     color: dark
     border.color: outline

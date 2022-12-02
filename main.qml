@@ -103,24 +103,8 @@ ApplicationWindow {
 
     BeatFunctions { id: beatFunctions }
 
-    Rectangle {
-
+    Splash {
         id: startSplashScreen
-
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-        }
-
-        //color: "#282323"
-        color: darkest
-
-        Splash{}
-
-
-
     }
 
     MouseArea {
@@ -128,8 +112,7 @@ ApplicationWindow {
         anchors.fill: parent
 
         onClicked: {
-            startSplashScreen.destroy()
-            splashClick.destroy()
+            startSplashScreen.closeSplash()
         }
     }
 

@@ -10,7 +10,7 @@ Rectangle {
     width: mainScreen.width - (blockMargin * 2)
     height: headerRandomAuthors.height + 20 + blockMargin + blockMargin * 12
     //radius: width / 20
-    radius: blockMargin * 2
+    radius: blockMargin * 1.5
     //color: "#00333333"
     color: dark
 

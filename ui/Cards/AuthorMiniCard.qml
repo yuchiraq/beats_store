@@ -103,6 +103,16 @@ Rectangle {
     }
 
 
+    Rectangle {
+        id: likeAuthorOverlay
+
+        color: dark
+
+        anchors.fill: parent
+        radius: parent.radius
+
+        opacity: 0
+    }
 
     Image {
         id: likeAuthorImg
@@ -117,15 +127,13 @@ Rectangle {
         opacity: 0
     }
 
-    Rectangle {
-        id: likeAuthorOverlay
 
-        color: outline
+    function singleClick(){
 
-        anchors.fill: parent
-        radius: parent.radius
+    }
 
-        opacity: 0
+    function doubleClick(){
+        likeAuthor.running = true
     }
 
     MouseArea {
@@ -133,8 +141,19 @@ Rectangle {
         width: parent.width
         height: parent.height
 
-        onDoubleClicked: {
-            likeAuthor.running = true
+        Timer {
+            id: timer
+            interval: 250
+            onTriggered: singleClick()
+        }
+
+        onClicked: {
+            if (timer.running) {
+                doubleClick()
+                timer.stop()
+            } else {
+                timer.restart()
+            }
         }
     }
 

@@ -91,7 +91,7 @@ Rectangle {
     Rectangle {
         id: likeBeatOverlay
 
-        color: outline
+        color: dark
 
         anchors.fill: parent
 
@@ -195,17 +195,17 @@ Rectangle {
         anchors.fill: parent
 
         Timer {
-            id: timerBeatLine
+            id: timer
             interval: 250
             onTriggered: singleClick()
         }
 
         onClicked: {
-            if (timerBeatLine.running) {
+            if (timer.running) {
                 doubleClick()
-                timerBeatLine.stop()
+                timer.stop()
             } else {
-                timerBeatLine.restart()
+                timer.restart()
             }
         }
 
