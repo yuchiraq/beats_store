@@ -1,6 +1,8 @@
 ﻿import QtQuick 2.15
+//import QtGraphicalEffects 1.15
 import Qt5Compat.GraphicalEffects
-import QtQuick.Controls
+import QtQuick.Controls 2.5
+import QtQuick.Controls.Material 2.3
 
 
 Rectangle {
@@ -43,7 +45,7 @@ Rectangle {
 
         color: dark
 
-        opacity: 0.4
+        opacity: 0.45
 
         anchors {
             bottom: parent.bottom
@@ -52,23 +54,15 @@ Rectangle {
 
         radius: parent.radius
 
-        visible: false
-
         height: blockMargin + newBeatAuthor.height + newBeatName.height
         width: newBeatAuthor.width > newBeatName.width ? (newBeatAuthor.width + blockMargin * 2) : (newBeatName.width + blockMargin * 2)
-    }
-
-    FastBlur {
-        anchors.fill: newBeatTextBackground
-        source: newBeatTextBackground
-        radius: 20
     }
 
     Text {
         id: newBeatAuthor
         font.family: appFont
 
-        color: light
+        color: secondary
         anchors {
             left: parent.left
             leftMargin: blockMargin
@@ -117,6 +111,7 @@ Rectangle {
         anchors.centerIn: parent
         width: likeMin
         fillMode: Image.PreserveAspectFit
+        opacity: 0
     }
 
     function singleClick(){
@@ -188,7 +183,7 @@ Rectangle {
         }
 
         NumberAnimation {
-            target: likeNewBeatImg
+            target: likeNewBeatOverlay
             property: "opacity"
             duration: timeAnimation / 2
             from: 0.3

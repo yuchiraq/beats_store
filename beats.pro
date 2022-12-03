@@ -37,3 +37,4 @@ contains(ANDROID_TARGET_ARCH,arm64-v8a) {
   #  IScreensStack.h \
    # mainScreen.h \
     #screensqueue.h
+android: include(/home/sosa/Android/Sdk/android_openssl/openssl.pri)

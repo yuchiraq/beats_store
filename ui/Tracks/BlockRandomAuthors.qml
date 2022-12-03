@@ -1,6 +1,8 @@
 import QtQuick 2.15
+//import QtGraphicalEffects 1.15
 import Qt5Compat.GraphicalEffects
-import QtQuick.Controls
+import QtQuick.Controls 2.5
+import QtQuick.Controls.Material 2.3
 
 import "qrc:/ui/Cards"
 

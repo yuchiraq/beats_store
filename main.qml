@@ -1,8 +1,10 @@
-import QtQuick
-import QtQuick.Window
-import QtQuick.Layouts
-import QtQuick.Controls.Material
-import Qt5Compat.GraphicalEffects
+import QtQuick 2.3
+import QtQuick.Window 2.3
+import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.5
+import QtQuick.Controls.Material 2.3
+//import QtGraphicalEffects 1.15
+import Qt5Compat.GraphicalEffects   //for Qt6+
 
 import "ui/BottomBar"
 import "ui/Tracks"
@@ -12,7 +14,7 @@ import "qrc:/ui"
 
 ApplicationWindow {
 
-    property string appFont: "Roboto"
+    property string appFont: "Montserrat"
 
     //property string dark: "#2D2D2D"
     property string dark: "#1C1B1F"

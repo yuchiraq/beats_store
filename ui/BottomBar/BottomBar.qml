@@ -1,5 +1,6 @@
-import QtQuick
-import QtQuick.Controls.Material
+import QtQuick 2.3
+import QtQuick.Controls 2.5
+import QtQuick.Controls.Material 2.3
 
 Rectangle {
     id: bottomBar
