@@ -73,5 +73,7 @@
         <file>ui/Profile/SettingsPage.qml</file>
         <file>png/мягкийСвет20.jpg</file>
         <file>png/temp/eat.jpg</file>
+        <file>ui/Cards/AlbumMiniCard.qml</file>
+        <file>ui/Tracks/BlockRandomAlbums.qml</file>
     </qresource>
 </RCC>

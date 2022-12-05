@@ -1,6 +1,8 @@
 import QtQuick 2.15
-import QtGraphicalEffects 1.15
-//import Qt5Compat.GraphicalEffects
+//import QtGraphicalEffects 1.15
+import Qt5Compat.GraphicalEffects
+import QtQuick.Controls 2.5
+import QtQuick.Controls.Material 2.3
 
 import "qrc:/ui/Cards"
 
@@ -28,6 +30,19 @@ Rectangle {
             left: parent.left
             leftMargin: blockMargin * 2
         }
+    }
+
+    Button {
+        id: blockRandomBeatsStyleButton
+
+        anchors {
+            verticalCenter: headerRandomBeats.verticalCenter
+            right: parent.right
+            rightMargin: blockMargin * 2
+        }
+
+        height: headerRandomBeats.font.pointSize
+        width: 50
     }
 
     Column {

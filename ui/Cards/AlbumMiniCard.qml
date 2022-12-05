@@ -8,25 +8,26 @@ import "qrc:/ui/Tracks"
 import "qrc:/ui"
 
 Rectangle {
-    id: authorMiniCard
+    id: albumMiniCard
 
-    height: blockMargin * 12
-    width: height / 12 * 9
+    height: blockMargin * 9
+    width: blockMargin * 21
     radius: blockMargin
     border.color: outline
 
-    color: "#0028292A"
+    color: dark
 
     border.width: 1
 
     property string cover: ""
-    property string name: "Beatmaker"
-    property string style: "music style"
+    property string title: "Album"
+    property string style: "Style"
+    property string author: "Author"
 
     Rectangle {
-        id: authorMiniCardCoverMask
+        id: albumMiniCardCoverMask
 
-        width: parent.width
+        width: parent.height
         height: width
         radius: parent.radius
 
@@ -36,22 +37,22 @@ Rectangle {
         border.width: 1
 
         anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: parent.top
+            verticalCenter: parent.verticalCenter
+            left: parent.left
             //topMargin: blockMargin / 2
         }
     }
 
     Image {
-        id: authorMiniCardCover
-        source: authorMiniCard.cover
+        id: albumMiniCardCover
+        source: albumMiniCard.cover
 
-        width: parent.width
+        width: parent.height
         height: width
 
         anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: parent.top
+            verticalCenter: parent.verticalCenter
+            left: parent.left
             //topMargin: blockMargin / 2
         }
 
@@ -59,54 +60,61 @@ Rectangle {
     }
 
     OpacityMask {
-        anchors.fill: authorMiniCardCoverMask
-        source: authorMiniCardCover
-        maskSource: authorMiniCardCoverMask
+        anchors.fill: albumMiniCardCoverMask
+        source: albumMiniCardCover
+        maskSource: albumMiniCardCoverMask
     }
 
-    Label {
-        id: authorMiniCardName
-        color: "white"
-
-        //wrapMode: Label.WrapAnywhere
-        font.family: appFont
-        text: "<strong>" + authorMiniCard.name + "</strong>"
-
-        font.pointSize: (authorMiniCard.height - authorMiniCardCoverMask.height) / 3
-        height: (authorMiniCard.height - authorMiniCardCoverMask.height) / 3
-
+    Item {
         anchors {
-            top: authorMiniCardCoverMask.bottom
-            topMargin: blockMargin / 4
-            left: parent.left
+            verticalCenter: parent.verticalCenter
+            left: albumMiniCardCover.right
             leftMargin: blockMargin / 2
             right: parent.right
-            rightMargin: blockMargin / 2
+        }
+
+        height: albumMiniCardAuthor.height + albumMiniCardTitle.height + albumMiniCardStyle.height
+
+        Label {
+            id: albumMiniCardTitle
+            color: "white"
+
+            //wrapMode: Label.WrapAnywhere
+            font.family: appFont
+            text: "<strong>" + albumMiniCard.title + "</strong>"
+        }
+
+        Text {
+            id: albumMiniCardAuthor
+
+            text: albumMiniCard.author
+
+            font.family: appFont
+
+            color: secondary
+
+            anchors.top: albumMiniCardTitle.bottom
+
+            font.pointSize: albumMiniCardTitle.font.pointSize * 0.8
+        }
+
+        Text {
+            id: albumMiniCardStyle
+
+            text: albumMiniCard.style
+
+            font.family: appFont
+
+            color: light
+
+            anchors.top: albumMiniCardAuthor.bottom
+
+            font.pointSize: albumMiniCardTitle.font.pointSize * 0.8
         }
     }
-
-    Text {
-        id: authorMiniCardStyle
-
-        text: authorMiniCard.style
-
-        font.pointSize: (authorMiniCard.height - authorMiniCardCoverMask.height) / 4
-
-        font.family: appFont
-
-        color: light
-
-        anchors {
-            top: authorMiniCardName.bottom
-            //topMargin: blockMargin / 4
-            left: parent.left
-            leftMargin: blockMargin / 2
-        }
-    }
-
 
     Rectangle {
-        id: likeAuthorOverlay
+        id: likeAlbumOverlay
 
         color: dark
 
@@ -117,11 +125,11 @@ Rectangle {
     }
 
     Image {
-        id: likeAuthorImg
+        id: likeAlbumImg
 
         source: "qrc:/png/interface/heart (1).svg"
 
-        anchors.centerIn: authorMiniCardCover
+        anchors.centerIn: albumMiniCardCover
 
         width: likeMin
         height: width
@@ -135,7 +143,7 @@ Rectangle {
     }
 
     function doubleClick(){
-        likeAuthor.running = true
+        likeAlbum.running = true
     }
 
     MouseArea {
@@ -159,15 +167,15 @@ Rectangle {
         }
     }
 
-    property int likeMin: authorMiniCardCover.width / 2
-    property int likeMax: authorMiniCardCover.width / 1.5
+    property int likeMin: albumMiniCardCover.height / 2
+    property int likeMax: albumMiniCardCover.height / 1.5
     property int timeAnimation: 100
 
     SequentialAnimation {
-        id: likeAuthor
+        id: likeAlbum
 
         NumberAnimation {
-            target: likeAuthorOverlay
+            target: likeAlbumOverlay
             property: "opacity"
             duration: timeAnimation / 2
             from: 0
@@ -175,14 +183,14 @@ Rectangle {
         }
 
         NumberAnimation {
-            target: likeAuthorImg
+            target: likeAlbumImg
             property: "opacity"
             duration: timeAnimation
             from: 0; to: 1
         }
 
         NumberAnimation {
-            target: likeAuthorImg
+            target: likeAlbumImg
             property: "width"
             duration: timeAnimation
             from: likeMin
@@ -190,7 +198,7 @@ Rectangle {
         }
 
         NumberAnimation {
-            target: likeAuthorImg
+            target: likeAlbumImg
             property: "width"
             duration: timeAnimation
             from: likeMax
@@ -198,14 +206,14 @@ Rectangle {
         }
 
         NumberAnimation {
-            target: likeAuthorImg
+            target: likeAlbumImg
             property: "opacity"
             duration: timeAnimation
             from: 1; to: 0
         }
 
         NumberAnimation {
-            target: likeAuthorOverlay
+            target: likeAlbumOverlay
             property: "opacity"
             duration: timeAnimation / 2
             from: 0.3

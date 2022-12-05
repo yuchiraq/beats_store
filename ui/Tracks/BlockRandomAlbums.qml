@@ -7,10 +7,10 @@ import QtQuick.Controls.Material 2.3
 import "qrc:/ui/Cards"
 
 Rectangle {
-    id: blockRandomAuthors
+    id: blockRandomAlbums
 
     width: mainScreen.width - (blockMargin * 2)
-    height: headerRandomAuthors.height + 20 + blockMargin + blockMargin * 12
+    height: headerRandomAlbums.height + 20 + blockMargin + blockMargin * 9
     //radius: width / 20
     radius: blockMargin * 1.5
     //color: "#00333333"
@@ -20,12 +20,12 @@ Rectangle {
     border.width: 0
 
     Text {
-        id: headerRandomAuthors
+        id: headerRandomAlbums
 
         font.family: appFont
         color: light
 
-        text: "<b>Авторы</b>"
+        text: "<b>Альбомы</b>"
         anchors {
             top: parent.top
             topMargin: 10
@@ -35,11 +35,11 @@ Rectangle {
     }
 
     Flickable {
-        id: randomAuthorsFlicable
+        id: randomAlbumsFlicable
 
-        contentWidth: AuthorMiniCard.width * 8 + blockMargin * 7
+        contentWidth: AlbumMiniCard.width * 8 + blockMargin * 7
         anchors {
-            top: headerRandomAuthors.bottom
+            top: headerRandomAlbums.bottom
             topMargin: 10
             left: parent.left
             right: parent.right
@@ -48,44 +48,44 @@ Rectangle {
         clip: true
 
         width: parent.width
-        height: parent.height - headerRandomAuthors.height - 20
+        height: parent.height - headerRandomAlbums.height - 20
 
         Row {
-            id: randomAuthors
+            id: randomAlbums
             anchors.fill: parent
             anchors.leftMargin: blockMargin
             anchors.rightMargin: blockMargin
             spacing: blockMargin
 
-            AuthorMiniCard {
-
+            AlbumMiniCard {
+                title: "162 pack 2"
                 style: "Trap/EDM"
-                name: "Niki-Y On Da Track"
+                author: "Niki-Y On Da Track"
                 cover: "qrc:/png/temp/authors/ava.png"
             }
 
-            AuthorMiniCard {
+            AlbumMiniCard {
                 style: "Boss design"
-                name: "Chiraq Concept"
+                author: "Chiraq Concept"
                 cover: "qrc:/png/temp/authors/cq.png"
             }
 
-            AuthorMiniCard {
+            AlbumMiniCard {
                 style: "Shit"
-                name: "ogbogtoy"
+                author: "ogbogtoy"
                 cover: "qrc:/png/temp/covers/cover.jpg"
             }
 
-            AuthorMiniCard {
+            AlbumMiniCard {
                 style: "Shit"
-                name: "ogbogdsalkdsald toykjadiojdajdosad"
+                title: "ogbogdsalkdsald toykjadiojdajdosad"
                 cover: "qrc:/png/temp/covers/cover.jpg"
             }
-            AuthorMiniCard {}
-            AuthorMiniCard {}
-            AuthorMiniCard {}
-            AuthorMiniCard {}
-            AuthorMiniCard {}
+            AlbumMiniCard {}
+            AlbumMiniCard {}
+            AlbumMiniCard {}
+            AlbumMiniCard {}
+            AlbumMiniCard {}
         }
     }
 

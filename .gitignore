@@ -1,6 +1,11 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
 
+gradle*
+android-build*
+.qtc_clangd*
+android-beats-deployment-settings.json
+
 *~
 *.autosave
 *.a

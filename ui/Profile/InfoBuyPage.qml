@@ -8,7 +8,7 @@ Flickable {
     contentHeight: infoBuyColumn.height
     anchors.fill: leftScreen
     anchors.topMargin: topBar.height + blockMargin
-    anchors.bottomMargin: bottomBar.height
+    anchors.bottomMargin: bottomBar.height * 3
 
     Column {
 
@@ -17,7 +17,7 @@ Flickable {
         anchors {
             top: leftScreen.top
             topMargin: topBar.height + blockMargin
-            bottomMargin: topBar.height
+            bottomMargin: topBar.height * 3
             horizontalCenter: parent.horizontalCenter
         }
 
