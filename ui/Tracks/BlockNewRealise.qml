@@ -12,7 +12,7 @@ Item {
     width: mainScreen.width - blockMargin * 2
     height: width / 2 * 1
 
-    anchors{
+    anchors {
         leftMargin: blockMargin
         rightMargin: blockMargin
     }
@@ -20,9 +20,9 @@ Item {
     DropShadow {
         anchors.fill: view
         transparentBorder: true
-        horizontalOffset: -4
-        verticalOffset: 4
-        radius: 8.0
+        horizontalOffset: -3
+        verticalOffset: 3
+        radius: 6.0
         color: "#40000000"
         source: view
     }
@@ -39,37 +39,34 @@ Item {
             cover: "qrc:/png/temp/eat.jpg"
         }
 
-        NewBeat{
+        NewBeat {
             author: "Niki-Y On Da Track"
             title: "«CLASSIC PACK III»"
             cover: "qrc:/png/temp/cp3.jpg"
             border.width: 0
         }
 
-        NewBeat{
+        NewBeat {
             author: "Niki-Y On Da Track"
             title: "«162 pack 3»"
             cover: "qrc:/png/temp/162-3.jpg"
             border.width: 0
         }
 
-        NewBeat{
+        NewBeat {
             author: "Niki-Y On Da Track"
             title: "«162 pack 2»"
             cover: "qrc:/png/temp/162-2.jpg"
             border.width: 0
         }
 
-        NewBeat {
-
-        }
-
+        NewBeat {}
     }
 
-//    PageIndicator {
-//        count: view.count
-//        currentIndex: view.currentIndex
-//        anchors.bottom: parent.bottom
-//        anchors.horizontalCenter: parent.horizontalCenter
-//    }
+    //    PageIndicator {
+    //        count: view.count
+    //        currentIndex: view.currentIndex
+    //        anchors.bottom: parent.bottom
+    //        anchors.horizontalCenter: parent.horizontalCenter
+    //    }
 }

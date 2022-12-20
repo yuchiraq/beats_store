@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
+import Qt5Compat.GraphicalEffects
 
 import "qrc:/ui/Tracks"
 import "qrc:/ui"
@@ -11,14 +12,22 @@ StackView {
 
     anchors.fill: parent
 
+    function clearStack() {
+        if (leftScreen.depth > 1) {
+            leftScreen.clear(StackView.PopTransition)
+            leftScreen.push(profileInitial)
+            topBar.backSwitch(1)
+        }
+    }
+
     initialItem: Flickable {
+        id: profileInitial
+        contentHeight: profileColumn.height
+        anchors.fill: parent
+        anchors.topMargin: topBar.height + blockMargin
+        anchors.bottomMargin: bottomBar.height
 
-    contentHeight: profileColumn.height
-    anchors.fill: parent
-    anchors.topMargin: topBar.height + blockMargin
-    anchors.bottomMargin: bottomBar.height
-
-    Column {
+        Column {
             id: profileColumn
 
             anchors {
@@ -30,7 +39,7 @@ StackView {
 
             spacing: blockMargin
 
-            BlockProfile{
+            BlockProfile {
                 anchors.horizontalCenter: parent.horizontalCenter
             }
 
@@ -80,6 +89,7 @@ StackView {
                             anchors.left: infoServiceImg.right
                             anchors.leftMargin: blockMargin * 2
                             color: secondary
+                            font.pointSize: 15
                         }
 
                         Image {
@@ -93,7 +103,8 @@ StackView {
                         }
 
                         onClicked: {
-                            leftScreen.push("qrc:/ui/Profile/InfoServicePage.qml")
+                            leftScreen.push(
+                                        "qrc:/ui/Profile/InfoServicePage.qml")
                             topBar.backSwitch()
                         }
                     }
@@ -116,7 +127,7 @@ StackView {
                         Image {
                             id: infoBuyImg
 
-                            source: "qrc:/png/interface/file-invoice-dollar.svg"
+                            source: "qrc:/ui_icons/solid/invoice.svg"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: parent.left
                             anchors.leftMargin: blockMargin * 2
@@ -132,6 +143,7 @@ StackView {
                             anchors.left: infoBuyImg.right
                             anchors.leftMargin: blockMargin * 2
                             color: secondary
+                            font.pointSize: 15
                         }
 
                         Image {
@@ -184,6 +196,7 @@ StackView {
                             anchors.left: settingsImg.right
                             anchors.leftMargin: blockMargin * 2
                             color: secondary
+                            font.pointSize: 15
                         }
 
                         Image {
@@ -200,7 +213,6 @@ StackView {
                             leftScreen.push("qrc:/ui/Profile/SettingsPage.qml")
                             topBar.backSwitch()
                         }
-
                     }
 
                     Rectangle {
@@ -237,6 +249,7 @@ StackView {
                             anchors.left: infoProfileImg.right
                             anchors.leftMargin: blockMargin * 2
                             color: secondary
+                            font.pointSize: 15
                         }
 
                         Image {
@@ -248,11 +261,8 @@ StackView {
                             height: parent.height / 5
                             width: height
                         }
-
                     }
-
                 }
-
             }
 
             Button {
@@ -292,6 +302,7 @@ StackView {
                     anchors.left: exitImg.right
                     anchors.leftMargin: blockMargin * 2
                     color: alert
+                    font.pointSize: 15
                 }
 
                 Image {
@@ -310,21 +321,19 @@ StackView {
                     mainScreen.close()
                     mainScreen.destroy()
                 }
-
             }
 
             Text {
                 font.family: appFont
                 color: secondary
                 text: "<strong>by Chiraq Concept</strong>"
+                font.pointSize: 15
 
                 anchors {
                     right: parent.right
                     rightMargin: blockMargin
                 }
             }
-
         }
     }
-
 }

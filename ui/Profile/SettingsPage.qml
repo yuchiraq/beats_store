@@ -48,6 +48,7 @@ Flickable {
                 anchors.left: parent.left
                 anchors.leftMargin: blockMargin * 2
                 color: secondary
+                font.pointSize: 15
             }
 
             Switch {
@@ -58,10 +59,10 @@ Flickable {
                 anchors.rightMargin: blockMargin * 2
 
                 onClicked: {
-                    if(!checked){
+                    if (darkTheme) {
                         darkTheme = false
                         darkest = "#FFF"
-                        dark = "#171717"
+                        dark = "#AAA"
                         darkestTransparency = "#EFFFFFFF"
                     } else {
                         darkTheme = true
@@ -70,10 +71,38 @@ Flickable {
                         darkestTransparency: "#EF171717"
                     }
                 }
+            }
+        }
 
+        Rectangle {
+
+            width: mainScreen.width - blockMargin * 2
+            height: blockMargin * 5
+
+            radius: blockMargin * 2
+
+            color: dark
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: blockMargin * 2
+
+            Text {
+                font.family: appFont
+                text: "Удалить данные"
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: blockMargin * 2
+                color: secondary
+                font.pointSize: 15
             }
 
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    database.deleteData()
+                    centralScreen.update()
+                }
+            }
         }
     }
-
 }

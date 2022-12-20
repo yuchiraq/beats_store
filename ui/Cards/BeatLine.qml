@@ -6,16 +6,24 @@ Rectangle {
     id: beatLine
 
     width: parent.width
-    height: blockMargin * 6
+    height: blockMargin * 7
 
     color: "#00333333"
 
+    property int id_track: 0
     property string cover: ""
     property string title: "Track name"
     property string author: "Beatmaker"
-    property string time: "0:00"
+    property string time: Math.floor(timeSec / 60) + ":" + timeCorrector(
+                              Math.floor(timeSec % 60))
     property int timeSec: 0
     property string bpm: "000"
+
+    function timeCorrector(number) {
+        if (number <= 9)
+            return "0" + number
+        return number
+    }
 
     Rectangle {
         id: beatLineCoverMask
@@ -42,6 +50,13 @@ Rectangle {
         visible: false
     }
 
+    //    AnimatedImage {
+    //        source: "qrc:/animated/loader.gif"
+    //        anchors.centerIn: beatLineCoverMask
+    //        width: beatLineCoverMask.height * 0.7
+    //        fillMode: Image.PreserveAspectFit
+    //        playing: beatLineCover.source == "" ? true : false
+    //    }
     OpacityMask {
         anchors.fill: beatLineCoverMask
         source: beatLineCover
@@ -63,13 +78,17 @@ Rectangle {
             font.family: appFont
 
             color: "white"
+
+            font.weight: Font.Medium
+            font.pointSize: blockMargin * 1.7
         }
 
         Text {
-            font.pointSize: beatLineName.height / 1.5
+
             id: beatLineAuthor
             text: beatLine.author
             font.family: appFont
+            font.pointSize: blockMargin * 1.4
             color: light
             anchors.top: beatLineName.bottom
         }
@@ -77,7 +96,7 @@ Rectangle {
 
     Text {
         id: beatLineBPMTime
-        text: time + "\n" + bpm + "bpm"
+        text: time + "\nid: " + id_track
         font.family: appFont
 
         anchors.right: parent.right
@@ -87,6 +106,7 @@ Rectangle {
         verticalAlignment: Text.AlignVCenter
 
         color: secondary
+        font.pointSize: blockMargin * 1.4
     }
 
     Rectangle {
@@ -102,7 +122,7 @@ Rectangle {
     Image {
         id: likeBeatImg
 
-        source: "qrc:/png/interface/heart (1).svg"
+        source: "qrc:/ui_icons/solid/heart.svg"
 
         anchors.centerIn: beatLineCoverMask
 
@@ -131,7 +151,8 @@ Rectangle {
             target: likeBeatImg
             property: "opacity"
             duration: timeAnimation
-            from: 0; to: 1
+            from: 0
+            to: 1
         }
 
         NumberAnimation {
@@ -154,7 +175,8 @@ Rectangle {
             target: likeBeatImg
             property: "opacity"
             duration: timeAnimation
-            from: 1; to: 0
+            from: 1
+            to: 0
         }
 
         NumberAnimation {
@@ -168,11 +190,11 @@ Rectangle {
         running: false
     }
 
-    function singleClick(){
+    function singleClick() {
         musicPlayer.titlePlayer = title
         musicPlayer.authorPlayer = author
         musicPlayer.coverPlayer = cover
-        musicPlayer.visible = true
+        //musicPlayer.visible = true
         musicPlayer.timePlayerString = time
         musicPlayer.timePlayerSec = timeSec
         musicPlayer.bpmPlayer = bpm
@@ -181,14 +203,15 @@ Rectangle {
         beatFunctions.author = author
         beatFunctions.time = time
         beatFunctions.bpm = bpm
+        beatFunctions.id = id_track
 
         musicPlayer.curTime = 0
         musicPlayer.resetPlayerSlider()
-        bottomBarShadow.visible = false
 
+        console.log("Beat clicked")
     }
 
-    function doubleClick(){
+    function doubleClick() {
         likeBeat.running = true
     }
 
@@ -204,19 +227,21 @@ Rectangle {
         onClicked: {
             if (timer.running) {
                 doubleClick()
+                console.log("Beat liked")
                 timer.stop()
             } else {
                 timer.restart()
             }
         }
+        onDoubleClicked: likeBeat.running = true
 
         onPressAndHold: {
             beatFunctions.title = title
             beatFunctions.author = author
             beatFunctions.time = time
             beatFunctions.bpm = bpm
+            beatFunctions.id = id_track
             beatFunctions.starter()
         }
-
     }
 }

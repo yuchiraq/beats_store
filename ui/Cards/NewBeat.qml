@@ -1,16 +1,14 @@
-﻿    import QtQuick 2.15
+﻿import QtQuick 2.15
 //import QtGraphicalEffects 1.15
 import Qt5Compat.GraphicalEffects
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
-
 
 Rectangle {
     id: newRealise
 
     width: mainScreen.width - (blockMargin * 2)
     height: width / 2 * 1
-
 
     radius: blockMargin * 1.5
 
@@ -34,34 +32,35 @@ Rectangle {
         visible: false
     }
 
-
     OpacityMask {
         anchors.fill: newRealise
         source: newBeatBackground
         maskSource: newRealise
     }
 
-    Rectangle {
-        id: newBeatTextBackground
+    DropShadow {
+        anchors.fill: newBeatAuthor
+        transparentBorder: true
+        horizontalOffset: 2
+        verticalOffset: 2
+        radius: 4.0
+        color: "#a0000000"
+        source: newBeatAuthor
+    }
 
-        color: dark
-
-        opacity: 0.45
-
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-        }
-
-        radius: parent.radius
-
-        height: blockMargin + newBeatAuthor.height + newBeatName.height
-        width: newBeatAuthor.width > newBeatName.width ? (newBeatAuthor.width + blockMargin * 2) : (newBeatName.width + blockMargin * 2)
+    DropShadow {
+        anchors.fill: newBeatName
+        transparentBorder: true
+        horizontalOffset: 2
+        verticalOffset: 2
+        radius: 4.0
+        color: "#a0000000"
+        source: newBeatName
     }
 
     Text {
         id: newBeatAuthor
-        font.family: appFont
+        font.family: localFont.name
 
         color: secondary
         anchors {
@@ -72,6 +71,7 @@ Rectangle {
         }
 
         text: author
+        font.pointSize: blockMargin * 1.7
     }
 
     Text {
@@ -88,7 +88,7 @@ Rectangle {
         }
         font.bold: true
         text: title
-
+        font.pointSize: blockMargin * 2
     }
 
     Rectangle {
@@ -104,22 +104,33 @@ Rectangle {
 
     property int likeMin: newRealise.height * 0.3
     property int likeMax: newRealise.height * 0.4
-    property int timeAnimation: 100
+    property int timeAnimation: 300
 
     Image {
         id: likeNewBeatImg
-        source: "qrc:/png/interface/heart (1).svg"
+        source: "qrc:/ui_icons/solid/heart.svg"
         anchors.centerIn: parent
         width: likeMin
         fillMode: Image.PreserveAspectFit
+        opacity: 1
+        visible: false
+    }
+
+    DropShadow {
+        id: likeNewBeatImgShadow
+        anchors.fill: likeNewBeatImg
+        source: likeNewBeatImg
+        transparentBorder: true
+        horizontalOffset: 0
+        verticalOffset: 0
+        radius: 12.0
+        color: "#f0000000"
         opacity: 0
     }
 
-    function singleClick(){
+    function singleClick() {}
 
-    }
-
-    function doubleClick(){
+    function doubleClick() {
         likeNewBeat.running = true
     }
 
@@ -131,6 +142,8 @@ Rectangle {
             interval: 250
             onTriggered: singleClick()
         }
+
+        onDoubleClicked: likeNewBeat.running = true
 
         onClicked: {
             if (timer.running) {
@@ -144,54 +157,97 @@ Rectangle {
 
     SequentialAnimation {
         id: likeNewBeat
+        onStarted: likeNewBeatImg.visible = true
+        ParallelAnimation {
 
-        NumberAnimation {
-            target: likeNewBeatOverlay
-            property: "opacity"
-            duration: timeAnimation / 2
-            from: 0
-            to: 0.3
+            NumberAnimation {
+                target: likeNewBeatImgShadow
+                property: "opacity"
+                duration: timeAnimation
+                from: 0
+                to: 1
+            }
+
+            NumberAnimation {
+                target: likeNewBeatImg
+                property: "width"
+                duration: timeAnimation
+                from: likeMin
+                to: likeMax
+            }
         }
 
-        NumberAnimation {
-            target: likeNewBeatImg
-            property: "opacity"
-            duration: timeAnimation
-            from: 0; to: 1
-        }
+        ParallelAnimation {
 
-        NumberAnimation {
-            target: likeNewBeatImg
-            property: "width"
-            duration: timeAnimation
-            from: likeMin
-            to: likeMax
-        }
+            NumberAnimation {
+                target: likeNewBeatImgShadow
+                property: "opacity"
+                duration: timeAnimation
+                from: 1
+                to: 0
+            }
 
-        NumberAnimation {
-            target: likeNewBeatImg
-            property: "width"
-            duration: timeAnimation
-            from: likeMax
-            to: likeMin
+            NumberAnimation {
+                target: likeNewBeatImg
+                property: "width"
+                duration: timeAnimation
+                from: likeMax
+                to: likeMin
+            }
         }
-
-        NumberAnimation {
-            target: likeNewBeatImg
-            property: "opacity"
-            duration: timeAnimation
-            from: 1; to: 0
-        }
-
-        NumberAnimation {
-            target: likeNewBeatOverlay
-            property: "opacity"
-            duration: timeAnimation / 2
-            from: 0.3
-            to: 0
-        }
-
+        onFinished: likeNewBeatImg.visible = false
         running: false
     }
 
+    //    SequentialAnimation {
+    //        id: likeNewBeat
+
+    //        NumberAnimation {
+    //            target: likeNewBeatOverlay
+    //            property: "opacity"
+    //            duration: timeAnimation / 2
+    //            from: 0
+    //            to: 0.3
+    //        }
+
+    //        NumberAnimation {
+    //            target: likeNewBeatImg
+    //            property: "opacity"
+    //            duration: timeAnimation
+    //            from: 0; to: 1
+    //        }
+
+    //        NumberAnimation {
+    //            target: likeNewBeatImg
+    //            property: "width"
+    //            duration: timeAnimation
+    //            from: likeMin
+    //            to: likeMax
+    //        }
+
+    //        NumberAnimation {
+    //            target: likeNewBeatImg
+    //            property: "width"
+    //            duration: timeAnimation
+    //            from: likeMax
+    //            to: likeMin
+    //        }
+
+    //        NumberAnimation {
+    //            target: likeNewBeatImg
+    //            property: "opacity"
+    //            duration: timeAnimation
+    //            from: 1; to: 0
+    //        }
+
+    //        NumberAnimation {
+    //            target: likeNewBeatOverlay
+    //            property: "opacity"
+    //            duration: timeAnimation / 2
+    //            from: 0.3
+    //            to: 0
+    //        }
+
+    //        running: false
+    //    }
 }

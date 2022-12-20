@@ -1,4 +1,4 @@
-QT += quick quickcontrols2 widgets core svg
+QT += qml quick quickcontrols2 widgets core svg sql multimedia
 
 greaterThan(QT_MAJOR_VERSION,5): QT += core5compat
 
@@ -7,11 +7,16 @@ greaterThan(QT_MAJOR_VERSION,5): QT += core5compat
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    databasetracks.cpp \
+    lastrealiseslistModel.cpp \
         main.cpp \
         #mainScreen.cpp \
-        #screensqueue.cpp
+ \        #screensqueue.cpp
+    randombeatsmodel.cpp \
+    searchlistmodel.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += qml.qrc \
+    icons.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -48,3 +53,9 @@ android: include(/home/sosa/Android/Sdk/android_openssl/openssl.pri)
 
 
 #CONFIG+=qml_debug
+
+HEADERS += \
+    databasetracks.h \
+    lastrealiseslistModel.h \
+    randombeatsmodel.h \
+    searchlistmodel.h

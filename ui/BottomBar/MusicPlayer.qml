@@ -22,7 +22,7 @@ Rectangle {
 
     property string bpmPlayer: "000"
 
-    visible: false
+    visible: id !== 0
     anchors.fill: parent
 
     color: "#00000000"
@@ -37,17 +37,17 @@ Rectangle {
         }
     }
 
-    function playerPPclick(){
-        if(!play){
+    function playerPPclick() {
+        if (!play) {
             play = true
             musicPlayerMinPPImg.source = "qrc:/png/interface/pause.svg"
             musicPlayerMaxPPImg.source = "qrc:/png/interface/pause.svg"
             musicPLayerMaxPPShadow.radius = 4
-        }else{
+        } else {
             play = false
-            musicPlayerMinPPImg.source = "qrc:/png/interface/play.svg"
-            musicPlayerMaxPPImg.source = "qrc:/png/interface/play.svg"
-            musicPLayerMaxPPShadow.radius = 12
+            musicPlayerMinPPImg.source = "qrc:/ui_icons/solid/play.svg"
+            musicPlayerMaxPPImg.source = "qrc:/ui_icons/solid/play.svg"
+            musicPLayerMaxPPShadow.radius = 7
         }
     }
 
@@ -57,25 +57,19 @@ Rectangle {
         anchors.fill: musicPlayerBlock
         transparentBorder: true
         horizontalOffset: 0
-        verticalOffset: -10
-        radius: 12.0
-        color: "#40000000"
+        verticalOffset: -5
+        radius: 6.0
+        color: "#20000000"
         source: musicPlayerBlock
-
-        visible: false
     }
 
     property int timeAnimation: 100
 
-
-
     Rectangle {
         id: musicPlayerBlock
 
-
-
         width: mainScreen.width
-        height: 40
+        height: blockMargin * 3
 
         color: darkestTransparency
 
@@ -86,134 +80,91 @@ Rectangle {
             right: parent.right
         }
 
-        Image {
-            id: playerCoverBackground
-            source: coverPlayer
-            height: parent.height
-            anchors.centerIn: parent
-            fillMode: Image.PreserveAspectFit
-            smooth: true
-            visible: false
-        }
-
-        OpacityMask {
-            id: playerCoverBackgroundTrimed
-            anchors.fill: musicPlayerBlock
-            source: playerCoverBackgroundBlur
-            maskSource: musicPlayerBlock
-            opacity: 0.15
-            visible: false
-        }
-
-        FastBlur {
-            id: playerCoverBackgroundBlur
-            anchors.fill: playerCoverBackground
-            source: playerCoverBackground
-            radius: 120
-            visible: false
-        }
-
-//        Image {
-//            id: playerCoverBackgroundOverlay
-//            source: "qrc:/png/мягкийСвет20.jpg"
-//            height: parent.height
-//            anchors.centerIn: parent
-//            fillMode: Image.PreserveAspectFit
-//            smooth: true
-//            visible: false
-//        }
-                                                            // high perfomance
-//        OpacityMask {
-//            id: playerCoverBackgroundOverlayTrimed
-//            anchors.fill: musicPlayerBlock
-//            source: playerCoverBackgroundOverlay
-//            maskSource: musicPlayerBlock
-//            opacity: 0.01
-//            visible: false
-//        }
-
         MouseArea {
             anchors.fill: parent
-            signal sgSwipeLeft();
-            signal sgSwipeRight();
-            signal sgSwipeDown();
-            signal sgSwipeUp();
+            signal sgSwipeLeft
+            signal sgSwipeRight
+            signal sgSwipeDown
+            signal sgSwipeUp
 
             QtObject {
 
-                property bool pTracing: false;
-                property real pXVelocity: 0.0;
-                property real pYVelocity: 0.0;
-                property int pXPrev: 0;
-                property int pYPrev: 0;
+                property bool pTracing: false
+                property real pXVelocity: 0.0
+                property real pYVelocity: 0.0
+                property int pXPrev: 0
+                property int pYPrev: 0
 
-                id: oPrivate;
+                id: oPrivate
             }
 
-            id: oRoot;
-            preventStealing: true;
+            id: oRoot
+            preventStealing: true
 
             onPressed: {
 
-                oPrivate.pTracing = true;
-                oPrivate.pXVelocity = 0;
-                oPrivate.pYVelocity = 0;
-                oPrivate.pXPrev = mouse.x;
-                oPrivate.pYPrev = mouse.y;
+                oPrivate.pTracing = true
+                oPrivate.pXVelocity = 0
+                oPrivate.pYVelocity = 0
+                oPrivate.pXPrev = mouse.x
+                oPrivate.pYPrev = mouse.y
             }
 
             onPositionChanged: {
 
-                if (!oPrivate.pTracing) return;
+                if (!oPrivate.pTracing)
+                    return
 
-                var oCurrentXVelocity = (mouse.x - oPrivate.pXPrev);
-                oPrivate.pXVelocity = (oPrivate.pXVelocity + oCurrentXVelocity) / 2.0;
-                oPrivate.pXPrev = mouse.x;
+                var oCurrentXVelocity = (mouse.x - oPrivate.pXPrev)
+                oPrivate.pXVelocity = (oPrivate.pXVelocity + oCurrentXVelocity) / 2.0
+                oPrivate.pXPrev = mouse.x
 
-                var oCurrentYVelocity = (mouse.y - oPrivate.pYPrev);
-                oPrivate.pYVelocity = (oPrivate.pXVelocity + oCurrentYVelocity) / 2.0;
-                oPrivate.pYPrev = mouse.y;
+                var oCurrentYVelocity = (mouse.y - oPrivate.pYPrev)
+                oPrivate.pYVelocity = (oPrivate.pXVelocity + oCurrentYVelocity) / 2.0
+                oPrivate.pYPrev = mouse.y
 
                 if (oPrivate.pXVelocity > 15 && mouse.x > parent.width * 0.2) {
-                    oPrivate.pTracing = false;
-                    oRoot.sgSwipeRight();
-                } else if (oPrivate.pXVelocity < -15 && mouse.x > parent.width * 0.2) {
-                    oPrivate.pTracing = false;
-                    oRoot.sgSwipeLeft();
-                } else if (oPrivate.pYVelocity > 5 && mouse.y > parent.height * 0.2) {
-                    oPrivate.pTracing = false;
-                    oRoot.sgSwipeDown();
-                } else if (oPrivate.pYVelocity < -2 && mouse.y < parent.height * 0.2) {
-                    oPrivate.pTracing = false;
-                    oRoot.sgSwipeUp();
+                    oPrivate.pTracing = false
+                    oRoot.sgSwipeRight()
+                } else if (oPrivate.pXVelocity < -15
+                           && mouse.x > parent.width * 0.2) {
+                    oPrivate.pTracing = false
+                    oRoot.sgSwipeLeft()
+                } else if (oPrivate.pYVelocity > 5
+                           && mouse.y > parent.height * 0.2) {
+                    oPrivate.pTracing = false
+                    oRoot.sgSwipeDown()
+                } else if (oPrivate.pYVelocity < -2
+                           && mouse.y < parent.height * 0.2) {
+                    oPrivate.pTracing = false
+                    oRoot.sgSwipeUp()
                 }
             }
 
-            onPressAndHold: console.log("onPressAndHold");
-            onSgSwipeLeft: console.log("onSgSwipeLeft");
+            onPressAndHold: console.log("onPressAndHold")
+            onSgSwipeLeft: console.log("onSgSwipeLeft")
             onSgSwipeDown: {
-                playerOnMinClick()
+                if (parent.height != blockMargin * 3) {
+                    playerOnMinClick()
+                }
             }
-            onSgSwipeRight: console.log("onSgSwipeRight");
+            onSgSwipeRight: console.log("onSgSwipeRight")
             onSgSwipeUp: {
-                if (parent.height == 40) {
+                if (parent.height == blockMargin * 3) {
                     playerOnMaxClick()
                 } else {
                     beatFunctions.starter()
                 }
 
-                console.log("onSgSwipeUp");
+                console.log("onSgSwipeUp")
             }
-            onReleased: console.log("onReleased");
+            onReleased: console.log("onReleased")
 
             onClicked: {
-                if (parent.height == 40) {
+                if (parent.height == blockMargin * 3) {
                     playerOnMaxClick()
                 }
-
             }
-
-
         }
 
         Item {
@@ -228,6 +179,7 @@ Rectangle {
                 text: titlePlayer
 
                 font.family: appFont
+                font.pointSize: blockMargin * 1.5
 
                 color: "#FFF"
 
@@ -244,6 +196,7 @@ Rectangle {
                 text: authorPlayer
 
                 font.family: appFont
+                font.pointSize: blockMargin * 1.5
 
                 color: light
 
@@ -257,7 +210,10 @@ Rectangle {
             Text {
                 id: musicPlayerMinCurTime
 
-                text: Math.floor(playerSlider.value / 60) + ":" + timeCorrector(Math.floor(playerSlider.value % 60))
+                text: Math.floor(playerSlider.value / 60) + ":" + timeCorrector(
+                          Math.floor(playerSlider.value % 60))
+
+                font.pointSize: blockMargin * 1.5
 
                 color: secondary
 
@@ -269,16 +225,16 @@ Rectangle {
 
                 function timeCorrector(number) {
                     if (number <= 9)
-                        return "0" + number;
-                    return number;
+                        return "0" + number
+                    return number
                 }
             }
 
             Button {
                 id: musicPlayerMinPP
 
-                width: 40
-                height: 40
+                width: blockMargin * 8
+                height: width
 
                 anchors {
                     verticalCenter: parent.verticalCenter
@@ -291,7 +247,8 @@ Rectangle {
                     source: "qrc:/png/interface/pause.svg"
                     fillMode: Image.PreserveAspectFit
                     anchors.centerIn: parent
-                    height: 40
+                    height: blockMargin * 8
+                    width: height
                 }
 
                 background: Rectangle {
@@ -305,7 +262,6 @@ Rectangle {
         }
 
         //animation and max from here
-
         Item {
             id: musicPlayerMax
 
@@ -317,7 +273,7 @@ Rectangle {
             Rectangle {
                 id: topLinePlayer
 
-                width: 40
+                width: 80
                 height: 4
 
                 color: secondary
@@ -329,29 +285,7 @@ Rectangle {
                     topMargin: blockMargin
                     horizontalCenter: parent.horizontalCenter
                 }
-
             }
-
-            Rectangle {
-                id: musicPlayerMaxCoverMask
-                width: parent.width * 0.8
-                height: width
-
-                radius: blockMargin * 2
-
-                color: darkVariant
-
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    top: parent.top
-                    topMargin: parent.width * 0.1
-                }
-                smooth: true
-                visible: false
-
-
-            }
-
 
             DropShadow {
                 anchors.fill: musicPlayerMaxCoverMask
@@ -361,6 +295,23 @@ Rectangle {
                 radius: 12.0
                 color: "#40000000"
                 source: musicPlayerMaxCoverMask
+            }
+
+            Rectangle {
+                id: musicPlayerMaxCoverMask
+                width: parent.width * 0.8
+                height: width
+
+                radius: blockMargin * 1.7
+
+                color: darkVariant
+
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    top: parent.top
+                    topMargin: parent.width * 0.1
+                }
+                smooth: true
             }
 
             Image {
@@ -399,24 +350,26 @@ Rectangle {
                     parent: playerSlider.handle
                     //visible: playerSlider.pressed
                     visible: false
-                    text: pad(Math.floor(value / 60)) + ":" + pad(Math.floor(value % 60))
+                    text: pad(Math.floor(value / 60)) + ":" + pad(
+                              Math.floor(value % 60))
                     y: parent.height
 
-                    readonly property int value: playerSlider.valueAt(playerSlider.position)
+                    readonly property int value: playerSlider.valueAt(
+                                                     playerSlider.position)
 
                     function pad(number) {
                         if (number <= 9)
-                            return "0" + number;
-                        return number;
+                            return "0" + number
+                        return number
                     }
                 }
             }
 
-
             Text {
                 id: musicPlayerMaxCurTime
 
-                text: Math.floor(playerSlider.value / 60) + ":" + timeCorrector(Math.floor(playerSlider.value % 60))
+                text: Math.floor(playerSlider.value / 60) + ":" + timeCorrector(
+                          Math.floor(playerSlider.value % 60))
 
                 color: secondary
 
@@ -425,10 +378,12 @@ Rectangle {
                     verticalCenter: playerSlider.verticalCenter
                 }
 
+                font.pointSize: blockMargin * 1.5
+
                 function timeCorrector(number) {
                     if (number <= 9)
-                        return "0" + number;
-                    return number;
+                        return "0" + number
+                    return number
                 }
             }
 
@@ -438,6 +393,7 @@ Rectangle {
                 text: timePlayerString
 
                 color: secondary
+                font.pointSize: blockMargin * 1.5
 
                 anchors {
                     right: musicPlayerMaxCoverMask.right
@@ -452,7 +408,7 @@ Rectangle {
                 color: "#FFF"
                 font.family: appFont
                 font.bold: true
-                font.pointSize: 20
+                font.pointSize: blockMargin * 2
 
                 anchors {
                     horizontalCenter: parent.horizontalCenter
@@ -468,21 +424,12 @@ Rectangle {
                 color: secondary
                 font.family: appFont
                 font.bold: false
-                font.pointSize: 15
+                font.pointSize: blockMargin * 1.7
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     top: musicPlayerMaxTitle.bottom
                     topMargin: 5
                 }
-            }
-
-            Rectangle {
-                id: musicPlayerMaxPPRectangle
-                anchors.fill: musicPlayerMaxPP
-                anchors.centerIn: musicPlayerMaxPPRectangle
-                radius: blockMargin
-                color: darkest
-                visible: false
             }
 
             DropShadow {
@@ -491,10 +438,18 @@ Rectangle {
                 transparentBorder: true
                 horizontalOffset: 0
                 verticalOffset: 2
-                radius: 12.0
-                opacity: 0.4
-                color: "#60000000"
+                radius: 7
+                opacity: 1
+                color: "#40000000"
                 source: musicPlayerMaxPPRectangle
+            }
+
+            Rectangle {
+                id: musicPlayerMaxPPRectangle
+                anchors.fill: musicPlayerMaxPP
+                anchors.centerIn: musicPlayerMaxPP
+                radius: blockMargin
+                color: darkest
             }
 
             Button {
@@ -525,16 +480,6 @@ Rectangle {
                 onClicked: {
                     playerPPclick()
                 }
-
-            }
-
-            Rectangle {
-                id: playerRepeatRectangle
-                anchors.fill: playerRepeat
-                anchors.centerIn: playerRepeat
-                radius: blockMargin
-                color: darkest
-                visible: false
             }
 
             DropShadow {
@@ -543,10 +488,18 @@ Rectangle {
                 transparentBorder: true
                 horizontalOffset: 2
                 verticalOffset: 2
-                radius: 12.0
-                opacity: 0.4
-                color: "#60000000"
+                radius: 7
+
+                color: "#40000000"
                 source: playerRepeatRectangle
+            }
+
+            Rectangle {
+                id: playerRepeatRectangle
+                anchors.fill: playerRepeat
+                anchors.centerIn: playerRepeat
+                radius: blockMargin
+                color: darkest
             }
 
             Button {
@@ -575,10 +528,10 @@ Rectangle {
                 }
 
                 onClicked: {
-                    if(onRepeat) {
+                    if (onRepeat) {
                         onRepeat = false
                         playerRepeatImg.source = "qrc:/png/interface/arrows-repeat (1).svg"
-                        playerRepeatShadow.radius = 12
+                        playerRepeatShadow.radius = 7
                     } else {
                         onRepeat = true
                         playerRepeatImg.source = "qrc:/png/interface/arrows-repeat.svg"
@@ -587,25 +540,24 @@ Rectangle {
                 }
             }
 
-            Rectangle {
-                id: playerFunctionsRectangle
-                anchors.fill: playerFunctions
-                anchors.centerIn: playerFunctions
-                radius: blockMargin
-                color: darkest
-                visible: false
-            }
-
             DropShadow {
                 id: playerFunctionsShadow
                 anchors.fill: playerFunctionsRectangle
                 transparentBorder: true
                 horizontalOffset: -2
                 verticalOffset: 2
-                radius: 12.0
-                opacity: 0.4
-                color: "#60000000"
+                radius: 7
+
+                color: "#40000000"
                 source: playerFunctionsRectangle
+            }
+
+            Rectangle {
+                id: playerFunctionsRectangle
+                anchors.fill: playerFunctions
+                anchors.centerIn: playerFunctions
+                radius: blockMargin
+                color: darkest
             }
 
             Button {
@@ -636,14 +588,8 @@ Rectangle {
                 onClicked: {
                     beatFunctions.starter()
                 }
-
             }
-
-
-
         }
-
-
 
         ParallelAnimation {
             id: musicPlayerOnMax
@@ -687,14 +633,13 @@ Rectangle {
                 property: "width"
                 duration: timeAnimation
                 from: 0
-                to: 40
+                to: 60
             }
 
             onFinished: {
                 musicPlayerShadow.visible = true
                 musicPlayerBackMouseArea.visible = true
             }
-
         }
 
         ParallelAnimation {
@@ -715,7 +660,7 @@ Rectangle {
                 property: "height"
                 duration: timeAnimation
                 from: mainScreen.height - 120
-                to: 40
+                to: blockMargin * 3
             }
 
             NumberAnimation {
@@ -738,28 +683,26 @@ Rectangle {
                 target: topLinePlayer
                 property: "width"
                 duration: timeAnimation
-                from: 40
+                from: 60
                 to: 0
             }
 
             onFinished: {
                 musicPlayerShadow.visible = true
                 musicPlayerBackMouseArea.visible = false
-                playerCoverBackgroundTrimed.visible = false
+                //playerCoverBackgroundTrimed.visible = false
                 //playerCoverBackgroundOverlayTrimed.visible = false
             }
         }
-
     }
 
     function playerOnMaxClick() {
         musicPlayerShadow.visible = true
-        //playerCoverBackgroundTrimed.visible = true    //high perfomance
-        //playerCoverBackgroundOverlayTrimed.visible = true         //very high perfomance
         musicPlayerOnMax.running = true
         musicPlayerMax.visible = true
         musicPlayerMin.visible = false
-        parent.color = darkest
+        musicPlayerBlock.color = darkest
+        musicPlayer.color = "#90000000"
 
         beatFunctions.title = titlePlayer
         beatFunctions.author = authorPlayer
@@ -773,10 +716,11 @@ Rectangle {
         musicPlayerShadow.visible = false
         musicPlayerMin.visible = true
         musicPlayerBlock.color = darkestTransparency
-        console.log("onSgSwipeDown");
+        musicPlayer.color = "#00000000"
+        console.log("onSgSwipeDown")
     }
 
-    function resetPlayerSlider(){
+    function resetPlayerSlider() {
         playerSlider.value = 0
     }
 }

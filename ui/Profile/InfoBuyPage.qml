@@ -5,10 +5,10 @@ import QtQuick.Controls.Material 2.3
 Flickable {
     id: infoBuy
 
-    contentHeight: infoBuyColumn.height
+    contentHeight: infoBuyColumn.height * 1.5
     anchors.fill: leftScreen
     anchors.topMargin: topBar.height + blockMargin
-    anchors.bottomMargin: bottomBar.height * 3
+    anchors.bottomMargin: bottomBar.height
 
     Column {
 
@@ -17,7 +17,7 @@ Flickable {
         anchors {
             top: leftScreen.top
             topMargin: topBar.height + blockMargin
-            bottomMargin: topBar.height * 3
+            bottomMargin: topBar.height
             horizontalCenter: parent.horizontalCenter
         }
 
@@ -41,19 +41,20 @@ Flickable {
             color: secondary
         }
 
-        Label {
+        Text {
             font.family: appFont
             anchors.left: parent.left
             anchors.leftMargin: blockMargin
-        //    anchors.horizontalCenter: parent.horizontalCenter
+            //    anchors.horizontalCenter: parent.horizontalCenter
             horizontalAlignment: Text.AlignLeft
             width: parent.width - blockMargin * 2
             wrapMode: Label.Wrap
             text: "    Оплата производится безналичным способом. Вывод средств "
-                  + "осуществляется с помощью электронного кошелька Ю-мани, банковской "
-                  + "карты."
+                  + "осуществляется с помощью электронного кошелька Ю-мани, банковской " + "карты."
 
             color: light
+            font.pointSize: 15
+            font.weight: Font.Medium
         }
 
         Text {
@@ -73,20 +74,22 @@ Flickable {
             color: secondary
         }
 
-        Label {
+        Text {
             font.family: appFont
             anchors.left: parent.left
             anchors.leftMargin: blockMargin
-        //    anchors.horizontalCenter: parent.horizontalCenter
+            //    anchors.horizontalCenter: parent.horizontalCenter
             horizontalAlignment: Text.AlignLeft
             width: parent.width - blockMargin * 2
             wrapMode: Label.Wrap
             text: "    Вы можете задать нам любые вопросы, воспользовавшись формой или по "
-            + "указанным ниже контактам. Мы отвечаем в течение 1-2 суток. Наши "
-            + "с одной стороны, и пользователем данного сайта (далее «Пользователь»), с другой стороны."
-            + "специалисты рады ответить на вопросы и предложения, связанные с "
-            + "сервисом в онлайн-чате."
+                  + "указанным ниже контактам. Мы отвечаем в течение 1-2 суток. Наши "
+                  + "с одной стороны, и пользователем данного сайта (далее «Пользователь»), с другой стороны."
+                  + "специалисты рады ответить на вопросы и предложения, связанные с "
+                  + "сервисом в онлайн-чате."
 
+            font.pointSize: 15
+            font.weight: Font.Medium
             color: light
         }
 
@@ -96,16 +99,15 @@ Flickable {
 
             anchors.left: parent.left
             anchors.leftMargin: blockMargin
-        //    anchors.horizontalCenter: parent.horizontalCenter
+            //    anchors.horizontalCenter: parent.horizontalCenter
             horizontalAlignment: Text.AlignLeft
             width: parent.width - blockMargin * 2
             wrapMode: Text.Wrap
             text: "support@ogbeats.ru"
 
+            font.pointSize: 13
+            font.weight: Font.Medium
             color: light
         }
-
-
     }
-
 }

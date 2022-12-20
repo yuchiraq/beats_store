@@ -10,12 +10,12 @@ import "qrc:/ui"
 Rectangle {
     id: authorMiniCard
 
-    height: blockMargin * 12
+    height: blockMargin * 14
     width: height / 12 * 9
     radius: blockMargin
     border.color: outline
 
-    color: "#0028292A"
+    color: dark
 
     border.width: 1
 
@@ -98,12 +98,11 @@ Rectangle {
 
         anchors {
             top: authorMiniCardName.bottom
-            //topMargin: blockMargin / 4
+            topMargin: height / 2
             left: parent.left
             leftMargin: blockMargin / 2
         }
     }
-
 
     Rectangle {
         id: likeAuthorOverlay
@@ -119,7 +118,7 @@ Rectangle {
     Image {
         id: likeAuthorImg
 
-        source: "qrc:/png/interface/heart (1).svg"
+        source: "qrc:/ui_icons/solid/heart.svg"
 
         anchors.centerIn: authorMiniCardCover
 
@@ -129,12 +128,9 @@ Rectangle {
         opacity: 0
     }
 
+    function singleClick() {}
 
-    function singleClick(){
-
-    }
-
-    function doubleClick(){
+    function doubleClick() {
         likeAuthor.running = true
     }
 
@@ -148,6 +144,8 @@ Rectangle {
             interval: 250
             onTriggered: singleClick()
         }
+
+        onDoubleClicked: likeAuthor.running = true
 
         onClicked: {
             if (timer.running) {
@@ -178,7 +176,8 @@ Rectangle {
             target: likeAuthorImg
             property: "opacity"
             duration: timeAnimation
-            from: 0; to: 1
+            from: 0
+            to: 1
         }
 
         NumberAnimation {
@@ -201,7 +200,8 @@ Rectangle {
             target: likeAuthorImg
             property: "opacity"
             duration: timeAnimation
-            from: 1; to: 0
+            from: 1
+            to: 0
         }
 
         NumberAnimation {

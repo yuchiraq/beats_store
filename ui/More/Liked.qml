@@ -3,49 +3,88 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 
 import "qrc:/ui/Tracks"
+import "qrc:/ui/Cards"
 
-Flickable {
+Page {
     id: rightScreen
 
-    width: parent
-
     anchors.fill: stackView
-    anchors.topMargin: topBar.height + blockMargin
-    anchors.bottomMargin: bottomBar.height
 
-    contentHeight: likedColumn.height
+    Rectangle {
+        anchors.fill: parent
+        color: darkest
+    }  
 
     Column {
-        id: likedColumn
-
-        anchors {
-            top: mainScreen.top
-            topMargin: topBar.height + blockMargin
-            bottomMargin: topBar.height
-            horizontalCenter: parent.horizontalCenter
-        }
-
-        spacing: blockMargin
-
+        id: column
+        anchors.centerIn: parent
         Text {
+            text: qsTr("Название:")
+            font.pixelSize: 16
+            color: light
+        }
+        TextField {
+            id: titleField
             font.family: appFont
+            font.pointSize: 25
+            placeholderTextColor: outline
+            selectedTextColor: secondary
             color: secondary
-            text: "<strong>by Chiraq Concept</strong>"
-
-            anchors {
-                right: parent.right
-                rightMargin: blockMargin
+        }
+        Text {
+            text: qsTr("Автор:")
+            font.pixelSize: 16
+            color: light
+        }
+        TextField {
+            id: authorField
+            font.family: appFont
+            font.pointSize: 25
+            placeholderTextColor: outline
+            selectedTextColor: secondary
+            color: secondary
+        }
+        Text {
+            text: qsTr("Длительность (секунд):")
+            font.pixelSize: 16
+            color: light
+        }
+        TextField {
+            id: timeField
+            validator: RegularExpressionValidator {
+                regularExpression: /[\d\s \Q(+)\E]{0,32}$/
             }
+            font.family: appFont
+            font.pointSize: 25
+            placeholderTextColor: outline
+            selectedTextColor: secondary
+            color: secondary
+        }
+        Text {
+            text: qsTr("Обложка URL:")
+            font.pixelSize: 16
+            color: light
+        }
+        TextField {
+            id: coverField
+            font.family: appFont
+            font.pointSize: 25
+            placeholderTextColor: outline
+            selectedTextColor: secondary
+            color: secondary
         }
 
-        ProgressBar {
-            indeterminate: true
-            anchors {
-
-                topMargin: 20
-                horizontalCenter: parent.horizontalCenter
+        Button {
+            text: "Добавить"
+            Material.theme: Material.Dark
+            onClicked: {
+                database.inserIntoTable(titleField.text, authorField.text,
+                                        timeField.text, coverField.text)
+                titleField.clear()
+                authorField.clear()
+                timeField.clear()
+                centralScreen.update()
             }
         }
     }
-
 }

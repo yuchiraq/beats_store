@@ -5,9 +5,14 @@ import QtQuick.Controls.Material 2.3
 import Qt5Compat.GraphicalEffects
 
 import "qrc:/ui/BottomBar"
+import "qrc:/fonts"
 
 Rectangle {
     id: topBar
+
+    Keys.onBackPressed: {
+        topBar.standartBack()
+    }
 
     anchors {
         left: parent.left
@@ -15,21 +20,32 @@ Rectangle {
         top: parent.top
     }
 
-    height: 60
+    height: blockMargin * 5
     width: parent.width
 
     color: darkestTransparency
+
+    function standartBack() {
+        if (searchInput.visible) {
+            searchOff()
+        } else {
+            if (bottomBar.active == 1 && leftScreen.depth > 1) {
+                leftScreen.pop()
+                if (leftScreen.depth == 1)
+                    backOff.running = true
+            }
+        }
+    }
 
     Image {
         id: topLogo
 
         source: "qrc:/png/fullLOGO.png"
-        //source: "qrc:/png/logowCrop.png"
 
+        //source: "qrc:/png/logowCrop.png"
         anchors {
             left: parent.left
-            leftMargin: blockMargin * 2
-            //leftMargin: (parent.width - width) / 2
+            leftMargin: blockMargin * 1.5
             top: parent.top
             topMargin: (parent.height - height) / 2
         }
@@ -41,8 +57,159 @@ Rectangle {
         anchors.fill: topLogo
         onClicked: {
             console.log("TopLogo click!")
-            centralScreen.contentY = centralScreen.top
+            centralScreen.flick(0, 0)
+            startSplashScreen.startSplash()
         }
+    }
+
+    Rectangle {
+        id: searchInput
+        anchors {
+            verticalCenter: topBar.verticalCenter
+            left: topBar.left
+            leftMargin: blockMargin / 2
+            right: topBar.right
+            rightMargin: blockMargin / 2
+        }
+
+        height: blockMargin * 3.5
+        //radius: blockMargin * 1.5
+        radius: height / 2
+        color: dark
+
+        Rectangle {
+            id: searchTopBarCleanerBack
+            anchors.centerIn: searchTopBarCleaner
+            height: searchTopBarCleaner.height
+            width: height
+            radius: height / 2
+            color: outline
+            opacity: 0
+        }
+
+        SequentialAnimation {
+            id: searchTopBarCleanerBackAnim
+            NumberAnimation {
+                target: searchTopBarCleanerBack
+                property: "opacity"
+                from: 0
+                to: 1
+            }
+            NumberAnimation {
+                target: searchTopBarCleanerBack
+                property: "opacity"
+                from: 1
+                to: 0
+            }
+            running: false
+        }
+
+        MouseArea {
+            id: searchTopBarCleaner
+
+            width: searchInput.height
+            height: width
+
+            anchors {
+                right: searchInput.right
+                //rightMargin: blockMargin / 4
+                verticalCenter: parent.verticalCenter
+            }
+
+            Image {
+                anchors.centerIn: parent
+                source: "qrc:/ui_icons/outline/cross.svg"
+                width: parent.height * 0.4 //(searchInput.height - blockMargin / 2) * 0.5
+                height: width
+                smooth: true
+            }
+
+            onPressed: searchTopBarCleanerBackAnim.running = true
+
+            onClicked: {
+                searchInputField.clear()
+                searchListModel.updateModel("")
+            }
+
+            //visible: searchInputField.text !== ""
+        }
+        visible: false
+    }
+
+    Rectangle {
+        id: searchInputFieldMask
+        visible: false
+
+        anchors {
+            verticalCenter: topBar.verticalCenter
+            left: searchTopBar.right
+            right: topBar.right
+            rightMargin: searchTopBar.width
+        }
+
+        height: blockMargin * 3.5
+        radius: blockMargin * 1.5
+
+        color: "transparent"
+
+        TextField {
+            id: searchInputField
+            placeholderText: "Поиск..."
+            font.family: appFont
+            font.pointSize: blockMargin * 2
+            placeholderTextColor: outline
+            selectedTextColor: secondary
+            color: secondary
+
+            background: Rectangle {
+                anchors {
+                    verticalCenter: topBar.verticalCenter
+                    left: topBar.left
+                    leftMargin: blockMargin
+                    right: topBar.right
+                    rightMargin: searchTopBar.width
+                }
+                height: blockMargin * 3.5
+                color: "transparent"
+            }
+
+            //            onTextEdited: {
+            //                searchListModel.updateModel(searchInputField.text)
+            //            }
+            onAccepted: {
+                searchListModel.updateModel(searchInputField.text)
+                Qt.inputMethod.hide()
+                console.log(searchListModel.updateModel(searchInputField.text))
+                searchInputField.cursorVisible = false
+            }
+        }
+    }
+
+    Rectangle {
+        id: searchTopBarBack
+        anchors.centerIn: searchTopBar
+        height: searchInput.height
+        width: height
+        radius: height / 2
+        color: outline
+        opacity: 0
+    }
+
+    SequentialAnimation {
+        id: searchTopBarBackAnim
+        NumberAnimation {
+            target: searchTopBarBack
+            property: "opacity"
+            from: 0
+            to: 1
+        }
+        NumberAnimation {
+            target: searchTopBarBack
+            property: "opacity"
+            from: 1
+            to: 0
+        }
+        running: false
     }
 
     MouseArea {
@@ -61,32 +228,115 @@ Rectangle {
             id: searchTopBarImg
 
             anchors.centerIn: parent
-            source: "qrc:/png/interface/search.svg"
+            source: "qrc:/ui_icons/outline/search.svg"
             width: parent.height * 0.4
             height: width
         }
 
         onClicked: {
-            searchAnimation.running = true
+            if (topLogo.visible) {
+                searchOn()
+                searchListModel.updateModel(searchInputField.text)
+            } else {
+                searchOff()
+                //searchAnimation.running = true
+            }
         }
+
+        onPressed: searchTopBarBackAnim.running = true
 
         NumberAnimation {
             id: searchAnimation
             running: false
             target: searchTopBarImg
             property: "rotation"
-            duration: timeAnimation * 5
             from: 0
-            to: 360
+            to: 90
         }
+    }
 
+    NumberAnimation {
+        id: searchOnAnimation
+
+        target: searchTopBar
+        property: "anchors.rightMargin"
+        from: 0
+        to: topBar.width - searchTopBar.width + blockMargin / 4
+
+        running: false
+
+        onFinished: {
+            searchInput.visible = true
+            searchInputFieldMask.visible = true
+        }
+    }
+
+    NumberAnimation {
+        id: searchOffAnimation
+
+        target: searchTopBar
+        property: "anchors.rightMargin"
+        from: topBar.width - searchTopBar.width + blockMargin / 4
+        to: 0
+
+        running: false
+
+        onStarted: {
+            searchInputFieldMask.visible = false
+            searchInput.visible = false
+        }
+    }
+
+    function searchOn() {
+        backTopBar.visible = false
+        topLogo.visible = false
+        bottomBar.close()
+        searchOnAnimation.running = true
+        stackView.push("qrc:/ui/Search/SearchPage.qml")
+    }
+
+    function searchOff() {
+        Qt.inputMethod.hide()
+        searchInputField.cursorVisible = false
+        searchOffAnimation.running = true
+        topLogo.visible = true
+        bottomBar.open()
+        stackView.pop()
+        backSwitch()
+    }
+
+    Rectangle {
+        id: backTopBarBack
+        anchors.centerIn: backTopBar
+        height: backTopBar.height * 0.5
+        width: height
+        radius: height / 2
+        color: outline
+        opacity: 0
+    }
+
+    SequentialAnimation {
+        id: backTopBarBackAnim
+        NumberAnimation {
+            target: backTopBarBack
+            property: "opacity"
+            from: 0
+            to: 1
+        }
+        NumberAnimation {
+            target: backTopBarBack
+            property: "opacity"
+            from: 1
+            to: 0
+        }
+        running: false
     }
 
     MouseArea {
         id: backTopBar
 
         width: 0
-        //width: parent.height * 0.3
+
         height: width
 
         anchors {
@@ -103,15 +353,17 @@ Rectangle {
             rotation: 180
         }
 
+        onPressed: backTopBarBackAnim.running = true
+
         onClicked: {
-            if(bottomBar.active == 1){
+            if (bottomBar.active == 1 && leftScreen.depth > 1) {
                 leftScreen.pop()
+                if (leftScreen.depth == 1)
+                    backOff.running = true
             }
-
-            backOff.running = true
-
+            //backSwitch()
+            //backOff.running = true
         }
-
     }
 
     property int timeAnimation: 150
@@ -125,7 +377,7 @@ Rectangle {
             target: topLogo
             property: "anchors.leftMargin"
             duration: timeAnimation
-            from: blockMargin * 2
+            from: blockMargin * 1
             to: (topBar.width - topLogo.width) / 2
         }
 
@@ -136,6 +388,8 @@ Rectangle {
             from: 0
             to: topBar.height
         }
+
+        onStarted: backTopBar.visible = true
     }
 
     ParallelAnimation {
@@ -156,22 +410,25 @@ Rectangle {
             property: "anchors.leftMargin"
             duration: timeAnimation
             from: (topBar.width - topLogo.width) / 2
-            to: blockMargin * 2
+            to: blockMargin * 1.5
         }
 
         onFinished: backSwitch()
     }
 
-    function backSwitch(){
-        if(bottomBar.active == 1){
-            if(leftScreen.depth > 1) {
+    function backSwitch(back) {
+        if (back) {
+            backOff.running = true
+            return
+        }
+
+        if (bottomBar.active == 1) {
+            if (leftScreen.depth > 1) {
                 backOn.running = true
             }
         } else {
-            if(backTopBar.width != 0)
+            if (backTopBar.width != 0)
                 backOff.running = true
         }
-
-
     }
 }

@@ -12,11 +12,9 @@
         <file>png/OG_2.png</file>
         <file>ui/More/Liked.qml</file>
         <file>ui/Profile/ProfileTest.qml</file>
-        <file>png/interface/heart.png</file>
         <file>png/interface/heartActive.png</file>
         <file>png/interface/music.png</file>
         <file>png/interface/musicActive.png</file>
-        <file>png/interface/user.png</file>
         <file>png/interface/userActive.png</file>
         <file>ui/TopLogo.qml</file>
         <file>png/beats.png</file>
@@ -39,13 +37,7 @@
         <file>ui/Cards/BeatLine.qml</file>
         <file>ui/Cards/NewBeat.qml</file>
         <file>png/interface/next.png</file>
-        <file>png/interface/heart.svg</file>
-        <file>png/interface/heart (1).svg</file>
         <file>png/interface/exit.svg</file>
-        <file>png/interface/music-alt.svg</file>
-        <file>png/interface/music-alt (1).svg</file>
-        <file>png/interface/user.svg</file>
-        <file>png/interface/user (1).svg</file>
         <file>png/interface/arrows-repeat.svg</file>
         <file>png/interface/mode-landscape.svg</file>
         <file>png/interface/power.svg</file>
@@ -62,7 +54,6 @@
         <file>ui/Profile/InfoServicePage.qml</file>
         <file>png/interface/angle-right.svg</file>
         <file>png/interface/pause.svg</file>
-        <file>png/interface/play.svg</file>
         <file>png/interface/shadow.png</file>
         <file>png/logowCrop.png</file>
         <file>png/logow.png</file>
@@ -75,5 +66,43 @@
         <file>png/temp/eat.jpg</file>
         <file>ui/Cards/AlbumMiniCard.qml</file>
         <file>ui/Tracks/BlockRandomAlbums.qml</file>
+        <file>fonts/Montserrat-Italic-VariableFont_wght.ttf</file>
+        <file>fonts/Montserrat-VariableFont_wght.ttf</file>
+        <file>fonts/LocalFont.qml</file>
+        <file>fonts/Montserrat-Black.ttf</file>
+        <file>fonts/Montserrat-BlackItalic.ttf</file>
+        <file>fonts/Montserrat-Bold.ttf</file>
+        <file>fonts/Montserrat-BoldItalic.ttf</file>
+        <file>fonts/Montserrat-ExtraBold.ttf</file>
+        <file>fonts/Montserrat-ExtraBoldItalic.ttf</file>
+        <file>fonts/Montserrat-ExtraLight.ttf</file>
+        <file>fonts/Montserrat-ExtraLightItalic.ttf</file>
+        <file>fonts/Montserrat-Italic.ttf</file>
+        <file>fonts/Montserrat-Light.ttf</file>
+        <file>fonts/Montserrat-LightItalic.ttf</file>
+        <file>fonts/Montserrat-Medium.ttf</file>
+        <file>fonts/Montserrat-MediumItalic.ttf</file>
+        <file>fonts/Montserrat-Regular.ttf</file>
+        <file>fonts/Montserrat-SemiBold.ttf</file>
+        <file>fonts/Montserrat-SemiBoldItalic.ttf</file>
+        <file>fonts/Montserrat-Thin.ttf</file>
+        <file>fonts/Montserrat-ThinItalic.ttf</file>
+        <file>png/interface/fire.gif</file>
+        <file>png/interface/fire.png</file>
+        <file>icons/startSplash.gif</file>
+        <file>fonts/SFPRODISPLAYBLACKITALIC.OTF</file>
+        <file>fonts/SFPRODISPLAYBOLD.OTF</file>
+        <file>fonts/SFPRODISPLAYHEAVYITALIC.OTF</file>
+        <file>fonts/SFPRODISPLAYLIGHTITALIC.OTF</file>
+        <file>fonts/SFPRODISPLAYMEDIUM.OTF</file>
+        <file>fonts/SFPRODISPLAYREGULAR.OTF</file>
+        <file>fonts/SFPRODISPLAYSEMIBOLDITALIC.OTF</file>
+        <file>fonts/SFPRODISPLAYTHINITALIC.OTF</file>
+        <file>fonts/SFPRODISPLAYULTRALIGHTITALIC.OTF</file>
+        <file>ui/Search/SearchPage.qml</file>
+        <file>animated/splash.gif</file>
+        <file>animated/splashLower.gif</file>
+        <file>ui/BottomBar/StyleChooser.qml</file>
+        <file>animated/lovelyboot1-103697 (mp3cut.net).mp3</file>
     </qresource>
 </RCC>

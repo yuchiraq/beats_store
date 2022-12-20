@@ -1,10 +1,14 @@
+import QtQml 2.12
 import QtQuick 2.15
+import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
+import QtQuick.LocalStorage 2.0
 //import QtGraphicalEffects 1.15
 import Qt5Compat.GraphicalEffects
-//import QtWebChannel
+//import LastRealisesModel 1.0
 
+//import QtWebChannel
 import "qrc:/ui/Tracks"
 import "qrc:/ui"
 import "qrc:/ui/Cards"
@@ -12,111 +16,218 @@ import "qrc:/ui/Cards"
 Flickable {
     id: centralScreen
 
-    contentHeight: bestTracksColumn.height
+    contentHeight: blockNewRealise.height * 2 + blockRandomBeats.height
+                   + blockRandomAlbums.height + blockRandomAuthors.height + lastRealises.height
     anchors.fill: stackView
-    anchors.topMargin: topBar.height + blockMargin
+
+    anchors.topMargin: topBar.height
     anchors.bottomMargin: bottomBar.height
+
+    property int lastSortBy: 0
+
+    //        Rectangle {
+    //            anchors.fill: parent
+    //            color: darkest
+    //        }
+    BlockNewRealise {
+        id: blockNewRealise
+
+        anchors {
+            top: parent.top
+            topMargin: blockMargin
+            horizontalCenter: parent.horizontalCenter
+        }
+    }
 
     DropShadow {
         anchors.fill: blockRandomBeats
         transparentBorder: true
-        horizontalOffset: -2
-        verticalOffset: 2
-        radius: 8.0
+        horizontalOffset: -3
+        verticalOffset: 3
+        radius: 6.0
         color: "#40000000"
         source: blockRandomBeats
+    }
+
+    BlockRandomBeats {
+        id: blockRandomBeats
+
+        anchors {
+            top: blockNewRealise.bottom
+            topMargin: blockMargin
+            horizontalCenter: parent.horizontalCenter
+        }
     }
 
     DropShadow {
         anchors.fill: blockRandomAuthors
         transparentBorder: true
-        horizontalOffset: -2
-        verticalOffset: 2
-        radius: 8.0
+        horizontalOffset: -3
+        verticalOffset: 3
+        radius: 6.0
         color: "#40000000"
         source: blockRandomAuthors
     }
 
-    Column {
-        id: bestTracksColumn
+    BlockRandomAuthors {
+        id: blockRandomAuthors
 
         anchors {
-            top: mainScreen.top
-            topMargin: topBar.height + blockMargin
-            bottomMargin: topBar.height
+            top: blockRandomBeats.bottom
+            topMargin: blockMargin
             horizontalCenter: parent.horizontalCenter
         }
+    }
 
-        spacing: blockMargin
+    DropShadow {
+        anchors.fill: blockRandomAlbums
+        transparentBorder: true
+        horizontalOffset: -3
+        verticalOffset: 3
+        radius: 6.0
+        color: "#40000000"
+        source: blockRandomAlbums
+    }
 
-        BlockNewRealise {
-            id: blockNewRealise
+    BlockRandomAlbums {
+        id: blockRandomAlbums
 
-            anchors.horizontalCenter: parent.horizontalCenter
+        anchors {
+            top: blockRandomAuthors.bottom
+            topMargin: blockMargin
+            horizontalCenter: parent.horizontalCenter
+        }
+    }
+
+    Text {
+        id: lastRealisesTitle
+        text: "<b>Последние релизы</b>"
+        color: light
+        anchors {
+            top: blockRandomAlbums.bottom
+            topMargin: blockMargin
+            left: parent.left
+            leftMargin: blockMargin
+        }
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        font.pointSize: blockMargin * 1.3
+    }
+
+    property string lastRealisesText: "Сначала старые"
+
+    Button {
+        id: lastRealisesSorter
+
+        anchors {
+            verticalCenter: lastRealisesTitle.verticalCenter
+            right: parent.right
+            rightMargin: blockMargin
         }
 
-        BlockRandomBeats {
-            id: blockRandomBeats
-
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-
-        BlockRandomAuthors {
-            id: blockRandomAuthors
-
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-
-        BlockRandomAlbums {
-            id: blockRandomAlbums
-
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-
-        Column {
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: blockRandomAuthors.width
+        background: Rectangle {
+            anchors.fill: parent
+            radius: blockMargin
+            border.color: outline
+            border.width: 0.5
+            color: dark
 
             Text {
-                text: "<b>Последние релизы</b>"
-                color: light
-                anchors.horizontalCenter: parent.horizontalCenter
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-            }
 
-            BeatLine {
-                time: "2:54"
-                bpm: "150"
-                cover: "qrc:/png/temp/covers/balenciaga.jpg"
-                title: "Balenciaga"
-                author: "Ebone Hoodrich"
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-
-            BeatLine {
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-
-            BeatLine {
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-
-            BeatLine {
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-
-            Text {
+                id: lastRealisesSorterText
+                text: "Случайные"
+                font.pointSize: blockMargin * 1.3
                 font.family: appFont
-                color: secondary
-                text: "<strong>by Chiraq Concept</strong>"
+                color: light
 
-                anchors {
-                    right: parent.right
-                    rightMargin: blockMargin
-                }
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 10
+            }
+
+            Image {
+                source: "qrc:/png/interface/next.png"
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.rightMargin: 10
+
+                rotation: 90
+                height: parent.height / 2
+                width: height
             }
         }
 
+        height: blockMargin * 1.6
+        width: lastRealisesSorterText.width + height + 20
+
+        onClicked: {
+            styleChooser.styleFor = 4
+            styleChooser.starter()
+        }
+    }
+
+    Rectangle {
+        width: parent.width
+        height: 0.5
+        color: outline
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: lastRealises.top
+    }
+
+    ListView {
+        id: lastRealises
+
+        model: lastRealisesModel
+        anchors.top: lastRealisesTitle.bottom
+        anchors.topMargin: blockMargin
+        anchors.right: parent.right
+        anchors.left: parent.left
+        height: database.getQuantity() * (blockMargin * 7 + 0.5)
+
+        delegate: Item {
+            id: lastRealise
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - blockMargin
+            height: lastRealiseBeat.height + 0.5
+
+            BeatLine {
+                id: lastRealiseBeat
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: parent.width
+                title: Title
+                author: Author
+                timeSec: TimeSec
+                id_track: id_db
+                cover: coverURL
+            }
+
+            Rectangle {
+                width: parent.width
+                height: 0.5
+                color: outline
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: lastRealiseBeat.bottom
+            }
+        }
+    }
+
+    Text {
+        font.family: appFont
+        color: secondary
+        text: "<strong>by Chiraq Concept</strong>\n" + mainScreen.height + " * " + mainScreen.width
+
+        anchors {
+            topMargin: blockMargin
+            top: lastRealises.bottom
+            right: parent.right
+            rightMargin: blockMargin
+            bottomMargin: bottomBar.height + 20
+        }
+    }
+
+    function update() {
+        lastRealises.height = database.getQuantity() * (blockMargin * 7 + 0.5)
+        lastRealisesModel.updateModel(lastSortBy)
+        randomBeatsModel.updateModel(0)
     }
 }

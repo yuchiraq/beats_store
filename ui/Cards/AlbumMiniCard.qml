@@ -10,8 +10,8 @@ import "qrc:/ui"
 Rectangle {
     id: albumMiniCard
 
-    height: blockMargin * 9
-    width: blockMargin * 21
+    height: blockMargin * 15
+    width: height
     radius: blockMargin
     border.color: outline
 
@@ -24,69 +24,83 @@ Rectangle {
     property string style: "Style"
     property string author: "Author"
 
-    Rectangle {
-        id: albumMiniCardCoverMask
+    //    Rectangle {
+    //        id: albumMiniCardCoverMask
 
-        width: parent.height
-        height: width
-        radius: parent.radius
+    //        width: parent.height
+    //        height: width
+    //        radius: parent.radius
 
-        //color: "#333"
-        color: darkVariant
-        border.color: outline
-        border.width: 1
+    //        //color: "#333"
+    //        color: darkVariant
+    //        border.color: outline
+    //        border.width: 1
 
-        anchors {
-            verticalCenter: parent.verticalCenter
-            left: parent.left
-            //topMargin: blockMargin / 2
-        }
-    }
-
+    //        anchors {
+    //            verticalCenter: parent.verticalCenter
+    //            left: parent.left
+    //            //topMargin: blockMargin / 2
+    //        }
+    //    }
     Image {
         id: albumMiniCardCover
         source: albumMiniCard.cover
 
-        width: parent.height
-        height: width
-
-        anchors {
-            verticalCenter: parent.verticalCenter
-            left: parent.left
-            //topMargin: blockMargin / 2
-        }
+        anchors.fill: parent
 
         visible: false
     }
 
     OpacityMask {
-        anchors.fill: albumMiniCardCoverMask
+        anchors.fill: parent
         source: albumMiniCardCover
-        maskSource: albumMiniCardCoverMask
+        maskSource: parent
     }
 
     Item {
+        id: albumMiniCardData
+
         anchors {
             verticalCenter: parent.verticalCenter
-            left: albumMiniCardCover.right
+            left: parent.left
             leftMargin: blockMargin / 2
-            right: parent.right
         }
 
         height: albumMiniCardAuthor.height + albumMiniCardTitle.height + albumMiniCardStyle.height
 
-        Label {
+        DropShadow {
+            anchors.fill: albumMiniCardTitle
+            transparentBorder: true
+            horizontalOffset: 2
+            verticalOffset: 2
+            radius: 4.0
+            color: "#a0000000"
+            source: albumMiniCardTitle
+        }
+
+        Text {
             id: albumMiniCardTitle
+
             color: "white"
 
             //wrapMode: Label.WrapAnywhere
             font.family: appFont
+            font.pointSize: 15
             text: "<strong>" + albumMiniCard.title + "</strong>"
+        }
+
+        DropShadow {
+            anchors.fill: albumMiniCardAuthor
+            transparentBorder: true
+            horizontalOffset: 2
+            verticalOffset: 2
+            radius: 4
+            color: "#a0000000"
+            source: albumMiniCardAuthor
         }
 
         Text {
             id: albumMiniCardAuthor
-
             text: albumMiniCard.author
 
             font.family: appFont
@@ -98,6 +112,16 @@ Rectangle {
             font.pointSize: albumMiniCardTitle.font.pointSize * 0.8
         }
 
+        DropShadow {
+            anchors.fill: albumMiniCardStyle
+            transparentBorder: true
+            horizontalOffset: 2
+            verticalOffset: 2
+            radius: 4.0
+            color: "#a0000000"
+            source: albumMiniCardStyle
+        }
+
         Text {
             id: albumMiniCardStyle
 
@@ -105,7 +129,7 @@ Rectangle {
 
             font.family: appFont
 
-            color: light
+            color: secondary
 
             anchors.top: albumMiniCardAuthor.bottom
 
@@ -127,22 +151,33 @@ Rectangle {
     Image {
         id: likeAlbumImg
 
-        source: "qrc:/png/interface/heart (1).svg"
+        source: "qrc:/ui_icons/solid/heart.svg"
 
         anchors.centerIn: albumMiniCardCover
 
         width: likeMin
         height: width
 
+        opacity: 1
+
+        visible: false
+    }
+
+    DropShadow {
+        id: likeAlbumImgShadow
+        anchors.fill: likeAlbumImg
+        source: likeAlbumImg
+        transparentBorder: true
+        horizontalOffset: 0
+        verticalOffset: 0
+        radius: 12.0
+        color: "#f0000000"
         opacity: 0
     }
 
+    function singleClick() {}
 
-    function singleClick(){
-
-    }
-
-    function doubleClick(){
+    function doubleClick() {
         likeAlbum.running = true
     }
 
@@ -157,6 +192,9 @@ Rectangle {
             onTriggered: singleClick()
         }
 
+        onDoubleClicked:
+            likeAlbum.running = true
+
         onClicked: {
             if (timer.running) {
                 doubleClick()
@@ -167,59 +205,105 @@ Rectangle {
         }
     }
 
-    property int likeMin: albumMiniCardCover.height / 2
-    property int likeMax: albumMiniCardCover.height / 1.5
-    property int timeAnimation: 100
+    property int likeMin: albumMiniCardCover.height * 0.3
+    property int likeMax: albumMiniCardCover.height * 0.5
+    property int timeAnimation: 300
 
     SequentialAnimation {
         id: likeAlbum
+        onStarted: likeAlbumImg.visible = true
+        ParallelAnimation {
 
-        NumberAnimation {
-            target: likeAlbumOverlay
-            property: "opacity"
-            duration: timeAnimation / 2
-            from: 0
-            to: 0.3
+            NumberAnimation {
+                target: likeAlbumImgShadow
+                property: "opacity"
+                duration: timeAnimation
+                from: 0
+                to: 1
+            }
+
+            NumberAnimation {
+                target: likeAlbumImg
+                property: "width"
+                duration: timeAnimation
+                from: likeMin
+                to: likeMax
+            }
         }
 
-        NumberAnimation {
-            target: likeAlbumImg
-            property: "opacity"
-            duration: timeAnimation
-            from: 0; to: 1
-        }
+        ParallelAnimation {
 
-        NumberAnimation {
-            target: likeAlbumImg
-            property: "width"
-            duration: timeAnimation
-            from: likeMin
-            to: likeMax
-        }
+            NumberAnimation {
+                target: likeAlbumImgShadow
+                property: "opacity"
+                duration: timeAnimation
+                from: 1
+                to: 0
+            }
 
-        NumberAnimation {
-            target: likeAlbumImg
-            property: "width"
-            duration: timeAnimation
-            from: likeMax
-            to: likeMin
+            NumberAnimation {
+                target: likeAlbumImg
+                property: "width"
+                duration: timeAnimation
+                from: likeMax
+                to: likeMin
+            }
         }
-
-        NumberAnimation {
-            target: likeAlbumImg
-            property: "opacity"
-            duration: timeAnimation
-            from: 1; to: 0
-        }
-
-        NumberAnimation {
-            target: likeAlbumOverlay
-            property: "opacity"
-            duration: timeAnimation / 2
-            from: 0.3
-            to: 0
-        }
-
+        onFinished: likeAlbumImg.visible = false
         running: false
     }
+
+    //    SequentialAnimation {
+    //        id: likeAlbum
+
+    //        NumberAnimation {
+    //            target: likeAlbumOverlay
+    //            property: "opacity"
+    //            duration: timeAnimation / 2
+    //            from: 0
+    //            to: 0.3
+    //        }
+
+    //        NumberAnimation {
+    //            target: likeAlbumImg
+    //            property: "opacity"
+    //            duration: timeAnimation
+    //            from: 0
+    //            to: 1
+    //        }
+
+    //        NumberAnimation {
+    //            target: likeAlbumImg
+    //            property: "width"
+    //            duration: timeAnimation
+    //            from: likeMin
+    //            to: likeMax
+    //        }
+
+    //        NumberAnimation {
+    //            target: likeAlbumImg
+    //            property: "width"
+    //            duration: timeAnimation
+    //            from: likeMax
+    //            to: likeMin
+    //        }
+
+    //        NumberAnimation {
+    //            target: likeAlbumImg
+    //            property: "opacity"
+    //            duration: timeAnimation
+    //            from: 1
+    //            to: 0
+    //        }
+
+    //        NumberAnimation {
+    //            target: likeAlbumOverlay
+    //            property: "opacity"
+    //            duration: timeAnimation / 2
+    //            from: 0.3
+    //            to: 0
+    //        }
+
+    //        running: false
+    //    }
 }
