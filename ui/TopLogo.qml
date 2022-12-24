@@ -23,7 +23,7 @@ Rectangle {
     height: blockMargin * 5
     width: parent.width
 
-    color: darkestTransparency
+    color: darkest
 
     function standartBack() {
         if (searchInput.visible) {
@@ -33,6 +33,10 @@ Rectangle {
                 leftScreen.pop()
                 if (leftScreen.depth == 1)
                     backOff.running = true
+            } else if (bottomBar.active == 2 && centralScreen.depth > 1) {
+                centralScreen.pop()
+                if (centralScreen.depth == 1)
+                    backOff.running = true
             }
         }
     }
@@ -40,9 +44,8 @@ Rectangle {
     Image {
         id: topLogo
 
-        source: "qrc:/png/fullLOGO.png"
-
-        //source: "qrc:/png/logowCrop.png"
+        //source: "qrc:/png/fullLOGO.png"
+        source: "qrc:/png/topLogoCQ.png"
         anchors {
             left: parent.left
             leftMargin: blockMargin * 1.5
@@ -50,7 +53,7 @@ Rectangle {
             topMargin: (parent.height - height) / 2
         }
         fillMode: Image.PreserveAspectFit
-        height: parent.height * 0.4
+        height: parent.height * 0.55
     }
 
     MouseArea {
@@ -161,6 +164,10 @@ Rectangle {
             selectedTextColor: secondary
             color: secondary
 
+            ToolTip {
+                visible: false
+            }
+
             background: Rectangle {
                 anchors {
                     verticalCenter: topBar.verticalCenter
@@ -231,6 +238,11 @@ Rectangle {
             source: "qrc:/ui_icons/outline/search.svg"
             width: parent.height * 0.4
             height: width
+            ColorOverlay {
+                anchors.fill: parent
+                source: parent
+                color: accent
+            }
         }
 
         onClicked: {
@@ -351,6 +363,13 @@ Rectangle {
             width: parent.height * 0.4
             height: parent.height * 0.4
             rotation: 180
+            ColorOverlay {
+                id: leftOverlay
+                anchors.fill: parent
+                source: parent
+                color: accent
+                visible: false
+            }
         }
 
         onPressed: backTopBarBackAnim.running = true
@@ -360,7 +379,12 @@ Rectangle {
                 leftScreen.pop()
                 if (leftScreen.depth == 1)
                     backOff.running = true
+            } else if (bottomBar.active == 2 && centralScreen.depth > 1) {
+                centralScreen.pop()
+                if (centralScreen.depth == 1)
+                    backOff.running = true
             }
+
             //backSwitch()
             //backOff.running = true
         }
@@ -424,6 +448,10 @@ Rectangle {
 
         if (bottomBar.active == 1) {
             if (leftScreen.depth > 1) {
+                backOn.running = true
+            }
+        } else if (bottomBar.active == 2) {
+            if (centralScreen.depth > 1) {
                 backOn.running = true
             }
         } else {

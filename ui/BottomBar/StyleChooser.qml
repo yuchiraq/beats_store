@@ -296,7 +296,7 @@ Rectangle {
             font.family: appFont
             font.bold: true
             wrapMode: Label.Wrap
-            color: secondary
+            color: accent
         }
 
         Rectangle {
@@ -314,7 +314,7 @@ Rectangle {
             width: 40
             height: 4
 
-            color: secondary
+            color: accent
 
             radius: 2
 

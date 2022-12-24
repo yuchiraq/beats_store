@@ -15,6 +15,7 @@ import "ui/More"
 import "ui/Profile"
 import "qrc:/ui"
 import "qrc:/fonts"
+import "qrc:/ui/Pages"
 
 ApplicationWindow {
     id: mainScreen
@@ -24,17 +25,28 @@ ApplicationWindow {
         id: localFont
     }
 
-    property string dark: "#1C1B1F"
-    property string darkest: "#171717"
-    property string darkTransparency: "#EF1C1B1F"
-    property string darkestTransparency: "#F6171717"
+    //property string dark: "#1C1B1F"
+    //property string darkest: "#171717"
+    //property string darkTransparency: "#EF1C1B1F"
+    //property string darkestTransparency: "#F6171717"
 
-    property string light: "#CAC4D0"
-    property string outline: "#49454F"
-    property string secondary: "#FFD8E4"
+    //property string light: "#CAC4D0"
+    //property string outline: "#49454F"
 
+    //property string secondary: "#FFD8E4"
     property string darkVariant: "#4F1C30"
     property string alert: "#E91E63"
+
+    //cols by CQ
+    property string dark: "#171517"
+    property string darkest: "#111111"
+    property string darkTransparency: "#EF19191A"
+    property string darkestTransparency: "#F6111111"
+
+    property string secondary: "#E1E1EC"
+    property string light: "#CACACA"
+    property string outline: "#2F2F3F"
+    property string accent: "#EAEAFE"
 
     property int blockMargin: mainScreen.width / 40
 
@@ -46,9 +58,9 @@ ApplicationWindow {
     color: darkest
 
     // visibility: "FullScreen"
-        Keys.onBackPressed: {
-            topBar.standartBack()
-        }
+    Keys.onBackPressed: {
+        topBar.standartBack()
+    }
     StackView {
         id: stackView
 
@@ -74,6 +86,11 @@ ApplicationWindow {
     Liked {
         id: rightScreen
 
+        visible: false
+    }
+
+    AlbumPage {
+        id: albumPage
         visible: false
     }
 

@@ -18,13 +18,13 @@ Rectangle {
     color: dark
 
     border.color: outline
-    border.width: 0.5
+    border.width: 0
 
     Text {
         id: headerRandomAuthors
 
         font.family: appFont
-        color: light
+        color: secondary
 
         text: "<b>Авторы</b>"
         anchors {
@@ -58,7 +58,7 @@ Rectangle {
                 text: "Случайные"
                 font.pointSize: blockMargin * 1.3
                 font.family: appFont
-                color: light
+                color: secondary
 
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left

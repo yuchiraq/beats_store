@@ -66,7 +66,7 @@ Rectangle {
 
     Label {
         id: authorMiniCardName
-        color: "white"
+        color: accent
 
         //wrapMode: Label.WrapAnywhere
         font.family: appFont
@@ -94,7 +94,7 @@ Rectangle {
 
         font.family: appFont
 
-        color: light
+        color: secondary
 
         anchors {
             top: authorMiniCardName.bottom

@@ -308,7 +308,7 @@ Rectangle {
 
             font.family: appFont
             font.bold: true
-            color: secondary
+            color: accent
         }
 
         Text {
@@ -323,7 +323,7 @@ Rectangle {
             font.pointSize: blockMargin
 
             font.family: appFont
-            color: light
+            color: secondary
         }
 
         Text {
@@ -338,7 +338,7 @@ Rectangle {
             font.pointSize: blockMargin
 
             font.family: appFont
-            color: light
+            color: secondary
         }
 
         NumberAnimation {
@@ -380,7 +380,7 @@ Rectangle {
             width: 40
             height: 4
 
-            color: secondary
+            color: accent
 
             radius: 2
 

@@ -6,6 +6,7 @@ import Qt5Compat.GraphicalEffects
 
 import "qrc:/ui/Tracks"
 import "qrc:/ui"
+import "qrc:/ui/Pages"
 
 Rectangle {
     id: albumMiniCard
@@ -175,7 +176,19 @@ Rectangle {
         opacity: 0
     }
 
-    function singleClick() {}
+    function singleClick() {
+        albumPage.album_cover = cover
+        albumPage.album_title = title
+        albumPage.album_author = author
+        if (bottomBar.active == 1) {
+            leftScreen.push(albumPage)
+        } else if (bottomBar.active == 2) {
+            centralScreen.push(albumPage)
+        } //else if (bottomBar.active == 3) {
+        //leftScreen.push("qrc:/ui/Pages/AlbumPage.qml")
+        //}
+        topBar.backSwitch()
+    }
 
     function doubleClick() {
         likeAlbum.running = true
@@ -192,8 +205,7 @@ Rectangle {
             onTriggered: singleClick()
         }
 
-        onDoubleClicked:
-            likeAlbum.running = true
+        onDoubleClicked: likeAlbum.running = true
 
         onClicked: {
             if (timer.running) {

@@ -17,13 +17,13 @@ Rectangle {
     //color: "#333333"
     color: dark
     border.color: outline
-    border.width: 0.5
+    border.width: 0
 
     Text {
         id: headerRandomBeats
         font.family: localFont.name
         text: "<b>Биты</b>"
-        color: light
+        color: secondary
 
         anchors {
             top: parent.top
@@ -57,7 +57,7 @@ Rectangle {
                 text: "Случайные"
                 font.pointSize: blockMargin * 1.3
                 font.family: appFont
-                color: light
+                color: secondary
 
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
@@ -106,11 +106,9 @@ Rectangle {
                 pointSize: blockMargin * 1.4
                 family: appFont
             }
-            background: Rectangle {
-                color: dark
-                implicitWidth: blockMargin * 12
-                implicitHeight: blockMargin * 3
-                radius: blockMargin * 1.5
+
+            onClicked: {
+                randomBeatsSelectorText.text = text
             }
         }
         MenuSeparator {
@@ -126,11 +124,8 @@ Rectangle {
                 pointSize: blockMargin * 1.4
                 family: appFont
             }
-            background: Rectangle {
-                color: dark
-                implicitWidth: blockMargin * 12
-                implicitHeight: blockMargin * 3
-                radius: blockMargin * 1.5
+            onClicked: {
+                randomBeatsSelectorText.text = text
             }
         }
         MenuSeparator {
@@ -146,11 +141,8 @@ Rectangle {
                 pointSize: blockMargin * 1.4
                 family: appFont
             }
-            background: Rectangle {
-                color: dark
-                implicitWidth: blockMargin * 12
-                implicitHeight: blockMargin * 3
-                radius: blockMargin * 1.5
+            onClicked: {
+                randomBeatsSelectorText.text = text
             }
         }
         MenuSeparator {
@@ -172,6 +164,9 @@ Rectangle {
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
             }
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
         }
         MenuSeparator {
             contentItem: Rectangle {
@@ -191,6 +186,9 @@ Rectangle {
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
+            }
+            onClicked: {
+                randomBeatsSelectorText.text = text
             }
         }
         MenuSeparator {
@@ -212,6 +210,9 @@ Rectangle {
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
             }
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
         }
         MenuSeparator {
             contentItem: Rectangle {
@@ -232,6 +233,9 @@ Rectangle {
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
             }
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
         }
         MenuItem {
             text: "Trap"
@@ -244,6 +248,9 @@ Rectangle {
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
+            }
+            onClicked: {
+                randomBeatsSelectorText.text = text
             }
         }
         MenuItem {
@@ -258,9 +265,12 @@ Rectangle {
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
             }
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
         }
         MenuItem {
-            text: "R&B"
+            text: "R\&B"
             font {
                 pointSize: blockMargin * 1.4
                 family: appFont
@@ -270,6 +280,9 @@ Rectangle {
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
+            }
+            onClicked: {
+                randomBeatsSelectorText.text = text
             }
         }
         MenuItem {
@@ -284,6 +297,9 @@ Rectangle {
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
             }
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
         }
         MenuItem {
             text: "K-Pop"
@@ -296,6 +312,9 @@ Rectangle {
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
+            }
+            onClicked: {
+                randomBeatsSelectorText.text = text
             }
         }
         MenuItem {
@@ -310,6 +329,9 @@ Rectangle {
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
             }
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
         }
         MenuItem {
             text: "UK Drill"
@@ -322,6 +344,9 @@ Rectangle {
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
+            }
+            onClicked: {
+                randomBeatsSelectorText.text = text
             }
         }
         MenuItem {
@@ -336,6 +361,9 @@ Rectangle {
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
             }
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
         }
         MenuItem {
             text: "Pop"
@@ -348,6 +376,9 @@ Rectangle {
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
+            }
+            onClicked: {
+                randomBeatsSelectorText.text = text
             }
         }
         MenuItem {
@@ -362,6 +393,9 @@ Rectangle {
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
             }
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
         }
         MenuItem {
             text: "Trap"
@@ -374,6 +408,9 @@ Rectangle {
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
+            }
+            onClicked: {
+                randomBeatsSelectorText.text = text
             }
         }
         MenuItem {
@@ -388,9 +425,12 @@ Rectangle {
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
             }
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
         }
         MenuItem {
-            text: "R&B"
+            text: "R\&B"
             font {
                 pointSize: blockMargin * 1.4
                 family: appFont
@@ -400,6 +440,9 @@ Rectangle {
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
+            }
+            onClicked: {
+                randomBeatsSelectorText.text = text
             }
         }
     }

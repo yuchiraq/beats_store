@@ -17,13 +17,13 @@ Rectangle {
     color: dark
 
     border.color: outline
-    border.width: 0.5
+    border.width: 0
 
     Text {
         id: headerRandomAlbums
 
         font.family: appFont
-        color: light
+        color: secondary
 
         text: "<b>Альбомы</b>"
         anchors {
@@ -57,7 +57,7 @@ Rectangle {
                 text: "Случайные"
                 font.pointSize: blockMargin * 1.3
                 font.family: appFont
-                color: light
+                color: secondary
 
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
@@ -138,8 +138,18 @@ Rectangle {
             AlbumMiniCard {
                 cover: "qrc:/png/temp/covers/trap-no-hook.jpg"
             }
-            AlbumMiniCard {}
-            AlbumMiniCard {}
+            AlbumMiniCard {
+                style: "Music"
+                title: "162 pack 2"
+                author: "Niki-Y On Da Track"
+                cover: "https://sun2.velcom-by-minsk.userapi.com/impg/9cMo2Hk21Bx7wmCuaWKi5VnwqYjPwWE9qi0IWA/mRv2QK6_bP4.jpg?size=2560x2560&quality=95&sign=825577ebbfdd295626b14fd4d44ef7bb&type=album"
+            }
+            AlbumMiniCard {
+                style: "Music"
+                title: "CLASSIC PACK III"
+                author: "Niki-Y On Da Track"
+                cover: "https://sun9-69.userapi.com/impg/AEX_p0-Og9LsT1TEFAj9uzRqhsBMRs_I4Mlq6g/j7De_kaIFms.jpg?size=2160x2160&quality=96&sign=4aec2871a32f9d475f43a993f379c06e&type=album"
+            }
             AlbumMiniCard {}
             AlbumMiniCard {}
         }

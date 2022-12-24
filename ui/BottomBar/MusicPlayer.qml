@@ -9,6 +9,8 @@ import "qrc:/"
 Rectangle {
     id: musicPlayer
 
+    property int track_id: 0
+
     property string titlePlayer: "Title"
     property string authorPlayer: "Author"
     property string coverPlayer: ""
@@ -22,7 +24,7 @@ Rectangle {
 
     property string bpmPlayer: "000"
 
-    visible: id !== 0
+    visible: track_id != 0
     anchors.fill: parent
 
     color: "#00000000"
@@ -71,7 +73,7 @@ Rectangle {
         width: mainScreen.width
         height: blockMargin * 3
 
-        color: darkestTransparency
+        color: darkest
 
         anchors {
             bottom: parent.bottom
@@ -181,7 +183,7 @@ Rectangle {
                 font.family: appFont
                 font.pointSize: blockMargin * 1.5
 
-                color: "#FFF"
+                color: accent
 
                 anchors {
                     verticalCenter: parent.verticalCenter
@@ -198,7 +200,7 @@ Rectangle {
                 font.family: appFont
                 font.pointSize: blockMargin * 1.5
 
-                color: light
+                color: secondary
 
                 anchors {
                     verticalCenter: parent.verticalCenter
@@ -215,7 +217,7 @@ Rectangle {
 
                 font.pointSize: blockMargin * 1.5
 
-                color: secondary
+                color: light
 
                 anchors {
                     right: musicPlayerMinPP.left
@@ -233,7 +235,7 @@ Rectangle {
             Button {
                 id: musicPlayerMinPP
 
-                width: blockMargin * 8
+                width: blockMargin * 4
                 height: width
 
                 anchors {
@@ -247,7 +249,7 @@ Rectangle {
                     source: "qrc:/png/interface/pause.svg"
                     fillMode: Image.PreserveAspectFit
                     anchors.centerIn: parent
-                    height: blockMargin * 8
+                    height: blockMargin * 4
                     width: height
                 }
 
@@ -276,7 +278,7 @@ Rectangle {
                 width: 80
                 height: 4
 
-                color: secondary
+                color: accent
 
                 radius: 2
 
@@ -715,7 +717,7 @@ Rectangle {
         musicPlayerMax.visible = false
         musicPlayerShadow.visible = false
         musicPlayerMin.visible = true
-        musicPlayerBlock.color = darkestTransparency
+        musicPlayerBlock.color = darkest
         musicPlayer.color = "#00000000"
         console.log("onSgSwipeDown")
     }

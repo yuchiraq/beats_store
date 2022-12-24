@@ -78,7 +78,7 @@ Rectangle {
         id: newBeatName
         font.family: appFont
 
-        color: "white"
+        color: accent
 
         anchors {
             left: parent.left

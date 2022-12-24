@@ -1,6 +1,7 @@
 import QtQuick 2.3
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
+import Qt5Compat.GraphicalEffects
 
 Rectangle {
     id: bottomBar
@@ -14,7 +15,7 @@ Rectangle {
     height: blockMargin * 5
     width: mainScreen.width
 
-    color: darkestTransparency
+    color: darkest
 
     property int buttonMin: height * 0.4
     property int buttonMax: height * 0.43
@@ -23,11 +24,11 @@ Rectangle {
 
     function bottomBarCorrector() {
         bottomBarCorrectorAnimation.running = true
-        if(active == 2)
+        if (active == 2)
             centralActivate.running = true
-        else if(active == 1)
+        else if (active == 1)
             leftActivate.running = true
-        else if(active == 3)
+        else if (active == 3)
             rightActivate.running = true
     }
 
@@ -149,6 +150,15 @@ Rectangle {
             //            anchors.left: parent.left
             //            anchors.leftMargin: (parent.width - width) / 2 + blockMargin * 2
             height: buttonMin
+            sourceSize: buttonMin
+
+            //            ColorOverlay {
+            //                id: leftOverlay
+            //                anchors.fill: parent
+            //                source: parent
+            //                color: accent
+            //                visible: false
+            //            }
         }
 
         background: Rectangle {
@@ -182,6 +192,10 @@ Rectangle {
             active = 1
 
             topBar.backSwitch()
+
+            //leftOverlay.visible = true
+            //centralOverlay.visible = false
+            //rightOverlay.visible = false
         }
     }
 
@@ -249,6 +263,13 @@ Rectangle {
 
             anchors.centerIn: parent
             height: buttonMin
+            sourceSize: buttonMin
+            //            ColorOverlay {
+            //                id: centralOverlay
+            //                anchors.fill: parent
+            //                source: parent
+            //                color: accent
+            //            }
         }
         background: Rectangle {
             color: "#00000000"
@@ -271,10 +292,19 @@ Rectangle {
             centralBottomBarButtonImg.source = "qrc:/ui_icons/solid/music-alt.svg"
             rightBottomBarButtonImg.source = "qrc:/ui_icons/outline/heart.svg"
 
-            stackView.clear()
-            stackView.push(centralScreen)
+            if (active == 2) {
+                centralScreen.clearStack()
+            } else {
+                stackView.clear()
+                stackView.push(centralScreen)
+            }
+
             active = 2
             topBar.backSwitch()
+
+            //            leftOverlay.visible = false
+            //            centralOverlay.visible = true
+            //            rightOverlay.visible = false
         }
     }
 
@@ -347,6 +377,14 @@ Rectangle {
             //            anchors.right: parent.right
             //            anchors.rightMargin: (parent.width - width) / 2 + blockMargin * 2
             height: buttonMin
+            sourceSize: buttonMin
+            //            ColorOverlay {
+            //                id: rightOverlay
+            //                anchors.fill: parent
+            //                source: parent
+            //                color: accent
+            //                visible: false
+            //            }
         }
 
         background: Rectangle {
@@ -370,6 +408,9 @@ Rectangle {
             centralBottomBarButtonImg.source = "qrc:/ui_icons/outline/music-alt.svg"
             rightBottomBarButtonImg.source = "qrc:/ui_icons/solid/heart.svg"
 
+            //            leftOverlay.visible = false
+            //            centralOverlay.visible = false
+            //            rightOverlay.visible = true
             stackView.clear()
             stackView.push(rightScreen)
             active = 3

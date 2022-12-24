@@ -77,7 +77,7 @@ Rectangle {
 
             font.family: appFont
 
-            color: "white"
+            color: accent
 
             font.weight: Font.Medium
             font.pointSize: blockMargin * 1.7
@@ -89,7 +89,7 @@ Rectangle {
             text: beatLine.author
             font.family: appFont
             font.pointSize: blockMargin * 1.4
-            color: light
+            color: secondary
             anchors.top: beatLineName.bottom
         }
     }
@@ -105,7 +105,7 @@ Rectangle {
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
 
-        color: secondary
+        color: light
         font.pointSize: blockMargin * 1.4
     }
 
@@ -198,6 +198,7 @@ Rectangle {
         musicPlayer.timePlayerString = time
         musicPlayer.timePlayerSec = timeSec
         musicPlayer.bpmPlayer = bpm
+        musicPlayer.track_id = id_track
 
         beatFunctions.title = title
         beatFunctions.author = author
