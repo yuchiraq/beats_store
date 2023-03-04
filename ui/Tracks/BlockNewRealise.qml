@@ -17,15 +17,15 @@ Item {
         rightMargin: blockMargin
     }
 
-    DropShadow {
-        anchors.fill: view
-        transparentBorder: true
-        horizontalOffset: -3
-        verticalOffset: 3
-        radius: 6.0
-        color: "#40000000"
-        source: view
-    }
+//    DropShadow {
+//        anchors.fill: view
+//        transparentBorder: true
+//        horizontalOffset: -3
+//        verticalOffset: 3
+//        radius: 6.0
+//        color: "#40000000"
+//        source: view
+//    }
 
     SwipeView {
         id: view

@@ -1,6 +1,8 @@
 import QtQuick 2.15
 //import QtGraphicalEffects 1.15
 import Qt5Compat.GraphicalEffects
+import QtQuick.Controls 2.5
+import QtQuick.Controls.Material 2.3
 
 Rectangle {
     id: beatLine
@@ -48,6 +50,11 @@ Rectangle {
         anchors.leftMargin: blockMargin
         anchors.verticalCenter: parent.verticalCenter
         visible: false
+    }
+
+    BusyIndicator {
+        running: beatLineCover.status === Image.Loading
+        anchors.centerIn: beatLineCover
     }
 
     //    AnimatedImage {
@@ -226,13 +233,14 @@ Rectangle {
         }
 
         onClicked: {
-            if (timer.running) {
-                doubleClick()
-                console.log("Beat liked")
-                timer.stop()
-            } else {
-                timer.restart()
-            }
+            //            if (timer.running) {
+            //                doubleClick()
+            //                console.log("Beat liked")
+            //                timer.stop()
+            //            } else {
+            //                timer.restart()
+            //            }
+            singleClick()
         }
         onDoubleClicked: likeBeat.running = true
 

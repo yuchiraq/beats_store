@@ -40,6 +40,8 @@ ApplicationWindow {
     //cols by CQ
     property string dark: "#171517"
     property string darkest: "#111111"
+    //property string dark: "#112"
+    //property string darkest: "#000"
     property string darkTransparency: "#EF19191A"
     property string darkestTransparency: "#F6111111"
 
@@ -94,17 +96,16 @@ ApplicationWindow {
         visible: false
     }
 
-    DropShadow {
-        anchors.fill: bottomBar
-        transparentBorder: true
-        horizontalOffset: 0
-        verticalOffset: -4
-        radius: 8.0
-        color: "#40000000"
-        source: bottomBar
-        visible: musicPlayer.visible ? false : true
-    }
-
+    //    DropShadow {
+    //        anchors.fill: bottomBar
+    //        transparentBorder: true
+    //        horizontalOffset: 0
+    //        verticalOffset: -4
+    //        radius: 8.0
+    //        color: "#40000000"
+    //        source: bottomBar
+    //        visible: musicPlayer.visible ? false : true
+    //    }
     BottomBar {
         id: bottomBar
     }
@@ -119,16 +120,15 @@ ApplicationWindow {
     //        height: width / 1920 * 100
     //        opacity: 0.3
     //    }
-    DropShadow {
-        anchors.fill: topBar
-        transparentBorder: true
-        horizontalOffset: 0
-        verticalOffset: 4
-        radius: 8.0
-        color: "#40000000"
-        source: topBar
-    }
-
+    //    DropShadow {
+    //        anchors.fill: topBar
+    //        transparentBorder: true
+    //        horizontalOffset: 0
+    //        verticalOffset: 4
+    //        radius: 8.0
+    //        color: "#40000000"
+    //        source: topBar
+    //    }
     TopLogo {
         id: topBar
     }

@@ -106,5 +106,7 @@
         <file>animated/lovelyboot1-103697 (mp3cut.net).mp3</file>
         <file>png/topLogoCQ.png</file>
         <file>ui/Pages/AlbumPage.qml</file>
+        <file>ui/Divider.qml</file>
+        <file>ui/Pages/AuthorPage.qml</file>
     </qresource>
 </RCC>

@@ -58,6 +58,11 @@ Rectangle {
         maskSource: parent
     }
 
+    BusyIndicator {
+        running: albumMiniCardCover.status === Image.Loading
+        anchors.centerIn: albumMiniCardCover
+    }
+
     Item {
         id: albumMiniCardData
 
@@ -208,12 +213,13 @@ Rectangle {
         onDoubleClicked: likeAlbum.running = true
 
         onClicked: {
-            if (timer.running) {
-                doubleClick()
-                timer.stop()
-            } else {
-                timer.restart()
-            }
+//            if (timer.running) {
+//                doubleClick()
+//                timer.stop()
+//            } else {
+//                timer.restart()
+//            }
+            singleClick()
         }
     }
 

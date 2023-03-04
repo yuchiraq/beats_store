@@ -53,18 +53,17 @@ Rectangle {
         }
     }
 
-    DropShadow {
-        id: musicPlayerShadow
+    //    DropShadow {
+    //        id: musicPlayerShadow
 
-        anchors.fill: musicPlayerBlock
-        transparentBorder: true
-        horizontalOffset: 0
-        verticalOffset: -5
-        radius: 6.0
-        color: "#20000000"
-        source: musicPlayerBlock
-    }
-
+    //        anchors.fill: musicPlayerBlock
+    //        transparentBorder: true
+    //        horizontalOffset: 0
+    //        verticalOffset: -5
+    //        radius: 6.0
+    //        color: "#20000000"
+    //        source: musicPlayerBlock
+    //    }
     property int timeAnimation: 100
 
     Rectangle {
@@ -261,6 +260,15 @@ Rectangle {
                     playerPPclick()
                 }
             }
+
+            Rectangle {
+                height: 0.5
+                width: parent.width - blockMargin * 2
+                color: outline
+
+                anchors.top: parent.top
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
         }
 
         //animation and max from here
@@ -271,23 +279,6 @@ Rectangle {
 
             visible: true
             opacity: 0
-
-            Rectangle {
-                id: topLinePlayer
-
-                width: 80
-                height: 4
-
-                color: accent
-
-                radius: 2
-
-                anchors {
-                    top: parent.top
-                    topMargin: blockMargin
-                    horizontalCenter: parent.horizontalCenter
-                }
-            }
 
             DropShadow {
                 anchors.fill: musicPlayerMaxCoverMask
@@ -301,17 +292,17 @@ Rectangle {
 
             Rectangle {
                 id: musicPlayerMaxCoverMask
-                width: parent.width * 0.8
+                width: parent.width //* 0.8
                 height: width
 
-                radius: blockMargin * 1.7
+                radius: blockMargin * 2 //1.7
 
-                color: darkVariant
+                color: dark
 
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     top: parent.top
-                    topMargin: parent.width * 0.1
+                    //topMargin: parent.width * 0.1
                 }
                 smooth: true
             }
@@ -335,6 +326,68 @@ Rectangle {
                 maskSource: musicPlayerMaxCoverMask
             }
 
+            BusyIndicator {
+                running: musicPlayerMaxCoverImg.status === Image.Loading
+                anchors.centerIn: musicPlayerMaxCoverImg
+            }
+
+            Rectangle {
+                id: topLinePlayer
+
+                width: 80
+                height: 4
+
+                color: accent
+
+                radius: 2
+
+                anchors {
+                    top: parent.top
+                    topMargin: blockMargin
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            //            Rectangle {
+            //                id: sliderBack
+            //                color: darkest
+            //                width: parent.width
+            //                height: blockMargin * 5
+            //                radius: blockMargin * 2
+            //                anchors {
+            //                    bottom: musicPlayerMaxCoverImg.bottom
+            //                    horizontalCenter: musicPlayerMaxCoverImg.horizontalCenter
+            //                }
+
+            //                opacity: 1
+            //            }
+
+            //            FastBlur {
+            //                id: bluredSliderBack
+            //                anchors.fill: musicPlayerMaxCoverImg
+            //                source: musicPlayerMaxCoverImg
+            //                radius: 60
+            //                visible: true
+            //            }
+            //            OpacityMask {
+            //                source: bluredSliderBack
+            //                maskSource: sliderBack
+            //                anchors.fill: bluredSliderBack
+            //            }
+            Rectangle {
+                id: playerSliderBack
+                color: darkest
+                width: parent.width
+                height: blockMargin * 5
+                radius: blockMargin * 2
+                anchors {
+                    bottom: musicPlayerMaxCoverImg.bottom
+                    horizontalCenter: musicPlayerMaxCoverImg.horizontalCenter
+                }
+
+                opacity: 0.4
+            }
+
             Slider {
                 id: playerSlider
                 value: curTime
@@ -343,9 +396,40 @@ Rectangle {
                 width: parent.width * 0.6
 
                 anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    top: musicPlayerMaxCoverMask.bottom
-                    topMargin: 20
+                    //horizontalCenter: parent.horizontalCenter
+                    //bottom: musicPlayerMaxCoverMask.bottom
+                    //bottomMargin: blockMargin
+                    centerIn: playerSliderBack
+                }
+
+                background: Rectangle {
+                    x: playerSlider.leftPadding
+                    y: playerSlider.topPadding + playerSlider.availableHeight / 2 - height / 2
+                    implicitWidth: playerSlider.width
+                    implicitHeight: 4
+                    width: implicitWidth
+                    height: implicitHeight
+                    radius: height / 2
+                    color: outline
+
+                    Rectangle {
+                        width: playerSlider.visualPosition * parent.width
+                        height: parent.height
+                        color: accent
+                        radius: height / 2
+                    }
+                }
+
+                handle: Rectangle {
+                    x: playerSlider.leftPadding + playerSlider.visualPosition
+                       * (playerSlider.availableWidth /*- width*/)
+                    y: playerSlider.topPadding + playerSlider.availableHeight / 2 - height / 2
+                    implicitWidth: playerSlider.pressed ? 20 : 16
+                    implicitHeight: playerSlider.pressed ? 20 : 16
+                    radius: height / 2
+                    color: playerSlider.pressed ? accent : secondary
+                    border.color: "#50EAEAFE"
+                    border.width: playerSlider.pressed ? 5 : 1
                 }
 
                 ToolTip {
@@ -377,6 +461,7 @@ Rectangle {
 
                 anchors {
                     left: musicPlayerMaxCoverMask.left
+                    leftMargin: blockMargin * 2
                     verticalCenter: playerSlider.verticalCenter
                 }
 
@@ -398,6 +483,7 @@ Rectangle {
                 font.pointSize: blockMargin * 1.5
 
                 anchors {
+                    rightMargin: blockMargin * 2
                     right: musicPlayerMaxCoverMask.right
                     verticalCenter: playerSlider.verticalCenter
                 }
@@ -639,7 +725,7 @@ Rectangle {
             }
 
             onFinished: {
-                musicPlayerShadow.visible = true
+                //musicPlayerShadow.visible = true
                 musicPlayerBackMouseArea.visible = true
             }
         }
@@ -690,7 +776,7 @@ Rectangle {
             }
 
             onFinished: {
-                musicPlayerShadow.visible = true
+                //musicPlayerShadow.visible = true
                 musicPlayerBackMouseArea.visible = false
                 //playerCoverBackgroundTrimed.visible = false
                 //playerCoverBackgroundOverlayTrimed.visible = false
@@ -699,7 +785,7 @@ Rectangle {
     }
 
     function playerOnMaxClick() {
-        musicPlayerShadow.visible = true
+        //musicPlayerShadow.visible = true
         musicPlayerOnMax.running = true
         musicPlayerMax.visible = true
         musicPlayerMin.visible = false
@@ -715,7 +801,7 @@ Rectangle {
     function playerOnMinClick() {
         musicPlayerOnMin.running = true
         musicPlayerMax.visible = false
-        musicPlayerShadow.visible = false
+        //musicPlayerShadow.visible = false
         musicPlayerMin.visible = true
         musicPlayerBlock.color = darkest
         musicPlayer.color = "#00000000"

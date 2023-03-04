@@ -35,7 +35,7 @@ Rectangle {
         font.pointSize: blockMargin * 1.3
     }
 
-    Button {
+    ComboBox {
         id: blockRandomAlbumsStyleButton
 
         anchors {
@@ -45,45 +45,49 @@ Rectangle {
         }
 
         background: Rectangle {
-            anchors.fill: parent
+            height: blockMargin * 1.6
+            width: 60
             radius: blockMargin
             border.color: outline
             border.width: 0.5
             color: dark
-
-            Text {
-
-                id: randomAlbumsSelectorText
-                text: "Случайные"
-                font.pointSize: blockMargin * 1.3
-                font.family: appFont
-                color: secondary
-
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: 10
-            }
-
-            Image {
-                source: "qrc:/png/interface/next.png"
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.right: parent.right
-                anchors.rightMargin: 10
-
-                rotation: 90
-                height: parent.height / 2
-                width: height
-            }
         }
 
+        delegate: Text {
+
+            id: randomAlbumsSelectorText
+            text: modelData
+            font.pointSize: blockMargin * 1.3
+            font.family: appFont
+            color: secondary
+
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+        }
+
+        indicator: Image {
+            source: "qrc:/png/interface/next.png"
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: parent.right
+            anchors.rightMargin: 10
+
+            rotation: 90
+            height: parent.height / 2
+            width: height
+        }
+
+        width: 60
         height: blockMargin * 1.6
-        width: randomAlbumsSelectorText.width + height + 20
 
-        onClicked: {
-            styleChooser.styleFor = 3
-            console.log("Clicked!!!!!")
-            styleChooser.starter()
-        }
+        //width: randomAlbumsSelectorText.width + height + 20
+        model: ["Trap", "R\&B", "Rock", "Rap", "Drill", "Pop"]
+
+        //        onClicked: {
+        //            styleChooser.styleFor = 3
+        //            console.log("Clicked!!!!!")
+        //            styleChooser.starter()
+        //        }
     }
 
     Flickable {

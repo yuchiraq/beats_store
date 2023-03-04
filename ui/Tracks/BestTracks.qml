@@ -43,15 +43,15 @@ StackView {
             }
         }
 
-        DropShadow {
-            anchors.fill: blockRandomBeats
-            transparentBorder: true
-            horizontalOffset: -3
-            verticalOffset: 3
-            radius: 6.0
-            color: "#40000000"
-            source: blockRandomBeats
-        }
+//        DropShadow {
+//            anchors.fill: blockRandomBeats
+//            transparentBorder: true
+//            horizontalOffset: -3
+//            verticalOffset: 3
+//            radius: 6.0
+//            color: "#40000000"
+//            source: blockRandomBeats
+//        }
 
         BlockRandomBeats {
             id: blockRandomBeats
@@ -63,15 +63,15 @@ StackView {
             }
         }
 
-        DropShadow {
-            anchors.fill: blockRandomAuthors
-            transparentBorder: true
-            horizontalOffset: -3
-            verticalOffset: 3
-            radius: 6.0
-            color: "#40000000"
-            source: blockRandomAuthors
-        }
+//        DropShadow {
+//            anchors.fill: blockRandomAuthors
+//            transparentBorder: true
+//            horizontalOffset: -3
+//            verticalOffset: 3
+//            radius: 6.0
+//            color: "#40000000"
+//            source: blockRandomAuthors
+//        }
 
         BlockRandomAuthors {
             id: blockRandomAuthors
@@ -83,15 +83,15 @@ StackView {
             }
         }
 
-        DropShadow {
-            anchors.fill: blockRandomAlbums
-            transparentBorder: true
-            horizontalOffset: -3
-            verticalOffset: 3
-            radius: 6.0
-            color: "#40000000"
-            source: blockRandomAlbums
-        }
+//        DropShadow {
+//            anchors.fill: blockRandomAlbums
+//            transparentBorder: true
+//            horizontalOffset: -3
+//            verticalOffset: 3
+//            radius: 6.0
+//            color: "#40000000"
+//            source: blockRandomAlbums
+//        }
 
         BlockRandomAlbums {
             id: blockRandomAlbums

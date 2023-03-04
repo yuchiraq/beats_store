@@ -4,6 +4,7 @@ import Qt5Compat.GraphicalEffects
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 
+import "qrc:/ui"
 import "qrc:/ui/Cards"
 import "qrc:/fonts"
 
@@ -484,11 +485,8 @@ Rectangle {
                 cover: coverURL
             }
 
-            Rectangle {
+            Divider {
                 width: parent.width - blockMargin
-                height: 0.5
-                color: outline
-                anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: randomBeat.bottom
             }
         }

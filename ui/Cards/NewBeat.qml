@@ -32,6 +32,11 @@ Rectangle {
         visible: false
     }
 
+    BusyIndicator {
+        running: newBeatBackground.status === Image.Loading
+        anchors.centerIn: newBeatBackground
+    }
+
     OpacityMask {
         anchors.fill: newRealise
         source: newBeatBackground
@@ -146,12 +151,13 @@ Rectangle {
         onDoubleClicked: likeNewBeat.running = true
 
         onClicked: {
-            if (timer.running) {
-                doubleClick()
-                timer.stop()
-            } else {
-                timer.restart()
-            }
+            //            if (timer.running) {
+            //                doubleClick()
+            //                timer.stop()
+            //            } else {
+            //                timer.restart()
+            //            }
+            singleClick()
         }
     }
 

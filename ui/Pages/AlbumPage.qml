@@ -30,59 +30,9 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
-    DropShadow {
-        anchors.fill: albumAuthor
-        transparentBorder: true
-        horizontalOffset: -2
-        verticalOffset: 2
-        radius: 4
-        color: "#a0000000"
-        source: albumAuthor
-    }
-
-    Text {
-        id: albumAuthor
-        anchors {
-            bottom: albumCover.bottom
-            bottomMargin: blockMargin * 2 + blockMargin
-            horizontalCenter: parent.horizontalCenter
-        }
-
-        text: album_author
-        color: secondary
-
-        font {
-            family: appFont
-            pointSize: blockMargin * 2.5
-        }
-    }
-
-    DropShadow {
-        anchors.fill: albumTitle
-        transparentBorder: true
-        horizontalOffset: -2
-        verticalOffset: 2
-        radius: 4
-        color: "#a0000000"
-        source: albumTitle
-    }
-
-    Text {
-        id: albumTitle
-        anchors {
-            bottom: albumAuthor.top
-
-            horizontalCenter: parent.horizontalCenter
-        }
-
-        text: album_title
-        color: accent
-
-        font {
-            family: appFont
-            pointSize: blockMargin * 2.5
-            bold: true
-        }
+    BusyIndicator {
+        running: albumCover.status === Image.Loading
+        anchors.centerIn: albumCover
     }
 
     Flickable {
@@ -94,9 +44,66 @@ Page {
         Rectangle {
             id: albumTop
             color: "transparent"
-            height: albumCover.height - blockMargin * 2
-            anchors.top: parent.top
+            height: parent.width
+            anchors.top: albumService.top
             anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: albumContent
+            //anchors.bottomMargin: -blockMargin * 2
+        }
+
+        DropShadow {
+            anchors.fill: albumAuthor
+            transparentBorder: true
+            horizontalOffset: -2
+            verticalOffset: 2
+            radius: 4
+            color: "#a0000000"
+            source: albumAuthor
+        }
+
+        Text {
+            id: albumAuthor
+            anchors {
+                bottom: albumContent.top
+                bottomMargin: blockMargin
+                horizontalCenter: parent.horizontalCenter
+            }
+
+            text: album_author
+            color: secondary
+
+            font {
+                family: appFont
+                pointSize: blockMargin * 2
+            }
+        }
+
+        DropShadow {
+            anchors.fill: albumTitle
+            transparentBorder: true
+            horizontalOffset: -2
+            verticalOffset: 2
+            radius: 4
+            color: "#a0000000"
+            source: albumTitle
+        }
+
+        Text {
+            id: albumTitle
+            anchors {
+                bottom: albumAuthor.top
+
+                horizontalCenter: parent.horizontalCenter
+            }
+
+            text: album_title
+            color: accent
+
+            font {
+                family: appFont
+                pointSize: blockMargin * 2.5
+                bold: true
+            }
         }
 
         Rectangle {
@@ -167,4 +174,19 @@ Page {
             }
         }
     }
+
+    //    FastBlur {
+    //        id: bluredCover
+    //        anchors.fill: albumCover
+    //        source: albumCover
+    //        radius: 60
+    //        visible: false
+    //    }
+
+    //    OpacityMask {
+    //        source: bluredCover
+    //        maskSource: albumContent
+    //        anchors.fill: bluredCover
+    //        opacity: 0.7
+    //    }
 }

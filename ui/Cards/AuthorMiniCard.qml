@@ -58,6 +58,11 @@ Rectangle {
         visible: false
     }
 
+    BusyIndicator {
+        running: authorMiniCardCover.status === Image.Loading
+        anchors.centerIn: authorMiniCardCover
+    }
+
     OpacityMask {
         anchors.fill: authorMiniCardCoverMask
         source: authorMiniCardCover
@@ -148,12 +153,13 @@ Rectangle {
         onDoubleClicked: likeAuthor.running = true
 
         onClicked: {
-            if (timer.running) {
-                doubleClick()
-                timer.stop()
-            } else {
-                timer.restart()
-            }
+//            if (timer.running) {
+//                doubleClick()
+//                timer.stop()
+//            } else {
+//                timer.restart()
+//            }
+            singleClick()
         }
     }
 

@@ -27,15 +27,15 @@ Rectangle {
         }
     }
 
-    DropShadow {
-        anchors.fill: styleChooserBlock
-        transparentBorder: true
-        horizontalOffset: 0
-        verticalOffset: -12
-        radius: 12.0
-        color: "#40000000"
-        source: styleChooserBlock
-    }
+//    DropShadow {
+//        anchors.fill: styleChooserBlock
+//        transparentBorder: true
+//        horizontalOffset: 0
+//        verticalOffset: -12
+//        radius: 12.0
+//        color: "#40000000"
+//        source: styleChooserBlock
+//    }
 
     Rectangle {
         id: styleChooserBlock

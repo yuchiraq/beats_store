@@ -23,7 +23,17 @@ Rectangle {
     height: blockMargin * 5
     width: parent.width
 
-    color: darkest
+    //color: darkest
+    gradient: Gradient {
+        GradientStop {
+            position: 0.00
+            color: darkest
+        }
+        GradientStop {
+            position: 1.00
+            color: "transparent"
+        }
+    }
 
     function standartBack() {
         if (searchInput.visible) {
@@ -31,11 +41,11 @@ Rectangle {
         } else {
             if (bottomBar.active == 1 && leftScreen.depth > 1) {
                 leftScreen.pop()
-                if (leftScreen.depth == 1)
+                if (leftScreen.depth === 1)
                     backOff.running = true
             } else if (bottomBar.active == 2 && centralScreen.depth > 1) {
                 centralScreen.pop()
-                if (centralScreen.depth == 1)
+                if (centralScreen.depth === 1)
                     backOff.running = true
             }
         }
@@ -60,7 +70,7 @@ Rectangle {
         anchors.fill: topLogo
         onClicked: {
             console.log("TopLogo click!")
-            centralScreen.flick(0, 0)
+            //centralScreen.flick(0, 0)
             startSplashScreen.startSplash()
         }
     }
@@ -163,10 +173,6 @@ Rectangle {
             placeholderTextColor: outline
             selectedTextColor: secondary
             color: secondary
-
-            ToolTip {
-                visible: false
-            }
 
             background: Rectangle {
                 anchors {
