@@ -4,6 +4,7 @@ import QtQuick.Controls.Material 2.3
 import Qt5Compat.GraphicalEffects
 
 import "qrc:/ui/Cards"
+import "qrc:/ui/Tracks"
 
 Page {
     id: authorService
@@ -63,23 +64,6 @@ Page {
             source: authorAuthor
         }
 
-        Text {
-            id: authorName
-            anchors {
-                bottom: authorContent.top
-                bottomMargin: blockMargin
-                horizontalCenter: parent.horizontalCenter
-            }
-
-            text: author_name
-            color: secondary
-
-            font {
-                family: appFont
-                pointSize: blockMargin * 2
-            }
-        }
-
         DropShadow {
             anchors.fill: authorName
             transparentBorder: true
@@ -91,9 +75,28 @@ Page {
         }
 
         Text {
+            id: authorName
+            anchors {
+                bottom: authorContent.top
+                bottomMargin: blockMargin * 3
+                horizontalCenter: parent.horizontalCenter
+            }
+
+            text: author_name
+            color: secondary
+
+            font {
+                bold: true
+                family: appFont
+                pointSize: blockMargin * 2
+            }
+        }
+
+        Text {
             id: authorData
             anchors {
-                bottom: albumAuthor.top
+                bottom: authorContent.top
+                bottomMargin: blockMargin
 
                 horizontalCenter: parent.horizontalCenter
             }
@@ -103,7 +106,7 @@ Page {
 
             font {
                 family: appFont
-                pointSize: blockMargin * 2.5
+                pointSize: blockMargin //* 2.5
                 bold: true
             }
         }
@@ -151,39 +154,94 @@ Page {
 
                 width: parent.width - blockMargin * 2
 
-                height: blockMargin * 9
+                height: blockMargin * 4 + authorInfoText.height
 
-                Rectangle {
-                    anchors {
-                        top: parent.top
-                        topMargin: blockMargin
-                        left: parent.left
-                        leftMargin: blockMargin
-                    }
-
-                    radius: blockMargin
-                    border.color: outline
-                    border.width: 0.5
-                    color: dark
-
-                    Text {
-                        text: "Об авторе"
-                        font.pointSize: blockMargin * 1.3
-                        font.family: appFont
-                        color: secondary
-
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: 10
-                    }
-                }
+                radius: blockMargin
 
                 Text {
+                    text: "Об авторе"
+                    font {
+                        bold: true
+                        pointSize: blockMargin
+                        family: appFont
+                    }
+                    color: secondary
+
+                    anchors.top: parent.top
+                    anchors.topMargin: blockMargin
+                    anchors.left: parent.left
+                    anchors.leftMargin: blockMargin
+                }
+
+                Label {
                     id: authorInfoText
-                    text: "hgsadggG JHSDhjad hdbashdbahj da hJDSahbshajbdasjhbdhjfbhdsf"
+                    text: "hgsadggG JHSDhjad hdbashdbahj da hJDSahbshajbd asjhbdhjfbhdsf"
+                          + " hgsadggG JHSDhjad hdbashdbahj da hJDSahbshajb dasjhbdhjfbhdsf"
+
+                    font {
+                        bold: true
+                        pointSize: blockMargin * 0.9
+                        family: appFont
+                    }
+
+                    width: parent.width - blockMargin
+
+                    color: light
                     anchors {
                         top: parent.top
-                        topMargin: blockMargin * 4
+                        topMargin: blockMargin * 3
+                        left: parent.left
+                        leftMargin: blockMargin * 0.5
+                        right: parent.left
+                        rightMargin: blockMargin * 0.5
+                    }
+                    wrapMode: Label.Wrap
+                }
+            }
+
+            BlockRandomAlbums {
+                id: blockAuthorAlbums
+
+                anchors {
+                    top: authorInfoBlock.bottom
+                    topMargin: blockMargin
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            ListView {
+                id: lastRealises
+
+                model: lastRealisesModel
+                anchors.top: blockAuthorAlbum.bottom
+                anchors.topMargin: blockMargin
+                anchors.right: parent.right
+                anchors.left: parent.left
+                height: database.getQuantity() * (blockMargin * 7 + 0.5)
+
+                delegate: Item {
+                    id: lastRealise
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: parent.width - blockMargin
+                    height: lastRealiseBeat.height + 0.5
+
+                    BeatLine {
+                        id: lastRealiseBeat
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        width: parent.width
+                        title: Title
+                        author: Author
+                        timeSec: TimeSec
+                        id_track: id_db
+                        //cover: coverURL
+                    }
+
+                    Rectangle {
+                        width: parent.width
+                        height: 0.5
+                        color: outline
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.top: lastRealiseBeat.bottom
                     }
                 }
             }

@@ -179,9 +179,9 @@ Rectangle {
                         onClicked: {
                             if (styleFor == 4) {
                                 centralScreen.lastSortBy = 0
-                                centralScreen.lastRealisesText = "Сначала старые"
                                 styleChooser.visible = false
                                 centralScreen.update()
+                                centralScreen.lastRealisesText = "Сначала старые"
                             }
                         }
                     }
@@ -224,9 +224,9 @@ Rectangle {
                         onClicked: {
                             if (styleFor == 4) {
                                 centralScreen.lastSortBy = 1
-                                centralScreen.lastRealisesText = "Сначала новые"
                                 styleChooser.visible = false
                                 centralScreen.update()
+                                centralScreen.lastRealisesText = "Сначала новые"
                             }
                         }
                     }
@@ -269,9 +269,9 @@ Rectangle {
                         onClicked: {
                             if (styleFor == 4) {
                                 centralScreen.lastSortBy = 2
-                                centralScreen.lastRealisesText = "По названию"
                                 styleChooser.visible = false
                                 centralScreen.update()
+                                centralScreen.lastRealisesText = "По названию"
                             }
                         }
                     }

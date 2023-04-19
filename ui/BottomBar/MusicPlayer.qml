@@ -13,7 +13,7 @@ Rectangle {
 
     property string titlePlayer: "Title"
     property string authorPlayer: "Author"
-    property string coverPlayer: ""
+    property string coverPlayer: "http://" + ip + "/coversFull/" + track_id + ".jpg"
 
     property bool play: true
     property bool onRepeat: false
@@ -422,7 +422,8 @@ Rectangle {
 
                 handle: Rectangle {
                     x: playerSlider.leftPadding + playerSlider.visualPosition
-                       * (playerSlider.availableWidth /*- width*/)
+                       * (playerSlider.availableWidth /*- width*/
+                          )
                     y: playerSlider.topPadding + playerSlider.availableHeight / 2 - height / 2
                     implicitWidth: playerSlider.pressed ? 20 : 16
                     implicitHeight: playerSlider.pressed ? 20 : 16

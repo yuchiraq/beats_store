@@ -14,7 +14,7 @@ public:
         TitleRole,
         AuthorRole,
         timeRole,
-        coverRole
+        //coverRole
     };
     // Объявляем конструктор класса
     explicit LastRealisesListModel(QObject *parent = nullptr);

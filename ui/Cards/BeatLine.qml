@@ -13,7 +13,7 @@ Rectangle {
     color: "#00333333"
 
     property int id_track: 0
-    property string cover: ""
+    property string cover: "http://" + ip + "/coversMini/" + id_track + ".jpg"
     property string title: "Track name"
     property string author: "Beatmaker"
     property string time: Math.floor(timeSec / 60) + ":" + timeCorrector(
@@ -198,20 +198,21 @@ Rectangle {
     }
 
     function singleClick() {
+        musicPlayer.track_id = id_track
         musicPlayer.titlePlayer = title
         musicPlayer.authorPlayer = author
-        musicPlayer.coverPlayer = cover
+        //musicPlayer.coverPlayer = cover
         //musicPlayer.visible = true
+        //musicPlayer.coverPlayer = "http://" + ip + "/coversFull/" + id_track + ".jpg"
         musicPlayer.timePlayerString = time
         musicPlayer.timePlayerSec = timeSec
         musicPlayer.bpmPlayer = bpm
-        musicPlayer.track_id = id_track
 
+        beatFunctions.id = id_track
         beatFunctions.title = title
         beatFunctions.author = author
         beatFunctions.time = time
         beatFunctions.bpm = bpm
-        beatFunctions.id = id_track
 
         musicPlayer.curTime = 0
         musicPlayer.resetPlayerSlider()

@@ -6,6 +6,7 @@ import Qt5Compat.GraphicalEffects
 
 import "qrc:/ui/Tracks"
 import "qrc:/ui"
+import "qrc:/ui/Pages"
 
 Rectangle {
     id: authorMiniCard
@@ -19,6 +20,7 @@ Rectangle {
 
     border.width: 1
 
+    property int id: 0
     property string cover: ""
     property string name: "Beatmaker"
     property string style: "music style"
@@ -77,6 +79,8 @@ Rectangle {
         font.family: appFont
         text: "<strong>" + authorMiniCard.name + "</strong>"
 
+        wrapMode: Label.Wrap
+
         font.pointSize: (authorMiniCard.height - authorMiniCardCoverMask.height) / 3
         height: (authorMiniCard.height - authorMiniCardCoverMask.height) / 3
 
@@ -133,7 +137,19 @@ Rectangle {
         opacity: 0
     }
 
-    function singleClick() {}
+    function singleClick() {
+        authorPage.author_cover = cover
+        authorPage.author_name = name
+        authorPage.author_id = id
+        if (bottomBar.active == 1) {
+            leftScreen.push(authorPage)
+        } else if (bottomBar.active == 2) {
+            centralScreen.push(authorPage)
+        } //else if (bottomBar.active == 3) {
+        //leftScreen.push("qrc:/ui/Pages/AlbumPage.qml")
+        //}
+        topBar.backSwitch()
+    }
 
     function doubleClick() {
         likeAuthor.running = true
@@ -153,12 +169,12 @@ Rectangle {
         onDoubleClicked: likeAuthor.running = true
 
         onClicked: {
-//            if (timer.running) {
-//                doubleClick()
-//                timer.stop()
-//            } else {
-//                timer.restart()
-//            }
+            //            if (timer.running) {
+            //                doubleClick()
+            //                timer.stop()
+            //            } else {
+            //                timer.restart()
+            //            }
             singleClick()
         }
     }

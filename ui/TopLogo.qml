@@ -72,6 +72,7 @@ Rectangle {
             console.log("TopLogo click!")
             //centralScreen.flick(0, 0)
             startSplashScreen.startSplash()
+            musicPlayer.track_id = 0
         }
     }
 
@@ -167,7 +168,7 @@ Rectangle {
 
         TextField {
             id: searchInputField
-            placeholderText: "Поиск..."
+            placeholderText: "Поиск...                   "
             font.family: appFont
             font.pointSize: blockMargin * 2
             placeholderTextColor: outline
@@ -326,7 +327,7 @@ Rectangle {
     Rectangle {
         id: backTopBarBack
         anchors.centerIn: backTopBar
-        height: backTopBar.height * 0.5
+        height: searchInput.height
         width: height
         radius: height / 2
         color: outline
@@ -453,12 +454,16 @@ Rectangle {
         }
 
         if (bottomBar.active == 1) {
-            if (leftScreen.depth > 1) {
+            if (leftScreen.depth > 1 && backTopBar.width == 0) {
                 backOn.running = true
+            } else if (backTopBar.width != 0) {
+                backOff.running = true
             }
         } else if (bottomBar.active == 2) {
-            if (centralScreen.depth > 1) {
+            if (centralScreen.depth > 1 && backTopBar.width == 0) {
                 backOn.running = true
+            } else if (backTopBar.width != 0) {
+                backOff.running = true
             }
         } else {
             if (backTopBar.width != 0)

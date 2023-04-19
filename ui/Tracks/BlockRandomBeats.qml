@@ -460,6 +460,9 @@ Rectangle {
         id: randomBeatsView
 
         model: randomBeatsModel
+
+
+
         anchors {
             top: headerRandomBeats.bottom
             topMargin: blockMargin
@@ -482,7 +485,7 @@ Rectangle {
                 author: Author
                 timeSec: TimeSec
                 id_track: id_db
-                cover: coverURL
+                //cover: coverURL
             }
 
             Divider {

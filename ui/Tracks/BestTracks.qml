@@ -20,11 +20,22 @@ StackView {
 
     property int lastSortBy: 0
 
+    property string lastRealisesText: "Сначала старые"
+
     //        Rectangle {
     //            anchors.fill: parent
     //            color: darkest
     //        }
-    initialItem: Flickable{
+
+    function clearStack() {
+        if (centralScreen.depth > 1) {
+            centralScreen.clear(StackView.PopTransition)
+            centralScreen.push(bestTracksInitial)
+            topBar.backSwitch(1)
+        }
+    }
+
+    initialItem: Flickable {
         id: bestTracksInitial
         contentHeight: blockNewRealise.height * 2 + blockRandomBeats.height
                        + blockRandomAlbums.height + blockRandomAuthors.height + lastRealises.height
@@ -43,16 +54,15 @@ StackView {
             }
         }
 
-//        DropShadow {
-//            anchors.fill: blockRandomBeats
-//            transparentBorder: true
-//            horizontalOffset: -3
-//            verticalOffset: 3
-//            radius: 6.0
-//            color: "#40000000"
-//            source: blockRandomBeats
-//        }
-
+        //        DropShadow {
+        //            anchors.fill: blockRandomBeats
+        //            transparentBorder: true
+        //            horizontalOffset: -3
+        //            verticalOffset: 3
+        //            radius: 6.0
+        //            color: "#40000000"
+        //            source: blockRandomBeats
+        //        }
         BlockRandomBeats {
             id: blockRandomBeats
 
@@ -63,16 +73,15 @@ StackView {
             }
         }
 
-//        DropShadow {
-//            anchors.fill: blockRandomAuthors
-//            transparentBorder: true
-//            horizontalOffset: -3
-//            verticalOffset: 3
-//            radius: 6.0
-//            color: "#40000000"
-//            source: blockRandomAuthors
-//        }
-
+        //        DropShadow {
+        //            anchors.fill: blockRandomAuthors
+        //            transparentBorder: true
+        //            horizontalOffset: -3
+        //            verticalOffset: 3
+        //            radius: 6.0
+        //            color: "#40000000"
+        //            source: blockRandomAuthors
+        //        }
         BlockRandomAuthors {
             id: blockRandomAuthors
 
@@ -83,16 +92,15 @@ StackView {
             }
         }
 
-//        DropShadow {
-//            anchors.fill: blockRandomAlbums
-//            transparentBorder: true
-//            horizontalOffset: -3
-//            verticalOffset: 3
-//            radius: 6.0
-//            color: "#40000000"
-//            source: blockRandomAlbums
-//        }
-
+        //        DropShadow {
+        //            anchors.fill: blockRandomAlbums
+        //            transparentBorder: true
+        //            horizontalOffset: -3
+        //            verticalOffset: 3
+        //            radius: 6.0
+        //            color: "#40000000"
+        //            source: blockRandomAlbums
+        //        }
         BlockRandomAlbums {
             id: blockRandomAlbums
 
@@ -117,8 +125,6 @@ StackView {
             verticalAlignment: Text.AlignVCenter
             font.pointSize: blockMargin * 1.3
         }
-
-        property string lastRealisesText: "Сначала старые"
 
         Button {
             id: lastRealisesSorter
@@ -202,7 +208,7 @@ StackView {
                     author: Author
                     timeSec: TimeSec
                     id_track: id_db
-                    cover: coverURL
+                    //cover: coverURL
                 }
 
                 Rectangle {
@@ -218,7 +224,8 @@ StackView {
         Text {
             font.family: appFont
             color: secondary
-            text: "<strong>by Chiraq Concept</strong>\n" + mainScreen.height + " * " + mainScreen.width
+            text: "<strong>by Chiraq Concept</strong>\n" + mainScreen.height
+                  + " * " + mainScreen.width
 
             anchors {
                 topMargin: blockMargin

@@ -25,7 +25,7 @@ QHash<int, QByteArray> LastRealisesListModel::roleNames() const {
     roles[TitleRole] = "Title";
     roles[AuthorRole] = "Author";
     roles[timeRole] = "TimeSec";
-    roles[coverRole] = "coverURL";
+    //roles[coverRole] = "coverURL";
     return roles;
 }
 

@@ -1,6 +1,9 @@
-QT += qml quick quickcontrols2 widgets core svg sql multimedia
+#LIBS += -L/usr/local/lib -lpq
+
+QT += qml quick quickcontrols2 widgets core svg sql multimedia #sql-psql
 
 greaterThan(QT_MAJOR_VERSION,5): QT += core5compat
+
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.

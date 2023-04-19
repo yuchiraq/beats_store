@@ -104,5 +104,46 @@ Flickable {
                 }
             }
         }
+        Rectangle {
+
+            anchors {
+
+                verticalCenter: settingsPage.verticalCenter
+                left: settingsPage.right
+                right: settingsPage.right
+                rightMargin: blockMargin
+            }
+
+            height: blockMargin * 3.5
+            radius: blockMargin * 1.5
+
+            color: "transparent"
+
+            TextField {
+                anchors.centerIn: parent
+                id: ipField
+                font.family: appFont
+                placeholderText: "IP server"
+                font.pointSize: 25
+                placeholderTextColor: outline
+                selectedTextColor: secondary
+                color: secondary
+                onAccepted: {
+                    ip = ipField.text
+                }
+                background: Rectangle {
+                    anchors {
+                        centerIn: parent
+                        verticalCenter: settingsPage.verticalCenter
+                        left: settingsPage.left
+                        leftMargin: blockMargin
+                        right: settingsPage.right
+                        rightMargin: blockMargin
+                    }
+                    height: blockMargin * 3.5
+                    color: dark
+                }
+            }
+        }
     }
 }

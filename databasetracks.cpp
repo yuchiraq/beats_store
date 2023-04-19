@@ -34,12 +34,18 @@ bool DataBaseTracks::openDataBase() {
     /* База данных открывается по заданному пути
 * и имени базы данных, если она существует
 * */
-    db = QSqlDatabase::addDatabase("QSQLITE");
+    db = QSqlDatabase::addDatabase("QPSQL");
     db.setHostName(DATABASE_HOSTNAME);
+    db.setPort(DATABASE_PORT);
+    db.setUserName(DATABASE_NAME);
+    db.setPassword(DATABASE_PASS);
     db.setDatabaseName(DATABASE_NAME);
+
     if(db.open()){
+        qDebug() << "CONNECT!!!" << QSqlDatabase::drivers();
         return true;
     } else {
+        qDebug() << "NO CONNECT!!!((((" << QSqlDatabase::drivers();
         return false;
     }
 }
@@ -58,7 +64,7 @@ bool DataBaseTracks::createTable() {
                                     TABLE_TITLE " VARCHAR(255) NOT NULL,"
                                     TABLE_AUTHOR " VARCHAR(255) NOT NULL,"
                                     TABLE_TIME " int NOT NULL,"
-                                    TABLE_COVER " VARCHAR(255)"
+                                    //TABLE_COVER " VARCHAR(255)"
                                     " )"
                                     ))
     {
@@ -84,13 +90,13 @@ bool DataBaseTracks::inserIntoTable(const QVariantList &data) {
     query.prepare("INSERT INTO " TABLE " ( "
                   TABLE_TITLE ", "
                   TABLE_AUTHOR ", "
-                          TABLE_TIME ", "
-                                     TABLE_COVER " ) "
+                          TABLE_TIME /*", "
+                                     TABLE_COVER */" ) "
                               "VALUES (:title, :author, :time, :coverURL)");
     query.bindValue(":title", data[0].toString());
     query.bindValue(":author", data[1].toString());
     query.bindValue(":time", data[2].toInt());
-    query.bindValue(":coverURL", data[3].toString());
+    //query.bindValue(":coverURL", data[3].toString());
     // После чего выполняется запросом методом exec()
     if(!query.exec()){
         qDebug() << "error insert into " << TABLE;
@@ -103,13 +109,13 @@ bool DataBaseTracks::inserIntoTable(const QVariantList &data) {
 }
 
 bool DataBaseTracks::inserIntoTable(const QString &title, const QString &author,
-                                    const int &time, const QString &coverURL) {
+                                    const int &time/*, const QString &coverURL*/) {
 
     QVariantList data;
     data.append(title);
     data.append(author);
     data.append(time);
-    data.append(coverURL);
+    //data.append(coverURL);
     if(inserIntoTable(data))
         return true;
     else

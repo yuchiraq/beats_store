@@ -52,6 +52,8 @@ ApplicationWindow {
 
     property int blockMargin: mainScreen.width / 40
 
+    property string ip: "172.20.10.7"
+
     width: 1080 / 2
     height: 1920 / 2
     visible: true
@@ -93,6 +95,11 @@ ApplicationWindow {
 
     AlbumPage {
         id: albumPage
+        visible: false
+    }
+
+    AuthorPage {
+        id: authorPage
         visible: false
     }
 
