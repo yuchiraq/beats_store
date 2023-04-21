@@ -55,13 +55,13 @@ Page {
         }
 
         DropShadow {
-            anchors.fill: authorAuthor
+            anchors.fill: authorData
             transparentBorder: true
             horizontalOffset: -2
             verticalOffset: 2
             radius: 4
             color: "#a0000000"
-            source: authorAuthor
+            source: authorData
         }
 
         DropShadow {

@@ -12,22 +12,23 @@
 #include <QSqlDriver>
 #include <QSqlDatabase>
 
-//#define DATABASE_HOSTNAME "DataBase"
-//#define DATABASE_NAME "DataBase.db"
-//#define TABLE "TracksTable"
-//#define TABLE_TITLE "trackTitle"
-//#define TABLE_AUTHOR "trackAuthor"
-//#define TABLE_TIME "trackTime"
+#define DATABASE_HOSTNAME "DataBase"
+#define DATABASE_NAME "DataBase.db"
+#define TABLE "TracksTable"
+#define TABLE_TITLE "trackTitle"
+#define TABLE_AUTHOR "trackAuthor"
+#define TABLE_TIME "trackTime"
 ///#define TABLE_COVER "coverURL"
 
-#define DATABASE_HOSTNAME "172.20.10.7"//"127.0.0.1"//"172.20.10.7"
-#define DATABASE_NAME "sosa"
-#define DATABASE_PORT 5432
-#define DATABASE_PASS "0162"
-#define TABLE "tracks"
-#define TABLE_TITLE "title"
-#define TABLE_AUTHOR "author"
-#define TABLE_TIME "duration"
+//#define DATABASE_HOSTNAME "172.20.10.7"//"127.0.0.1"//"172.20.10.7"
+//#define DATABASE_USER "beat_user"
+//#define DATABASE_NAME "beats"
+//#define DATABASE_PORT 3306
+//#define DATABASE_PASS "p@ssword123Beats_User"
+//#define TABLE "tracks"
+//#define TABLE_TITLE "title"
+//#define TABLE_AUTHOR "author"
+//#define TABLE_TIME "duration"
 
 class DataBaseTracks : public QObject
 {
