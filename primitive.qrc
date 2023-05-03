@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>primitive/Divider.qml</file>
+        <file>primitive/Splash.qml</file>
+    </qresource>
+</RCC>

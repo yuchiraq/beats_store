@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>topBar/SearchPage.qml</file>
+        <file>topBar/TopLogo.qml</file>
+    </qresource>
+</RCC>

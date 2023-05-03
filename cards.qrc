@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>cards/AlbumMiniCard.qml</file>
+        <file>cards/AuthorMiniCard.qml</file>
+        <file>cards/BeatLine.qml</file>
+        <file>cards/NewBeat.qml</file>
+    </qresource>
+</RCC>

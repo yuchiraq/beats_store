@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>screenTracks/BestTracks.qml</file>
+        <file>screenTracks/BlockNewRealise.qml</file>
+        <file>screenTracks/BlockRandomAlbums.qml</file>
+        <file>screenTracks/BlockRandomAuthors.qml</file>
+        <file>screenTracks/BlockRandomBeats.qml</file>
+    </qresource>
+</RCC>

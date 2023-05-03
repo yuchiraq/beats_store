@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>pages/AlbumPage.qml</file>
+        <file>pages/AuthorPage.qml</file>
+    </qresource>
+</RCC>
