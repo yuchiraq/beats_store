@@ -13,10 +13,10 @@ import "ui/BottomBar"
 import "ui/Tracks"
 import "ui/More"
 import "ui/Profile"
-import "qrc:/ui"
-import "qrc:/fonts"
-import "qrc:/ui/Pages"
 
+//import "qrc:/ui"
+//import "qrc:/fonts"
+//import "qrc:/ui/Pages"
 ApplicationWindow {
     id: mainScreen
 
