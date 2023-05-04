@@ -9,7 +9,7 @@ import "../cards"
 Rectangle {
     id: beatFunctions
     anchors.fill: parent
-    color: "#60000000"
+    color: "#90000000"
 
     property int id: 0
     property string title: "Beat title"
@@ -23,6 +23,7 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         onClicked: {
+            stackMaskedBackground.visible = false
             parent.visible = false
         }
     }
@@ -52,6 +53,9 @@ Rectangle {
         radius: blockMargin * 2
 
         color: darkest
+
+        border.width: 0.5
+        border.color: outline
 
         MouseArea {
             anchors.fill: parent
@@ -118,6 +122,7 @@ Rectangle {
             onPressAndHold: console.log("onPressAndHold")
             onSgSwipeLeft: console.log("onSgSwipeLeft")
             onSgSwipeDown: {
+                stackMaskedBackground.visible = false
                 beatFunctions.visible = false
                 console.log("onSgSwipeDown")
             }
@@ -404,6 +409,7 @@ Rectangle {
     }
 
     function starter() {
+        stackMaskedBackground.visible = true
         beatFunctions.visible = true
         //beatFunctionsOpen.running = true
     }

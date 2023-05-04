@@ -51,7 +51,6 @@ Rectangle {
     Image {
         id: topLogo
 
-        //source: "qrc:/topLogoCQ.png"
         source: "../topLogoCQ.png"
         anchors {
             left: parent.left
@@ -241,6 +240,7 @@ Rectangle {
             anchors.centerIn: parent
             source: "qrc:/ui_icons/outline/search.svg"
             width: parent.height * 0.4
+            fillMode: Image.PreserveAspectFit
             height: width
             ColorOverlay {
                 anchors.fill: parent

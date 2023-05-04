@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 import Qt5Compat.GraphicalEffects
+//import QtGraphicalEffects 1.15
 
 import "qrc:/primitive"
 
@@ -25,6 +26,16 @@ StackView {
         anchors.topMargin: topBar.height + blockMargin
         anchors.bottomMargin: bottomBar.height
 
+        DropShadow {
+            color: "#000"
+            horizontalOffset: 4
+            verticalOffset: 4
+            radius: 8
+            source: profileMenu
+            anchors.fill: profileMenu
+            transparentBorder: true
+        }
+
         Column {
             id: profileColumn
 
@@ -42,10 +53,21 @@ StackView {
             }
 
             Rectangle {
+
                 id: profileMenu
 
+                layer.effect: DropShadow {
+                    color: "black"
+                    horizontalOffset: 4
+                    verticalOffset: 4
+                    radius: 8
+                    source: parent
+                    anchors.fill: parent
+                    transparentBorder: true
+                }
+
                 border.color: outline
-                border.width: 0
+                border.width: 0.5
 
                 width: mainScreen.width - blockMargin * 2
                 height: blockMargin * 5 * 4 + 3
@@ -71,13 +93,18 @@ StackView {
                         Image {
                             id: infoServiceImg
 
-                            source: "qrc:/png/interface/info.svg"
+                            source: "qrc:/ui_icons/basic/interrogation.svg"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: parent.left
-                            anchors.leftMargin: blockMargin * 2
-                            sourceSize.width: blockMargin * 2.5
-                            sourceSize.height: blockMargin * 2.5
+                            anchors.leftMargin: blockMargin * 1.5
+                            sourceSize.width: blockMargin * 2.2
+                            sourceSize.height: blockMargin * 2.2
                             //fillMode: Image.PreserveAspectFit
+                            ColorOverlay {
+                                source: parent
+                                color: secondary
+                                anchors.fill: parent
+                            }
                         }
 
                         Text {
@@ -85,7 +112,7 @@ StackView {
                             text: "Информация о сервисе"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: infoServiceImg.right
-                            anchors.leftMargin: blockMargin * 2
+                            anchors.leftMargin: blockMargin * 1.5
                             color: secondary
                             font.pointSize: 15
                         }
@@ -94,7 +121,7 @@ StackView {
                             source: "qrc:/ui_icons/basic/angle-small-right.svg"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.right: parent.right
-                            anchors.rightMargin: blockMargin * 2
+                            anchors.rightMargin: blockMargin
 
                             height: parent.height / 3
                             width: height
@@ -112,7 +139,9 @@ StackView {
                         }
                     }
 
-                    Divider {}
+                    Divider {
+                        width: parent.width - blockMargin * 2
+                    }
 
                     Button {
                         width: parent.width
@@ -128,9 +157,9 @@ StackView {
                             source: "qrc:/ui_icons/solid/invoice.svg"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: parent.left
-                            anchors.leftMargin: blockMargin * 2
-                            sourceSize.width: blockMargin * 2.5
-                            sourceSize.height: blockMargin * 2.5
+                            anchors.leftMargin: blockMargin * 1.5
+                            sourceSize.width: blockMargin * 2.2
+                            sourceSize.height: blockMargin * 2.2
                             //fillMode: Image.PreserveAspectFit
                         }
 
@@ -139,7 +168,7 @@ StackView {
                             text: "Информация о покупках"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: infoBuyImg.right
-                            anchors.leftMargin: blockMargin * 2
+                            anchors.leftMargin: blockMargin * 1.5
                             color: secondary
                             font.pointSize: 15
                         }
@@ -148,7 +177,7 @@ StackView {
                             source: "qrc:/ui_icons/basic/angle-small-right.svg"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.right: parent.right
-                            anchors.rightMargin: blockMargin * 2
+                            anchors.rightMargin: blockMargin
 
                             height: parent.height / 3
                             width: height
@@ -166,7 +195,9 @@ StackView {
                         }
                     }
 
-                    Divider {}
+                    Divider {
+                        width: parent.width - blockMargin * 2
+                    }
 
                     Button {
                         width: parent.width
@@ -179,13 +210,18 @@ StackView {
                         Image {
                             id: settingsImg
 
-                            source: "qrc:/png/interface/settings (1).svg"
+                            source: "qrc:/ui_icons/basic/settings.svg"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: parent.left
-                            anchors.leftMargin: blockMargin * 2
-                            sourceSize.width: blockMargin * 2.5
-                            sourceSize.height: blockMargin * 2.5
+                            anchors.leftMargin: blockMargin * 1.5
+                            sourceSize.width: blockMargin * 2.2
+                            sourceSize.height: blockMargin * 2.2
                             //fillMode: Image.PreserveAspectFit
+                            ColorOverlay {
+                                source: parent
+                                color: secondary
+                                anchors.fill: parent
+                            }
                         }
 
                         Text {
@@ -193,7 +229,7 @@ StackView {
                             text: "Настройки"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: settingsImg.right
-                            anchors.leftMargin: blockMargin * 2
+                            anchors.leftMargin: blockMargin * 1.5
                             color: secondary
                             font.pointSize: 15
                         }
@@ -202,7 +238,7 @@ StackView {
                             source: "qrc:/ui_icons/basic/angle-small-right.svg"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.right: parent.right
-                            anchors.rightMargin: blockMargin * 2
+                            anchors.rightMargin: blockMargin
 
                             height: parent.height / 3
                             width: height
@@ -220,7 +256,9 @@ StackView {
                         }
                     }
 
-                    Divider {}
+                    Divider {
+                        width: parent.width - blockMargin * 2
+                    }
 
                     Button {
                         width: parent.width
@@ -233,13 +271,17 @@ StackView {
                         Image {
                             id: infoProfileImg
 
-                            source: "qrc:/png/interface/fingerprint.svg"
+                            source: "qrc:/ui_icons/basic/fingerprint.svg"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: parent.left
-                            anchors.leftMargin: blockMargin * 2
-                            sourceSize.width: blockMargin * 2.5
-                            sourceSize.height: blockMargin * 2.5
-                            //fillMode: Image.PreserveAspectFit
+                            anchors.leftMargin: blockMargin * 1.5
+                            sourceSize.width: blockMargin * 2.2
+                            sourceSize.height: blockMargin * 2.2
+                            ColorOverlay {
+                                source: parent
+                                color: secondary
+                                anchors.fill: parent
+                            }
                         }
 
                         Text {
@@ -247,7 +289,7 @@ StackView {
                             text: "Хранящиеся данные пользователя"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: infoProfileImg.right
-                            anchors.leftMargin: blockMargin * 2
+                            anchors.leftMargin: blockMargin * 1.5
                             color: secondary
                             font.pointSize: 15
                         }
@@ -256,7 +298,7 @@ StackView {
                             source: "qrc:/ui_icons/basic/angle-small-right.svg"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.right: parent.right
-                            anchors.rightMargin: blockMargin * 2
+                            anchors.rightMargin: blockMargin
 
                             height: parent.height / 3
                             width: height
@@ -280,7 +322,7 @@ StackView {
                     anchors.fill: parent
 
                     border.color: outline
-                    border.width: 0
+                    border.width: 0.5
 
                     anchors.horizontalCenter: parent.horizontalCenter
 
@@ -295,7 +337,7 @@ StackView {
                     source: "qrc:/png/interface/power.svg"
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
-                    anchors.leftMargin: blockMargin * 2
+                    anchors.leftMargin: blockMargin
                     sourceSize.width: blockMargin * 2.5
                     sourceSize.height: blockMargin * 2.5
                     //fillMode: Image.PreserveAspectFit
@@ -306,7 +348,7 @@ StackView {
                     text: "Выход"
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: exitImg.right
-                    anchors.leftMargin: blockMargin * 2
+                    anchors.leftMargin: blockMargin
                     color: alert
                     font.pointSize: 15
                 }
@@ -315,7 +357,7 @@ StackView {
                     source: "qrc:/ui_icons/basic/angle-small-right.svg"
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
-                    anchors.rightMargin: blockMargin * 2
+                    anchors.rightMargin: blockMargin
 
                     height: parent.height / 3
                     width: height

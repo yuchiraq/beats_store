@@ -22,8 +22,10 @@ Rectangle {
     property int id: 0
     property string cover: ""
     property string name: "Beatmaker"
+    property string nameCorreted: name
     property string style: "music style"
 
+    clip: true
     Rectangle {
         id: authorMiniCardCoverMask
 
@@ -69,6 +71,31 @@ Rectangle {
         source: authorMiniCardCover
         maskSource: authorMiniCardCoverMask
     }
+    function titleCheckerAuthor() {}
+
+    SequentialAnimation {
+        id: checkTitle
+        NumberAnimation {
+            target: authorMiniCardName
+            property: "anchors.leftMargin"
+            from: blockMargin / 2
+            to: -100
+            duration: 2000
+        }
+
+
+        /*NumberAnimation {
+            target: authorMiniCardName
+            property: "anchors.leftMargin"
+            from: -100
+            to: blockMargin / 2
+            duration: 2000
+        }*/
+        onFinished: {
+            //authorMiniCardName.text = name
+            authorMiniCardName.anchors.leftMargin = blockMargin / 2
+        }
+    }
 
     Label {
         id: authorMiniCardName
@@ -76,7 +103,7 @@ Rectangle {
 
         //wrapMode: Label.WrapAnywhere
         font.family: appFont
-        text: "<strong>" + authorMiniCard.name + "</strong>"
+        text: "<strong>" + authorMiniCard.nameCorreted + "</strong>"
 
         wrapMode: Label.Wrap
 
@@ -91,6 +118,7 @@ Rectangle {
             right: parent.right
             rightMargin: blockMargin / 2
         }
+        elide: Text.ElideRight
     }
 
     Text {
@@ -110,6 +138,7 @@ Rectangle {
             left: parent.left
             leftMargin: blockMargin / 2
         }
+        elide: Text.ElideRight
     }
 
     Rectangle {
@@ -175,6 +204,14 @@ Rectangle {
             //                timer.restart()
             //            }
             singleClick()
+        }
+
+        property int widthTitle: authorMiniCardName.width
+        onPressAndHold: {
+            if (true) {
+                //authorMiniCardName.text = name + " " + name
+                checkTitle.running = true
+            }
         }
     }
 

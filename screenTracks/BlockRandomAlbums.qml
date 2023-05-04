@@ -17,7 +17,7 @@ Rectangle {
     color: dark
 
     border.color: outline
-    border.width: 0
+    border.width: 0.5
 
     Text {
         id: headerRandomAlbums
@@ -125,40 +125,40 @@ Rectangle {
                 title: "162 pack 2"
                 style: "Trap/EDM"
                 author: "Niki-Y On Da Track"
-                cover: "http://172.20.10.7/coversMini/1.jpg"
+                cover: "http://" + ip + "/coversMini/1.jpg"
             }
 
             AlbumMiniCard {
                 style: "Boss design"
                 author: "Chiraq Concept"
-                cover: "http://172.20.10.7/coversMini/2.jpg"
+                cover: "http://" + ip + "/coversMini/2.jpg"
             }
 
             AlbumMiniCard {
                 style: "Shit"
                 author: "ogbogtoy"
-                cover: "http://172.20.10.7/coversMini/3.jpg"
+                cover: "http://" + ip + "/coversMini/3.jpg"
             }
 
             AlbumMiniCard {
                 style: "Shit"
                 title: "ogbogdsalkdsald toykjadiojdajdosad"
-                cover: "http://172.20.10.7/coversMini/4.jpg"
+                cover: "http://" + ip + "/coversMini/4.jpg"
             }
             AlbumMiniCard {
-                cover: "http://172.20.10.7/coversMini/5.jpg"
+                cover: "http://" + ip + "/coversMini/5.jpg"
             }
             AlbumMiniCard {
                 style: "Music"
                 title: "162 pack 2"
                 author: "Niki-Y On Da Track"
-                cover: "http://172.20.10.7/coversMini/6.jpg"
+                cover: "http://" + ip + "/coversMini/6.jpg"
             }
             AlbumMiniCard {
                 style: "Music"
                 title: "CLASSIC PACK III"
                 author: "Niki-Y On Da Track"
-                cover: "http://172.20.10.7/coversMini/7.jpg"
+                cover: "http://" + ip + "/coversMini/7.jpg"
             }
             AlbumMiniCard {}
             AlbumMiniCard {}

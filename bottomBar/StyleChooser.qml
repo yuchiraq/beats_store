@@ -9,7 +9,7 @@ import "../cards"
 Rectangle {
     id: styleChooser
     anchors.fill: parent
-    color: "#60000000"
+    color: "#90000000"
 
     property int styleFor: 0
 
@@ -22,6 +22,7 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         onClicked: {
+            stackMaskedBackground.visible = false
             parent.visible = false
         }
     }
@@ -51,6 +52,9 @@ Rectangle {
         radius: blockMargin * 2
 
         color: darkest
+
+        border.color: outline
+        border.width: 0.5
 
         //Material.theme: Material.Dark
         MouseArea {
@@ -118,6 +122,7 @@ Rectangle {
             onPressAndHold: console.log("onPressAndHold")
             onSgSwipeLeft: console.log("onSgSwipeLeft")
             onSgSwipeDown: {
+                stackMaskedBackground.visible = false
                 styleChooser.visible = false
                 console.log("onSgSwipeDown")
             }
@@ -349,6 +354,7 @@ Rectangle {
             styleChooserHeaderTitle.text = "Error!\nClose this"
         }
 
+        stackMaskedBackground.visible = true
         styleChooser.visible = true
         //beatFunctionsOpen.running = true
     }

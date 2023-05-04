@@ -1,9 +1,9 @@
-﻿import QtQml 2.12
+﻿import QtQml.Models 2.3
 import QtQuick 2.15
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
-import QtQuick.LocalStorage 2.0
+//import QtQuick.LocalStorage 2.0
 //import QtGraphicalEffects 1.15
 import Qt5Compat.GraphicalEffects
 

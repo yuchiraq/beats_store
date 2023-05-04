@@ -73,10 +73,13 @@ Rectangle {
             leftMargin: blockMargin
             bottom: newBeatName.top
             bottomMargin: 2
+            right: parent.right
+            rightMargin: blockMargin
         }
 
         text: author
         font.pointSize: blockMargin * 1.7
+        elide: Text.ElideRight
     }
 
     Text {
@@ -90,10 +93,13 @@ Rectangle {
             leftMargin: blockMargin
             bottom: parent.bottom
             bottomMargin: blockMargin * 0.5
+            right: parent.right
+            rightMargin: blockMargin
         }
         font.bold: true
         text: title
         font.pointSize: blockMargin * 2
+        elide: Text.ElideRight
     }
 
     Rectangle {

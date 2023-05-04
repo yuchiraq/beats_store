@@ -17,7 +17,7 @@ Rectangle {
     color: dark
 
     border.color: outline
-    border.width: 0
+    border.width: 0.5
 
     Text {
         id: headerRandomAuthors
@@ -115,25 +115,25 @@ Rectangle {
 
                 style: "Trap/EDM"
                 name: "Niki-Y On Da Track"
-                cover: "http://172.20.10.7/coversMini/9.jpg"
+                cover: "http://" + ip + "/coversMini/9.jpg"
             }
 
             AuthorMiniCard {
                 style: "Boss design"
                 name: "Chiraq Concept"
-                cover: "http://172.20.10.7/coversMini/1.jpg"
+                cover: "http://" + ip + "/coversMini/1.jpg"
             }
 
             AuthorMiniCard {
                 style: "Shit"
                 name: "ogbogtoy"
-                cover: "http://172.20.10.7/coversMini/10.jpg"
+                cover: "http://" + ip + "/coversMini/10.jpg"
             }
 
             AuthorMiniCard {
                 style: "Shit"
                 name: "ogbogdsalkdsald toykjadiojdajdosad"
-                cover: "http://172.20.10.7/coversMini/12.jpg"
+                cover: "http://" + ip + "/coversMini/12.jpg"
             }
             AuthorMiniCard {}
             AuthorMiniCard {}

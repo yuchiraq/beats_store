@@ -17,7 +17,7 @@ Rectangle {
     //color: "#333333"
     color: dark
     border.color: outline
-    border.width: 0
+    border.width: 0.5
 
     Text {
         id: headerRandomBeats

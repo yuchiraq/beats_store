@@ -2,13 +2,14 @@ import QtQuick 2.15
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 import Qt5Compat.GraphicalEffects
+//import QtGraphicalEffects 1.15
 
 import "qrc:/cards"
 import "qrc:/screenTracks"
 
 Page {
     id: authorService
-    anchors.fill: parent
+    anchors.fill: mainScreen
 
     property string author_cover: ""
     property int author_id: 0

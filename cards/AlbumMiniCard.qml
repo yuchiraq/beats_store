@@ -21,6 +21,8 @@ Rectangle {
     property string style: "Style"
     property string author: "Author"
 
+    clip: true
+
     Image {
         id: albumMiniCardCover
         source: albumMiniCard.cover
@@ -30,12 +32,11 @@ Rectangle {
         visible: false
     }
 
-    OpacityMask {
-        anchors.fill: parent
-        source: albumMiniCardCover
-        maskSource: parent
-    }
-
+        OpacityMask {
+            anchors.fill: parent
+            source: albumMiniCardCover
+            maskSource: parent
+        }
     BusyIndicator {
         running: albumMiniCardCover.status === Image.Loading
         anchors.centerIn: albumMiniCardCover
@@ -71,6 +72,7 @@ Rectangle {
             font.family: appFont
             font.pointSize: 15
             text: "<strong>" + albumMiniCard.title + "</strong>"
+            elide: Text.ElideRight
         }
 
         DropShadow {
@@ -86,6 +88,7 @@ Rectangle {
         Text {
             id: albumMiniCardAuthor
             text: albumMiniCard.author
+            elide: Text.ElideRight
 
             font.family: appFont
 
@@ -110,6 +113,7 @@ Rectangle {
             id: albumMiniCardStyle
 
             text: albumMiniCard.style
+            elide: Text.ElideRight
 
             font.family: appFont
 

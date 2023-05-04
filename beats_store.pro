@@ -1,5 +1,7 @@
 QT += qml quick quickcontrols2 widgets core svg sql multimedia
 
+greaterThan(QT_MAJOR_VERSION,5): QT += core5compat
+
 SOURCES += \
         databasetracks.cpp \
         lastrealiseslistModel.cpp \

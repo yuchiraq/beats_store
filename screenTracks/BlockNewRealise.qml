@@ -42,21 +42,21 @@ Item {
             author: "Niki-Y On Da Track"
             title: "«CLASSIC PACK III»"
             cover: "http://" + ip + "/newRealises/" + "3" + ".jpg"
-            border.width: 0
+
         }
 
         NewBeat {
             author: "Niki-Y On Da Track"
             title: "«162 pack 3»"
             cover: "http://" + ip + "/newRealises/" + "4" + ".jpg"
-            border.width: 0
+
         }
 
         NewBeat {
             author: "Niki-Y On Da Track"
             title: "«162 pack 2»"
             cover: "http://" + ip + "/newRealises/" + "6" + ".jpg"
-            border.width: 0
+
         }
 
         NewBeat {}

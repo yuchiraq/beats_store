@@ -1,7 +1,7 @@
 import QtQuick 2.3
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
-import Qt5Compat.GraphicalEffects
+//import Qt5Compat.GraphicalEffects
 
 Rectangle {
     id: bottomBar
@@ -128,6 +128,7 @@ Rectangle {
         width: 0
         anchors.centerIn: leftBottomBarButton
         radius: 0
+        opacity: 0.7
     }
 
     Button {
@@ -246,6 +247,7 @@ Rectangle {
         width: 0
         anchors.centerIn: centralBottomBarButton
         radius: 0
+        opacity: 0.7
     }
 
     Button {
@@ -355,6 +357,7 @@ Rectangle {
         width: 0
         anchors.centerIn: rightBottomBarButton
         radius: 0
+        opacity: 0.7
     }
 
     Button {

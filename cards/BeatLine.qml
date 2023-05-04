@@ -88,6 +88,7 @@ Rectangle {
 
             font.weight: Font.Medium
             font.pointSize: blockMargin * 1.7
+            elide: Text.ElideRight
         }
 
         Text {
@@ -98,6 +99,7 @@ Rectangle {
             font.pointSize: blockMargin * 1.4
             color: secondary
             anchors.top: beatLineName.bottom
+            elide: Text.ElideRight
         }
     }
 

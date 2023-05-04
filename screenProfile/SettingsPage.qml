@@ -106,13 +106,16 @@ Flickable {
         }
         Rectangle {
 
-            anchors {
+
+            /*anchors {
 
                 verticalCenter: settingsPage.verticalCenter
-                left: settingsPage.right
-                right: settingsPage.right
-                rightMargin: blockMargin
-            }
+                //left: settingsPage.right
+                //right: settingsPage.right
+                //rightMargin: blockMargin
+            }*/
+            anchors.topMargin: blockMargin * 2
+            anchors.horizontalCenter: parent.horizontalCenter
 
             height: blockMargin * 3.5
             radius: blockMargin * 1.5
@@ -132,14 +135,17 @@ Flickable {
                     ip = ipField.text
                 }
                 background: Rectangle {
-                    anchors {
+
+
+                    /*anchors {
                         centerIn: parent
                         verticalCenter: settingsPage.verticalCenter
                         left: settingsPage.left
                         leftMargin: blockMargin
                         right: settingsPage.right
                         rightMargin: blockMargin
-                    }
+                    }*/
+                    anchors.centerIn: parent
                     height: blockMargin * 3.5
                     color: dark
                 }

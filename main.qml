@@ -1,12 +1,14 @@
-import QtQml 2.12
+import QtQml.Models 2.3
 import QtQuick 2.3
 import QtQuick.Window 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
-import QtQuick.LocalStorage 2.0
+//import QtQuick.LocalStorage 2.0
 //import QtGraphicalEffects 1.15
 import Qt5Compat.GraphicalEffects
+//import QtGraphicalEffects 1.15
+import QtQuick.Effects
 
 //for Qt6+
 import "qrc:/screenTracks"
@@ -40,20 +42,20 @@ Window {
     property string alert: "#E91E63"
 
     //cols by CQ
-    property string dark: "#171517"
-    property string darkest: "#111111"
+    property string dark: "#111"
+    property string darkest: "#0D0C0D"
 
     property string darkTransparency: "#EF19191A"
-    property string darkestTransparency: "#F6111111"
+    property string darkestTransparency: "#810F0A0F"
 
     property string secondary: "#E1E1EC"
-    property string light: "#CACACA"
-    property string outline: "#2F2F3F"
+    property string light: "#F5EFED"
+    property string outline: "#272838"
     property string accent: "#EAEAFE"
 
     property int blockMargin: mainScreen.width / 40
 
-    property string ip: "172.20.10.7"
+    property string ip: "100.70.75.245"
 
     width: 1080 / 2
     height: 1920 / 2
@@ -104,12 +106,66 @@ Window {
         visible: false
     }
 
+    Rectangle {
+        id: blurMask
+
+        width: parent.width
+        anchors.bottom: parent.bottom
+        height: blockMargin * 5
+        color: darkest
+        visible: true
+    }
+
+    //    MaskedBlur {
+    //        id: stackViewBlured
+
+    //        anchors.fill: blurMask
+    //        source: stackView
+    //        maskSource: blurMask
+    //        /// тут проблема, не работает маска, поэтому стоит fill на нижний бар
+    //        radius: 80
+    //        samples: 60
+    //        visible: true
+    //        opacity: 0.7
+    //    }
+    MultiEffect {
+        id: stackMasked
+        source: stackView
+        anchors.fill: blurMask
+
+        autoPaddingEnabled: false
+
+        blurEnabled: true
+        blur: 1
+        blurMax: 100
+
+        maskEnabled: true
+        maskSource: blurMask
+        maskSpreadAtMax: 1
+        maskSpreadAtMin: 1
+    }
+
     BottomBar {
         id: bottomBar
+        color: darkestTransparency
     }
 
     TopLogo {
         id: topBar
+    }
+
+    MultiEffect {
+        id: stackMaskedBackground
+        source: stackView
+        anchors.fill: stackView
+
+        autoPaddingEnabled: false
+
+        blurEnabled: true
+        blur: 1
+        blurMax: 80
+
+        visible: false
     }
 
     MusicPlayer {

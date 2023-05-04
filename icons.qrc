@@ -14,5 +14,8 @@
         <file>ui_icons/solid/user.svg</file>
         <file>topLogoCQ.png</file>
         <file>ui_icons/basic/angle-small-right.svg</file>
+        <file>ui_icons/basic/fingerprint.svg</file>
+        <file>ui_icons/basic/interrogation.svg</file>
+        <file>ui_icons/basic/settings.svg</file>
     </qresource>
 </RCC>
