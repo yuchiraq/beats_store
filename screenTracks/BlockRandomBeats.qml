@@ -476,7 +476,6 @@ Rectangle {
                 author: Author
                 timeSec: TimeSec
                 id_track: id_db
-                //cover: coverURL
             }
 
             Divider {
@@ -486,85 +485,4 @@ Rectangle {
         }
     }
 
-    //    Column {
-    //        anchors {
-    //            top: headerRandomBeats.bottom
-    //            topMargin: 10
-    //            left: parent.left
-    //            right: parent.right
-    //        }
-
-    //        spacing: 0
-
-    //        Rectangle {
-    //            width: parent.width
-    //            height: 1
-    //            color: outline
-    //            anchors.horizontalCenter: parent.horizontalCenter
-    //        }
-
-    //        BeatLine {
-
-    //            cover: "qrc:/png/temp/covers/2.png"
-    //            title: "Roll up dat zaza shit"
-    //            author: "1swif"
-
-    //            time: "2:54"
-    //            timeSec: 174
-    //        }
-
-    //        Rectangle {
-    //            width: parent.width - headerRandomBeats.anchors.leftMargin
-    //            height: 0.5
-    //            color: outline
-    //            anchors.horizontalCenter: parent.horizontalCenter
-    //        }
-
-    //        BeatLine {
-    //            time: "2:54"
-    //            timeSec: 174
-    //            bpm: "159"
-    //            cover: "qrc:/png/temp/covers/balenciaga.jpg"
-    //            title: "Balenciaga"
-    //            author: "Ebone Hoodrich"
-    //        }
-
-    //        Rectangle {
-
-    //            width: parent.width - headerRandomBeats.anchors.leftMargin
-    //            height: 0.5
-    //            color: outline
-    //            anchors.horizontalCenter: parent.horizontalCenter
-    //        }
-
-    //        BeatLine {
-    //            id: kfmfksd
-    //            cover: "qrc:/png/temp/covers/PLINOFFICIAL - Cocaina80%.jpg"
-    //            title: "Cocaina"
-    //            author: "Plinofficial"
-
-    //            time: "2:22"
-    //            timeSec: 142
-    //        }
-
-    //        Rectangle {
-    //            width: parent.width - headerRandomBeats.anchors.leftMargin
-    //            height: 0.5
-    //            color: outline
-    //            anchors.horizontalCenter: parent.horizontalCenter
-    //        }
-
-    //        BeatLine {
-    //            cover: "https://sun1.velcom-by-minsk.userapi.com/impf/kI8faorZFjW_wzAhTjRHhA4xEjPzARLBPM5rPw/TrfiTANzteA.jpg?size=80x0&quality=90&sign=8c34842dd235bac9f8e18fa98a823405"
-    //        }
-
-    //        Rectangle {
-    //            width: parent.width - headerRandomBeats.anchors.leftMargin
-    //            height: 0.5
-    //            color: outline
-    //            anchors.horizontalCenter: parent.horizontalCenter
-    //        }
-
-    //        BeatLine {}
-    //    }
 }

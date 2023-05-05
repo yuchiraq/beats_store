@@ -13,8 +13,6 @@ Flickable {
 
     contentHeight: settingsColumn.height
 
-    property bool darkTheme: true
-
     Column {
         id: settingsColumn
 
@@ -55,23 +53,23 @@ Flickable {
             }
 
             Switch {
-                checked: true
+                checked: mainScreen.darkTheme
 
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.right: parent.right
                 anchors.rightMargin: blockMargin * 2
 
                 onClicked: {
-                    if (darkTheme) {
-                        darkTheme = false
-                        darkest = "#FFF"
-                        dark = "#AAA"
-                        darkestTransparency = "#EFFFFFFF"
+                    if (mainScreen.darkTheme) {
+                        mainScreen.darkTheme = false
+                        //darkest = "#FFF"
+                        //dark = "#AAA"
+                        //darkestTransparency = "#EFFFFFFF"
                     } else {
-                        darkTheme = true
-                        dark = "#111"
-                        darkest = "#0D0C0D"
-                        darkestTransparency = "#810F0A0F"
+                        mainScreen.darkTheme = true
+                        //dark = "#111"
+                        //darkest = "#0D0C0D"
+                        //darkestTransparency = "#810F0A0F"
                     }
                 }
             }

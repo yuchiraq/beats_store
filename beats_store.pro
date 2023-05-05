@@ -4,6 +4,7 @@ greaterThan(QT_MAJOR_VERSION,5): QT += core5compat
 
 SOURCES += \
         databasetracks.cpp \
+        functionsdatamodel.cpp \
         lastrealiseslistModel.cpp \
         main.cpp \
         randombeatsmodel.cpp \
@@ -43,6 +44,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     databasetracks.h \
+    functionsdatamodel.h \
     lastrealiseslistModel.h \
     randombeatsmodel.h \
     searchlistmodel.h

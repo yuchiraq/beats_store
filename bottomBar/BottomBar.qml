@@ -1,8 +1,8 @@
 import QtQuick 2.3
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
+import Qt5Compat.GraphicalEffects
 
-//import Qt5Compat.GraphicalEffects
 Rectangle {
     id: bottomBar
 
@@ -179,7 +179,6 @@ Rectangle {
             //                anchors.fill: parent
             //                source: parent
             //                color: accent
-            //                visible: false
             //            }
         }
 
@@ -197,13 +196,13 @@ Rectangle {
                 bottomBarCorrector()
             leftActivate.running = true
 
-            //leftBottomBarButtonImg.height = buttonMax
-            //centralBottomBarButtonImg.height = buttonMin
-            //rightBottomBarButtonImg.height = buttonMin
             leftBottomBarButtonImg.source = "qrc:/ui_icons/solid/user.svg"
+            //leftOverlay.color = secondary
             centralBottomBarButtonImg.source = "qrc:/ui_icons/outline/music-alt.svg"
+            //centralOverlay.color = accent
             rightBottomBarButtonImg.source = "qrc:/ui_icons/outline/heart.svg"
 
+            //rightOverlay.color = accent
             if (active == 1) {
                 leftScreen.clearStack()
             } else {
@@ -214,10 +213,6 @@ Rectangle {
             active = 1
 
             topBar.backSwitch()
-
-            //leftOverlay.visible = true
-            //centralOverlay.visible = false
-            //rightOverlay.visible = false
         }
     }
 
@@ -291,7 +286,7 @@ Rectangle {
             //                id: centralOverlay
             //                anchors.fill: parent
             //                source: parent
-            //                color: accent
+            //                color: secondary
             //            }
         }
         background: Rectangle {
@@ -306,15 +301,16 @@ Rectangle {
 
             if (centralBottomBarButtonImg.height != buttonMin)
                 bottomBarCorrector()
+
             centralActivate.running = true
 
-            //leftBottomBarButtonImg.height = buttonMin
-            //centralBottomBarButtonImg.height = buttonMax
-            //rightBottomBarButtonImg.height = buttonMin
             leftBottomBarButtonImg.source = "qrc:/ui_icons/outline/user.svg"
+            //rightOverlay.color = accent
             centralBottomBarButtonImg.source = "qrc:/ui_icons/solid/music-alt.svg"
+            //centralOverlay.color = secondary
             rightBottomBarButtonImg.source = "qrc:/ui_icons/outline/heart.svg"
 
+            //rightOverlay.color = accent
             if (active == 2) {
                 centralScreen.clearStack()
             } else {
@@ -324,10 +320,6 @@ Rectangle {
 
             active = 2
             topBar.backSwitch()
-
-            //            leftOverlay.visible = false
-            //            centralOverlay.visible = true
-            //            rightOverlay.visible = false
         }
     }
 
@@ -397,9 +389,7 @@ Rectangle {
             smooth: true
 
             anchors.centerIn: parent
-            //            anchors.verticalCenter: parent.verticalCenter
-            //            anchors.right: parent.right
-            //            anchors.rightMargin: (parent.width - width) / 2 + blockMargin * 2
+
             height: buttonMin
             sourceSize: buttonMin
             //            ColorOverlay {
@@ -407,7 +397,6 @@ Rectangle {
             //                anchors.fill: parent
             //                source: parent
             //                color: accent
-            //                visible: false
             //            }
         }
 
@@ -425,16 +414,13 @@ Rectangle {
                 bottomBarCorrector()
             rightActivate.running = true
 
-            //leftBottomBarButtonImg.height = buttonMin
-            //centralBottomBarButtonImg.height = buttonMin
-            //rightBottomBarButtonImg.height = buttonMax
+            //leftOverlay.color = accent
             leftBottomBarButtonImg.source = "qrc:/ui_icons/outline/user.svg"
+            //centralOverlay.color = accent
             centralBottomBarButtonImg.source = "qrc:/ui_icons/outline/music-alt.svg"
+            //rightOverlay.color = secondary
             rightBottomBarButtonImg.source = "qrc:/ui_icons/solid/heart.svg"
 
-            //            leftOverlay.visible = false
-            //            centralOverlay.visible = false
-            //            rightOverlay.visible = true
             stackView.clear()
             stackView.push(rightScreen)
             active = 3

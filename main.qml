@@ -42,16 +42,18 @@ Window {
     property string alert: "#E91E63"
 
     //cols by CQ
-    property string dark: "#111"
-    property string darkest: "#0D0C0D"
+    property string dark: darkTheme ? "#111" : "#F0EFF4"
+    property string darkest: darkTheme ? "#0D0C0D" : "#F1F0EA"
 
-    property string darkTransparency: "#EF19191A"
-    property string darkestTransparency: "#810F0A0F"
+    property string darkTransparency: darkTheme ? "#EF19191A" : ""
+    property string darkestTransparency: darkTheme ? "#810F0A0F" : "#81F1F0EA"
 
-    property string secondary: "#E1E1EC"
-    property string light: "#F5EFED"
-    property string outline: "#272838"
-    property string accent: "#EAEAFE"
+    property string secondary: darkTheme ? "#E1E1EC" : "#2D232E"
+    property string light: darkTheme ? "#F5EFED" : "#474448"
+    property string outline: darkTheme ? "#272838" : "#534B52"
+    property string accent: darkTheme ? "#EAEAFE" : "#534B52"
+
+    property bool darkTheme: true
 
     property int blockMargin: mainScreen.width / 40
 
@@ -143,7 +145,6 @@ Window {
         maskSource: blurMask
         maskSpreadAtMax: 1
         maskSpreadAtMin: 1
-
     }
 
     BottomBar {
@@ -169,6 +170,11 @@ Window {
 
     //        visible: false
     //    }
+
+    MusicPlayer {
+        id: musicPlayer
+    }
+
     Rectangle {
         id: stackMaskedDarkBackground
         anchors.fill: stackView
@@ -185,10 +191,6 @@ Window {
         transparentBorder: false
 
         visible: false
-    }
-
-    MusicPlayer {
-        id: musicPlayer
     }
 
     BeatFunctions {

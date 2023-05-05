@@ -11,10 +11,11 @@ Rectangle {
     anchors.fill: parent
     color: "#A0000000"
 
+    //model: functionsModel
     property int id: 0
     property string title: "Beat title"
     property string author: "Author"
-    property string album: "Single"
+    property string album: "Album"
     property string time: "0:00"
     property string bpm: "000"
 
@@ -28,15 +29,6 @@ Rectangle {
         }
     }
 
-    //    DropShadow {
-    //        anchors.fill: beatFunctionsBlock
-    //        transparentBorder: true
-    //        horizontalOffset: 0
-    //        verticalOffset: -12
-    //        radius: 12.0
-    //        color: "#40000000"
-    //        source: beatFunctionsBlock
-    //    }
     Rectangle {
         id: beatFunctionsBlock
 
@@ -411,6 +403,8 @@ Rectangle {
     function starter() {
         stackMaskedBackground.visible = true
         beatFunctions.visible = true
+
+        //functionsModel.updateModel(beatFunctions.id)
         //beatFunctionsOpen.running = true
     }
 }
