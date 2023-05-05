@@ -7,7 +7,7 @@
 #include "lastrealiseslistModel.h"
 #include "searchlistmodel.h"
 #include "randombeatsmodel.h"
-//#include "functionsdatamodel.h"
+#include "functionsdatamodel.h"
 #include <QDirIterator>
 
 int main(int argc, char *argv[])
@@ -37,13 +37,13 @@ int main(int argc, char *argv[])
     LastRealisesListModel *lastRealisesListModel = new LastRealisesListModel();
     searchListModel *searchModel = new searchListModel();
     RandomBeatsModel *randomBeatsModel = new RandomBeatsModel();
-    //functionsDataModel * functionsModel = new functionsDataModel();
+    functionsDataModel * functionsModel = new functionsDataModel();
 
     engine.rootContext() -> setContextProperty("lastRealisesModel", lastRealisesListModel);
     engine.rootContext() -> setContextProperty("database", &dataBaseTracks);
     engine.rootContext() -> setContextProperty("randomBeatsModel", randomBeatsModel);
     engine.rootContext() -> setContextProperty("searchListModel", searchModel);
-    //engine.rootContext() -> setContextProperty("functionsModel", functionsModel);
+    engine.rootContext() -> setContextProperty("functionsModel", functionsModel);
 
 
     engine.load(url);

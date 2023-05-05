@@ -57,13 +57,6 @@ Rectangle {
         anchors.centerIn: beatLineCover
     }
 
-    //    AnimatedImage {
-    //        source: "qrc:/animated/loader.gif"
-    //        anchors.centerIn: beatLineCoverMask
-    //        width: beatLineCoverMask.height * 0.7
-    //        fillMode: Image.PreserveAspectFit
-    //        playing: beatLineCover.source == "" ? true : false
-    //    }
     OpacityMask {
         anchors.fill: beatLineCoverMask
         source: beatLineCover
@@ -203,9 +196,7 @@ Rectangle {
         musicPlayer.track_id = id_track
         musicPlayer.titlePlayer = title
         musicPlayer.authorPlayer = author
-        //musicPlayer.coverPlayer = cover
-        //musicPlayer.visible = true
-        //musicPlayer.coverPlayer = "http://" + ip + "/coversFull/" + id_track + ".jpg"
+
         musicPlayer.timePlayerString = time
         musicPlayer.timePlayerSec = timeSec
         musicPlayer.bpmPlayer = bpm
@@ -248,10 +239,6 @@ Rectangle {
         onDoubleClicked: likeBeat.running = true
 
         onPressAndHold: {
-            beatFunctions.title = title
-            beatFunctions.author = author
-            beatFunctions.time = time
-            beatFunctions.bpm = bpm
             beatFunctions.id = id_track
             beatFunctions.starter()
         }

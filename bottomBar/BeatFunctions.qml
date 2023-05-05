@@ -9,13 +9,12 @@ import "../cards"
 Rectangle {
     id: beatFunctions
     anchors.fill: parent
-    color: "#A0000000"
+    color: "#00000000"
 
-    //model: functionsModel
     property int id: 0
     property string title: "Beat title"
     property string author: "Author"
-    property string album: "Album"
+    property string album: "Album11"
     property string time: "0:00"
     property string bpm: "000"
 
@@ -265,15 +264,6 @@ Rectangle {
             }
         }
 
-        //        DropShadow {
-        //            anchors.fill: functionsMaskSource
-        //            transparentBorder: true
-        //            horizontalOffset: 0
-        //            verticalOffset: -6
-        //            radius: 12.0
-        //            color: "#40000000"
-        //            source: functionsMaskSource
-        //        }
         Rectangle {
             id: functionsHeader
 
@@ -293,60 +283,64 @@ Rectangle {
             visible: true
         }
 
-        //        DropShadow {
-        //            anchors.fill: functionsHeaderMasked
-        //            transparentBorder: true
-        //            horizontalOffset: 0
-        //            verticalOffset: 6
-        //            radius: 8
-        //            color: "#fff"
-        //            source: functionsHeaderMasked
-        //        }
-        Text {
-            id: functionsHeaderTitle
-            text: title
+        ListView {
+            id: dataModel
 
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: topLineFunctions.bottom
-                topMargin: blockMargin
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: topLineFunctions.bottom
+
+            //anchors.topMargin: blockMargin
+            model: functionsModel
+
+            delegate: Item {
+                anchors.fill: parent
+
+                Text {
+                    id: functionsHeaderTitle
+                    text: Title
+
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        top: parent.top
+                    }
+
+                    font.pointSize: blockMargin * 2
+
+                    font.family: appFont
+                    font.bold: true
+                    color: accent
+                }
+                Text {
+
+                    id: functionsHeaderAuthorAlbum
+                    text: Album + " • " + Author
+
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        top: functionsHeaderTitle.bottom
+                    }
+
+                    font.pointSize: blockMargin
+
+                    font.family: appFont
+                    color: secondary
+                }
+
+                Text {
+                    id: functionsHeaderTimeBPM
+                    text: TimeSec + " • " + BPM + "bpm"
+
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        top: functionsHeaderAuthorAlbum.bottom
+                    }
+
+                    font.pointSize: blockMargin
+
+                    font.family: appFont
+                    color: secondary
+                }
             }
-
-            font.pointSize: blockMargin * 2
-
-            font.family: appFont
-            font.bold: true
-            color: accent
-        }
-
-        Text {
-            id: functionsHeaderAuthorAlbum
-            text: album + " • " + author
-
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: functionsHeaderTitle.bottom
-            }
-
-            font.pointSize: blockMargin
-
-            font.family: appFont
-            color: secondary
-        }
-
-        Text {
-            id: functionsHeaderTimeBPM
-            text: time + " • " + bpm + "bpm"
-
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: functionsHeaderAuthorAlbum.bottom
-            }
-
-            font.pointSize: blockMargin
-
-            font.family: appFont
-            color: secondary
         }
 
         NumberAnimation {
@@ -404,7 +398,7 @@ Rectangle {
         stackMaskedBackground.visible = true
         beatFunctions.visible = true
 
-        //functionsModel.updateModel(beatFunctions.id)
+        functionsModel.updateModel(id)
         //beatFunctionsOpen.running = true
     }
 }
