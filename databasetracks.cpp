@@ -34,11 +34,20 @@ bool DataBaseTracks::openDataBase() {
     /* База данных открывается по заданному пути
 * и имени базы данных, если она существует
 * */
-    db = QSqlDatabase::addDatabase("QSQLITE");
+    //db = QSqlDatabase::addDatabase("QSQLITE");
+    //db.setHostName(DATABASE_HOSTNAME);
+    //db.setDatabaseName(DATABASE_NAME);
+
+    db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName(DATABASE_HOSTNAME);
+    db.setPort(DATABASE_PORT);
+    db.setUserName(DATABASE_USER);
+    db.setPassword(DATABASE_PASS);
     db.setDatabaseName(DATABASE_NAME);
+
     if(db.open()){
         return true;
+        qDebug() << "DB connected";
     } else {
         return false;
     }

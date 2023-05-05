@@ -2,14 +2,16 @@ import QtQuick 2.15
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 import Qt5Compat.GraphicalEffects
-//import QtGraphicalEffects 1.15
 
+//import QtGraphicalEffects 1.15
 import "qrc:/primitive"
 
 StackView {
     id: leftScreen
 
     anchors.fill: parent
+
+    property string ava: ""
 
     function clearStack() {
         if (leftScreen.depth > 1) {
@@ -26,16 +28,6 @@ StackView {
         anchors.topMargin: topBar.height + blockMargin
         anchors.bottomMargin: bottomBar.height
 
-        DropShadow {
-            color: "#000"
-            horizontalOffset: 4
-            verticalOffset: 4
-            radius: 8
-            source: profileMenu
-            anchors.fill: profileMenu
-            transparentBorder: true
-        }
-
         Column {
             id: profileColumn
 
@@ -49,6 +41,7 @@ StackView {
             spacing: blockMargin
 
             BlockProfile {
+                id: blockProfile
                 anchors.horizontalCenter: parent.horizontalCenter
             }
 
@@ -74,7 +67,7 @@ StackView {
 
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                radius: blockMargin * 2
+                radius: blockMargin * 1.5
 
                 color: dark
 
@@ -326,7 +319,7 @@ StackView {
 
                     anchors.horizontalCenter: parent.horizontalCenter
 
-                    radius: blockMargin * 2
+                    radius: blockMargin * 1.5
 
                     color: dark
                 }

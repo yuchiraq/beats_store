@@ -34,7 +34,7 @@ void RandomBeatsModel::updateModel(int style) {
     // Обновление производится SQL-запросом к базе данных
     //this->setQuery("SELECT id, " TABLE_TITLE ", " TABLE_AUTHOR ", "
     //             TABLE_TIME " FROM " TABLE);
-    this->setQuery("SELECT * FROM " TABLE " ORDER BY RANDOM() LIMIT 5");
+    this->setQuery("SELECT * FROM " TABLE " ORDER BY RAND() LIMIT 5");
 
 }
 

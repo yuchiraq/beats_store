@@ -2,8 +2,8 @@ import QtQuick 2.15
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 import Qt5Compat.GraphicalEffects
-//import QtGraphicalEffects 1.15
 
+//import QtGraphicalEffects 1.15
 Rectangle {
     border.color: outline
     border.width: 0
@@ -22,6 +22,20 @@ Rectangle {
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         radius: parent.radius
+
+        clip: true
+    }
+    Image {
+        id: avaImage
+        anchors.fill: avaMask
+        source: leftScreen.ava
+        visible: false
+    }
+
+    OpacityMask {
+        anchors.fill: avaImage
+        source: avaImage
+        maskSource: avaMask
     }
 
     Text {

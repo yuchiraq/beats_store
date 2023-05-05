@@ -5,6 +5,7 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 
 import "qrc:/cards"
+import "qrc:/primitive"
 
 Rectangle {
     id: blockRandomAuthors
@@ -18,6 +19,17 @@ Rectangle {
 
     border.color: outline
     border.width: 0.5
+
+    clip: true
+
+    GaussianBlur {
+        source: randomAuthorsFlicable
+        anchors.fill: randomAuthorsFlicable
+        radius: 16
+        samples: 16
+        transparentBorder: true
+        opacity: 0.5
+    }
 
     Text {
         id: headerRandomAuthors
@@ -80,9 +92,118 @@ Rectangle {
         width: randomAuthorsSelectorText.width + height + 20
 
         onClicked: {
-            styleChooser.styleFor = 2
-            console.log("Clicked!!!!!")
-            styleChooser.starter()
+            //            styleChooser.styleFor = 2
+            //            console.log("Clicked!!!!!")
+            //            styleChooser.starter()
+            menu.popup()
+        }
+    }
+
+    MouseArea {
+        id: backgroundMenu
+        anchors.fill: mainScreen
+
+        onClicked: menu.close()
+        visible: false
+    }
+
+    Menu {
+        id: menu
+
+        onAboutToShow: {
+            backgroundMenu.visible = true
+            stackMaskedBackground.visible = true
+        }
+        onAboutToHide: {
+            backgroundMenu.visible = false
+            stackMaskedBackground.visible = false
+        }
+
+        transformOrigin: Menu.Right
+
+        font {
+            pointSize: blockMargin * 1.4
+            family: appFont
+        }
+
+        MenuItem {
+            text: "Все"
+
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
+        }
+        MenuSeparator {
+            Divider {}
+        }
+        MenuItem {
+            text: "K-Pop"
+
+            contentItem: Text {
+                text: parent.text
+                color: light
+                font: parent.font
+            }
+
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
+        }
+        MenuItem {
+            text: "K-Pop"
+
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
+        }
+        MenuItem {
+            text: "K-Pop"
+
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
+        }
+        MenuItem {
+            text: "K-Pop"
+
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
+        }
+        MenuItem {
+            text: "K-Pop"
+
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
+        }
+        MenuItem {
+            text: "K-Pop"
+
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
+        }
+        MenuItem {
+            text: "K-Pop"
+
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
+        }
+        MenuItem {
+            text: "K-Pop"
+
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
+        }
+        MenuItem {
+            text: "K-Pop"
+
+            onClicked: {
+                randomBeatsSelectorText.text = text
+            }
         }
     }
 

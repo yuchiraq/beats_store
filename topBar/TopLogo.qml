@@ -97,6 +97,31 @@ Rectangle {
             opacity: 0
         }
 
+        TextField {
+            id: searchInputField
+            anchors.fill: parent
+            //placeholderText: "Поиск..."
+            font.family: appFont
+            font.pointSize: blockMargin * 2
+            placeholderTextColor: outline
+            selectedTextColor: secondary
+            color: secondary
+            leftPadding: searchTopBarCleaner.height
+            rightPadding: searchTopBarCleaner.height
+            bottomPadding: 0
+            topPadding: 0
+
+            onTextEdited: {
+                searchListModel.updateModel(searchInputField.text)
+            }
+
+            onAccepted: {
+                searchListModel.updateModel(searchInputField.text)
+                Qt.inputMethod.hide()
+                console.log(searchListModel.updateModel(searchInputField.text))
+                searchInputField.cursorVisible = false
+            }
+        }
         SequentialAnimation {
             id: searchTopBarCleanerBackAnim
             NumberAnimation {
@@ -146,55 +171,43 @@ Rectangle {
         visible: false
     }
 
-    Rectangle {
-        id: searchInputFieldMask
-        visible: false
+    //    Rectangle {
+    //        id: searchInputFieldMask
+    //        visible: true
 
-        anchors {
-            verticalCenter: topBar.verticalCenter
-            left: searchTopBar.right
-            right: topBar.right
-            rightMargin: searchTopBar.width
-        }
+    //        anchors {
+    //            verticalCenter: topBar.verticalCenter
+    //            left: searchTopBar.right
+    //            right: topBar.right
+    //            rightMargin: searchTopBar.width
+    //        }
 
-        height: blockMargin * 3.5
-        radius: blockMargin * 1.5
+    //        height: blockMargin * 3.5
+    //        radius: blockMargin * 1.5
 
-        color: "transparent"
+    //        color: "transparent"
 
-        TextField {
-            id: searchInputField
-            placeholderText: "Поиск...                   "
-            font.family: appFont
-            font.pointSize: blockMargin * 2
-            placeholderTextColor: outline
-            selectedTextColor: secondary
-            color: secondary
+    //        TextField {
+    //            id: searchInputField
+    //            placeholderText: "Поиск...                   "
+    //            font.family: appFont
+    //            font.pointSize: blockMargin * 2
+    //            placeholderTextColor: outline
+    //            selectedTextColor: secondary
+    //            color: secondary
 
-            background: Rectangle {
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                    left: parent.left
-                    leftMargin: blockMargin
-                    right: parent.right
-                    rightMargin: searchTopBar.width
-                }
-                height: blockMargin * 3.5
-                color: "transparent"
-            }
+    //                        onTextEdited: {
+    //                            searchListModel.updateModel(searchInputField.text)
+    //                        }
 
-            //            onTextEdited: {
-            //                searchListModel.updateModel(searchInputField.text)
-            //            }
-            onAccepted: {
-                searchListModel.updateModel(searchInputField.text)
-                Qt.inputMethod.hide()
-                console.log(searchListModel.updateModel(searchInputField.text))
-                searchInputField.cursorVisible = false
-            }
-        }
-    }
-
+    //            onAccepted: {
+    //                searchListModel.updateModel(searchInputField.text)
+    //                Qt.inputMethod.hide()
+    //                console.log(searchListModel.updateModel(searchInputField.text))
+    //                searchInputField.cursorVisible = false
+    //            }
+    //        }
+    //    }
     Rectangle {
         id: searchTopBarBack
         anchors.centerIn: searchTopBar
@@ -283,7 +296,7 @@ Rectangle {
 
         onFinished: {
             searchInput.visible = true
-            searchInputFieldMask.visible = true
+            //searchInputFieldMask.visible = true
         }
     }
 
@@ -298,7 +311,7 @@ Rectangle {
         running: false
 
         onStarted: {
-            searchInputFieldMask.visible = false
+            //searchInputFieldMask.visible = false
             searchInput.visible = false
         }
     }

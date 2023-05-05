@@ -19,6 +19,17 @@ Rectangle {
     border.color: outline
     border.width: 0.5
 
+    clip: true
+
+    GaussianBlur {
+        source: randomAlbumsFlicable
+        anchors.fill: randomAlbumsFlicable
+        radius: 16
+        samples: 16
+        transparentBorder: true
+        opacity: 0.5
+    }
+
     Text {
         id: headerRandomAlbums
 

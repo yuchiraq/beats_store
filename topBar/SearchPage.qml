@@ -4,6 +4,7 @@ import QtQuick.Controls.Material 2.3
 
 import "qrc:/screenTracks"
 import "qrc:/cards"
+import "qrc:/primitive"
 
 Flickable {
     id: searchScreen
@@ -11,10 +12,7 @@ Flickable {
     width: parent
 
     anchors.fill: stackView
-    anchors.topMargin: topBar.height + blockMargin
-    anchors.bottomMargin: bottomBar.height
-
-    contentHeight: parent.height
+    anchors.topMargin: topBar.height
 
     ListView {
         id: searchBeats
@@ -22,7 +20,6 @@ Flickable {
         model: searchListModel
         anchors.fill: parent
 
-        //height: database.getQuantity() * (blockMargin * 7 + 0.5)
         delegate: Item {
             id: searchAnswer
             anchors.horizontalCenter: parent.horizontalCenter
@@ -37,16 +34,9 @@ Flickable {
                 author: Author
                 timeSec: TimeSec
                 id_track: id_db
-                cover: coverURL
             }
 
-            Rectangle {
-                width: parent.width
-                height: 0.5
-                color: outline
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: searchBeat.bottom
-            }
+            Divider {}
         }
     }
 }

@@ -55,7 +55,7 @@ Window {
 
     property int blockMargin: mainScreen.width / 40
 
-    property string ip: "100.70.75.245"
+    property string ip: "172.20.10.7"
 
     width: 1080 / 2
     height: 1920 / 2
@@ -111,7 +111,7 @@ Window {
 
         width: parent.width
         anchors.bottom: parent.bottom
-        height: blockMargin * 5
+        height: musicPlayer.visible ? blockMargin * 8 : blockMargin * 5
         color: darkest
         visible: true
     }
@@ -137,12 +137,13 @@ Window {
 
         blurEnabled: true
         blur: 1
-        blurMax: 100
 
+        blurMax: 100
         maskEnabled: true
         maskSource: blurMask
         maskSpreadAtMax: 1
         maskSpreadAtMin: 1
+
     }
 
     BottomBar {
@@ -154,16 +155,34 @@ Window {
         id: topBar
     }
 
-    MultiEffect {
+    //    MultiEffect {
+    //        id: stackMaskedBackground
+    //        source: stackView
+    //        anchors.fill: stackView
+
+    //        autoPaddingEnabled: false
+
+    //        blurEnabled: true
+    //        blur: 1
+    //        blurMax: 120
+    //        blurMultiplier: 2
+
+    //        visible: false
+    //    }
+    Rectangle {
+        id: stackMaskedDarkBackground
+        anchors.fill: stackView
+        color: darkest
+        visible: stackMaskedBackground.visible
+    }
+
+    GaussianBlur {
         id: stackMaskedBackground
         source: stackView
         anchors.fill: stackView
-
-        autoPaddingEnabled: false
-
-        blurEnabled: true
-        blur: 1
-        blurMax: 80
+        radius: 64
+        samples: 128
+        transparentBorder: false
 
         visible: false
     }

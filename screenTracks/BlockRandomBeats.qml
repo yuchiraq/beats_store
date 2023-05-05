@@ -83,6 +83,7 @@ Rectangle {
             //styleChooser.styleFor = 1
             console.log("Clicked!!!!!")
             //styleChooser.starter()
+            //stackMaskedBackground.visible = true
             menu.open()
         }
     }
@@ -100,23 +101,23 @@ Rectangle {
             implicitHeight: blockMargin * 12
         }
 
+        onAboutToShow: stackMaskedBackground.visible = true
+        onAboutToHide: stackMaskedBackground.visible = false
+
+        font {
+            pointSize: blockMargin * 1.4
+            family: appFont
+        }
+
         MenuItem {
             text: "Jazz"
-            font {
-                pointSize: blockMargin * 1.4
-                family: appFont
-            }
 
             onClicked: {
                 randomBeatsSelectorText.text = text
             }
         }
         MenuSeparator {
-            contentItem: Rectangle {
-                implicitWidth: blockMargin * 6
-                implicitHeight: 0.5
-                color: outline
-            }
+            Divider {}
         }
         MenuItem {
             text: "K-Pop"
@@ -129,18 +130,11 @@ Rectangle {
             }
         }
         MenuSeparator {
-            contentItem: Rectangle {
-                implicitWidth: blockMargin * 6
-                implicitHeight: 0.5
-                color: outline
-            }
+            contentItem: Divider {}
         }
         MenuItem {
             text: "Russian Rock"
-            font {
-                pointSize: blockMargin * 1.4
-                family: appFont
-            }
+
             onClicked: {
                 randomBeatsSelectorText.text = text
             }

@@ -72,7 +72,7 @@ Rectangle {
         width: mainScreen.width
         height: blockMargin * 3
 
-        color: darkest
+        color: darkestTransparency
 
         anchors {
             bottom: parent.bottom
@@ -804,7 +804,7 @@ Rectangle {
         musicPlayerMax.visible = false
         //musicPlayerShadow.visible = false
         musicPlayerMin.visible = true
-        musicPlayerBlock.color = darkest
+        musicPlayerBlock.color = darkestTransparency
         musicPlayer.color = "#00000000"
         console.log("onSgSwipeDown")
     }

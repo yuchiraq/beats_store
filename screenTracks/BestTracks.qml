@@ -207,13 +207,7 @@ StackView {
                     //cover: coverURL
                 }
 
-                Rectangle {
-                    width: parent.width
-                    height: 0.5
-                    color: outline
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.top: lastRealiseBeat.bottom
-                }
+                Divider {}
             }
         }
 

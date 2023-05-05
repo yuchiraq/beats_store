@@ -1,8 +1,8 @@
 import QtQuick 2.3
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
-//import Qt5Compat.GraphicalEffects
 
+//import Qt5Compat.GraphicalEffects
 Rectangle {
     id: bottomBar
 
@@ -63,21 +63,42 @@ Rectangle {
         bottomBarOn.running = true
     }
 
-    NumberAnimation {
+    ParallelAnimation {
         id: bottomBarOff
-        target: bottomBar
-        property: "height"
-        from: blockMargin * 5
-        to: 0
+        NumberAnimation {
+            target: bottomBar
+            property: "height"
+            from: blockMargin * 5
+            to: 0
+        }
+
+        NumberAnimation {
+            target: blurMask
+            property: "height"
+
+            from: blurMask.height
+            to: blurMask.height == blockMargin * 5 ? 0 : blockMargin * 3
+        }
         running: false
     }
 
-    NumberAnimation {
+    ParallelAnimation {
         id: bottomBarOn
-        target: bottomBar
-        property: "height"
-        from: 0
-        to: blockMargin * 5
+
+        NumberAnimation {
+            target: bottomBar
+            property: "height"
+            from: 0
+            to: blockMargin * 5
+        }
+
+        NumberAnimation {
+            target: blurMask
+            property: "height"
+
+            from: blurMask.height
+            to: blurMask.height == 0 ? blockMargin * 5 : blockMargin * 8
+        }
         running: false
     }
 

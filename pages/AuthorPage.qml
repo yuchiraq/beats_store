@@ -2,10 +2,11 @@ import QtQuick 2.15
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 import Qt5Compat.GraphicalEffects
-//import QtGraphicalEffects 1.15
 
+//import QtGraphicalEffects 1.15
 import "qrc:/cards"
 import "qrc:/screenTracks"
+import "qrc:/primitive"
 
 Page {
     id: authorService
@@ -40,7 +41,7 @@ Page {
     }
 
     Flickable {
-        contentHeight: authorTop.height + authorContent.height
+        contentHeight: authorTop.height + authorContent.height + blockMargin * 8
         anchors.fill: parent
         anchors.topMargin: 0
         anchors.bottomMargin: bottomBar.height
@@ -157,7 +158,7 @@ Page {
 
                 height: blockMargin * 4 + authorInfoText.height
 
-                radius: blockMargin
+                radius: blockMargin * 1.5
 
                 Text {
                     text: "Об авторе"
@@ -176,27 +177,28 @@ Page {
 
                 Label {
                     id: authorInfoText
-                    text: "hgsadggG JHSDhjad hdbashdbahj da hJDSahbshajbd asjhbdhjfbhdsf"
-                          + " hgsadggG JHSDhjad hdbashdbahj da hJDSahbshajb dasjhbdhjfbhdsf"
+                    text: "Американский рэпер, певец и автор песен. Известный своим эксцентричным стилем вокала и отношением к " + "моде, первое внимание к себе он привлёк совместными работами с такими рэперами, как Рич Хоуми Куан, " + "Бердмен и Гуччи Мейн. В самом начале Янг Таг выпустил серию инди-микстейпов, первый из которых - I Came " + "from Nothing 2011 года. В 2013-м он заключил контракт с 1017 Records Гуччи Мейна и выпустил свой дебютный " + "микстейп на лейбле, получивший название 1017 Thug и положительные отзывы критиков"
+
+                    horizontalAlignment: Text.AlignLeft
+                    wrapMode: Label.Wrap
 
                     font {
-                        bold: true
+                        bold: false
                         pointSize: blockMargin * 0.9
                         family: appFont
                     }
 
-                    width: parent.width - blockMargin
-
                     color: light
+
+                    //width: parent.width - blockMargin
                     anchors {
                         top: parent.top
                         topMargin: blockMargin * 3
                         left: parent.left
-                        leftMargin: blockMargin * 0.5
-                        right: parent.left
+                        leftMargin: blockMargin
+                        right: parent.right
                         rightMargin: blockMargin * 0.5
                     }
-                    wrapMode: Label.Wrap
                 }
             }
 
@@ -214,7 +216,7 @@ Page {
                 id: lastRealises
 
                 model: lastRealisesModel
-                anchors.top: blockAuthorAlbum.bottom
+                anchors.top: blockAuthorAlbums.bottom
                 anchors.topMargin: blockMargin
                 anchors.right: parent.right
                 anchors.left: parent.left
@@ -237,13 +239,7 @@ Page {
                         //cover: coverURL
                     }
 
-                    Rectangle {
-                        width: parent.width
-                        height: 0.5
-                        color: outline
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        anchors.top: lastRealiseBeat.bottom
-                    }
+                    Divider {}
                 }
             }
         }

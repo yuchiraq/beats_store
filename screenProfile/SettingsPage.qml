@@ -30,6 +30,7 @@ Flickable {
         spacing: blockMargin
 
         Rectangle {
+            id: themeSwitcher
 
             width: mainScreen.width - blockMargin * 2
             height: blockMargin * 5
@@ -39,8 +40,10 @@ Flickable {
             color: dark
 
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: blockMargin * 2
 
+            anchors.top: parent.top
+
+            //anchors.topMargin: blockMargin * 2
             Text {
                 font.family: appFont
                 text: "Тёмная тема"
@@ -66,15 +69,16 @@ Flickable {
                         darkestTransparency = "#EFFFFFFF"
                     } else {
                         darkTheme = true
-                        dark: "#1C1B1F"
-                        darkest: "#171717"
-                        darkestTransparency: "#EF171717"
+                        dark = "#111"
+                        darkest = "#0D0C0D"
+                        darkestTransparency = "#810F0A0F"
                     }
                 }
             }
         }
 
         Rectangle {
+            id: deleteData
 
             width: mainScreen.width - blockMargin * 2
             height: blockMargin * 5
@@ -84,6 +88,7 @@ Flickable {
             color: dark
 
             anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: themeSwitcher.bottom
             anchors.topMargin: blockMargin * 2
 
             Text {
@@ -104,51 +109,71 @@ Flickable {
                 }
             }
         }
-        Rectangle {
 
+        TextField {
+            id: ipField
 
-            /*anchors {
-
-                verticalCenter: settingsPage.verticalCenter
-                //left: settingsPage.right
-                //right: settingsPage.right
-                //rightMargin: blockMargin
-            }*/
-            anchors.topMargin: blockMargin * 2
+            anchors.top: deleteData.bottom
+            anchors.topMargin: blockMargin
             anchors.horizontalCenter: parent.horizontalCenter
 
-            height: blockMargin * 3.5
-            radius: blockMargin * 1.5
-
-            color: "transparent"
-
-            TextField {
+            font.family: appFont
+            placeholderText: "IP server"
+            font.pointSize: blockMargin * 2
+            placeholderTextColor: outline
+            selectedTextColor: secondary
+            color: secondary
+            onAccepted: {
+                ip = ipField.text
+            }
+            background: Rectangle {
                 anchors.centerIn: parent
-                id: ipField
-                font.family: appFont
-                placeholderText: "IP server"
-                font.pointSize: 25
-                placeholderTextColor: outline
-                selectedTextColor: secondary
-                color: secondary
-                onAccepted: {
-                    ip = ipField.text
-                }
-                background: Rectangle {
 
+                width: mainScreen.width - blockMargin * 2
+                height: blockMargin * 5
 
-                    /*anchors {
-                        centerIn: parent
-                        verticalCenter: settingsPage.verticalCenter
-                        left: settingsPage.left
-                        leftMargin: blockMargin
-                        right: settingsPage.right
-                        rightMargin: blockMargin
-                    }*/
-                    anchors.centerIn: parent
-                    height: blockMargin * 3.5
-                    color: dark
-                }
+                radius: blockMargin * 2
+                color: dark
+            }
+        }
+
+        TextField {
+            id: avaField
+
+            anchors.top: ipField.bottom
+            anchors.topMargin: blockMargin
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            font.family: appFont
+            placeholderText: "avatar's URL"
+            font.pointSize: blockMargin * 2
+            placeholderTextColor: outline
+            selectedTextColor: secondary
+            color: secondary
+            onAccepted: {
+                leftScreen.ava = avaField.text
+            }
+            background: Rectangle {
+                anchors.centerIn: parent
+
+                width: mainScreen.width - blockMargin * 2
+                height: blockMargin * 5
+
+                radius: blockMargin * 2
+                color: dark
+            }
+        }
+
+        Rectangle {
+            anchors.top: avaField.bottom
+            anchors.topMargin: blockMargin
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            height: 80
+            width: parent.width - blockMargin * 2
+            color: "transparent"
+            TextField {
+                anchors.fill: parent
             }
         }
     }
