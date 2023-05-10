@@ -22,6 +22,7 @@
 #define DATABASE_PORT 3306
 #define DATABASE_USER "beat_user"
 #define DATABASE_PASS "p@ssword123Beats_User"
+
 #define TABLE "tracks"
 #define TABLE_TITLE "title"
 #define TABLE_AUTHOR "author_id"

@@ -85,7 +85,7 @@ Rectangle {
         height: blockMargin * 3.5
         //radius: blockMargin * 1.5
         radius: height / 2
-        color: dark
+        color: accentTransparency
 
         Rectangle {
             id: searchTopBarCleanerBack
@@ -99,10 +99,13 @@ Rectangle {
 
         TextField {
             id: searchInputField
+
             anchors.fill: parent
+
             //placeholderText: "Поиск..."
             font.family: appFont
             font.pointSize: blockMargin * 2
+
             placeholderTextColor: outline
             selectedTextColor: secondary
             color: secondary
@@ -110,6 +113,9 @@ Rectangle {
             rightPadding: searchTopBarCleaner.height
             bottomPadding: 0
             topPadding: 0
+            background: Rectangle {
+                color: "transparent"
+            }
 
             onTextEdited: {
                 searchListModel.updateModel(searchInputField.text)

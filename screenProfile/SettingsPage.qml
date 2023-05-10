@@ -163,6 +163,7 @@ Flickable {
         }
 
         Rectangle {
+            id: testField
             anchors.top: avaField.bottom
             anchors.topMargin: blockMargin
             anchors.horizontalCenter: parent.horizontalCenter
@@ -171,7 +172,26 @@ Flickable {
             width: parent.width - blockMargin * 2
             color: "transparent"
             TextField {
+                Material.theme: Material.Dark
                 anchors.fill: parent
+            }
+        }
+
+        Rectangle {
+            id: testButton
+            anchors.top: testField.bottom
+            anchors.topMargin: blockMargin
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            height: 80
+            width: parent.width - blockMargin * 2
+            radius: blockMargin
+            color: "transparent"
+            Button {
+                Material.theme: Material.Dark
+                anchors.fill: parent
+
+                down: true
             }
         }
     }

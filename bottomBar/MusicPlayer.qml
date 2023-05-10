@@ -53,17 +53,7 @@ Rectangle {
         }
     }
 
-    //    DropShadow {
-    //        id: musicPlayerShadow
 
-    //        anchors.fill: musicPlayerBlock
-    //        transparentBorder: true
-    //        horizontalOffset: 0
-    //        verticalOffset: -5
-    //        radius: 6.0
-    //        color: "#20000000"
-    //        source: musicPlayerBlock
-    //    }
     property int timeAnimation: 100
 
     Rectangle {

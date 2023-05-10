@@ -10,7 +10,11 @@ Rectangle {
     width: parent.width
     height: blockMargin * 7
 
-    color: "#00333333"
+    color: selected ? accentTransparency : "transparent"
+
+    radius: blockMargin
+
+    clip: true
 
     property int id_track: 0
     property string cover: "http://" + ip + "/coversMini/" + id_track + ".jpg"
@@ -21,24 +25,36 @@ Rectangle {
     property int timeSec: 0
     property string bpm: "000"
 
+    property bool selected: musicPlayer.track_id == id_track
+
     function timeCorrector(number) {
         if (number <= 9)
             return "0" + number
         return number
     }
 
+    GaussianBlur {
+        source: beatLineCover
+        anchors.fill: beatLineCover
+        radius: 16
+        samples: 16
+        transparentBorder: true
+        opacity: 1
+        visible: selected
+    }
+
     Rectangle {
         id: beatLineCoverMask
-        //color: "#282323"
+
         color: darkVariant
         border.width: 1
         border.color: outline
-        width: parent.height * 0.8
+        width: blockMargin * 6
         height: width
         anchors.left: parent.left
-        anchors.leftMargin: blockMargin
+        anchors.leftMargin: blockMargin / 2
         anchors.verticalCenter: parent.verticalCenter
-        radius: height / 20
+        radius: selected ? blockMargin / 2 : height / 20
     }
 
     Image {

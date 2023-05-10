@@ -106,14 +106,14 @@ bool DataBaseTracks::inserIntoTable(const QVariantList &data) {
 }
 
 bool DataBaseTracks::inserIntoTable(const QString &title, const QString &author,
-                                    const int &time/*, const QString &coverURL*/) {
+                                    const int &time) {
 
     QVariantList data;
     data.append(title);
     data.append(author);
     data.append(time);
     qDebug() << title << author;
-    //data.append(coverURL);
+
     if(inserIntoTable(data))
         return true;
     else

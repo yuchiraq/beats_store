@@ -9,7 +9,7 @@ import "../cards"
 Rectangle {
     id: styleChooser
     anchors.fill: parent
-    color: "#00000000"
+    color: "transparent"
 
     property int styleFor: 0
 

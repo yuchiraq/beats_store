@@ -24,6 +24,7 @@ Window {
     id: mainScreen
 
     property string appFont: "SF Pro Display"
+
     FontLoader {
         id: localFont
         source: "qrc:/fonts/SFPRODISPLAYREGULAR.OTF"
@@ -51,7 +52,9 @@ Window {
     property string secondary: darkTheme ? "#E1E1EC" : "#2D232E"
     property string light: darkTheme ? "#F5EFED" : "#474448"
     property string outline: darkTheme ? "#272838" : "#534B52"
+
     property string accent: darkTheme ? "#EAEAFE" : "#534B52"
+    property string accentTransparency: darkTheme ? "#10EAEAFE" : "#10534B52"
 
     property bool darkTheme: true
 
@@ -118,18 +121,6 @@ Window {
         visible: true
     }
 
-    //    MaskedBlur {
-    //        id: stackViewBlured
-
-    //        anchors.fill: blurMask
-    //        source: stackView
-    //        maskSource: blurMask
-    //        /// тут проблема, не работает маска, поэтому стоит fill на нижний бар
-    //        radius: 80
-    //        samples: 60
-    //        visible: true
-    //        opacity: 0.7
-    //    }
     MultiEffect {
         id: stackMasked
         source: stackView
@@ -156,23 +147,13 @@ Window {
         id: topBar
     }
 
-    //    MultiEffect {
-    //        id: stackMaskedBackground
-    //        source: stackView
-    //        anchors.fill: stackView
-
-    //        autoPaddingEnabled: false
-
-    //        blurEnabled: true
-    //        blur: 1
-    //        blurMax: 120
-    //        blurMultiplier: 2
-
-    //        visible: false
-    //    }
-
     MusicPlayer {
         id: musicPlayer
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        visible: stackMaskedBackground.visible
     }
 
     Rectangle {
@@ -204,5 +185,60 @@ Window {
     Splash {
         id: startSplashScreen
         visible: false
+    }
+
+    MouseArea {
+
+        id: oRoot
+        anchors.fill: parent
+
+        Timer {
+            id: timer
+            interval: 100
+        }
+
+        signal sgSwipeRight
+
+        QtObject {
+
+            property bool pTracing: false
+            property real pXVelocity: 0.0
+            property real pYVelocity: 0.0
+            property int pXPrev: 0
+            property int pYPrev: 0
+
+            id: oPrivate
+        }
+        onPressed: {
+            if (mouseX < blockMargin) {
+                console.log("HASIKUGDUSGDAS")
+                oPrivate.pXPrev = mouseX
+                oPrivate.pXVelocity = 0
+            } else
+                mouse.accepted = false
+        }
+
+        onPositionChanged: {
+            var oCurrentXVelocity = (mouse.x - oPrivate.pXPrev)
+            oPrivate.pXVelocity = (oPrivate.pXVelocity + oCurrentXVelocity) / 2.0
+            oPrivate.pXPrev = mouse.x
+
+            if (oPrivate.pXVelocity > 15 && mouse.x > parent.width * 0.2) {
+                oPrivate.pTracing = false
+                oRoot.sgSwipeRight()
+            } else {
+                mouse.accepted = false
+            }
+        }
+
+        onSgSwipeRight: {
+            if (timer.running) {
+
+            } else {
+                timer.restart()
+                topBar.standartBack()
+                console.log("onSgSwipeRight")
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@ import "../cards"
 Rectangle {
     id: beatFunctions
     anchors.fill: parent
-    color: "#00000000"
+    color: "transparent"
 
     property int id: 0
     property string title: "Beat title"
