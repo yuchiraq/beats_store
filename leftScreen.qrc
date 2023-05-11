@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>screenProfile/BlockProfile.qml</file>
-        <file>screenProfile/ProfileTest.qml</file>
-    </qresource>
-</RCC>

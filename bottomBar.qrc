@@ -1,8 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>bottomBar/BeatFunctions.qml</file>
-        <file>bottomBar/BottomBar.qml</file>
-        <file>bottomBar/MusicPlayer.qml</file>
-        <file>bottomBar/StyleChooser.qml</file>
-    </qresource>
-</RCC>

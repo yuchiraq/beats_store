@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>screenProfile/InfoBuyPage.qml</file>
-        <file>screenProfile/InfoServicePage.qml</file>
-        <file>screenProfile/SettingsPage.qml</file>
-    </qresource>
-</RCC>

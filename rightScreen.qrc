@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>screenMore/Liked.qml</file>
-    </qresource>
-</RCC>
