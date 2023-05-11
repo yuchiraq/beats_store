@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>primitive/Divider.qml</file>
         <file>primitive/Splash.qml</file>
+        <file>primitive/Notification.qml</file>
     </qresource>
 </RCC>

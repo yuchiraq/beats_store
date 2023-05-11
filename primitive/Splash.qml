@@ -128,7 +128,18 @@ Rectangle {
         splashAnim.paused = true
     }
 
+    Connections {
+        target: setHost
+    }
+
     function closeSplash() {
+        if (!setHost.connect()) {
+            notification.notificationText = "Нет подключения к БД"
+            notification.start()
+        } else {
+            notification.notificationText = "Подключено к БД"
+            notification.start()
+        }
 
         bottomBar.bottomBarCorrector()
         startSplashScreen.visible = 0

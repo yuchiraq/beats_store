@@ -42,7 +42,7 @@ Window {
     property string alert: "#E91E63"
 
     //cols by CQ
-    property string dark: darkTheme ? "#111" : "#F0EFF4"
+    property string dark: darkTheme ? "#171519" : "#F0EFF4"
     property string darkest: darkTheme ? "#0D0C0D" : "#F1F0EA"
 
     property string darkTransparency: darkTheme ? "#EF19191A" : ""
@@ -53,13 +53,13 @@ Window {
     property string outline: darkTheme ? "#272838" : "#534B52"
 
     property string accent: darkTheme ? "#EAEAFE" : "#534B52"
-    property string accentTransparency: darkTheme ? "#10EAEAFE" : "#10534B52"
+    property string accentTransparency: darkTheme ? "#09EAEAFE" : "#10534B52"
 
     property bool darkTheme: true
 
     property int blockMargin: mainScreen.width / 40
 
-    property string ip: "172.20.10.7"
+    property string ip: "raw.githubusercontent.com/yuchiraq/beats_store"
 
     width: 1080 / 2
     height: 1920 / 2
@@ -239,5 +239,18 @@ Window {
                 console.log("onSgSwipeRight")
             }
         }
+    }
+
+    DropShadow {
+        visible: notification.visible
+        anchors.fill: notification
+        radius: 8
+        color: accentTransparency
+        source: notification
+        transparentBorder: true
+    }
+
+    Notification {
+        id: notification
     }
 }

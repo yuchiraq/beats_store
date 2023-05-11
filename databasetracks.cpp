@@ -47,9 +47,11 @@ bool DataBaseTracks::openDataBase() {
     db.setDatabaseName(DATABASE_NAME);
 
     if(db.open()){
+        this->connected = true;
         return true;
         qDebug() << "DB connected";
     } else {
+        this->connected = false;
         return false;
     }
 }

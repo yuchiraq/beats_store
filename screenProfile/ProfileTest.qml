@@ -60,7 +60,7 @@ StackView {
                 }
 
                 border.color: outline
-                border.width: 0.5
+                border.width: 0
 
                 width: mainScreen.width - blockMargin * 2
                 height: blockMargin * 5 * 4 + 3

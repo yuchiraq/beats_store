@@ -12,7 +12,7 @@ Flickable {
     width: parent
 
     anchors.fill: stackView
-    anchors.topMargin: topBar.height
+    anchors.topMargin: blockMargin * 3.5 + blockMargin * 3 + blockMargin * 3
 
     ListView {
         id: searchBeats
@@ -38,5 +38,7 @@ Flickable {
 
             Divider {}
         }
+
+        visible: topBar.selectorPos == 1
     }
 }

@@ -4,6 +4,8 @@ import QtQuick.Controls.Material 2.3
 //import QtGraphicalEffects 1.15
 import Qt5Compat.GraphicalEffects
 
+import "qrc:/primitive"
+
 Rectangle {
     id: topBar
 
@@ -29,6 +31,42 @@ Rectangle {
         GradientStop {
             position: 1.00
             color: "transparent"
+        }
+    }
+
+    Rectangle {
+        id: topBarBackground
+
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        height: 0
+        width: parent.width
+
+        color: darkest
+
+        visible: false
+    }
+
+    GaussianBlur {
+        source: stackView
+        anchors.fill: topBarBackground
+
+        radius: 100
+        samples: 128
+        transparentBorder: false
+
+        visible: topBarBackground.visible
+    }
+
+    Rectangle {
+        anchors.fill: topBarBackground
+        color: darkestTransparency
+        visible: topBarBackground.visible
+
+        Divider {
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
         }
     }
 
@@ -85,9 +123,11 @@ Rectangle {
         height: blockMargin * 3.5
         //radius: blockMargin * 1.5
         radius: height / 2
-        color: searchInputField.focus ? dark : accentTransparency
-        border.width: searchInputField.focus ? 1 : 0
-        border.color: outline
+        color: searchInputField.focus ? dark : dark
+        border.width: 0.5
+        border.color: searchInputField.focus ? accent : outline
+
+        Material.theme: Material.Dark
 
         Rectangle {
             id: searchTopBarCleanerBack
@@ -129,6 +169,7 @@ Rectangle {
                 searchInputField.focus = false
             }
         }
+
         SequentialAnimation {
             id: searchTopBarCleanerBackAnim
             NumberAnimation {
@@ -178,43 +219,6 @@ Rectangle {
         visible: false
     }
 
-    //    Rectangle {
-    //        id: searchInputFieldMask
-    //        visible: true
-
-    //        anchors {
-    //            verticalCenter: topBar.verticalCenter
-    //            left: searchTopBar.right
-    //            right: topBar.right
-    //            rightMargin: searchTopBar.width
-    //        }
-
-    //        height: blockMargin * 3.5
-    //        radius: blockMargin * 1.5
-
-    //        color: "transparent"
-
-    //        TextField {
-    //            id: searchInputField
-    //            placeholderText: "Поиск...                   "
-    //            font.family: appFont
-    //            font.pointSize: blockMargin * 2
-    //            placeholderTextColor: outline
-    //            selectedTextColor: secondary
-    //            color: secondary
-
-    //                        onTextEdited: {
-    //                            searchListModel.updateModel(searchInputField.text)
-    //                        }
-
-    //            onAccepted: {
-    //                searchListModel.updateModel(searchInputField.text)
-    //                Qt.inputMethod.hide()
-    //                console.log(searchListModel.updateModel(searchInputField.text))
-    //                searchInputField.cursorVisible = false
-    //            }
-    //        }
-    //    }
     Rectangle {
         id: searchTopBarBack
         anchors.centerIn: searchTopBar
@@ -323,11 +327,320 @@ Rectangle {
         }
     }
 
+    property int selectorPos: 1
+
+    Rectangle {
+        id: searchSelector
+
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        width: 0
+        height: 0
+
+        radius: blockMargin * 1.5
+
+        color: dark
+
+        visible: false
+
+        border.width: 0.5
+        border.color: outline
+
+        Rectangle {
+            anchors.left: parent.left
+            anchors.leftMargin: parent.width / 3
+            anchors.verticalCenter: parent.verticalCenter
+
+            height: blockMargin
+            width: 1
+
+            color: outline
+        }
+
+        Rectangle {
+            anchors.right: parent.right
+            anchors.rightMargin: parent.width / 3
+            anchors.verticalCenter: parent.verticalCenter
+
+            height: blockMargin
+            width: 1
+
+            color: outline
+        }
+
+        Rectangle {
+            id: selector
+
+            anchors {
+                verticalCenter: parent.verticalCenter
+                left: parent.left
+                leftMargin: blockMargin / 4
+            }
+
+            width: parent.width / 3 - blockMargin / 2
+            height: parent.height - blockMargin / 2
+
+            color: accentTransparency
+
+            radius: parent.radius - blockMargin / 4
+        }
+
+        Text {
+            id: textTracks
+
+            text: "Треки"
+
+            font {
+                family: appFont
+                pointSize: parent.height - blockMargin * 2.5
+                bold: true
+            }
+
+            anchors {
+                verticalCenter: parent.verticalCenter
+                left: parent.left
+                leftMargin: parent.width / 6 - width / 2
+            }
+
+            color: accent
+        }
+
+        Text {
+            id: textAlbums
+
+            text: "Альбомы"
+
+            font {
+                family: appFont
+                pointSize: parent.height - blockMargin * 2.5
+                bold: false
+            }
+
+            anchors {
+                centerIn: parent
+            }
+
+            color: secondary
+        }
+
+        Text {
+            id: textAuthors
+
+            text: "Авторы"
+
+            font {
+                family: appFont
+                pointSize: parent.height - blockMargin * 2.5
+                bold: false
+            }
+
+            anchors {
+                verticalCenter: parent.verticalCenter
+                right: parent.right
+                rightMargin: parent.width / 6 - width / 2
+            }
+
+            color: secondary
+        }
+
+        NumberAnimation {
+            id: selectorToLeft
+            target: selector
+            property: "anchors.leftMargin"
+            easing.type: Easing.InOutQuad
+            from: selector.anchors.leftMargin
+            to: blockMargin / 4
+
+            onFinished: {
+                textTracks.font.bold = true
+                textAlbums.font.bold = false
+                textAuthors.font.bold = false
+
+                textTracks.color = accent
+                textAlbums.color = secondary
+                textAuthors.color = secondary
+            }
+
+            running: false
+        }
+
+        NumberAnimation {
+            id: selectorToCenter
+            target: selector
+            property: "anchors.leftMargin"
+            easing.type: Easing.InOutQuad
+            from: selector.anchors.leftMargin
+            to: blockMargin / 2 + blockMargin / 4 + selector.width
+
+            onFinished: {
+                textTracks.font.bold = false
+                textAlbums.font.bold = true
+                textAuthors.font.bold = false
+
+                textTracks.color = secondary
+                textAlbums.color = accent
+                textAuthors.color = secondary
+            }
+            running: false
+        }
+
+        NumberAnimation {
+            id: selectorToRight
+            target: selector
+            property: "anchors.leftMargin"
+            easing.type: Easing.InOutQuad
+            from: selector.anchors.leftMargin
+            to: blockMargin + blockMargin / 4 + selector.width * 2
+
+            onFinished: {
+                textTracks.font.bold = false
+                textAlbums.font.bold = false
+                textAuthors.font.bold = true
+
+                textTracks.color = secondary
+                textAlbums.color = secondary
+                textAuthors.color = accent
+            }
+            running: false
+        }
+
+        MouseArea {
+            width: parent.width / 3
+            height: parent.height
+
+            anchors {
+                verticalCenter: parent.verticalCenter
+                left: parent.left
+            }
+
+            onClicked: {
+                selectorToLeft.running = true
+                selectorPos = 1
+            }
+        }
+
+        MouseArea {
+            width: parent.width / 3
+            height: parent.height
+
+            anchors {
+                centerIn: parent
+            }
+
+            onClicked: {
+                selectorToCenter.running = true
+                selectorPos = 2
+            }
+        }
+
+        MouseArea {
+            width: parent.width / 3
+            height: parent.height
+
+            anchors {
+                verticalCenter: parent.verticalCenter
+                right: parent.right
+            }
+
+            onClicked: {
+                selectorToRight.running = true
+                selectorPos = 3
+            }
+        }
+    }
+
+    ParallelAnimation {
+        id: searchSelectorOn
+
+        NumberAnimation {
+            target: searchSelector
+            property: "height"
+            from: 0
+            to: blockMargin * 3.5
+            easing.type: Easing.OutBack
+        }
+
+        NumberAnimation {
+            target: searchSelector
+            property: "width"
+            from: 0
+            to: parent.width - blockMargin
+            easing.type: Easing.OutInBack
+        }
+
+        NumberAnimation {
+            target: searchSelector
+            property: "anchors.topMargin"
+            from: 0
+            to: blockMargin * 5
+            easing.type: Easing.InOutQuad
+        }
+
+        NumberAnimation {
+            target: topBarBackground
+            property: "height"
+            easing.type: Easing.OutInBack
+            from: 0
+            to: blockMargin * 3.5 + blockMargin * 3 + blockMargin * 3
+        }
+
+        onStarted: {
+            topBarBackground.visible = true
+            searchSelector.visible = true
+        }
+
+        running: false
+    }
+
+    ParallelAnimation {
+        id: searchSelectorOff
+
+        NumberAnimation {
+            target: searchSelector
+            property: "height"
+            from: blockMargin * 3.5
+            to: 0
+            easing.type: Easing.OutBack
+        }
+
+        NumberAnimation {
+            target: searchSelector
+            property: "width"
+            from: searchSelector.width
+            to: 0
+            easing.type: Easing.OutInBack
+        }
+
+        NumberAnimation {
+            target: searchSelector
+            property: "anchors.topMargin"
+            from: blockMargin * 5
+            to: 0
+            easing.type: Easing.InOutQuad
+        }
+
+        NumberAnimation {
+            target: topBarBackground
+            property: "height"
+            easing.type: Easing.OutInBack
+            from: blockMargin * 3.5 + blockMargin * 3 + blockMargin * 3
+            to: 0
+        }
+
+        onFinished: {
+            topBarBackground.visible = false
+            searchSelector.visible = false
+        }
+        running: false
+    }
+
     function searchOn() {
         backTopBar.visible = false
         topLogo.visible = false
         bottomBar.close()
         searchOnAnimation.running = true
+        searchSelectorOn.running = true
         stackView.push("qrc:/topBar/SearchPage.qml")
     }
 
@@ -335,6 +648,7 @@ Rectangle {
         Qt.inputMethod.hide()
         searchInputField.cursorVisible = false
         searchOffAnimation.running = true
+        searchSelectorOff.running = true
         topLogo.visible = true
         bottomBar.open()
         stackView.pop()

@@ -205,6 +205,11 @@ Rectangle {
             to: 0
         }
 
+        onStarted: {
+            notification.notificationText = beatLine.title + " добавлен"
+            notification.start()
+        }
+
         running: false
     }
 

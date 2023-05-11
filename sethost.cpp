@@ -12,3 +12,7 @@ void setHost::getHost(QString newHost){
     this->database->host = newHost;
     this->database->connectToDataBase();
 }
+
+bool setHost::connect(){
+    return database->connected;
+}

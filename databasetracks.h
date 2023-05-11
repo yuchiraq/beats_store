@@ -36,6 +36,7 @@ public:
     explicit DataBaseTracks(QObject *parent = nullptr);
     void connectToDataBase();
 
+    bool connected = false;
 private:
     // Сам объект базы данных, с которым будет производиться работа
     QSqlDatabase db;

@@ -127,7 +127,7 @@ Flickable {
             color: secondary
             onAccepted: {
                 setHost.getHost(ipField.text)
-                ip = ipField.text
+                //ip = ipField.text
                 centralcreen.update()
             }
             background: Rectangle {
@@ -140,7 +140,7 @@ Flickable {
                 color: ipField.activeFocus ? dark : accentTransparency
 
                 border.width: ipField.activeFocus ? 1 : 0
-                border.color: outline
+                border.color: accent
             }
         }
 
@@ -202,6 +202,8 @@ Flickable {
                 anchors.fill: parent
 
                 down: true
+
+                onClicked: notification.start()
             }
         }
     }

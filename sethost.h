@@ -15,6 +15,7 @@ signals:
 
 public slots:
     void getHost(QString newHost);
+    bool connect();
 
 private:
     DataBaseTracks* database;
