@@ -236,7 +236,6 @@ Page {
                         author: Author
                         timeSec: TimeSec
                         id_track: id_db
-                        //cover: coverURL
                     }
 
                     Divider {}

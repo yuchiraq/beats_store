@@ -13,6 +13,10 @@ Flickable {
 
     contentHeight: settingsColumn.height
 
+    Connections {
+        target: setHost
+    }
+
     Column {
         id: settingsColumn
 
@@ -122,7 +126,9 @@ Flickable {
             selectedTextColor: secondary
             color: secondary
             onAccepted: {
+                setHost.getHost(ipField.text)
                 ip = ipField.text
+                centralcreen.update()
             }
             background: Rectangle {
                 anchors.centerIn: parent
@@ -131,7 +137,10 @@ Flickable {
                 height: blockMargin * 5
 
                 radius: blockMargin * 2
-                color: dark
+                color: ipField.activeFocus ? dark : accentTransparency
+
+                border.width: ipField.activeFocus ? 1 : 0
+                border.color: outline
             }
         }
 
@@ -148,6 +157,7 @@ Flickable {
             placeholderTextColor: outline
             selectedTextColor: secondary
             color: secondary
+
             onAccepted: {
                 leftScreen.ava = avaField.text
             }
@@ -158,7 +168,7 @@ Flickable {
                 height: blockMargin * 5
 
                 radius: blockMargin * 2
-                color: dark
+                color: accentTransparency
             }
         }
 

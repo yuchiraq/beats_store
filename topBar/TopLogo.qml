@@ -85,7 +85,9 @@ Rectangle {
         height: blockMargin * 3.5
         //radius: blockMargin * 1.5
         radius: height / 2
-        color: accentTransparency
+        color: searchInputField.focus ? dark : accentTransparency
+        border.width: searchInputField.focus ? 1 : 0
+        border.color: outline
 
         Rectangle {
             id: searchTopBarCleanerBack
@@ -124,8 +126,7 @@ Rectangle {
             onAccepted: {
                 searchListModel.updateModel(searchInputField.text)
                 Qt.inputMethod.hide()
-                console.log(searchListModel.updateModel(searchInputField.text))
-                searchInputField.cursorVisible = false
+                searchInputField.focus = false
             }
         }
         SequentialAnimation {

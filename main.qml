@@ -4,7 +4,6 @@ import QtQuick.Window 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
-//import QtQuick.LocalStorage 2.0
 //import QtGraphicalEffects 1.15
 import Qt5Compat.GraphicalEffects
 //import QtGraphicalEffects 1.15
@@ -69,7 +68,7 @@ Window {
 
     color: darkest
 
-    // visibility: "FullScreen"
+    //visibility: "FullScreen"
     Keys.onBackPressed: {
         topBar.standartBack()
     }

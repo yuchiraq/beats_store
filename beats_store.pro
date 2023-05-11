@@ -8,7 +8,8 @@ SOURCES += \
         lastrealiseslistModel.cpp \
         main.cpp \
         randombeatsmodel.cpp \
-        searchlistmodel.cpp
+        searchlistmodel.cpp \
+        sethost.cpp
 
 resources.files = main.qml 
 resources.prefix = /$${TARGET}
@@ -47,4 +48,5 @@ HEADERS += \
     functionsdatamodel.h \
     lastrealiseslistModel.h \
     randombeatsmodel.h \
-    searchlistmodel.h
+    searchlistmodel.h \
+    sethost.h

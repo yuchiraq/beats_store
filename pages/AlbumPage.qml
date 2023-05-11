@@ -146,7 +146,8 @@ Page {
                 anchors.topMargin: blockMargin
                 anchors.right: parent.right
                 anchors.left: parent.left
-                height: database.getQuantity() * (blockMargin * 7 + 0.5)
+                height: database.getQuantity(
+                            ) * (blockMargin * 7 + 0.5) * blockMargin * 7
 
                 delegate: Item {
                     id: lastRealise
@@ -170,19 +171,4 @@ Page {
             }
         }
     }
-
-    //    FastBlur {
-    //        id: bluredCover
-    //        anchors.fill: albumCover
-    //        source: albumCover
-    //        radius: 60
-    //        visible: false
-    //    }
-
-    //    OpacityMask {
-    //        source: bluredCover
-    //        maskSource: albumContent
-    //        anchors.fill: bluredCover
-    //        opacity: 0.7
-    //    }
 }

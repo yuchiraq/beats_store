@@ -67,7 +67,7 @@ Page {
                 titleField.clear()
                 authorField.clear()
                 timeField.clear()
-                //centralScreen.update()
+                centralScreen.update()
             }
         }
     }

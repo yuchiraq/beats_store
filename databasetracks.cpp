@@ -11,11 +11,12 @@ void DataBaseTracks::connectToDataBase() {
 * В зависимости от результата производим открытие базы данных или ее
 восстановление
 * */
-    if(!QFile(DATABASE_NAME).exists()){
-        this->restoreDataBase();
-    } else {
+    //if(!QFile(DATABASE_NAME).exists()){
+      //  this->restoreDataBase();
+    //} else {
+
         this->openDataBase();
-    }
+
 }
 
 bool DataBaseTracks::restoreDataBase() {
@@ -39,7 +40,7 @@ bool DataBaseTracks::openDataBase() {
     //db.setDatabaseName(DATABASE_NAME);
 
     db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName(DATABASE_HOSTNAME);
+    db.setHostName(host);
     db.setPort(DATABASE_PORT);
     db.setUserName(DATABASE_USER);
     db.setPassword(DATABASE_PASS);

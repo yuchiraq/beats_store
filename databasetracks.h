@@ -17,7 +17,7 @@
 //#define TABLE_AUTHOR "trackAuthor"
 //#define TABLE_TIME "trackTime"
 
-#define DATABASE_HOSTNAME "172.20.10.7"
+//#define DATABASE_HOSTNAME "172.20.10.7"
 #define DATABASE_NAME "beats"
 #define DATABASE_PORT 3306
 #define DATABASE_USER "beat_user"
@@ -32,6 +32,7 @@ class DataBaseTracks : public QObject
 {
     Q_OBJECT
 public:
+    QString host = "172.20.10.7";
     explicit DataBaseTracks(QObject *parent = nullptr);
     void connectToDataBase();
 

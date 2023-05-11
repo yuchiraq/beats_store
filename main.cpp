@@ -8,6 +8,7 @@
 #include "searchlistmodel.h"
 #include "randombeatsmodel.h"
 #include "functionsdatamodel.h"
+#include "sethost.h"
 #include <QDirIterator>
 
 int main(int argc, char *argv[])
@@ -34,11 +35,13 @@ int main(int argc, char *argv[])
     DataBaseTracks dataBaseTracks;
     dataBaseTracks.connectToDataBase();
 
+    setHost *setHostClass = new setHost(&dataBaseTracks);
     LastRealisesListModel *lastRealisesListModel = new LastRealisesListModel();
     searchListModel *searchModel = new searchListModel();
     RandomBeatsModel *randomBeatsModel = new RandomBeatsModel();
     functionsDataModel * functionsModel = new functionsDataModel();
 
+    engine.rootContext()->setContextProperty("setHost", setHostClass);
     engine.rootContext() -> setContextProperty("lastRealisesModel", lastRealisesListModel);
     engine.rootContext() -> setContextProperty("database", &dataBaseTracks);
     engine.rootContext() -> setContextProperty("randomBeatsModel", randomBeatsModel);
