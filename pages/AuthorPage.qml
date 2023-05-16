@@ -32,6 +32,7 @@ Page {
         height: width
         fillMode: Image.PreserveAspectFit
         anchors.top: parent.top
+        anchors.topMargin: topBar.height
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
@@ -49,7 +50,7 @@ Page {
         Rectangle {
             id: authorTop
             color: "transparent"
-            height: parent.width
+            height: parent.width + topBar.height
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: authorContent

@@ -10,15 +10,22 @@
 #include <QDate>
 #include <QDebug>
 
-//#define DATABASE_HOSTNAME "DataBase"
-//#define DATABASE_NAME "DataBase.db"
-//#define TABLE "TracksTable"
-//#define TABLE_TITLE "trackTitle"
-//#define TABLE_AUTHOR "trackAuthor"
-//#define TABLE_TIME "trackTime"
+#include <QTextCodec>
+
+#include <QNetworkReply>
+#include <QEventLoop>
+
+
+
+#define DATABASE_HOSTNAME "DataBase"
+#define DATABASE_NAME "DataBase.db"
+#define TABLE "tracks"
+#define TABLE_TITLE "title"
+#define TABLE_AUTHOR "author_id"
+#define TABLE_TIME "duration"
 
 //#define DATABASE_HOSTNAME "172.20.10.7"
-#define DATABASE_NAME "beats"
+/*#define DATABASE_NAME "beats"
 #define DATABASE_PORT 3306
 #define DATABASE_USER "beat_user"
 #define DATABASE_PASS "p@ssword123Beats_User"
@@ -27,12 +34,14 @@
 #define TABLE_TITLE "title"
 #define TABLE_AUTHOR "author_id"
 #define TABLE_TIME "duration"
-
+*/
 class DataBaseTracks : public QObject
 {
     Q_OBJECT
 public:
     QString host = "172.20.10.7";
+    QString port = ":8080";
+
     explicit DataBaseTracks(QObject *parent = nullptr);
     void connectToDataBase();
 
@@ -41,6 +50,8 @@ private:
     // Сам объект базы данных, с которым будет производиться работа
     QSqlDatabase db;
 private:
+
+    QString divider = "|||";
     /* Внутренние методы для работы с базой данных
     * */
     bool openDataBase();
@@ -50,13 +61,9 @@ private:
     // Закрытие базы данных
     bool createTable();
     // Создание таблицы в базе данных
+    bool insertData();
 
 public slots:
-    bool inserIntoTable(const QVariantList &data); // Добавление записей в
-
-    bool inserIntoTable(const QString &title, const QString &author, const
-                        int &time/*, const QString &coverURL*/);
-    bool removeRecord(const int id); // Удаление записи из таблицы по ее id
 
     QString showDB();
 

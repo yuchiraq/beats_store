@@ -21,111 +21,34 @@ Rectangle {
     property int logoOGwidth: startSplashScreen.width / 2.5
     property int timeAnimation: 110
 
-    MediaPlayer {
-        id: startedSound
-        audioOutput: AudioOutput {}
-        source: "qrc:/animated/lovelyboot1-103697 (mp3cut.net).mp3"
-    }
-
-    Item {
-
-        height: parent.height / 4
-        width: parent.width
+    Image {
+        id: fullLogoSplash
+        source: "qrc:/topLogoCQ.png"
 
         anchors.centerIn: parent
 
-        Image {
-            id: fullLogoSplash
-            source: "qrc:/topLogoCQ.png"
+        height: parent.height / 5
+        fillMode: Image.PreserveAspectFit
 
-            anchors.centerIn: parent
+        opacity: 1
 
-            height: parent.height / 5
-            width: height * (2308 / 392)
-
-            opacity: 0
-        }
-
-        Image {
-            id: logoOG
-
-            source: "qrc:/topLogoCQ.png"
-
-            anchors {
-                verticalCenter: parent.verticalCenter
-                left: fullLogoSplash.left
-            }
-
-            width: logoOGwidth
-
-            height: width
-
-            anchors.leftMargin: fullLogoSplash.width / 2 - width / 2
-        }
-
-        SequentialAnimation {
-            id: splashAnimation
-
-            NumberAnimation {}
-            NumberAnimation {
-                target: logoOG
-                property: "width"
-
-                from: logoOG.width
-                to: fullLogoSplash.width / (2307 / 731)
-            }
-            NumberAnimation {
-                target: logoOG
-                property: "anchors.leftMargin"
-
-                from: logoOG.anchors.leftMargin
-                to: 0
-            }
-
-            NumberAnimation {
-                target: fullLogoSplash
-                property: "opacity"
-
-                from: 0
-                to: 1
-            }
-
-            NumberAnimation {
-                target: logoOG
-                property: "opacity"
-
-                from: 1
-                to: 0
-            }
-
-            NumberAnimation {
-                duration: timeAnimation * 5
-            }
-
-            NumberAnimation {
-                target: splashScreen
-                property: "opacity"
-                duration: timeAnimation * 2
-                from: 1
-                to: 0
-            }
-
-            onStarted: {
-                centralScreen.update()
-                startedSound.play()
-                bottomBar.bottomBarCorrector()
-            }
-            onFinished: closeSplash()
-            running: true
-        }
+        onStatusChanged: if (image.status === Image.Ready) {
+                             startSplash()
+                             textAnim.restart()
+                         }
     }
 
-    function splashStoper() {
-        while (splashAnim.currentFrame < splashAnim.frameCount) {
-
+    ProgressBar {
+        id: progress
+        anchors {
+            //top: fullLogoSplash.bottom
+            horizontalCenter: parent.horizontalCenter
+            //topMargin: blockMargin * 3
+            top: fullLogoSplash.bottom
+            bottom: parent.bottom
         }
 
-        splashAnim.paused = true
+        indeterminate: true
     }
 
     Connections {
@@ -133,25 +56,123 @@ Rectangle {
     }
 
     function closeSplash() {
-        if (!setHost.connect()) {
-            notification.notificationText = "Нет подключения к БД"
+        centralScreen.update()
+        //        while (!setHost.connectDB()) {
+        //            console.log("cikle")
+        //        }
+        console.log("1cikle")
+        if (notification.notificationText != "")
             notification.start()
-        } else {
-            notification.notificationText = "Подключено к БД"
-            notification.start()
-        }
 
         bottomBar.bottomBarCorrector()
-        startSplashScreen.visible = 0
+        startSplashScreen.visible = false
     }
 
     function startSplash() {
-        fullLogoSplash.opacity = 0
-        logoOG.width = logoOGwidth
-        logoOG.anchors.leftMargin = fullLogoSplash.width / 2 - logoOG.width / 2
-        logoOG.opacity = 1
+        console.log("startSPLASH")
+        n = 0
         startSplashScreen.opacity = 1
-        startSplashScreen.visible = 1
-        splashAnimation.running = true
+        startSplashScreen.visible = true
+
+        if (!setHost.connect()) {
+            notification.notificationText = "Нет подключения к серверу"
+        } else {
+            notification.notificationText = setHost.checkNotification()
+        }
+
+        bottomBar.bottomBarCorrector()
+        closeSplash()
+    }
+
+    MouseArea {
+        anchors.fill: parent
+
+        onClicked: textAnim.restart()
+    }
+
+    TextField {
+        id: ipField
+
+        color: secondary
+
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            bottom: fullLogoSplash.top
+        }
+
+        onAccepted: setHost.getHost(ipField.text)
+
+        visible: false
+    }
+
+    Text {
+        id: textConnection
+        text: "Подключение..."
+
+        font.family: appFont
+        font.bold: true
+
+        color: accent
+
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            bottom: fullLogoSplash.bottom
+            bottomMargin: 0 - progress.height / 4 * 3
+        }
+
+        opacity: 0
+    }
+
+    property int n: 0
+
+    SequentialAnimation {
+        id: textAnim
+
+        NumberAnimation {
+            target: textConnection
+            property: "opacity"
+            from: 0
+            to: 1
+            duration: 500
+            easing.type: Easing.InOutQuad
+        }
+
+        NumberAnimation {
+            target: textConnection
+            property: "opacity"
+            from: 1
+            to: 0
+            duration: 500
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            target: textConnection
+            property: "opacity"
+            from: 0
+            to: 1
+            duration: 500
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            target: textConnection
+            property: "opacity"
+            from: 1
+            to: 0
+            duration: 500
+            easing.type: Easing.InOutQuad
+        }
+
+        onFinished: {
+            ipField.visible = true
+            n++
+            if (n >= 2)
+                closeSplash()
+        }
+    }
+
+    NumberAnimation {
+        duration: 10
+        onFinished: startSplash()
+        running: true
     }
 }

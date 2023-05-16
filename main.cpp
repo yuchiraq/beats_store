@@ -33,7 +33,6 @@ int main(int argc, char *argv[])
      QCoreApplication::setAttribute( Qt::AA_UseSoftwareOpenGL );
 
     DataBaseTracks dataBaseTracks;
-    dataBaseTracks.connectToDataBase();
 
     setHost *setHostClass = new setHost(&dataBaseTracks);
     LastRealisesListModel *lastRealisesListModel = new LastRealisesListModel();
@@ -48,8 +47,11 @@ int main(int argc, char *argv[])
     engine.rootContext() -> setContextProperty("searchListModel", searchModel);
     engine.rootContext() -> setContextProperty("functionsModel", functionsModel);
 
-
     engine.load(url);
+
+    dataBaseTracks.connectToDataBase();
+    //lastRealisesListModel->updateModel(0);
+    //randomBeatsModel->updateModel(0);
 
     return app.exec();
 }

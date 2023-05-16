@@ -28,6 +28,8 @@ Rectangle {
         samples: 16
         transparentBorder: true
         opacity: 0.5
+
+        visible: false
     }
 
     Text {
@@ -171,7 +173,9 @@ Rectangle {
                 author: "Niki-Y On Da Track"
                 cover: "http://" + ip + "/coversMini/7.jpg"
             }
-            AlbumMiniCard {}
+            AlbumMiniCard {
+                cover: "http://" + ip + "/coversMini/13.jpg"
+            }
             AlbumMiniCard {}
         }
     }

@@ -32,15 +32,15 @@ Rectangle {
         visible: false
     }
 
-        OpacityMask {
-            anchors.fill: parent
-            source: albumMiniCardCover
-            maskSource: parent
-        }
-    BusyIndicator {
-        running: albumMiniCardCover.status === Image.Loading
-        anchors.centerIn: albumMiniCardCover
+    OpacityMask {
+        anchors.fill: parent
+        source: albumMiniCardCover
+        maskSource: parent
     }
+//    BusyIndicator {
+//        running: albumMiniCardCover.status === Image.Loading
+//        anchors.centerIn: albumMiniCardCover
+//    }
 
     Item {
         id: albumMiniCardData
@@ -61,6 +61,27 @@ Rectangle {
             radius: 4.0
             color: "#a0000000"
             source: albumMiniCardTitle
+            visible: false
+        }
+
+        Text {
+
+            color: "black"
+
+            //wrapMode: Label.WrapAnywhere
+            font.family: appFont
+            font.pointSize: 15
+            text: "<strong>" + albumMiniCard.title + "</strong>"
+            elide: Text.ElideRight
+
+            opacity: 0.7
+
+            anchors {
+                right: albumMiniCardTitle.right
+                rightMargin: 3
+                top: albumMiniCardTitle.top
+                topMargin: 2
+            }
         }
 
         Text {
@@ -83,6 +104,30 @@ Rectangle {
             radius: 4
             color: "#a0000000"
             source: albumMiniCardAuthor
+
+            visible: false
+        }
+
+        Text {
+            text: albumMiniCard.author
+            elide: Text.ElideRight
+
+            font.family: appFont
+
+            color: "black"
+
+            anchors.top: albumMiniCardTitle.bottom
+
+            font.pointSize: albumMiniCardTitle.font.pointSize * 0.8
+
+            opacity: 0.7
+
+            anchors {
+                right: albumMiniCardAuthor.right
+                rightMargin: 1.5
+                top: albumMiniCardAuthor.top
+                topMargin: 1
+            }
         }
 
         Text {
@@ -92,7 +137,7 @@ Rectangle {
 
             font.family: appFont
 
-            color: secondary
+            color: light
 
             anchors.top: albumMiniCardTitle.bottom
 
@@ -107,6 +152,31 @@ Rectangle {
             radius: 4.0
             color: "#a0000000"
             source: albumMiniCardStyle
+
+            visible: false
+        }
+
+        Text {
+
+            text: albumMiniCard.style
+            elide: Text.ElideRight
+
+            font.family: appFont
+
+            color: "black"
+
+            anchors.top: albumMiniCardAuthor.bottom
+
+            font.pointSize: albumMiniCardTitle.font.pointSize * 0.8
+
+            opacity: 0.7
+
+            anchors {
+                right: albumMiniCardStyle.right
+                rightMargin: 1.5
+                top: albumMiniCardStyle.top
+                topMargin: 1
+            }
         }
 
         Text {
@@ -117,7 +187,7 @@ Rectangle {
 
             font.family: appFont
 
-            color: secondary
+            color: light
 
             anchors.top: albumMiniCardAuthor.bottom
 

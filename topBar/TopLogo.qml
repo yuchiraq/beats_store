@@ -22,30 +22,30 @@ Rectangle {
     height: blockMargin * 5
     width: parent.width
 
-    //color: darkest
-    gradient: Gradient {
-        GradientStop {
-            position: 0.00
-            color: darkest
-        }
-        GradientStop {
-            position: 1.00
-            color: "transparent"
-        }
-    }
+    color: darkestTransparency
 
+    //    gradient: Gradient {
+    //        GradientStop {
+    //            position: 0.00
+    //            color: darkest
+    //        }
+    //        GradientStop {
+    //            position: 1.00
+    //            color: "transparent"
+    //        }
+    //    }
     Rectangle {
         id: topBarBackground
 
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
 
-        height: 0
+        height: topBar.height
         width: parent.width
 
-        color: darkest
+        color: darkestTransparency
 
-        visible: false
+        visible: true
     }
 
     GaussianBlur {
@@ -581,12 +581,11 @@ Rectangle {
             target: topBarBackground
             property: "height"
             easing.type: Easing.OutInBack
-            from: 0
+            from: topBar.height
             to: blockMargin * 3.5 + blockMargin * 3 + blockMargin * 3
         }
 
         onStarted: {
-            topBarBackground.visible = true
             searchSelector.visible = true
         }
 
@@ -625,11 +624,10 @@ Rectangle {
             property: "height"
             easing.type: Easing.OutInBack
             from: blockMargin * 3.5 + blockMargin * 3 + blockMargin * 3
-            to: 0
+            to: topBar.height
         }
 
         onFinished: {
-            topBarBackground.visible = false
             searchSelector.visible = false
         }
         running: false

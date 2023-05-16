@@ -50,15 +50,6 @@ StackView {
             }
         }
 
-        //        DropShadow {
-        //            anchors.fill: blockRandomBeats
-        //            transparentBorder: true
-        //            horizontalOffset: -3
-        //            verticalOffset: 3
-        //            radius: 6.0
-        //            color: "#40000000"
-        //            source: blockRandomBeats
-        //        }
         BlockRandomBeats {
             id: blockRandomBeats
 
@@ -69,15 +60,6 @@ StackView {
             }
         }
 
-        //        DropShadow {
-        //            anchors.fill: blockRandomAuthors
-        //            transparentBorder: true
-        //            horizontalOffset: -3
-        //            verticalOffset: 3
-        //            radius: 6.0
-        //            color: "#40000000"
-        //            source: blockRandomAuthors
-        //        }
         BlockRandomAuthors {
             id: blockRandomAuthors
 
@@ -88,15 +70,6 @@ StackView {
             }
         }
 
-        //        DropShadow {
-        //            anchors.fill: blockRandomAlbums
-        //            transparentBorder: true
-        //            horizontalOffset: -3
-        //            verticalOffset: 3
-        //            radius: 6.0
-        //            color: "#40000000"
-        //            source: blockRandomAlbums
-        //        }
         BlockRandomAlbums {
             id: blockRandomAlbums
 
@@ -106,7 +79,6 @@ StackView {
                 horizontalCenter: parent.horizontalCenter
             }
         }
-
         Text {
             id: lastRealisesTitle
             text: "<b>Последние релизы</b>"
@@ -190,7 +162,10 @@ StackView {
             anchors.left: parent.left
             height: database.getQuantity() * (blockMargin * 7 + 0.5)
 
+            property int countMax: 50
+
             delegate: Item {
+
                 id: lastRealise
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width - blockMargin
@@ -204,7 +179,6 @@ StackView {
                     author: Author
                     timeSec: TimeSec
                     id_track: id_db
-                    //cover: coverURL
                 }
 
                 Divider {}

@@ -34,7 +34,7 @@ void LastRealisesListModel::updateModel(int type) {
     //this->setQuery("SELECT id, " TABLE_TITLE ", " TABLE_AUTHOR ", "
     //             TABLE_TIME " FROM " TABLE);
     if(type == 0) {
-        this->setQuery("SELECT * FROM " TABLE " ORDER BY id ASC");
+        this->setQuery("SELECT * FROM " TABLE);
     } else if (type == 1) {
         this->setQuery("SELECT * FROM " TABLE " ORDER BY id DESC");
     } else if (type == 2) {

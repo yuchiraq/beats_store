@@ -8,6 +8,7 @@ SOURCES += \
         lastrealiseslistModel.cpp \
         main.cpp \
         randombeatsmodel.cpp \
+        requester.cpp \
         searchlistmodel.cpp \
         sethost.cpp
 
@@ -48,5 +49,6 @@ HEADERS += \
     functionsdatamodel.h \
     lastrealiseslistModel.h \
     randombeatsmodel.h \
+    requester.h \
     searchlistmodel.h \
     sethost.h

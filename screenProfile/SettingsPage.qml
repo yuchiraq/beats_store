@@ -128,7 +128,7 @@ Flickable {
             onAccepted: {
                 setHost.getHost(ipField.text)
                 //ip = ipField.text
-                centralcreen.update()
+                startSplashScreen.startSplash()
             }
             background: Rectangle {
                 anchors.centerIn: parent

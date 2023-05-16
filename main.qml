@@ -46,7 +46,7 @@ Window {
     property string darkest: darkTheme ? "#0D0C0D" : "#F1F0EA"
 
     property string darkTransparency: darkTheme ? "#EF19191A" : ""
-    property string darkestTransparency: darkTheme ? "#810F0A0F" : "#81F1F0EA"
+    property string darkestTransparency: darkTheme ? "#C80F0A0F" : "#81F1F0EA"
 
     property string secondary: darkTheme ? "#E1E1EC" : "#2D232E"
     property string light: darkTheme ? "#F5EFED" : "#474448"
@@ -116,25 +116,19 @@ Window {
         width: parent.width
         anchors.bottom: parent.bottom
         height: musicPlayer.visible ? blockMargin * 8 : blockMargin * 5
-        color: darkest
+        color: darkestTransparency
         visible: true
     }
 
-    MultiEffect {
-        id: stackMasked
+    GaussianBlur {
         source: stackView
         anchors.fill: blurMask
 
-        autoPaddingEnabled: false
+        radius: 100
+        samples: 128
+        transparentBorder: false
 
-        blurEnabled: true
-        blur: 1
-
-        blurMax: 100
-        maskEnabled: true
-        maskSource: blurMask
-        maskSpreadAtMax: 1
-        maskSpreadAtMin: 1
+        visible: blurMask.visible
     }
 
     BottomBar {
@@ -183,7 +177,6 @@ Window {
 
     Splash {
         id: startSplashScreen
-        visible: false
     }
 
     MouseArea {

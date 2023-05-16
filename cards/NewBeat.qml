@@ -51,6 +51,8 @@ Rectangle {
         radius: 4.0
         color: "#a0000000"
         source: newBeatAuthor
+
+        visible: false
     }
 
     DropShadow {
@@ -61,6 +63,27 @@ Rectangle {
         radius: 4.0
         color: "#a0000000"
         source: newBeatName
+
+        visible: false
+    }
+
+    Text {
+        font.family: localFont.name
+
+        color: "black"
+        opacity: 0.7
+        anchors {
+            left: parent.left
+            leftMargin: blockMargin + 2
+            bottom: newBeatName.top
+            bottomMargin: -1
+            right: parent.right
+            rightMargin: blockMargin
+        }
+
+        text: author
+        font.pointSize: blockMargin * 1.7
+        elide: Text.ElideRight
     }
 
     Text {
@@ -79,6 +102,26 @@ Rectangle {
 
         text: author
         font.pointSize: blockMargin * 1.7
+        elide: Text.ElideRight
+    }
+
+    Text {
+        font.family: appFont
+
+        color: "black"
+        opacity: 0.7
+
+        anchors {
+            left: parent.left
+            leftMargin: blockMargin + 2
+            bottom: parent.bottom
+            bottomMargin: blockMargin * 0.5 - 3
+            right: parent.right
+            rightMargin: blockMargin
+        }
+        font.bold: true
+        text: title
+        font.pointSize: blockMargin * 2
         elide: Text.ElideRight
     }
 

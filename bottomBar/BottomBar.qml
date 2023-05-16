@@ -39,18 +39,21 @@ Rectangle {
             property: "height"
             from: leftBottomBarButtonImg.height
             to: buttonMin
+            easing.type: Easing.InOutBounce
         }
         NumberAnimation {
             target: centralBottomBarButtonImg
             property: "height"
             from: centralBottomBarButtonImg.height
             to: buttonMin
+            easing.type: Easing.InOutBounce
         }
         NumberAnimation {
             target: rightBottomBarButtonImg
             property: "height"
             from: rightBottomBarButtonImg.height
             to: buttonMin
+            easing.type: Easing.InOutBounce
         }
         running: false
     }

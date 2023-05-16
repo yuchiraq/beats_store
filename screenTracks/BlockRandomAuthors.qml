@@ -29,6 +29,8 @@ Rectangle {
         samples: 16
         transparentBorder: true
         opacity: 0.5
+
+        visible: false
     }
 
     Text {

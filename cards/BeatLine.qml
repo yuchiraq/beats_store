@@ -68,11 +68,10 @@ Rectangle {
         visible: false
     }
 
-    BusyIndicator {
-        running: beatLineCover.status === Image.Loading
-        anchors.centerIn: beatLineCover
-    }
-
+    //    BusyIndicator {
+    //        running: beatLineCover.status === Image.Loading
+    //        anchors.centerIn: beatLineCover
+    //    }
     OpacityMask {
         anchors.fill: beatLineCoverMask
         source: beatLineCover

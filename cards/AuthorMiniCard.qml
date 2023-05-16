@@ -61,11 +61,10 @@ Rectangle {
         visible: false
     }
 
-    BusyIndicator {
-        running: authorMiniCardCover.status === Image.Loading
-        anchors.centerIn: authorMiniCardCover
-    }
-
+    //    BusyIndicator {
+    //        running: authorMiniCardCover.status === Image.Loading
+    //        anchors.centerIn: authorMiniCardCover
+    //    }
     OpacityMask {
         anchors.fill: authorMiniCardCoverMask
         source: authorMiniCardCover
