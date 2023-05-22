@@ -104,9 +104,10 @@ Rectangle {
         anchors.fill: topLogo
         onClicked: {
             console.log("TopLogo click!")
-            //centralScreen.flick(0, 0)
+
             startSplashScreen.startSplash()
             musicPlayer.track_id = 0
+            //audioTest.play()
         }
     }
 

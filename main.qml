@@ -8,6 +8,7 @@ import QtQuick.Controls.Material 2.3
 import Qt5Compat.GraphicalEffects
 //import QtGraphicalEffects 1.15
 import QtQuick.Effects
+import QtMultimedia
 
 //for Qt6+
 import "qrc:/screenTracks"
@@ -60,6 +61,7 @@ Window {
     property int blockMargin: mainScreen.width / 40
 
     property string ip: "raw.githubusercontent.com/yuchiraq/beats_store"
+    property bool updated: false
 
     width: 1080 / 2
     height: 1920 / 2
@@ -69,9 +71,6 @@ Window {
     color: darkest
 
     //visibility: "FullScreen"
-    Keys.onBackPressed: {
-        topBar.standartBack()
-    }
     StackView {
         id: stackView
 
@@ -246,4 +245,20 @@ Window {
     Notification {
         id: notification
     }
+
+    Keys.onBackPressed: {
+        topBar.standartBack()
+    }
+
+    //    Rectangle {
+    //        id: mainBackground
+
+    //        color: accentTransparency
+
+    //        width: 200
+    //        height: width
+    //        radius: width / 2
+    //        x: 202
+    //        y: 200
+    //    }
 }

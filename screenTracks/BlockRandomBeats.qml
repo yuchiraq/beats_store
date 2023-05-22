@@ -450,6 +450,37 @@ Rectangle {
     }
 
     ListView {
+        anchors {
+            top: headerRandomBeats.bottom
+            topMargin: blockMargin
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+
+        model: 5
+
+        visible: randomBeatsView.count == 0
+
+        delegate: Item {
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            height: blockMargin * 7 + 0.5
+
+            BeatLine {
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: parent.width
+                id_track: 0
+            }
+
+            Divider {
+                width: parent.width - blockMargin
+                anchors.top: randomBeat.bottom
+            }
+        }
+    }
+
+    ListView {
         id: randomBeatsView
 
         model: randomBeatsModel
@@ -484,5 +515,4 @@ Rectangle {
             }
         }
     }
-
 }

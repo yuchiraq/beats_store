@@ -10,20 +10,21 @@ Rectangle {
     width: parent.width
     height: blockMargin * 7
 
-    color: selected ? accentTransparency : "transparent"
+    color: /*selected ? accentTransparency :*/ "transparent"
 
     radius: blockMargin
 
     clip: true
 
     property int id_track: 0
-    property string cover: "http://" + ip + "/coversMini/" + id_track + ".jpg"
-    property string title: "Track name"
-    property string author: "Beatmaker"
-    property string time: Math.floor(timeSec / 60) + ":" + timeCorrector(
-                              Math.floor(timeSec % 60))
+    property string cover: id_track == 0 ? "" : "http://" + ip + "/coversMini/" + id_track + ".jpg"
+    property string title: ""
+    property string author: ""
+    property string time: id_track == 0 ? "" : Math.floor(
+                                              timeSec / 60) + ":" + timeCorrector(
+                                              Math.floor(timeSec % 60))
     property int timeSec: 0
-    property string bpm: "000"
+    property string bpm: id_track == 0 ? "" : "000"
 
     property bool selected: musicPlayer.track_id == id_track
 
@@ -31,6 +32,67 @@ Rectangle {
         if (number <= 9)
             return "0" + number
         return number
+    }
+
+    property real backX: 0
+    property real backY: 0
+    property bool needBack: false
+
+    Rectangle {
+        id: beatLineBackground
+
+        color: accentTransparency
+
+        width: beatLine.width * 2
+        height: width
+        radius: width / 2
+
+        x: backX - width / 2
+        y: backY - width / 2
+
+        visible: selected
+    }
+
+    ParallelAnimation {
+        id: touchAnimOn
+
+        NumberAnimation {
+            target: beatLineBackground
+            property: "width"
+            duration: 1000
+            easing.type: Easing.InOutQuad
+            from: 0
+            to: beatLine.width * 2
+        }
+
+        onFinished: {
+            if (!beatLineMouseArea.pressed) {
+                needBack = true
+            }
+        }
+
+        onStarted: {
+            beatLineBackground.visible = true
+            beatLineBackground.opacity = 0.7
+        }
+
+        running: false
+    }
+
+    NumberAnimation {
+        id: touchAnimOff
+        target: beatLineBackground
+        property: "opacity"
+        duration: 300
+        easing.type: Easing.InOutQuad
+        from: 0.7
+        to: 0
+        onFinished: {
+            beatLineBackground.width = 0
+            beatLineBackground.visible = false
+            needBack = false
+        }
+        running: selected == false && needBack == true
     }
 
     GaussianBlur {
@@ -46,7 +108,7 @@ Rectangle {
     Rectangle {
         id: beatLineCoverMask
 
-        color: darkVariant
+        color: dark
         border.width: 1
         border.color: outline
         width: blockMargin * 6
@@ -109,6 +171,36 @@ Rectangle {
             anchors.top: beatLineName.bottom
             elide: Text.ElideRight
         }
+
+        Rectangle {
+            anchors.verticalCenter: beatLineName.verticalCenter
+            anchors.leftMargin: blockMargin
+            visible: id_track == 0
+
+            height: beatLineName.font.pointSize
+            width: beatLine.width / 3
+
+            radius: height / 3
+
+            color: accentTransparency
+            border.width: 0.5
+            border.color: outline
+        }
+
+        Rectangle {
+            anchors.verticalCenter: beatLineAuthor.verticalCenter
+            anchors.leftMargin: blockMargin
+            visible: id_track == 0
+
+            height: beatLineAuthor.font.pointSize
+            width: beatLine.width / 4
+
+            radius: height / 3
+
+            color: accentTransparency
+            border.width: 0.5
+            border.color: outline
+        }
     }
 
     Text {
@@ -122,8 +214,40 @@ Rectangle {
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
 
+        visible: id_track != 0
+
         color: light
         font.pointSize: blockMargin * 1.4
+    }
+
+    Rectangle {
+        anchors.top: beatLineBPMTime.top
+        anchors.right: beatLineBPMTime.right
+        visible: id_track == 0
+
+        height: beatLineBPMTime.font.pointSize
+        width: beatLine.width / 10
+
+        radius: height / 3
+
+        color: accentTransparency
+        border.width: 0.5
+        border.color: outline
+    }
+
+    Rectangle {
+        anchors.bottom: beatLineBPMTime.bottom
+        anchors.right: beatLineBPMTime.right
+        visible: id_track == 0
+
+        height: beatLineBPMTime.font.pointSize
+        width: beatLine.width / 10
+
+        radius: height / 3
+
+        color: accentTransparency
+        border.width: 0.5
+        border.color: outline
     }
 
     Rectangle {
@@ -238,6 +362,7 @@ Rectangle {
     }
 
     MouseArea {
+        id: beatLineMouseArea
         anchors.fill: parent
 
         Timer {
@@ -246,6 +371,18 @@ Rectangle {
             onTriggered: singleClick()
         }
 
+        onPressed: {
+            backX = mouseX
+            backY = mouseY
+            console.log("Beat pressed")
+            touchAnimOn.restart()
+        }
+        onReleased: {
+            if (!touchAnimOn.running) {
+                needBack = true
+            }
+            console.log("Beat released")
+        }
         onClicked: {
             //            if (timer.running) {
             //                doubleClick()

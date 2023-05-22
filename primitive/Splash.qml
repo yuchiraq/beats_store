@@ -77,6 +77,7 @@ Rectangle {
         if (!setHost.connect()) {
             notification.notificationText = "Нет подключения к серверу"
         } else {
+            updated = true
             notification.notificationText = setHost.checkNotification()
         }
 
