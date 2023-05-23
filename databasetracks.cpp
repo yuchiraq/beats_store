@@ -197,12 +197,15 @@ int DataBaseTracks::getQuantity() {
     int quantity = 0;
     QSqlQuery query;
 
-    query.exec("SELECT * FROM " TABLE);
-    while (query.next()) {
-        quantity++;
+    query.exec("SELECT COUNT(*) FROM " TABLE);
+
+    if (query.next()) {
+        quantity = query.value(0).toInt();
     }
+    qDebug() << "quantity = " << quantity;
     return quantity;
 }
+
 void DataBaseTracks::deleteData() {
     QSqlQuery query;
     // Удаление производим по id записи, который передается в качестве аргумента функции

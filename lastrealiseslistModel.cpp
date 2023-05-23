@@ -33,13 +33,14 @@ void LastRealisesListModel::updateModel(int type) {
     // Обновление производится SQL-запросом к базе данных
     //this->setQuery("SELECT id, " TABLE_TITLE ", " TABLE_AUTHOR ", "
     //             TABLE_TIME " FROM " TABLE);
-    if(type == 0) {
-        this->setQuery("SELECT * FROM " TABLE);
+
+    this->setQuery("SELECT * FROM " TABLE " LIMIT " + QString::number(type));
+    /*if(type == 0) {
     } else if (type == 1) {
         this->setQuery("SELECT * FROM " TABLE " ORDER BY id DESC");
     } else if (type == 2) {
         this->setQuery("SELECT * FROM " TABLE " ORDER BY " TABLE_TITLE);
-    }
+    }*/
 }
 
 // Получение id из строки в модели представления данных

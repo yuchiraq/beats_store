@@ -32,10 +32,10 @@ Rectangle {
 
         opacity: 1
 
-        onStatusChanged: if (image.status === Image.Ready) {
-                             startSplash()
-                             textAnim.restart()
-                         }
+//        onStatusChanged: if (fullLogoSplash.status === Image.Ready) {
+//                             startSplash()
+//                             textAnim.restart()
+//                         }
     }
 
     ProgressBar {

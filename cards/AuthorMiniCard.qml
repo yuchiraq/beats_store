@@ -10,265 +10,156 @@ import "../cards"
 Rectangle {
     id: authorMiniCard
 
-    height: blockMargin * 14
-    width: height / 12 * 9
+    height: blockMargin * 16
+    width: blockMargin * 12
     radius: blockMargin
     border.color: outline
+    border.width: 0.5
 
     color: dark
 
-    border.width: 1
-
     property int id: 0
     property string cover: ""
-    property string name: "Beatmaker"
-    property string nameCorreted: name
-    property string style: "music style"
+    property string name: ""
+    property string style: ""
 
     clip: true
+
     Rectangle {
-        id: authorMiniCardCoverMask
+        id: coverMask
 
         width: parent.width
         height: width
         radius: parent.radius
 
-        //color: "#333"
-        color: darkVariant
-        border.color: outline
-        border.width: 1
+        color: accentTransparency
 
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
-            //topMargin: blockMargin / 2
         }
     }
 
     Image {
-        id: authorMiniCardCover
+        id: coverImg
         source: authorMiniCard.cover
 
         width: parent.width
         height: width
 
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: parent.top
-            //topMargin: blockMargin / 2
-        }
+        anchors.centerIn: coverMask
 
         visible: false
     }
 
-    //    BusyIndicator {
-    //        running: authorMiniCardCover.status === Image.Loading
-    //        anchors.centerIn: authorMiniCardCover
-    //    }
     OpacityMask {
-        anchors.fill: authorMiniCardCoverMask
-        source: authorMiniCardCover
-        maskSource: authorMiniCardCoverMask
-    }
-    function titleCheckerAuthor() {}
-
-    SequentialAnimation {
-        id: checkTitle
-        NumberAnimation {
-            target: authorMiniCardName
-            property: "anchors.leftMargin"
-            from: blockMargin / 2
-            to: -100
-            duration: 2000
-        }
-
-
-        /*NumberAnimation {
-            target: authorMiniCardName
-            property: "anchors.leftMargin"
-            from: -100
-            to: blockMargin / 2
-            duration: 2000
-        }*/
-        onFinished: {
-            //authorMiniCardName.text = name
-            authorMiniCardName.anchors.leftMargin = blockMargin / 2
-        }
+        anchors.fill: coverMask
+        source: coverImg
+        maskSource: coverMask
     }
 
-    Label {
-        id: authorMiniCardName
-        color: accent
-
-        //wrapMode: Label.WrapAnywhere
-        font.family: appFont
-        text: "<strong>" + authorMiniCard.nameCorreted + "</strong>"
-
-        wrapMode: Label.Wrap
-
-        font.pointSize: (authorMiniCard.height - authorMiniCardCoverMask.height) / 3
-        height: (authorMiniCard.height - authorMiniCardCoverMask.height) / 3
-
+    Item {
         anchors {
-            top: authorMiniCardCoverMask.bottom
-            topMargin: blockMargin / 4
+            top: coverMask.bottom
+            bottom: parent.bottom
             left: parent.left
-            leftMargin: blockMargin / 2
             right: parent.right
-            rightMargin: blockMargin / 2
+            topMargin: blockMargin * 0.5
+            bottomMargin: blockMargin * 0.5
+            leftMargin: blockMargin * 0.5
+            rightMargin: blockMargin * 0.5
         }
-        elide: Text.ElideRight
-    }
 
-    Text {
-        id: authorMiniCardStyle
+        Rectangle {
+            id: titleMask
 
-        text: authorMiniCard.style
+            anchors {
+                top: parent.top
+                left: parent.left
+            }
 
-        font.pointSize: (authorMiniCard.height - authorMiniCardCoverMask.height) / 4
+            width: blockMargin * 11
+            height: blockMargin * 1.5
 
-        font.family: appFont
+            color: accentTransparency
+            radius: height / 3
 
-        color: secondary
-
-        anchors {
-            top: authorMiniCardName.bottom
-            topMargin: height / 2
-            left: parent.left
-            leftMargin: blockMargin / 2
+            visible: name == ""
         }
-        elide: Text.ElideRight
-    }
 
-    Rectangle {
-        id: likeAuthorOverlay
+        Rectangle {
+            id: styleMask
 
-        color: dark
+            anchors {
+                bottom: parent.bottom
+                left: parent.left
+            }
 
-        anchors.fill: parent
-        radius: parent.radius
+            width: blockMargin * 9
+            height: blockMargin
 
-        opacity: 0
-    }
+            color: accentTransparency
+            radius: height / 3
 
-    Image {
-        id: likeAuthorImg
+            visible: authorMiniCard.style == ""
+        }
 
-        source: "qrc:/ui_icons/solid/heart.svg"
+        Label {
+            text: name
 
-        anchors.centerIn: authorMiniCardCover
+            anchors {
+                top: parent.top
+                left: parent.left
+            }
 
-        width: likeMin
-        height: width
+            width: blockMargin * 11
 
-        opacity: 0
-    }
+            font {
+                family: appFont
+                bold: false
+                pointSize: blockMargin
+            }
 
-    function singleClick() {
-        authorPage.author_cover = cover
-        authorPage.author_name = name
-        authorPage.author_id = id
-        if (bottomBar.active == 1) {
-            leftScreen.push(authorPage)
-        } else if (bottomBar.active == 2) {
-            centralScreen.push(authorPage)
-        } //else if (bottomBar.active == 3) {
-        //leftScreen.push("qrc:/ui/Pages/AlbumPage.qml")
-        //}
-        topBar.backSwitch()
-    }
+            color: accent
+            elide: Text.ElideRight
+        }
 
-    function doubleClick() {
-        likeAuthor.running = true
+        Label {
+            text: authorMiniCard.style
+
+            anchors {
+                bottom: parent.bottom
+                left: parent.left
+            }
+
+            width: blockMargin * 11
+
+            font {
+                family: appFont
+                bold: false
+                pointSize: blockMargin * 0.7
+            }
+
+            color: secondary
+            elide: Text.ElideRight
+        }
     }
 
     MouseArea {
-        anchors.centerIn: parent
-        width: parent.width
-        height: parent.height
-
-        Timer {
-            id: timer
-            interval: 250
-            onTriggered: singleClick()
-        }
-
-        onDoubleClicked: likeAuthor.running = true
+        anchors.fill: parent
 
         onClicked: {
-            //            if (timer.running) {
-            //                doubleClick()
-            //                timer.stop()
-            //            } else {
-            //                timer.restart()
-            //            }
-            singleClick()
+            authorPage.author_cover = cover
+            authorPage.author_name = name
+            authorPage.author_id = id
+            if (bottomBar.active == 1) {
+                leftScreen.push(authorPage)
+            } else if (bottomBar.active == 2) {
+                centralScreen.push(authorPage)
+            } //else if (bottomBar.active == 3) {
+            //leftScreen.push("qrc:/ui/Pages/AlbumPage.qml")
+            //}
+            topBar.backSwitch()
         }
-
-        property int widthTitle: authorMiniCardName.width
-        onPressAndHold: {
-            if (true) {
-                //authorMiniCardName.text = name + " " + name
-                checkTitle.running = true
-            }
-        }
-    }
-
-    property int likeMin: authorMiniCardCover.width / 2
-    property int likeMax: authorMiniCardCover.width / 1.5
-    property int timeAnimation: 100
-
-    SequentialAnimation {
-        id: likeAuthor
-
-        NumberAnimation {
-            target: likeAuthorOverlay
-            property: "opacity"
-            duration: timeAnimation / 2
-            from: 0
-            to: 0.3
-        }
-
-        NumberAnimation {
-            target: likeAuthorImg
-            property: "opacity"
-            duration: timeAnimation
-            from: 0
-            to: 1
-        }
-
-        NumberAnimation {
-            target: likeAuthorImg
-            property: "width"
-            duration: timeAnimation
-            from: likeMin
-            to: likeMax
-        }
-
-        NumberAnimation {
-            target: likeAuthorImg
-            property: "width"
-            duration: timeAnimation
-            from: likeMax
-            to: likeMin
-        }
-
-        NumberAnimation {
-            target: likeAuthorImg
-            property: "opacity"
-            duration: timeAnimation
-            from: 1
-            to: 0
-        }
-
-        NumberAnimation {
-            target: likeAuthorOverlay
-            property: "opacity"
-            duration: timeAnimation / 2
-            from: 0.3
-            to: 0
-        }
-
-        running: false
     }
 }

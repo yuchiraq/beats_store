@@ -11,7 +11,7 @@ Rectangle {
     id: blockRandomAuthors
 
     width: mainScreen.width - (blockMargin * 2)
-    height: headerRandomAuthors.height + blockMargin * 2 + blockMargin + blockMargin * 14
+    height: headerRandomAuthors.height + blockMargin * 2 + blockMargin + blockMargin * 16
     //radius: width / 20
     radius: blockMargin * 1.5
     //color: "#00333333"

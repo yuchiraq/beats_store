@@ -54,11 +54,12 @@ Window {
     property string outline: darkTheme ? "#272838" : "#534B52"
 
     property string accent: darkTheme ? "#EAEAFE" : "#534B52"
-    property string accentTransparency: darkTheme ? "#09EAEAFE" : "#10534B52"
+    property string accentTransparency: darkTheme ? "#332637" : "#10534B52"
 
     property bool darkTheme: true
 
-    property int blockMargin: mainScreen.width / 40
+    property int blockMargin: mainScreen.width
+                              < mainScreen.height ? mainScreen.width / 40 : mainScreen.height / 40
 
     property string ip: "raw.githubusercontent.com/yuchiraq/beats_store"
     property bool updated: false

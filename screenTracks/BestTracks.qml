@@ -19,10 +19,6 @@ StackView {
 
     property string lastRealisesText: "Сначала старые"
 
-    //        Rectangle {
-    //            anchors.fill: parent
-    //            color: darkest
-    //        }
     function clearStack() {
         if (centralScreen.depth > 1) {
             centralScreen.clear(StackView.PopTransition)
@@ -79,6 +75,7 @@ StackView {
                 horizontalCenter: parent.horizontalCenter
             }
         }
+
         Text {
             id: lastRealisesTitle
             text: "<b>Последние релизы</b>"
@@ -144,10 +141,7 @@ StackView {
             }
         }
 
-        Rectangle {
-            width: parent.width
-            height: 0.5
-            color: outline
+        Divider {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: lastRealises.top
         }
@@ -162,7 +156,7 @@ StackView {
             anchors.left: parent.left
             height: database.getQuantity() * (blockMargin * 7 + 0.5)
 
-            property int countMax: 50
+            property int maxRows: 5
 
             delegate: Item {
 
@@ -185,6 +179,29 @@ StackView {
             }
         }
 
+        Button {
+            id: moreButton
+            anchors {
+                top: lastRealises.bottom
+                horizontalCenter: parent.horizontalCenter
+            }
+
+            Material.theme: Material.Dark
+            onClicked: {
+                lastRealises.maxRows += 10
+                lastRealisesModel.updateModel(lastRealises.maxRows)
+                if (database.getQuantity() > lastRealises.maxRows)
+                    lastRealises.height = lastRealises.maxRows * (blockMargin * 7 + 0.5)
+                else
+                    lastRealises.height = database.getQuantity(
+                                ) * (blockMargin * 7 + 0.5)
+
+                visible = database.getQuantity() > lastRealises.maxRows
+            }
+
+            visible: database.getQuantity() > lastRealises.maxRows
+        }
+
         Text {
             font.family: appFont
             color: secondary
@@ -202,8 +219,21 @@ StackView {
     }
 
     function update() {
-        lastRealises.height = database.getQuantity() * (blockMargin * 7 + 0.5)
-        lastRealisesModel.updateModel(lastSortBy)
+
+        lastRealises.maxRows = 25
+        lastRealisesModel.updateModel(lastRealises.maxRows)
         randomBeatsModel.updateModel(0)
+
+        if (database.getQuantity() > lastRealises.maxRows)
+            lastRealises.height = lastRealises.maxRows * (blockMargin * 7 + 0.5)
+        else
+            lastRealises.height = database.getQuantity(
+                        ) * (blockMargin * 7 + 0.5)
+
+        moreButton.visible = database.getQuantity() > lastRealises.maxRows
+    }
+
+    function moveUP() {
+        bestTracksInitial.contentY = 0
     }
 }

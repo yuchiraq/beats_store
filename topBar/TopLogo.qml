@@ -101,13 +101,17 @@ Rectangle {
     }
 
     MouseArea {
+        anchors.fill: parent
+        onClicked: centralScreen.moveUP()
+    }
+
+    MouseArea {
         anchors.fill: topLogo
         onClicked: {
             console.log("TopLogo click!")
 
             startSplashScreen.startSplash()
             musicPlayer.track_id = 0
-            //audioTest.play()
         }
     }
 
@@ -394,7 +398,7 @@ Rectangle {
 
             font {
                 family: appFont
-                pointSize: parent.height - blockMargin * 2.5
+                pointSize: parent.height - blockMargin * 2.3
                 bold: true
             }
 
@@ -414,7 +418,7 @@ Rectangle {
 
             font {
                 family: appFont
-                pointSize: parent.height - blockMargin * 2.5
+                pointSize: parent.height - blockMargin * 2.3
                 bold: false
             }
 
@@ -432,7 +436,7 @@ Rectangle {
 
             font {
                 family: appFont
-                pointSize: parent.height - blockMargin * 2.5
+                pointSize: parent.height - blockMargin * 2.3
                 bold: false
             }
 

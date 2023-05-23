@@ -10,7 +10,7 @@ Rectangle {
     id: blockRandomAlbums
 
     width: mainScreen.width - (blockMargin * 2)
-    height: headerRandomAlbums.height + blockMargin * 2 + blockMargin + blockMargin * 15
+    height: headerRandomAlbums.height + blockMargin * 2 + blockMargin + blockMargin * 20
     //radius: width / 20
     radius: blockMargin * 1.5
     //color: "#00333333"
@@ -137,7 +137,7 @@ Rectangle {
             AlbumMiniCard {
                 title: "162 pack 2"
                 style: "Trap/EDM"
-                author: "Niki-Y On Da Track"
+                author: "Niki-Y On Da Track & Scotty On Da Track"
                 cover: "http://" + ip + "/coversMini/1.jpg"
             }
 

@@ -1,4 +1,5 @@
 import QtQuick 2.15
+import QtQuick.Controls.Material
 
 Rectangle {
     id: notification
@@ -15,9 +16,12 @@ Rectangle {
 
     clip: true
 
-    radius: height / 2
+    radius: blockMargin * 1.5
 
-    Text {
+    width: textNotification.width + blockMargin * 3
+    height: blockMargin * 3
+
+    Label {
         id: textNotification
 
         anchors.centerIn: parent
@@ -27,13 +31,12 @@ Rectangle {
             pointSize: blockMargin
         }
 
+        wrapMode: Label.Wrap
+
         color: accent
 
         text: notificationText
     }
-
-    width: textNotification.width + blockMargin * 3
-    height: blockMargin * 3
 
     visible: false
 
@@ -74,7 +77,10 @@ Rectangle {
         onStarted: notification.visible = true
 
         running: false
-        onFinished: notificationOff.running = true
+        onFinished: {
+            if (!mouseArea.pressed)
+                notificationOff.running = true
+        }
     }
 
     ParallelAnimation {
@@ -111,5 +117,14 @@ Rectangle {
 
     function start() {
         notificationOn.running = true
+    }
+
+    MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+        onReleased: {
+            if (!notificationOn.running)
+                notificationOff.start()
+        }
     }
 }

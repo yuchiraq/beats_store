@@ -43,14 +43,14 @@ Rectangle {
 
         color: accentTransparency
 
-        width: beatLine.width * 2
+        width: beatLine.width * 3
         height: width
         radius: width / 2
 
         x: backX - width / 2
         y: backY - width / 2
 
-        visible: selected
+        visible: selected && id_track != 0
     }
 
     ParallelAnimation {
@@ -62,7 +62,7 @@ Rectangle {
             duration: 1000
             easing.type: Easing.InOutQuad
             from: 0
-            to: beatLine.width * 2
+            to: beatLine.width * 3
         }
 
         onFinished: {
@@ -130,10 +130,6 @@ Rectangle {
         visible: false
     }
 
-    //    BusyIndicator {
-    //        running: beatLineCover.status === Image.Loading
-    //        anchors.centerIn: beatLineCover
-    //    }
     OpacityMask {
         anchors.fill: beatLineCoverMask
         source: beatLineCover
@@ -173,6 +169,7 @@ Rectangle {
         }
 
         Rectangle {
+            id: titleMask
             anchors.verticalCenter: beatLineName.verticalCenter
             anchors.leftMargin: blockMargin
             visible: id_track == 0
@@ -183,17 +180,52 @@ Rectangle {
             radius: height / 3
 
             color: accentTransparency
-            border.width: 0.5
+            border.width: 0
             border.color: outline
         }
 
         Rectangle {
+            id: authorMask
             anchors.verticalCenter: beatLineAuthor.verticalCenter
             anchors.leftMargin: blockMargin
             visible: id_track == 0
 
             height: beatLineAuthor.font.pointSize
             width: beatLine.width / 4
+
+            radius: height / 3
+
+            color: accentTransparency
+            border.width: 0
+            border.color: outline
+        }
+
+        Rectangle {
+            anchors.verticalCenter: beatLineName.verticalCenter
+            anchors.left: titleMask.right
+            anchors.leftMargin: beatLine.width - (titleMask.width + blockMargin * 1.5
+                                                  + beatLineCoverMask.width + width + blockMargin)
+            visible: id_track == 0
+
+            height: beatLineBPMTime.font.pointSize
+            width: beatLine.width / 10
+
+            radius: height / 3
+
+            color: accentTransparency
+            border.width: 0.5
+            border.color: outline
+        }
+
+        Rectangle {
+            anchors.verticalCenter: beatLineAuthor.verticalCenter
+            anchors.left: authorMask.right
+            anchors.leftMargin: beatLine.width - (authorMask.width + blockMargin * 1.5
+                                                  + beatLineCoverMask.width + width + blockMargin)
+            visible: id_track == 0
+
+            height: beatLineBPMTime.font.pointSize
+            width: beatLine.width / 10
 
             radius: height / 3
 
@@ -218,36 +250,6 @@ Rectangle {
 
         color: light
         font.pointSize: blockMargin * 1.4
-    }
-
-    Rectangle {
-        anchors.top: beatLineBPMTime.top
-        anchors.right: beatLineBPMTime.right
-        visible: id_track == 0
-
-        height: beatLineBPMTime.font.pointSize
-        width: beatLine.width / 10
-
-        radius: height / 3
-
-        color: accentTransparency
-        border.width: 0.5
-        border.color: outline
-    }
-
-    Rectangle {
-        anchors.bottom: beatLineBPMTime.bottom
-        anchors.right: beatLineBPMTime.right
-        visible: id_track == 0
-
-        height: beatLineBPMTime.font.pointSize
-        width: beatLine.width / 10
-
-        radius: height / 3
-
-        color: accentTransparency
-        border.width: 0.5
-        border.color: outline
     }
 
     Rectangle {
