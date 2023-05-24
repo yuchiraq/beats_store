@@ -19,7 +19,7 @@ Page {
 
     Rectangle {
         anchors.fill: parent
-        color: darkest
+        color: surface
     }
 
     Image {
@@ -120,7 +120,7 @@ Page {
             //anchors.topMargin: albumCover.height - blockMargin * 2
             anchors.horizontalCenter: parent.horizontalCenter
 
-            color: darkest
+            color: surface
 
             Rectangle {
                 id: topLineAlbum

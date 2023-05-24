@@ -22,7 +22,7 @@ Page {
 
     Rectangle {
         anchors.fill: parent
-        color: darkest
+        color: surface
     }
 
     Image {
@@ -125,7 +125,7 @@ Page {
 
             anchors.horizontalCenter: parent.horizontalCenter
 
-            color: darkest
+            color: surface
 
             Rectangle {
                 id: topLineAuthor
@@ -147,7 +147,7 @@ Page {
             Rectangle {
                 id: authorInfoBlock
 
-                color: dark
+                color: container
 
                 anchors {
                     top: topLineAuthor.bottom
@@ -189,7 +189,7 @@ Page {
                         family: appFont
                     }
 
-                    color: light
+                    color: secondary
 
                     //width: parent.width - blockMargin
                     anchors {

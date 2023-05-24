@@ -39,7 +39,7 @@ Flickable {
 
             radius: blockMargin * 2
 
-            color: dark
+            color: container
 
             anchors.horizontalCenter: parent.horizontalCenter
 
@@ -87,7 +87,7 @@ Flickable {
 
             radius: blockMargin * 2
 
-            color: dark
+            color: container
 
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: themeSwitcher.bottom
@@ -137,7 +137,7 @@ Flickable {
                 height: blockMargin * 5
 
                 radius: blockMargin * 2
-                color: ipField.activeFocus ? dark : accentTransparency
+                color: ipField.activeFocus ? dark : outline
 
                 border.width: ipField.activeFocus ? 1 : 0
                 border.color: accent
@@ -168,7 +168,7 @@ Flickable {
                 height: blockMargin * 5
 
                 radius: blockMargin * 2
-                color: accentTransparency
+                color: outline
             }
         }
 

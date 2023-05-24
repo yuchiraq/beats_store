@@ -30,31 +30,20 @@ Window {
         source: "qrc:/fonts/SFPRODISPLAYREGULAR.OTF"
     }
 
-    //property string dark: "#1C1B1F"
-    //property string darkest: "#171717"
-    //property string darkTransparency: "#EF1C1B1F"
-    //property string darkestTransparency: "#F6171717"
-
-    //property string light: "#CAC4D0"
-    //property string outline: "#49454F"
-
-    //property string secondary: "#FFD8E4"
-    property string darkVariant: "#4F1C30"
     property string alert: "#E91E63"
 
     //cols by CQ
-    property string dark: darkTheme ? "#171519" : "#F0EFF4"
-    property string darkest: darkTheme ? "#0D0C0D" : "#F1F0EA"
+    property string container: darkTheme ? "#171519" : "#F0EFF4"
+    property string surface: darkTheme ? "#0D0C0D" : "#F1F0EA"
 
-    property string darkTransparency: darkTheme ? "#EF19191A" : ""
     property string darkestTransparency: darkTheme ? "#C80F0A0F" : "#81F1F0EA"
 
+    property string accent: darkTheme ? "#EAEAFE" : "#534B52"
+
     property string secondary: darkTheme ? "#E1E1EC" : "#2D232E"
-    property string light: darkTheme ? "#F5EFED" : "#474448"
+
     property string outline: darkTheme ? "#272838" : "#534B52"
 
-    property string accent: darkTheme ? "#EAEAFE" : "#534B52"
-    property string accentTransparency: darkTheme ? "#332637" : "#10534B52"
 
     property bool darkTheme: true
 
@@ -69,7 +58,7 @@ Window {
     visible: true
     title: qsTr("beats")
 
-    color: darkest
+    color: surface
 
     //visibility: "FullScreen"
     StackView {
@@ -152,7 +141,7 @@ Window {
     Rectangle {
         id: stackMaskedDarkBackground
         anchors.fill: stackView
-        color: darkest
+        color: surface
         visible: stackMaskedBackground.visible
     }
 
@@ -238,7 +227,7 @@ Window {
         visible: notification.visible
         anchors.fill: notification
         radius: 8
-        color: accentTransparency
+        color: outline
         source: notification
         transparentBorder: true
     }

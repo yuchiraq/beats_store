@@ -14,7 +14,7 @@ Rectangle {
     //radius: width / 20
     radius: blockMargin * 1.5
     //color: "#00333333"
-    color: dark
+    color: container
 
     border.color: outline
     border.width: 0.5
@@ -35,17 +35,20 @@ Rectangle {
     Text {
         id: headerRandomAlbums
 
-        font.family: appFont
-        color: secondary
+        font {
+            weight: Font.Bold
+            family: appFont
+            pointSize: blockMargin * 1.3
+        }
+        color: accent
 
-        text: "<b>Альбомы</b>"
+        text: "Альбомы"
         anchors {
             top: parent.top
             topMargin: blockMargin
             left: parent.left
             leftMargin: blockMargin
         }
-        font.pointSize: blockMargin * 1.3
     }
 
     ComboBox {
@@ -63,7 +66,7 @@ Rectangle {
             radius: blockMargin
             border.color: outline
             border.width: 0.5
-            color: dark
+            color: container
         }
 
         delegate: Text {

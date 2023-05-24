@@ -15,7 +15,7 @@ Rectangle {
     //radius: width / 20
     radius: blockMargin * 1.5
     //color: "#00333333"
-    color: dark
+    color: container
 
     border.color: outline
     border.width: 0.5
@@ -36,17 +36,20 @@ Rectangle {
     Text {
         id: headerRandomAuthors
 
-        font.family: appFont
-        color: secondary
+        font {
+            weight: Font.Bold
+            family: appFont
+            pointSize: blockMargin * 1.3
+        }
+        color: accent
 
-        text: "<b>Авторы</b>"
+        text: "Авторы"
         anchors {
             top: parent.top
             topMargin: blockMargin
             left: parent.left
             leftMargin: blockMargin
         }
-        font.pointSize: blockMargin * 1.3
     }
 
     Button {
@@ -63,7 +66,7 @@ Rectangle {
             radius: blockMargin
             border.color: outline
             border.width: 0.5
-            color: dark
+            color: container
 
             Text {
 
@@ -143,7 +146,7 @@ Rectangle {
 
             contentItem: Text {
                 text: parent.text
-                color: light
+                color: secondary
                 font: parent.font
             }
 

@@ -12,7 +12,7 @@ Rectangle {
 
     radius: blockMargin * 1.5
 
-    color: dark
+    color: container
 
     border.color: outline
     border.width: 1
@@ -88,7 +88,9 @@ Rectangle {
 
     Text {
         id: newBeatAuthor
-        font.family: localFont.name
+        font.family: appFont
+        font.pointSize: blockMargin * 1.7
+        font.weight: Font.Medium
 
         color: secondary
         anchors {
@@ -101,7 +103,6 @@ Rectangle {
         }
 
         text: author
-        font.pointSize: blockMargin * 1.7
         elide: Text.ElideRight
     }
 
@@ -139,7 +140,7 @@ Rectangle {
             right: parent.right
             rightMargin: blockMargin
         }
-        font.bold: true
+        font.weight: Font.Bold
         text: title
         font.pointSize: blockMargin * 2
         elide: Text.ElideRight
@@ -151,7 +152,7 @@ Rectangle {
         anchors.fill: parent
         radius: parent.radius
 
-        color: dark
+        color: container
 
         opacity: 0
     }

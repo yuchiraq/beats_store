@@ -16,7 +16,7 @@ Rectangle {
     border.color: outline
     border.width: 0.5
 
-    color: dark
+    color: container
 
     property int id: 0
     property string cover: ""
@@ -32,7 +32,7 @@ Rectangle {
         height: width
         radius: parent.radius
 
-        color: accentTransparency
+        color: outline
 
         anchors {
             horizontalCenter: parent.horizontalCenter
@@ -81,7 +81,7 @@ Rectangle {
             width: blockMargin * 11
             height: blockMargin * 1.5
 
-            color: accentTransparency
+            color: outline
             radius: height / 3
 
             visible: name == ""
@@ -98,7 +98,7 @@ Rectangle {
             width: blockMargin * 9
             height: blockMargin
 
-            color: accentTransparency
+            color: outline
             radius: height / 3
 
             visible: authorMiniCard.style == ""
@@ -115,9 +115,10 @@ Rectangle {
             width: blockMargin * 11
 
             font {
+                weight: Font.Medium
                 family: appFont
                 bold: false
-                pointSize: blockMargin
+                pointSize: parent.height * 0.35 //blockMargin
             }
 
             color: accent
@@ -137,7 +138,7 @@ Rectangle {
             font {
                 family: appFont
                 bold: false
-                pointSize: blockMargin * 0.7
+                pointSize: parent.height * 0.25 //blockMargin * 0.7
             }
 
             color: secondary

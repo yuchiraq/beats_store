@@ -16,7 +16,7 @@ Rectangle {
         right: parent.right
     }
 
-    color: darkest
+    color: surface
 
     property int logoOGwidth: startSplashScreen.width / 2.5
     property int timeAnimation: 110

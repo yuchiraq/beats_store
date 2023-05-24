@@ -43,7 +43,7 @@ Rectangle {
 
         radius: blockMargin * 2
 
-        color: darkest
+        color: surface
 
         border.width: 0.5
         border.color: outline
@@ -136,7 +136,7 @@ Rectangle {
 
             //radius: parent.radius
             //color: parent.color
-            color: darkest
+            color: surface
 
             Flickable {
 
@@ -249,7 +249,7 @@ Rectangle {
 
                         background: Rectangle {
                             anchors.fill: parent
-                            color: darkest
+                            color: surface
                         }
                         onClicked: {
                             //                            if(musicPlayer.titlePlayer == title)
@@ -270,7 +270,7 @@ Rectangle {
             anchors.fill: parent
             radius: parent.radius
             //color: parent.color
-            color: darkest
+            color: surface
             visible: false
         }
 

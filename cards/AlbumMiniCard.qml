@@ -12,7 +12,7 @@ Rectangle {
     radius: blockMargin
     border.color: outline
 
-    color: dark
+    color: container
 
     border.width: 0.5
 
@@ -27,7 +27,7 @@ Rectangle {
         anchors.fill: coverMask
         verticalOffset: blockMargin / 2
         radius: 8
-        color: darkest
+        color: surface
         source: coverMask
         transparentBorder: true
 
@@ -36,7 +36,7 @@ Rectangle {
 
     Rectangle {
         id: coverMask
-        color: accentTransparency
+        color: outline
         width: parent.width
         height: width
 
@@ -87,7 +87,7 @@ Rectangle {
 
             radius: height / 3
 
-            color: accentTransparency
+            color: outline
 
             visible: title == ""
         }
@@ -103,7 +103,7 @@ Rectangle {
 
             radius: height / 3
 
-            color: accentTransparency
+            color: outline
 
             visible: author == ""
         }
@@ -116,9 +116,10 @@ Rectangle {
             text: albumMiniCard.title
 
             font {
+                weight: Font.Medium
                 family: appFont
-                bold: true
-                pointSize: blockMargin * 1.5
+                bold: false
+                pointSize: parent.height * 0.35 //blockMargin * 1.5
             }
 
             anchors {
@@ -140,7 +141,7 @@ Rectangle {
             font {
                 family: appFont
                 bold: false
-                pointSize: blockMargin * 1
+                pointSize: parent.height * 0.25 //blockMargin * 1
             }
 
             anchors {

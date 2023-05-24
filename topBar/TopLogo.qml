@@ -128,7 +128,7 @@ Rectangle {
         height: blockMargin * 3.5
         //radius: blockMargin * 1.5
         radius: height / 2
-        color: searchInputField.focus ? dark : dark
+        color: searchInputField.focus ? container : container
         border.width: 0.5
         border.color: searchInputField.focus ? accent : outline
 
@@ -345,7 +345,7 @@ Rectangle {
 
         radius: blockMargin * 1.5
 
-        color: dark
+        color: container
 
         visible: false
 
@@ -386,7 +386,7 @@ Rectangle {
             width: parent.width / 3 - blockMargin / 2
             height: parent.height - blockMargin / 2
 
-            color: accentTransparency
+            color: outline //**//
 
             radius: parent.radius - blockMargin / 4
         }

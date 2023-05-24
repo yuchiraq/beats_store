@@ -206,7 +206,7 @@ Rectangle {
 
                 font.pointSize: blockMargin * 1.5
 
-                color: light
+                color: secondary
 
                 anchors {
                     right: musicPlayerMinPP.left
@@ -287,7 +287,7 @@ Rectangle {
 
                 radius: blockMargin * 2 //1.7
 
-                color: dark
+                color: container
 
                 anchors {
                     horizontalCenter: parent.horizontalCenter
@@ -366,7 +366,7 @@ Rectangle {
             //            }
             Rectangle {
                 id: playerSliderBack
-                color: darkest
+                color: surface
                 width: parent.width
                 height: blockMargin * 5
                 radius: blockMargin * 2
@@ -528,7 +528,7 @@ Rectangle {
                 anchors.fill: musicPlayerMaxPP
                 anchors.centerIn: musicPlayerMaxPP
                 radius: blockMargin
-                color: darkest
+                color: surface
             }
 
             Button {
@@ -578,7 +578,7 @@ Rectangle {
                 anchors.fill: playerRepeat
                 anchors.centerIn: playerRepeat
                 radius: blockMargin
-                color: darkest
+                color: surface
             }
 
             Button {
@@ -636,7 +636,7 @@ Rectangle {
                 anchors.fill: playerFunctions
                 anchors.centerIn: playerFunctions
                 radius: blockMargin
-                color: darkest
+                color: surface
             }
 
             Button {
@@ -780,7 +780,7 @@ Rectangle {
         musicPlayerOnMax.running = true
         musicPlayerMax.visible = true
         musicPlayerMin.visible = false
-        musicPlayerBlock.color = darkest
+        musicPlayerBlock.color = surface
         musicPlayer.color = "#90000000"
 
         beatFunctions.title = titlePlayer

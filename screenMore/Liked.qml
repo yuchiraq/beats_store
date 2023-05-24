@@ -9,7 +9,7 @@ Page {
 
     Rectangle {
         anchors.fill: parent
-        color: darkest
+        color: surface
     }
 
     Column {
@@ -18,7 +18,7 @@ Page {
         Text {
             text: qsTr("Название:")
             font.pixelSize: 16
-            color: light
+            color: secondary
         }
         TextField {
             id: titleField
@@ -31,7 +31,7 @@ Page {
         Text {
             text: qsTr("Автор:")
             font.pixelSize: 16
-            color: light
+            color: secondary
         }
         TextField {
             id: authorField
@@ -44,7 +44,7 @@ Page {
         Text {
             text: qsTr("Длительность (секунд):")
             font.pixelSize: 16
-            color: light
+            color: secondary
         }
         TextField {
             id: timeField

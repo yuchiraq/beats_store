@@ -52,7 +52,7 @@ Flickable {
             text: "    Оплата производится безналичным способом. Вывод средств "
                   + "осуществляется с помощью электронного кошелька Ю-мани, банковской " + "карты."
 
-            color: light
+            color: secondary
             font.pointSize: 15
             font.weight: Font.Medium
         }
@@ -90,7 +90,7 @@ Flickable {
 
             font.pointSize: 15
             font.weight: Font.Medium
-            color: light
+            color: secondary
         }
 
         Text {
@@ -107,7 +107,7 @@ Flickable {
 
             font.pointSize: 13
             font.weight: Font.Medium
-            color: light
+            color: secondary
         }
     }
 }

@@ -15,7 +15,7 @@ Rectangle {
     height: blockMargin * 5
     width: mainScreen.width
 
-    color: darkest
+    color: surface
 
     property int buttonMin: height * 0.4
     property int buttonMax: height * 0.43
@@ -171,9 +171,6 @@ Rectangle {
 
             anchors.centerIn: parent
 
-            //            anchors.verticalCenter: parent.verticalCenter
-            //            anchors.left: parent.left
-            //            anchors.leftMargin: (parent.width - width) / 2 + blockMargin * 2
             height: buttonMin
             sourceSize: buttonMin
 

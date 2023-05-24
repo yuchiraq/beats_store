@@ -51,7 +51,7 @@ Rectangle {
 
         radius: blockMargin * 2
 
-        color: darkest
+        color: surface
 
         border.color: outline
         border.width: 0.5
@@ -143,7 +143,7 @@ Rectangle {
                 horizontalCenter: parent.horizontalCenter
             }
 
-            color: darkest
+            color: surface
             Flickable {
 
                 anchors.fill: styleChooserMaskSource
@@ -183,7 +183,7 @@ Rectangle {
                         }
                         background: Rectangle {
                             anchors.fill: parent
-                            color: darkest
+                            color: surface
                         }
                         onClicked: {
                             if (styleFor == 4) {
@@ -234,7 +234,7 @@ Rectangle {
 
                         background: Rectangle {
                             anchors.fill: parent
-                            color: darkest
+                            color: surface
                         }
                         onClicked: {
                             if (styleFor == 4) {
@@ -285,7 +285,7 @@ Rectangle {
 
                         background: Rectangle {
                             anchors.fill: parent
-                            color: darkest
+                            color: surface
                         }
                         onClicked: {
                             if (styleFor == 4) {

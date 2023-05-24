@@ -41,7 +41,7 @@ Rectangle {
     Rectangle {
         id: beatLineBackground
 
-        color: accentTransparency
+        color: outline //**//
 
         width: beatLine.width * 3
         height: width
@@ -108,7 +108,7 @@ Rectangle {
     Rectangle {
         id: beatLineCoverMask
 
-        color: dark
+        color: container
         border.width: 1
         border.color: outline
         width: blockMargin * 6
@@ -179,7 +179,7 @@ Rectangle {
 
             radius: height / 3
 
-            color: accentTransparency
+            color: outline
             border.width: 0
             border.color: outline
         }
@@ -195,7 +195,7 @@ Rectangle {
 
             radius: height / 3
 
-            color: accentTransparency
+            color: outline
             border.width: 0
             border.color: outline
         }
@@ -212,7 +212,7 @@ Rectangle {
 
             radius: height / 3
 
-            color: accentTransparency
+            color: outline
             border.width: 0.5
             border.color: outline
         }
@@ -225,11 +225,11 @@ Rectangle {
             visible: id_track == 0
 
             height: beatLineBPMTime.font.pointSize
-            width: beatLine.width / 10
+            width: beatLine.width / 11
 
             radius: height / 3
 
-            color: accentTransparency
+            color: outline
             border.width: 0.5
             border.color: outline
         }
@@ -248,14 +248,14 @@ Rectangle {
 
         visible: id_track != 0
 
-        color: light
+        color: secondary
         font.pointSize: blockMargin * 1.4
     }
 
     Rectangle {
         id: likeBeatOverlay
 
-        color: dark
+        color: container
 
         anchors.fill: parent
 

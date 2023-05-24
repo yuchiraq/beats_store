@@ -6,7 +6,7 @@ Rectangle {
 
     property string notificationText: "Empty notification"
 
-    color: darkest
+    color: surface
 
     anchors {
         horizontalCenter: parent.horizontalCenter

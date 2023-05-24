@@ -10,7 +10,7 @@ Rectangle {
     width: mainScreen.width - (blockMargin * 2)
     height: width / 2 * 1
 
-    color: dark
+    color: container
 
     radius: width / 20
 
@@ -18,7 +18,7 @@ Rectangle {
         id: avaMask
         width: parent.height
         height: width
-        color: darkVariant
+        color: outline
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         radius: parent.radius

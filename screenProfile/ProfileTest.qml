@@ -69,7 +69,7 @@ StackView {
 
                 radius: blockMargin * 1.5
 
-                color: dark
+                color: container
 
                 Column {
                     anchors.fill: parent
@@ -321,7 +321,7 @@ StackView {
 
                     radius: blockMargin * 1.5
 
-                    color: dark
+                    color: container
                 }
 
                 Image {

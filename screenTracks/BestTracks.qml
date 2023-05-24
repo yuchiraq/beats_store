@@ -78,7 +78,7 @@ StackView {
 
         Text {
             id: lastRealisesTitle
-            text: "<b>Последние релизы</b>"
+            text: "Последние релизы"
             color: accent
             anchors {
                 top: blockRandomAlbums.bottom
@@ -88,7 +88,11 @@ StackView {
             }
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pointSize: blockMargin * 1.3
+            font {
+                family: appFont
+                weight: Font.Bold
+                pointSize: blockMargin * 1.3
+            }
         }
 
         Button {
@@ -105,7 +109,7 @@ StackView {
                 radius: blockMargin
                 border.color: outline
                 border.width: 0.5
-                color: dark
+                color: container
 
                 Text {
 

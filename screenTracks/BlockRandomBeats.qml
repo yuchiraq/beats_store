@@ -15,15 +15,19 @@ Rectangle {
     //radius: width / 20
     radius: blockMargin * 1.5
     //color: "#333333"
-    color: dark
+    color: container
     border.color: outline
     border.width: 0.5
 
     Text {
         id: headerRandomBeats
-        font.family: localFont.name
-        text: "<b>Биты</b>"
-        color: secondary
+        font {
+            weight: Font.Bold
+            family: appFont
+            pointSize: blockMargin * 1.3
+        }
+        color: accent
+        text: "Биты"
 
         anchors {
             top: parent.top
@@ -31,8 +35,6 @@ Rectangle {
             left: parent.left
             leftMargin: blockMargin
         }
-
-        font.pointSize: blockMargin * 1.3
     }
 
     Button {
@@ -49,7 +51,7 @@ Rectangle {
             radius: blockMargin
             border.color: outline
             border.width: 0.5
-            color: dark
+            color: container
 
             Text {
 
@@ -93,7 +95,7 @@ Rectangle {
         background: Rectangle {
             anchors.top: blockRandomBeatsStyleButton.top
             anchors.horizontalCenter: blockRandomBeatsStyleButton.horizontalCenter
-            color: dark
+            color: container
             border.color: outline
             border.width: 0.5
             radius: blockMargin * 1.5
@@ -153,7 +155,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -176,7 +178,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -199,7 +201,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -222,7 +224,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -238,7 +240,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -254,7 +256,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -270,7 +272,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -286,7 +288,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -302,7 +304,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -318,7 +320,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -334,7 +336,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -350,7 +352,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -366,7 +368,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -382,7 +384,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -398,7 +400,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -414,7 +416,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -430,7 +432,7 @@ Rectangle {
                 family: appFont
             }
             background: Rectangle {
-                color: dark
+                color: container
                 implicitWidth: blockMargin * 12
                 implicitHeight: blockMargin * 3
                 radius: blockMargin * 1.5
@@ -475,7 +477,7 @@ Rectangle {
 
             Divider {
                 width: parent.width - blockMargin
-                anchors.top: randomBeat.bottom
+                //anchors.top: randomBeat.bottom
             }
         }
     }
