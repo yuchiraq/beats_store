@@ -4,15 +4,16 @@ setHost::setHost(QObject *parent) : QObject(parent) {
 
 }
 
-setHost::setHost(DataBaseTracks* databaseObj){
+setHost::setHost(DataBaseTracks* databaseObj, trackData* trackDataCur){
     this->database = databaseObj;
+    this->trackDataClass = trackDataCur;
 
 }
 
 void setHost::getHost(QString newHost){
     this->database->host = newHost;
     this->database->connectToDataBase();
-
+    this->trackDataClass->host = newHost;
 }
 
 bool setHost::connectDB(){
@@ -26,7 +27,7 @@ bool setHost::connect(){
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
-    manager.setTransferTimeout(2000);
+    manager.setTransferTimeout(3000);
 
     QEventLoop eventloop;
 

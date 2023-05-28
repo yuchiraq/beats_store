@@ -12,11 +12,12 @@ Rectangle {
     color: "transparent"
 
     property int id: 0
-    property string title: "Beat title"
-    property string author: "Author"
-    property string album: "Album11"
-    property string time: "0:00"
-    property string bpm: "000"
+    property string title: ""
+    property string author: ""
+    property string album: ""
+    property string time: ""
+    property string bpm: ""
+    property string tags: ""
 
     visible: false
 

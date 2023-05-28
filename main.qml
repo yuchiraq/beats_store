@@ -44,7 +44,6 @@ Window {
 
     property string outline: darkTheme ? "#272838" : "#534B52"
 
-
     property bool darkTheme: true
 
     property int blockMargin: mainScreen.width
@@ -166,6 +165,7 @@ Window {
 
     Splash {
         id: startSplashScreen
+        updateNeed: true
     }
 
     MouseArea {

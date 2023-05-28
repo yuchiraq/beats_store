@@ -24,16 +24,9 @@ Rectangle {
 
     color: darkestTransparency
 
-    //    gradient: Gradient {
-    //        GradientStop {
-    //            position: 0.00
-    //            color: darkest
-    //        }
-    //        GradientStop {
-    //            position: 1.00
-    //            color: "transparent"
-    //        }
-    //    }
+    property int selectorPos: 1
+    property bool searching: false
+
     Rectangle {
         id: topBarBackground
 
@@ -102,7 +95,37 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: centralScreen.moveUP()
+
+        onClicked: {
+            if (topBar.searching)
+                return
+
+            if (bottomBar.active == 1) {
+                moveLeftScreen.running = true
+            } else if (bottomBar.active == 2) {
+                moveCentralScreen.running = true
+            }
+        }
+    }
+
+    NumberAnimation {
+        id: moveLeftScreen
+        target: leftScreen.get(leftScreen.depth - 1)
+        property: "contentY"
+        //duration: 200
+        easing.type: Easing.InOutQuad
+        from: leftScreen.get(leftScreen.depth - 1).contentY
+        to: 0
+    }
+
+    NumberAnimation {
+        id: moveCentralScreen
+        target: centralScreen.get(centralScreen.depth - 1)
+        property: "contentY"
+        //duration: 200
+        easing.type: Easing.InOutQuad
+        from: centralScreen.get(centralScreen.depth - 1).contentY
+        to: 0
     }
 
     MouseArea {
@@ -126,8 +149,8 @@ Rectangle {
         }
 
         height: blockMargin * 3.5
-        //radius: blockMargin * 1.5
-        radius: height / 2
+        radius: blockMargin * 1.5
+        //radius: height / 2
         color: searchInputField.focus ? container : container
         border.width: 0.5
         border.color: searchInputField.focus ? accent : outline
@@ -165,11 +188,15 @@ Rectangle {
             }
 
             onTextEdited: {
-                searchListModel.updateModel(searchInputField.text)
+                searchTracks.updateModel(searchInputField.text)
+                stackView.pop()
+                stackView.push("qrc:/topBar/SearchPage.qml")
             }
 
             onAccepted: {
-                searchListModel.updateModel(searchInputField.text)
+                searchTracks.updateModel(searchInputField.text)
+                stackView.pop()
+                stackView.push("qrc:/topBar/SearchPage.qml")
                 Qt.inputMethod.hide()
                 searchInputField.focus = false
             }
@@ -217,6 +244,8 @@ Rectangle {
             onClicked: {
                 searchInputField.clear()
                 searchListModel.updateModel("")
+                stackView.pop()
+                stackView.push("qrc:/topBar/SearchPage.qml")
             }
 
             //visible: searchInputField.text !== ""
@@ -332,8 +361,6 @@ Rectangle {
         }
     }
 
-    property int selectorPos: 1
-
     Rectangle {
         id: searchSelector
 
@@ -398,7 +425,7 @@ Rectangle {
 
             font {
                 family: appFont
-                pointSize: parent.height - blockMargin * 2.3
+                pointSize: parent.height - blockMargin * 2
                 bold: true
             }
 
@@ -418,7 +445,7 @@ Rectangle {
 
             font {
                 family: appFont
-                pointSize: parent.height - blockMargin * 2.3
+                pointSize: parent.height - blockMargin * 2
                 bold: false
             }
 
@@ -436,7 +463,7 @@ Rectangle {
 
             font {
                 family: appFont
-                pointSize: parent.height - blockMargin * 2.3
+                pointSize: parent.height - blockMargin * 2
                 bold: false
             }
 
@@ -562,7 +589,7 @@ Rectangle {
             target: searchSelector
             property: "height"
             from: 0
-            to: blockMargin * 3.5
+            to: blockMargin * 3
             easing.type: Easing.OutBack
         }
 
@@ -571,7 +598,7 @@ Rectangle {
             property: "width"
             from: 0
             to: parent.width - blockMargin
-            easing.type: Easing.OutInBack
+            easing.type: Easing.InOutBack
         }
 
         NumberAnimation {
@@ -587,7 +614,7 @@ Rectangle {
             property: "height"
             easing.type: Easing.OutInBack
             from: topBar.height
-            to: blockMargin * 3.5 + blockMargin * 3 + blockMargin * 3
+            to: blockMargin * 3 + blockMargin * 3 + blockMargin * 3
         }
 
         onStarted: {
@@ -603,7 +630,7 @@ Rectangle {
         NumberAnimation {
             target: searchSelector
             property: "height"
-            from: blockMargin * 3.5
+            from: blockMargin * 3
             to: 0
             easing.type: Easing.OutBack
         }
@@ -613,7 +640,7 @@ Rectangle {
             property: "width"
             from: searchSelector.width
             to: 0
-            easing.type: Easing.OutInBack
+            easing.type: Easing.InOutBack
         }
 
         NumberAnimation {
@@ -628,7 +655,7 @@ Rectangle {
             target: topBarBackground
             property: "height"
             easing.type: Easing.OutInBack
-            from: blockMargin * 3.5 + blockMargin * 3 + blockMargin * 3
+            from: blockMargin * 3 + blockMargin * 3 + blockMargin * 3
             to: topBar.height
         }
 
@@ -639,21 +666,25 @@ Rectangle {
     }
 
     function searchOn() {
+        topBar.searching = true
         backTopBar.visible = false
         topLogo.visible = false
         bottomBar.close()
         searchOnAnimation.running = true
         searchSelectorOn.running = true
+        stackView.push("qrc:/primitive/Splash.qml")
         stackView.push("qrc:/topBar/SearchPage.qml")
     }
 
     function searchOff() {
+        topBar.searching = false
         Qt.inputMethod.hide()
         searchInputField.cursorVisible = false
         searchOffAnimation.running = true
         searchSelectorOff.running = true
         topLogo.visible = true
         bottomBar.open()
+        stackView.pop()
         stackView.pop()
         backSwitch()
     }

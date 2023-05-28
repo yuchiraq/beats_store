@@ -472,12 +472,12 @@ Rectangle {
             BeatLine {
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width
-                id_track: 0
+                id_track: ""
             }
 
             Divider {
                 width: parent.width - blockMargin
-                //anchors.top: randomBeat.bottom
+                anchors.top: parent.bottom
             }
         }
     }
@@ -505,9 +505,6 @@ Rectangle {
                 id: randomBeat
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width
-                title: Title
-                author: Author
-                timeSec: TimeSec
                 id_track: id_db
             }
 

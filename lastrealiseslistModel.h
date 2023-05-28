@@ -11,9 +11,9 @@ public:
     // Перечисляем все роли, которые будут использоваться в TableView
     enum Roles {
         IdRole = Qt::UserRole + 1, // idFNameRole,
-        TitleRole,
-        AuthorRole,
-        timeRole,
+        //TitleRole,
+        //AuthorRole,
+        //timeRole,
         //coverRole
     };
     // Объявляем конструктор класса

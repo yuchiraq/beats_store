@@ -1,7 +1,7 @@
 #include "searchlistmodel.h"
-#include "databasetracks.h"
 
-searchListModel::searchListModel(QObject *parent) : QSqlQueryModel(parent) {
+
+searchListModel::searchListModel(QObject *parent) : QAbstractListModel(parent) {
     this->updateModel("");
 }
 
@@ -13,7 +13,7 @@ QVariant searchListModel::data(const QModelIndex & index, int role) const {
     /* И с помощью уже метода data() базового класса
 * берем данные для таблицы из модели
 * */
-    return QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+    return QAbstractListModel::data(modelIndex, Qt::DisplayRole);
 }
 
 QHash<int, QByteArray> searchListModel::roleNames() const {
@@ -22,20 +22,55 @@ QHash<int, QByteArray> searchListModel::roleNames() const {
 * */
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id_db";
-    roles[TitleRole] = "Title";
-    roles[AuthorRole] = "Author";
-    roles[timeRole] = "TimeSec";
-    roles[coverRole] = "coverURL";
     return roles;
 }
 
 // Метод обновления таблицы в модели представления данных
-void searchListModel::updateModel(QString request) {
+void searchListModel::updateModel(QString title) {
     // Обновление производится SQL-запросом к базе данных
-    this->setQuery("SELECT * FROM " TABLE " WHERE " TABLE_TITLE " LIKE '%" + request + "%'");
+    QEventLoop eventloop;
+
+    QString url = "http://" + host + port + "/tracks/search?title=" + title;
+
+    QNetworkReply *reply;
+    QNetworkAccessManager manager;
+
+    QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
+
+    QNetworkRequest request((QUrl(url)));
+
+    reply = manager.get(request);
+    eventloop.exec();
+
+    if(reply->error() == QNetworkReply::NoError) {
+        qDebug() << "NO EROOR";
+
+
+
+        QString str = QString(reply->readAll());
+
+        QStringList *replyList = new QStringList(QString(str).split("|||"));
+
+        delete reply;
+
+        //this->setItemData({"model", QVariant::fromValue(replyList)});
+
+        qDebug() << "connected = true";
+        return ;
+    }else {
+        qDebug() << "ERROR" << reply->error() << QUrl();
+
+        qDebug() << "connected = false";
+        delete reply;
+        return ;
+    }
+
+
+
+    return ;
 }
 
 // Получение id из строки в модели представления данных
-int searchListModel::getId(int row) {
+/*int searchListModel::getId(int row) {
     return this->data(this->index(row, 0), IdRole).toInt();
-}
+}*/

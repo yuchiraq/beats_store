@@ -160,9 +160,9 @@ Page {
                         id: lastRealiseBeat
                         anchors.horizontalCenter: parent.horizontalCenter
                         width: parent.width
-                        title: Title
+                        //title: Title
                         author: albumPage.album_author
-                        timeSec: TimeSec
+                        //timeSec: TimeSec
                         id_track: id_db
                         cover: albumPage.album_cover
                     }

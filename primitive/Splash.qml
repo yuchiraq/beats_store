@@ -18,6 +18,8 @@ Rectangle {
 
     color: surface
 
+    property bool updateNeed: false
+
     property int logoOGwidth: startSplashScreen.width / 2.5
     property int timeAnimation: 110
 
@@ -32,10 +34,10 @@ Rectangle {
 
         opacity: 1
 
-//        onStatusChanged: if (fullLogoSplash.status === Image.Ready) {
-//                             startSplash()
-//                             textAnim.restart()
-//                         }
+        //        onStatusChanged: if (fullLogoSplash.status === Image.Ready) {
+        //                             startSplash()
+        //                             textAnim.restart()
+        //                         }
     }
 
     ProgressBar {
@@ -56,7 +58,6 @@ Rectangle {
     }
 
     function closeSplash() {
-        centralScreen.update()
         //        while (!setHost.connectDB()) {
         //            console.log("cikle")
         //        }
@@ -80,8 +81,8 @@ Rectangle {
             updated = true
             notification.notificationText = setHost.checkNotification()
         }
-
-        bottomBar.bottomBarCorrector()
+        if (setHost.connect())
+            centralScreen.update()
         closeSplash()
     }
 
@@ -174,6 +175,6 @@ Rectangle {
     NumberAnimation {
         duration: 10
         onFinished: startSplash()
-        running: true
+        running: updateNeed
     }
 }

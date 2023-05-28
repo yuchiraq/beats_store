@@ -233,9 +233,9 @@ Page {
                         id: lastRealiseBeat
                         anchors.horizontalCenter: parent.horizontalCenter
                         width: parent.width
-                        title: Title
-                        author: Author
-                        timeSec: TimeSec
+                        //title: Title
+                        //author: Author
+                        //timeSec: TimeSec
                         id_track: id_db
                     }
 

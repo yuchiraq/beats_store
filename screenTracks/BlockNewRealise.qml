@@ -17,15 +17,6 @@ Item {
         rightMargin: blockMargin
     }
 
-    //    DropShadow {
-    //        anchors.fill: view
-    //        transparentBorder: true
-    //        horizontalOffset: -3
-    //        verticalOffset: 3
-    //        radius: 6.0
-    //        color: "#40000000"
-    //        source: view
-    //    }
     SwipeView {
         id: view
         currentIndex: 2
@@ -42,30 +33,27 @@ Item {
             author: "Niki-Y On Da Track"
             title: "«CLASSIC PACK III»"
             cover: "http://" + ip + "/newRealises/" + "3" + ".jpg"
-
         }
 
         NewBeat {
             author: "Niki-Y On Da Track"
             title: "«162 pack 3»"
             cover: "http://" + ip + "/newRealises/" + "4" + ".jpg"
-
         }
 
         NewBeat {
             author: "Niki-Y On Da Track"
             title: "«162 pack 2»"
             cover: "http://" + ip + "/newRealises/" + "6" + ".jpg"
-
         }
 
         NewBeat {}
     }
 
-    //    PageIndicator {
-    //        count: view.count
-    //        currentIndex: view.currentIndex
-    //        anchors.bottom: parent.bottom
-    //        anchors.horizontalCenter: parent.horizontalCenter
-    //    }
+//    PageIndicator {
+//        count: view.count
+//        currentIndex: view.currentIndex
+//        anchors.bottom: parent.bottom
+//        anchors.horizontalCenter: parent.horizontalCenter
+//    }
 }

@@ -16,15 +16,21 @@ Rectangle {
 
     clip: true
 
-    property int id_track: 0
-    property string cover: id_track == 0 ? "" : "http://" + ip + "/coversMini/" + id_track + ".jpg"
-    property string title: ""
-    property string author: ""
-    property string time: id_track == 0 ? "" : Math.floor(
+    Connections {
+        target: trackData
+    }
+
+    visible: beatLine.id_track != "empty arg"
+
+    property string id_track: ""
+    property string cover: id_track == "" ? "" : "http://" + ip + "/coversMini/" + id_track + ".jpg"
+    property string title: id_track == "" ? "" : trackData.getTitle(id_track)
+    property string author: id_track == "" ? "" : trackData.getAuthorId(id_track)
+    property string time: id_track == "" ? "" : Math.floor(
                                               timeSec / 60) + ":" + timeCorrector(
                                               Math.floor(timeSec % 60))
-    property int timeSec: 0
-    property string bpm: id_track == 0 ? "" : "000"
+    property int timeSec: id_track == "" ? 0 : trackData.getDuration(id_track)
+    property int bpm: id_track == "" ? 0 : 1
 
     property bool selected: musicPlayer.track_id == id_track
 
@@ -50,7 +56,7 @@ Rectangle {
         x: backX - width / 2
         y: backY - width / 2
 
-        visible: selected && id_track != 0
+        visible: selected && id_track != ""
     }
 
     ParallelAnimation {
@@ -172,7 +178,7 @@ Rectangle {
             id: titleMask
             anchors.verticalCenter: beatLineName.verticalCenter
             anchors.leftMargin: blockMargin
-            visible: id_track == 0
+            visible: beatLine.title == ""
 
             height: beatLineName.font.pointSize
             width: beatLine.width / 3
@@ -188,7 +194,7 @@ Rectangle {
             id: authorMask
             anchors.verticalCenter: beatLineAuthor.verticalCenter
             anchors.leftMargin: blockMargin
-            visible: id_track == 0
+            visible: beatLine.author == ""
 
             height: beatLineAuthor.font.pointSize
             width: beatLine.width / 4
@@ -205,7 +211,7 @@ Rectangle {
             anchors.left: titleMask.right
             anchors.leftMargin: beatLine.width - (titleMask.width + blockMargin * 1.5
                                                   + beatLineCoverMask.width + width + blockMargin)
-            visible: id_track == 0
+            visible: beatLine.time == ""
 
             height: beatLineBPMTime.font.pointSize
             width: beatLine.width / 10
@@ -222,7 +228,7 @@ Rectangle {
             anchors.left: authorMask.right
             anchors.leftMargin: beatLine.width - (authorMask.width + blockMargin * 1.5
                                                   + beatLineCoverMask.width + width + blockMargin)
-            visible: id_track == 0
+            visible: beatLine.bpm == 0
 
             height: beatLineBPMTime.font.pointSize
             width: beatLine.width / 11
@@ -246,7 +252,7 @@ Rectangle {
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
 
-        visible: id_track != 0
+        visible: beatLine.time != ""
 
         color: secondary
         font.pointSize: blockMargin * 1.4

@@ -162,6 +162,8 @@ StackView {
 
             property int maxRows: 5
 
+            clip: true
+
             delegate: Item {
 
                 id: lastRealise
@@ -173,9 +175,9 @@ StackView {
                     id: lastRealiseBeat
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: parent.width
-                    title: Title
-                    author: Author
-                    timeSec: TimeSec
+                    //title: Title
+                    //author: Author
+                    //timeSec: TimeSec
                     id_track: id_db
                 }
 
@@ -238,6 +240,7 @@ StackView {
     }
 
     function moveUP() {
+
         bestTracksInitial.contentY = 0
     }
 }

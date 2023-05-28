@@ -79,7 +79,7 @@ bool DataBaseTracks::createTable() {
     eventloop.exec();
 
     if(QString(reply->readAll()) != "availible"){
-        qDebug() << "connected = true";
+        qDebug() << "connected = false";
         connected = true;
         return false;
     }
@@ -88,10 +88,10 @@ bool DataBaseTracks::createTable() {
     qDebug() << "START";
     QSqlQuery query;
     if(!query.exec( "CREATE TABLE " TABLE " ("
-                    "id INTEGER, "
-                    TABLE_TITLE " VARCHAR(255) NOT NULL,"
-                    TABLE_AUTHOR " INTEGER NOT NULL,"
-                    TABLE_TIME " INTEGER NOT NULL"
+                    "id INTEGER "
+                    //TABLE_TITLE " VARCHAR(255) NOT NULL,"
+                    //TABLE_AUTHOR " INTEGER NOT NULL,"
+                    //TABLE_TIME " INTEGER NOT NULL"
                     " )"
                     ))
     {
@@ -108,7 +108,7 @@ bool DataBaseTracks::insertData(){
 
     QEventLoop eventloop;
 
-    QString url = "http://" + host + port + "/lastRealises";
+    QString url = "http://" + host + port + "/tracks/all";
 
     QNetworkReply *reply;
     QNetworkAccessManager manager;
@@ -137,10 +137,19 @@ bool DataBaseTracks::insertData(){
 
         foreach (QString idStr, *replyList) {
 
-            qDebug() << "GET DATA FOR " << idStr;
-            url = "http://" + host + port + "/getDataTrack?ID=" + idStr;
+            //qDebug() << "GET DATA FOR " << idStr;
+            //url = "http://" + host + port + "/getDataTrack?ID=" + idStr;
 
-            reply = manager.get(QNetworkRequest(QUrl(url)));
+            query.prepare("INSERT INTO " TABLE " ( id ) VALUES (:id)");
+            query.bindValue(":id", idStr.toInt());
+
+            if(!query.exec()){
+                qDebug() << query.lastQuery();
+                qDebug() << "error insert into " << TABLE;
+                qDebug() << query.lastError().text();
+            }
+
+            /*reply = manager.get(QNetworkRequest(QUrl(url)));
             eventloop.exec();
 
             if(reply->error() == QNetworkReply::NoError) {
@@ -160,7 +169,7 @@ bool DataBaseTracks::insertData(){
                     qDebug() << "error insert into " << TABLE;
                     qDebug() << query.lastError().text();
                 }
-            }
+            }*/
 
         }
         delete reply;

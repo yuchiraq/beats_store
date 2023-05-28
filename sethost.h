@@ -2,6 +2,7 @@
 #define SETHOST_H
 
 #include "databasetracks.h"
+#include "trackdata.h"
 #include <QObject>
 #include <QNetworkAccessManager>
 
@@ -10,7 +11,7 @@ class setHost : public QObject
     Q_OBJECT
 public:
     explicit setHost(QObject *parent = nullptr);
-    setHost(DataBaseTracks* database);
+    setHost(DataBaseTracks* database, trackData* trackDataCur);
 
 signals:
 
@@ -23,8 +24,8 @@ public slots:
 private:
     bool conectionDB = false;
     bool conectionServer = false;
-    //Requester* requester;
     DataBaseTracks* database;
+    trackData* trackDataClass;
 };
 
 #endif // SETHOST_H

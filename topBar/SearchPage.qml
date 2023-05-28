@@ -12,14 +12,26 @@ Flickable {
     width: parent
 
     anchors.fill: stackView
-    anchors.topMargin: blockMargin * 3.5 + blockMargin * 3 + blockMargin * 3
+    anchors.topMargin: blockMargin * 3 + blockMargin * 3 + blockMargin * 3
 
     ListView {
         id: searchBeats
 
-        model: searchListModel
+        model: searchTracks.items
         anchors.fill: parent
 
+        ScrollIndicator.vertical: ScrollIndicator {
+            orientation: Qt.Vertical
+            parent: parent
+            anchors {
+                right: parent.right
+                top: parent.top
+                bottom: parent.bottom
+            }
+
+            size: parent.contentHeight
+            active: true
+        }
         delegate: Item {
             id: searchAnswer
             anchors.horizontalCenter: parent.horizontalCenter
@@ -30,10 +42,7 @@ Flickable {
                 id: searchBeat
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width
-                title: Title
-                author: Author
-                timeSec: TimeSec
-                id_track: id_db
+                id_track: modelData != "" ? modelData : "empty arg"
             }
 
             Divider {}

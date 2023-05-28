@@ -22,10 +22,10 @@ QHash<int, QByteArray> RandomBeatsModel::roleNames() const {
 * */
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id_db";
-    roles[TitleRole] = "Title";
-    roles[AuthorRole] = "Author";
-    roles[timeRole] = "TimeSec";
-    roles[coverRole] = "coverURL";
+//    roles[TitleRole] = "Title";
+//    roles[AuthorRole] = "Author";
+//    roles[timeRole] = "TimeSec";
+//    roles[coverRole] = "coverURL";
     return roles;
 }
 
