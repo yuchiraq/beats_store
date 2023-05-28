@@ -1,17 +1,16 @@
 package main
 
 import (
-	"bytes"
 	"database/sql"
-	"encoding/binary"
 	"fmt"
-	"github.com/bobertlo/go-mpg123/mpg123"
 	_ "github.com/bobertlo/go-mpg123/mpg123"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/gordonklaus/portaudio"
 	_ "github.com/gordonklaus/portaudio"
+	"io"
 	"log"
+	"net"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 )
@@ -35,32 +34,6 @@ type Track struct {
 
 func main() {
 
-	fileName := "55.mp3"
-
-	decoder, err := mpg123.NewDecoder("")
-
-	chk(err)
-
-	chk(decoder.Open(fileName))
-	defer decoder.Close()
-
-	rate, channels, _ := decoder.GetFormat()
-
-	decoder.FormatNone()
-	decoder.Format(rate, channels, mpg123.ENC_SIGNED_16)
-
-	portaudio.Initialize()
-	defer portaudio.Terminate()
-
-	out := make([]int16, 8192)
-
-	stream, err := portaudio.OpenDefaultStream(0, channels, float64(rate), len(out), &out)
-	chk(err)
-
-	defer stream.Close()
-
-	chk(stream.Start())
-
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		_, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
 		if err != nil {
@@ -70,52 +43,6 @@ func main() {
 		fmt.Println(time.Now().String() + "||-->>" + r.RemoteAddr + " check connection")
 		fmt.Fprintf(w, "availible")
 	}) // each request calls handler
-	http.HandleFunc("/lastRealises", lastRealises)
-	http.HandleFunc("/getDataTrack", getDataTrack)
-	http.HandleFunc("/tracks/search", func(w http.ResponseWriter, r *http.Request) {
-
-		fmt.Println(time.Now().String() + "||-->>" + r.RemoteAddr + " GET track search")
-
-		title := r.URL.Query().Get("title")
-		if title == "" {
-			fmt.Fprintf(w, "empty arg")
-			return
-		}
-
-		endl := "|||"
-
-		db, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
-
-		if err != nil {
-			fmt.Println("Err > ", err.Error())
-			return
-		}
-
-		defer db.Close()
-		results, err := db.Query("SELECT id FROM tracks WHERE title LIKE '%" + title + "%'")
-
-		if err != nil {
-			fmt.Println("Err > ", err.Error())
-			return
-		}
-
-		tracks := []Track{}
-		for results.Next() {
-			var trackCur Track
-			err = results.Scan(&trackCur.ID)
-			if err != nil {
-				panic(err.Error())
-			}
-			tracks = append(tracks, trackCur)
-		}
-
-		for i := 0; i < len(tracks); i++ {
-			fmt.Fprintf(w, strconv.FormatUint(uint64(tracks[i].ID), 10))
-			if i != len(tracks)-1 {
-				fmt.Fprintf(w, endl)
-			}
-		}
-	})
 	http.HandleFunc("/notify", func(w http.ResponseWriter, r *http.Request) {
 		_, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
 		if err != nil {
@@ -124,28 +51,32 @@ func main() {
 		}
 		fmt.Fprintf(w, "All is good, bro")
 	})
+	http.HandleFunc("/tracks/all", allTracks)
+	http.HandleFunc("/tracks/getData", getDataTrack)
+	http.HandleFunc("/tracks/search", searchTrack)
+	http.HandleFunc("/stream", func(w http.ResponseWriter, r *http.Request) {
+		trackID := r.URL.Query().Get("ID")
 
-	http.HandleFunc("/audio", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println(time.Now().String() + "||-->>" + r.RemoteAddr + " STREAM > " + trackID)
 
-		w.Header().Set("Connection", "Keep-Alive")
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
-		w.Header().Set("Transfer-Encoding", "chunked")
-		w.Header().Set("Content-Type", "audio/wave")
-		for {
-			audio := make([]byte, 2*len(out))
-			_, err = decoder.Read(audio)
-			if err == mpg123.EOF {
-				return
-			}
-			chk(err)
+		file, err := os.Open("55.mp3")
+		if err != nil {
+			panic(err)
+			return
+		}
 
-			chk(binary.Read(bytes.NewBuffer(audio), binary.LittleEndian, out))
-			chk(stream.Write())
+		defer file.Close()
 
-			//binary.Write(w, binary.BigEndian, &buffer)
-			//flusher.Flush() // Trigger "chunked" encoding and send a chunk...
-			//return
+		addr, err := net.ResolveUDPAddr("udp", "127.0.0.1:1234")
+		if err != nil {
+			panic(err)
+			return
+		}
+
+		err = streamAudioUDP(file, addr)
+		if err != nil {
+			panic(err)
+			return
 		}
 	})
 
@@ -158,9 +89,9 @@ func chk(err error) {
 	}
 }
 
-func lastRealises(w http.ResponseWriter, r *http.Request) {
+func allTracks(w http.ResponseWriter, r *http.Request) {
 
-	fmt.Println(time.Now().String() + "||-->>" + r.RemoteAddr + " GET lastRealises")
+	fmt.Println(time.Now().String() + "||-->>" + r.RemoteAddr + " GET allTracks")
 	endl := "|||"
 	//code := r.URL.Query().Get("code")
 
@@ -261,4 +192,75 @@ func getDataTrack(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "your error 2")
 	}
 
+}
+
+func searchTrack(w http.ResponseWriter, r *http.Request) {
+
+	fmt.Println(time.Now().String() + "||-->>" + r.RemoteAddr + " GET track search")
+
+	title := r.URL.Query().Get("title")
+	if title == "" {
+		fmt.Fprintf(w, "empty arg")
+		return
+	}
+
+	endl := "|||"
+
+	db, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
+
+	if err != nil {
+		fmt.Println("Err > ", err.Error())
+		return
+	}
+
+	defer db.Close()
+	results, err := db.Query("SELECT id FROM tracks WHERE title LIKE '%" + title + "%'")
+
+	if err != nil {
+		fmt.Println("Err > ", err.Error())
+		return
+	}
+
+	tracks := []Track{}
+	for results.Next() {
+		var trackCur Track
+		err = results.Scan(&trackCur.ID)
+		if err != nil {
+			panic(err.Error())
+		}
+		tracks = append(tracks, trackCur)
+	}
+
+	for i := 0; i < len(tracks); i++ {
+		fmt.Fprintf(w, strconv.FormatUint(uint64(tracks[i].ID), 10))
+		if i != len(tracks)-1 {
+			fmt.Fprintf(w, endl)
+		}
+	}
+}
+
+func streamAudioUDP(audioFile io.Reader, addr *net.UDPAddr) error {
+	conn, err := net.DialUDP("udp", nil, addr)
+	chk(err)
+
+	defer conn.Close()
+
+	buf := make([]byte, 1024)
+
+	for {
+		n, err := audioFile.Read(buf)
+		if err != nil {
+			if err != io.EOF {
+				panic(err)
+				return err
+			}
+			break
+		}
+
+		_, err = conn.Write(buf[:n])
+		chk(err)
+
+	}
+
+	return nil
 }
