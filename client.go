@@ -40,8 +40,8 @@ func main() {
 
 }
 
-func chk(err error) {
+/*func chk(err error) {
 	if err != nil {
 		panic(err)
 	}
-}
+}*/

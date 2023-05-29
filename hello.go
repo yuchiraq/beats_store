@@ -110,7 +110,7 @@ func allTracks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tracks := []Track{}
+	var tracks []Track
 	for results.Next() {
 		var trackCur Track
 		err = results.Scan(&trackCur.ID)
@@ -121,7 +121,7 @@ func allTracks(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for i := 0; i < len(tracks); i++ {
-		fmt.Fprintf(w, strconv.FormatUint(uint64(tracks[i].ID), 10))
+		fmt.Fprintf(w, strconv.FormatUint(tracks[i].ID, 10))
 		if i != len(tracks)-1 {
 			fmt.Fprintf(w, endl)
 		}
@@ -161,7 +161,7 @@ func getDataTrack(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tracks := []Track{}
+	var tracks []Track
 	for results.Next() {
 		var trackCur Track
 		err = results.Scan(&trackCur.ID, &trackCur.Title, &trackCur.Album, &trackCur.Author, &trackCur.Style, &trackCur.Tags, &trackCur.Price, &trackCur.Currency, &trackCur.Duration, &trackCur.RealiseDate, &trackCur.SaleType, &trackCur.BPM, &trackCur.ForSale, &trackCur.KBPS)
@@ -170,21 +170,21 @@ func getDataTrack(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if dataType == "" {
-		fmt.Fprintf(w, strconv.FormatUint(uint64(tracks[0].ID), 10)+endl)
+		fmt.Fprintf(w, strconv.FormatUint(tracks[0].ID, 10)+endl)
 		fmt.Fprintf(w, tracks[0].Title+endl)
-		fmt.Fprintf(w, strconv.FormatUint(uint64(tracks[0].Author), 10)+endl)
+		fmt.Fprintf(w, strconv.FormatUint(tracks[0].Author, 10)+endl)
 		fmt.Fprintf(w, strconv.FormatInt(int64(tracks[0].Duration), 10))
 	} else if dataType == "title" {
 		fmt.Fprintf(w, tracks[0].Title)
 	} else if dataType == "author" {
-		fmt.Fprintf(w, strconv.FormatUint(uint64(tracks[0].Author), 10))
+		fmt.Fprintf(w, strconv.FormatUint(tracks[0].Author, 10))
 	} else if dataType == "album" {
-		fmt.Fprintf(w, strconv.FormatUint(uint64(tracks[0].Album), 10))
+		fmt.Fprintf(w, strconv.FormatUint(tracks[0].Album, 10))
 	} else if dataType == "duration" {
 		fmt.Fprintf(w, strconv.FormatUint(uint64(tracks[0].Duration), 10))
 	} else if dataType == "full" {
-		fmt.Fprintf(w, strconv.FormatUint(uint64(tracks[0].ID), 10)+endl+tracks[0].Title+endl+strconv.FormatUint(uint64(tracks[0].Album), 10)+
-			endl+strconv.FormatUint(uint64(tracks[0].Author), 10)+endl+strconv.FormatUint(uint64(tracks[0].Style), 10)+endl+tracks[0].Tags+endl+
+		fmt.Fprintf(w, strconv.FormatUint(tracks[0].ID, 10)+endl+tracks[0].Title+endl+strconv.FormatUint(tracks[0].Album, 10)+
+			endl+strconv.FormatUint(tracks[0].Author, 10)+endl+strconv.FormatUint(uint64(tracks[0].Style), 10)+endl+tracks[0].Tags+endl+
 			strconv.FormatUint(uint64(tracks[0].Price), 10)+endl+tracks[0].Currency+endl+strconv.FormatUint(uint64(tracks[0].Duration), 10)+endl+
 			tracks[0].RealiseDate+endl+strconv.FormatUint(uint64(tracks[0].SaleType), 10)+endl+strconv.FormatUint(uint64(tracks[0].BPM), 10)+endl+
 			strconv.FormatBool(tracks[0].ForSale)+endl+strconv.FormatUint(uint64(tracks[0].KBPS), 10))
@@ -196,10 +196,12 @@ func getDataTrack(w http.ResponseWriter, r *http.Request) {
 
 func searchTrack(w http.ResponseWriter, r *http.Request) {
 
-	fmt.Println(time.Now().String() + "||-->>" + r.RemoteAddr + " GET track search")
+	clientRequest := r.URL.Query().Get("request")
+	typeSearching := r.URL.Query().Get("type")
 
-	title := r.URL.Query().Get("title")
-	if title == "" {
+	fmt.Println(time.Now().String() + "||-->>" + r.RemoteAddr + " GET track search by " + typeSearching + " >" + clientRequest)
+
+	if clientRequest == "" {
 		fmt.Fprintf(w, "empty arg")
 		return
 	}
@@ -214,14 +216,23 @@ func searchTrack(w http.ResponseWriter, r *http.Request) {
 	}
 
 	defer db.Close()
-	results, err := db.Query("SELECT id FROM tracks WHERE title LIKE '%" + title + "%'")
+
+	var DBrequest = string("")
+
+	if typeSearching == "title" || typeSearching == "" {
+		DBrequest = "SELECT id FROM tracks WHERE title LIKE '%" + clientRequest + "%'"
+	} else if typeSearching == "tags" {
+		DBrequest = "SELECT id FROM tracks WHERE tags LIKE '%" + clientRequest + "%'"
+	}
+
+	results, err := db.Query(DBrequest)
 
 	if err != nil {
 		fmt.Println("Err > ", err.Error())
 		return
 	}
 
-	tracks := []Track{}
+	var tracks []Track
 	for results.Next() {
 		var trackCur Track
 		err = results.Scan(&trackCur.ID)
@@ -232,7 +243,7 @@ func searchTrack(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for i := 0; i < len(tracks); i++ {
-		fmt.Fprintf(w, strconv.FormatUint(uint64(tracks[i].ID), 10))
+		fmt.Fprintf(w, strconv.FormatUint(tracks[i].ID, 10))
 		if i != len(tracks)-1 {
 			fmt.Fprintf(w, endl)
 		}
