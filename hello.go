@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -40,7 +41,7 @@ func main() {
 			fmt.Fprintf(w, "unavailable database Tracks")
 			return
 		}
-		fmt.Println(time.Now().String() + "||-->>" + r.RemoteAddr + " check connection")
+		go fmt.Println(timeNow() + "||-->>" + r.RemoteAddr + " check connection")
 		fmt.Fprintf(w, "availible")
 	}) // each request calls handler
 	http.HandleFunc("/notify", func(w http.ResponseWriter, r *http.Request) {
@@ -57,7 +58,7 @@ func main() {
 	http.HandleFunc("/stream", func(w http.ResponseWriter, r *http.Request) {
 		trackID := r.URL.Query().Get("ID")
 
-		fmt.Println(time.Now().String() + "||-->>" + r.RemoteAddr + " STREAM > " + trackID)
+		go fmt.Println(timeNow() + "||-->>" + r.RemoteAddr + " STREAM > " + trackID)
 
 		file, err := os.Open("55.mp3")
 		if err != nil {
@@ -83,6 +84,14 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
+func timeNow() string {
+	str := strings.Split(time.Now().String(), " ")[0] + " " + strings.Split(time.Now().String(), " ")[1]
+	for len(str) < 30 {
+		str += " "
+	}
+	return str
+}
+
 func chk(err error) {
 	if err != nil {
 		panic(err)
@@ -91,7 +100,7 @@ func chk(err error) {
 
 func allTracks(w http.ResponseWriter, r *http.Request) {
 
-	fmt.Println(time.Now().String() + "||-->>" + r.RemoteAddr + " GET allTracks")
+	go fmt.Println(timeNow() + "||-->>" + r.RemoteAddr + " GET allTracks")
 	endl := "|||"
 	//code := r.URL.Query().Get("code")
 
@@ -144,7 +153,7 @@ func getDataTrack(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println(time.Now().String() + "||-->>" + r.RemoteAddr + " GET data for " + id + " track->" + dataType)
+	go fmt.Println(timeNow() + "||-->>" + r.RemoteAddr + " GET data for " + id + " track->" + dataType)
 
 	db, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
 
@@ -199,7 +208,7 @@ func searchTrack(w http.ResponseWriter, r *http.Request) {
 	clientRequest := r.URL.Query().Get("request")
 	typeSearching := r.URL.Query().Get("type")
 
-	fmt.Println(time.Now().String() + "||-->>" + r.RemoteAddr + " GET track search by " + typeSearching + " >" + clientRequest)
+	go fmt.Println(timeNow() + "||-->>" + r.RemoteAddr + " GET track search by " + typeSearching + " >" + clientRequest)
 
 	if clientRequest == "" {
 		fmt.Fprintf(w, "empty arg")
