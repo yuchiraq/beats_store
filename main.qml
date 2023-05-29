@@ -240,15 +240,4 @@ Window {
         topBar.standartBack()
     }
 
-    //    Rectangle {
-    //        id: mainBackground
-
-    //        color: accentTransparency
-
-    //        width: 200
-    //        height: width
-    //        radius: width / 2
-    //        x: 202
-    //        y: 200
-    //    }
 }

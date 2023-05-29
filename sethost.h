@@ -3,6 +3,7 @@
 
 #include "databasetracks.h"
 #include "trackdata.h"
+#include "searchmodel.h"
 #include <QObject>
 #include <QNetworkAccessManager>
 
@@ -11,7 +12,7 @@ class setHost : public QObject
     Q_OBJECT
 public:
     explicit setHost(QObject *parent = nullptr);
-    setHost(DataBaseTracks* database, trackData* trackDataCur);
+    setHost(DataBaseTracks* database, trackData* trackDataCur, searchModel* searchClassCur);
 
 signals:
 
@@ -26,6 +27,7 @@ private:
     bool conectionServer = false;
     DataBaseTracks* database;
     trackData* trackDataClass;
+    searchModel* searchClass;
 };
 
 #endif // SETHOST_H

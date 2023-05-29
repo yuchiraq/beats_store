@@ -24,7 +24,6 @@ Rectangle {
 
     color: darkestTransparency
 
-    property int selectorPos: 1
     property bool searching: false
 
     Rectangle {
@@ -97,8 +96,10 @@ Rectangle {
         anchors.fill: parent
 
         onClicked: {
-            if (topBar.searching)
+            if (topBar.searching) {
+                mouse.accepted = false
                 return
+            }
 
             if (bottomBar.active == 1) {
                 moveLeftScreen.running = true
@@ -136,6 +137,17 @@ Rectangle {
             startSplashScreen.startSplash()
             musicPlayer.track_id = 0
         }
+    }
+
+    function searchFun() {
+        if (selectorType.height != 0) {
+            selectorTypeOff.restart()
+        }
+
+        search.updateModel(searchInputField.text, searchInputField.searchType,
+                           searchInputField.searchWhat)
+        stackView.pop()
+        stackView.push("qrc:/topBar/SearchPage.qml")
     }
 
     Rectangle {
@@ -187,16 +199,44 @@ Rectangle {
                 color: "transparent"
             }
 
-            onTextEdited: {
-                searchTracks.updateModel(searchInputField.text)
-                stackView.pop()
-                stackView.push("qrc:/topBar/SearchPage.qml")
+            property string searchType: {
+                if (selectorPos == 1) {
+                    if (selectorTracks == 1)
+                        return "title"
+                    else if (selectorTracks == 2)
+                        return "tags"
+                } else if (selectorPos == 2) {
+                    if (selectorAlbums == 1)
+                        return "title"
+                    else if (selectorAlbums == 2)
+                        return "tags"
+                } else if (selectorPos == 3) {
+                    if (selectorTracks == 1)
+                        return "title"
+                    else if (selectorTracks == 2)
+                        return "tags"
+                }
             }
 
-            onAccepted: {
-                searchTracks.updateModel(searchInputField.text)
+            property string searchWhat: {
+                if (selectorPos == 1)
+                    return "tracks"
+                else if (selectorPos == 2)
+                    return "albums"
+                else if (selectorPos == 3)
+                    return "authors"
+            }
+
+
+            /*onTextEdited: {
+
+                search.updateModel(searchInputField.text, searchType,
+                                   searchWhat)
                 stackView.pop()
                 stackView.push("qrc:/topBar/SearchPage.qml")
+            }*/
+            onAccepted: {
+                topBar.searchFun()
                 Qt.inputMethod.hide()
                 searchInputField.focus = false
             }
@@ -243,9 +283,7 @@ Rectangle {
 
             onClicked: {
                 searchInputField.clear()
-                searchListModel.updateModel("")
-                stackView.pop()
-                stackView.push("qrc:/topBar/SearchPage.qml")
+                topBar.searchFun()
             }
 
             //visible: searchInputField.text !== ""
@@ -310,7 +348,7 @@ Rectangle {
         onClicked: {
             if (topLogo.visible) {
                 searchOn()
-                searchListModel.updateModel(searchInputField.text)
+                topBar.searchFun()
             } else {
                 searchOff()
                 //searchAnimation.running = true
@@ -361,6 +399,181 @@ Rectangle {
         }
     }
 
+    property int selectorPos: 1
+    property int selectorTracks: 1
+    property int selectorAlbums: 1
+    property int selectorAuthors: 1
+    property int selectorTypeRows: 0
+    property int selectorSelectedRow: 1
+
+    Rectangle {
+        id: selectorType
+
+        width: searchSelector.width / 3
+        height: 0
+
+        clip: true
+
+        anchors {
+            top: searchSelector.top
+            left: searchSelector.left
+        }
+
+        color: container
+
+        border {
+            width: 0.5
+            color: outline
+        }
+
+        radius: blockMargin * 1.5
+
+        Divider {
+            anchors {
+                top: parent.top
+                horizontalCenter: parent.horizontalCenter
+                topMargin: searchSelector.height
+            }
+
+            width: parent.width - blockMargin
+        }
+
+        Rectangle {
+            id: selectorTypeOne
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+                topMargin: searchSelector.height
+            }
+
+            z: selector.z + 1
+
+            width: parent.width
+            height: searchSelector.height
+
+            color: "transparent"
+
+            property string text: "По названию"
+
+            Text {
+                text: parent.text
+
+                font {
+                    family: appFont
+                    pointSize: searchSelector.height - blockMargin * 2
+                    bold: selectorSelectedRow == 1
+                }
+
+                anchors.centerIn: parent
+
+                color: selectorSelectedRow == 1 ? accent : secondary
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if (selectorPos == 1)
+                        selectorTracks = 1
+                    else if (selectorPos == 2)
+                        selectorAlbums = 1
+                    else if (selectorTracks == 3)
+                        selectorAuthors = 1
+                    selectorSelectedRow = 1
+                    selectorToTwo.restart()
+                }
+            }
+        }
+
+        Divider {
+            anchors {
+                top: parent.top
+                horizontalCenter: parent.horizontalCenter
+                topMargin: searchSelector.height * 2
+            }
+
+            width: parent.width - blockMargin
+        }
+
+        Rectangle {
+            id: selectorTypeTwo
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+                topMargin: searchSelector.height * 2
+            }
+
+            z: selector.z + 1
+
+            width: parent.width
+            height: searchSelector.height
+
+            color: "transparent"
+
+            property string text: "По тэгам"
+
+            Text {
+                text: parent.text
+
+                font {
+                    family: appFont
+                    pointSize: searchSelector.height - blockMargin * 2
+                    bold: selectorSelectedRow == 2
+                }
+
+                color: selectorSelectedRow == 2 ? accent : secondary
+
+                anchors.centerIn: parent
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if (selectorPos == 1)
+                        selectorTracks = 2
+                    else if (selectorPos == 2)
+                        selectorAlbums = 2
+                    else if (selectorTracks == 3)
+                        selectorAuthors = 2
+                    selectorSelectedRow = 2
+                    selectorToTwo.restart()
+                }
+            }
+        }
+
+        NumberAnimation {
+            id: selectorTypeOn
+            target: selectorType
+            property: "height"
+            duration: 200
+            easing.type: Easing.InOutQuad
+            from: 0
+            to: (selectorTypeRows + 1) * searchSelector.height
+            onStarted: {
+                if (selectorPos == 1) {
+                    selectorSelectedRow = selectorTracks
+                    selectorType.anchors.leftMargin = 0
+                } else if (selectorPos == 2) {
+                    selectorSelectedRow = selectorAlbums
+                    selectorType.anchors.leftMargin = searchSelector.width / 3
+                } else if (selectorPos == 3) {
+                    selectorSelectedRow = selectorAuthors
+                    selectorType.anchors.leftMargin = searchSelector.width / 3 * 2
+                }
+            }
+        }
+
+        NumberAnimation {
+            id: selectorTypeOff
+            target: selectorType
+            property: "height"
+            duration: 200
+            easing.type: Easing.InOutQuad
+            from: selectorType.height
+            to: 0
+            onStarted: selectorToOne.restart()
+        }
+    }
+
     Rectangle {
         id: searchSelector
 
@@ -378,6 +591,43 @@ Rectangle {
 
         border.width: 0.5
         border.color: outline
+
+        Rectangle {
+            id: selector
+
+            anchors {
+                top: parent.top
+                topMargin: blockMargin / 4
+                left: searchSelector.left
+                leftMargin: blockMargin / 4
+            }
+
+            width: searchSelector.width / 3 - blockMargin / 2
+            height: searchSelector.height - blockMargin / 2
+
+            color: outline //**//
+
+            radius: searchSelector.radius - blockMargin / 4
+
+            Text {
+                anchors.centerIn: parent
+
+                font {
+                    family: appFont
+                    pointSize: searchSelector.height - blockMargin * 2
+                    bold: true
+                }
+
+                color: accent
+
+                text: if (selectorSelectedRow == 1) {
+                          return selectorTypeOne.text
+                      } else if (selectorSelectedRow == 2)
+                          return selectorTypeTwo.text
+
+                visible: selectorType.height > searchSelector.height
+            }
+        }
 
         Rectangle {
             anchors.left: parent.left
@@ -399,23 +649,6 @@ Rectangle {
             width: 1
 
             color: outline
-        }
-
-        Rectangle {
-            id: selector
-
-            anchors {
-                verticalCenter: parent.verticalCenter
-                left: parent.left
-                leftMargin: blockMargin / 4
-            }
-
-            width: parent.width / 3 - blockMargin / 2
-            height: parent.height - blockMargin / 2
-
-            color: outline //**//
-
-            radius: parent.radius - blockMargin / 4
         }
 
         Text {
@@ -537,6 +770,28 @@ Rectangle {
             running: false
         }
 
+        NumberAnimation {
+            id: selectorToOne
+            target: selector
+            property: "anchors.topMargin"
+            duration: 200
+            easing.type: Easing.InOutQuad
+            from: selector.anchors.topMargin
+            to: blockMargin / 4
+            running: false
+        }
+
+        NumberAnimation {
+            id: selectorToTwo
+            target: selector
+            property: "anchors.topMargin"
+            duration: 200
+            easing.type: Easing.InOutQuad
+            from: selector.anchors.topMargin
+            to: blockMargin / 4 + searchSelector.height * selectorSelectedRow
+            running: false
+        }
+
         MouseArea {
             width: parent.width / 3
             height: parent.height
@@ -547,8 +802,28 @@ Rectangle {
             }
 
             onClicked: {
+                if (selectorPos == 1) {
+                    if (selectorType.height == 0) {
+                        selectorTypeRows = 2
+                        selectorTypeOne.text = "По названию"
+                        selectorTypeTwo.text = "По тэгам"
+                        selectorTypeOn.restart()
+                        selectorToTwo.restart()
+                    } else {
+                        topBar.searchFun()
+                        //selectorTypeOff.restart()
+                    }
+
+                    return
+                }
+                if (selectorType.height != 0) {
+                    //selectorToOne.restart()
+                    selectorTypeOff.restart()
+                }
+
                 selectorToLeft.running = true
                 selectorPos = 1
+                topBar.searchFun()
             }
         }
 
@@ -561,8 +836,28 @@ Rectangle {
             }
 
             onClicked: {
+                if (selectorPos == 2) {
+                    if (selectorType.height == 0) {
+                        selectorTypeRows = 2
+                        selectorTypeOne.text = "По названию"
+                        selectorTypeTwo.text = "По тэгам"
+                        selectorTypeOn.restart()
+                        selectorToTwo.restart()
+                    } else {
+                        topBar.searchFun()
+                        //selectorTypeOff.restart()
+                    }
+
+                    return
+                }
+                if (selectorType.height != 0) {
+                    //selectorToOne.restart()
+                    selectorTypeOff.restart()
+                }
+
                 selectorToCenter.running = true
                 selectorPos = 2
+                topBar.searchFun()
             }
         }
 
@@ -576,8 +871,27 @@ Rectangle {
             }
 
             onClicked: {
+                if (selectorPos == 3) {
+                    if (selectorType.height == 0) {
+                        selectorTypeRows = 2
+                        selectorTypeOne.text = "По имени"
+                        selectorTypeTwo.text = "По тэгам"
+                        selectorTypeOn.restart()
+                        selectorToTwo.restart()
+                    } else {
+                        topBar.searchFun()
+                        //selectorTypeOff.restart()
+                    }
+                    return
+                }
+                if (selectorType.height != 0) {
+                    //selectorToOne.restart()
+                    selectorTypeOff.restart()
+                }
+
                 selectorToRight.running = true
                 selectorPos = 3
+                topBar.searchFun()
             }
         }
     }

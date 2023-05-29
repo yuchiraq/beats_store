@@ -9,7 +9,7 @@
 #include "functionsdatamodel.h"
 #include "sethost.h"
 #include "trackdata.h"
-#include "searchtracksmodel.h"
+#include "searchmodel.h"
 
 #include <QDirIterator>
 
@@ -40,16 +40,16 @@ int main(int argc, char *argv[])
     RandomBeatsModel *randomBeatsModel = new RandomBeatsModel();
     functionsDataModel * functionsModel = new functionsDataModel();
     trackData *trackDataClass = new trackData();
-    searchTracksModel *searchTracks = new searchTracksModel();
+    searchModel *search = new searchModel();
 
     dataBaseTracks.deleteData();
-    setHost *setHostClass = new setHost(&dataBaseTracks, trackDataClass);
+    setHost *setHostClass = new setHost(&dataBaseTracks, trackDataClass, search);
 
     engine.rootContext()->setContextProperty("setHost", setHostClass);
     engine.rootContext() -> setContextProperty("lastRealisesModel", lastRealisesListModel);
     engine.rootContext() -> setContextProperty("database", &dataBaseTracks);
     engine.rootContext() -> setContextProperty("randomBeatsModel", randomBeatsModel);
-    engine.rootContext()->setContextProperty("searchTracks", searchTracks);
+    engine.rootContext()->setContextProperty("search", search);
 
     engine.rootContext() -> setContextProperty("functionsModel", functionsModel);
     engine.rootContext()->setContextProperty("trackData", trackDataClass);

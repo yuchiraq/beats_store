@@ -8,7 +8,7 @@ SOURCES += \
         lastrealiseslistModel.cpp \
         main.cpp \
         randombeatsmodel.cpp \
-        searchtracksmodel.cpp \
+        searchmodel.cpp \
         sethost.cpp \
         trackdata.cpp
 
@@ -49,6 +49,6 @@ HEADERS += \
     functionsdatamodel.h \
     lastrealiseslistModel.h \
     randombeatsmodel.h \
-    searchtracksmodel.h \
+    searchmodel.h \
     sethost.h \
     trackdata.h

@@ -1,22 +1,25 @@
-#include "searchtracksmodel.h"
+#include "searchmodel.h"
 
-searchTracksModel::searchTracksModel(QObject *parent)
+searchModel::searchModel(QObject *parent)
     : QObject{parent}
 {
 
 }
 
-QStringList searchTracksModel::model(){
+QStringList searchModel::model(){
     return this->results;
 }
 
-bool searchTracksModel::updateModel(QString title){
+bool searchModel::updateModel(QString title, QString type, QString what){
     QEventLoop eventloop;
 
-    QString url = "http://" + host + port + "/tracks/search?title=" + title;
+    QString url = "http://" + host + port + "/" + what + "/search?request=" + title + "&type=" + type;
+    qDebug() << "searching... " << url;
 
     QNetworkReply *reply;
     QNetworkAccessManager manager;
+
+    manager.setTransferTimeout(1000);
 
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 

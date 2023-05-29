@@ -17,21 +17,9 @@ Flickable {
     ListView {
         id: searchBeats
 
-        model: searchTracks.items
+        model: search.items
         anchors.fill: parent
 
-        ScrollIndicator.vertical: ScrollIndicator {
-            orientation: Qt.Vertical
-            parent: parent
-            anchors {
-                right: parent.right
-                top: parent.top
-                bottom: parent.bottom
-            }
-
-            size: parent.contentHeight
-            active: true
-        }
         delegate: Item {
             id: searchAnswer
             anchors.horizontalCenter: parent.horizontalCenter
@@ -48,6 +36,6 @@ Flickable {
             Divider {}
         }
 
-        visible: topBar.selectorPos == 1
+        //visible: topBar.selectorPos == 1
     }
 }
