@@ -16,7 +16,7 @@
 #include <QEventLoop>
 
 #define DATABASE_HOSTNAME "DataBase"
-#define DATABASE_NAME "DataBase.db"
+#define DATABASE_NAME ":memory:"
 #define TABLE "tracks"
 #define TABLE_TITLE "title"
 #define TABLE_AUTHOR "author_id"
