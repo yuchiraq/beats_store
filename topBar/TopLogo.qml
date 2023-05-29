@@ -348,7 +348,7 @@ Rectangle {
         onClicked: {
             if (topLogo.visible) {
                 searchOn()
-                topBar.searchFun()
+                //topBar.searchFun()
             } else {
                 searchOff()
                 //searchAnimation.running = true
