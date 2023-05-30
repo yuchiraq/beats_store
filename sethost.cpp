@@ -1,25 +1,30 @@
-#include "sethost.h"
+﻿#include "sethost.h"
 
 setHost::setHost(QObject *parent) : QObject(parent) {
-
+    qDebug() << this->host << " HOST cc";
 }
 
-setHost::setHost(DataBaseTracks* databaseObj, trackData* trackDataCur, searchModel* searchClassCur){
-    this->database = databaseObj;
-    this->trackDataClass = trackDataCur;
-    this->searchClass = searchClassCur;
+QString setHost::getHost(){
+    if(host.isNull())
+        qDebug() << "HOST NULL";
+    if(host.isNull())
+        return "172.20.10.7";
+    else
+        return host;
 }
 
-void setHost::getHost(QString newHost){
-    this->database->host = newHost;
-    this->database->connectToDataBase();
-    this->trackDataClass->host = newHost;
-    this->searchClass->host = newHost;
+QString setHost::getPort(){
+    if(port.isNull())
+        return ":8080";
+    else
+        return port;
 }
 
-bool setHost::connectDB(){
-    this->conectionDB = database->connected;
-    return this->conectionDB;
+void setHost::setNewHost(QString newHost, QString newPort){
+    host = newHost;
+    port = newPort;
+    conectionServer = false;
+    conectionServer = connect();
 }
 
 bool setHost::connect(){
@@ -34,7 +39,7 @@ bool setHost::connect(){
 
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-    QNetworkRequest req(QUrl(QString("http://" + database->host + database->port + "/")));
+    QNetworkRequest req(QUrl(QString("http://" + getHost() + getPort() + "/")));
     reply = manager.get(req);
     eventloop.exec();
 
@@ -45,9 +50,9 @@ bool setHost::connect(){
 
     qDebug() << rep << "CONNECT CHECK";
 
-    this->conectionServer = rep == "availible";
+    conectionServer = rep == "availible";
 
-    return this->conectionServer;
+    return conectionServer;
 }
 
 QString setHost::checkNotification(){
@@ -57,7 +62,7 @@ QString setHost::checkNotification(){
     QEventLoop eventloop;
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-    QNetworkRequest req(QUrl(QString("http://" + database->host + database->port + "/notify")));
+    QNetworkRequest req(QUrl(QString("http://" + getHost() + getPort() + "/notify")));
     reply = manager.get(req);
     eventloop.exec();
 

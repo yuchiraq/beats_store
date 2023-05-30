@@ -126,7 +126,7 @@ Flickable {
             selectedTextColor: secondary
             color: secondary
             onAccepted: {
-                setHost.getHost(ipField.text)
+                setHost.setNewHost(ipField.text)
                 //ip = ipField.text
                 startSplashScreen.startSplash()
             }

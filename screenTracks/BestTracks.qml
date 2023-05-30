@@ -78,7 +78,7 @@ StackView {
 
         Text {
             id: lastRealisesTitle
-            text: "Последние релизы"
+            text: "<b>Последние релизы</b>"
             color: accent
             anchors {
                 top: blockRandomAlbums.bottom
@@ -228,7 +228,7 @@ StackView {
 
         lastRealises.maxRows = 25
         lastRealisesModel.updateModel(lastRealises.maxRows)
-        randomBeatsModel.updateModel(0)
+        blockRandomBeats.updateView()
 
         if (database.getQuantity() > lastRealises.maxRows)
             lastRealises.height = lastRealises.maxRows * (blockMargin * 7 + 0.5)

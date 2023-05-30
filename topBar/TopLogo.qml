@@ -446,8 +446,6 @@ Rectangle {
                 topMargin: searchSelector.height
             }
 
-            z: selector.z + 1
-
             width: parent.width
             height: searchSelector.height
 
@@ -501,8 +499,6 @@ Rectangle {
                 top: parent.top
                 topMargin: searchSelector.height * 2
             }
-
-            z: selector.z + 1
 
             width: parent.width
             height: searchSelector.height

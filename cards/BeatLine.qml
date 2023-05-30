@@ -20,15 +20,16 @@ Rectangle {
         target: trackData
     }
 
-    visible: beatLine.id_track != "empty arg"
+    visible: beatLine.id_track != "empty arg" && beatLine.id_track != "0"
 
     property string id_track: ""
     property string cover: id_track == "" ? "" : "http://" + ip + "/coversMini/" + id_track + ".jpg"
     property string title: id_track == "" ? "" : trackData.getTitle(id_track)
-    property string author: id_track == "" ? "" : trackData.getAuthorId(id_track)
+    property string author: id_track == "" ? "" : trackData.getAuthorId(
+                                                 id_track)
     property string time: id_track == "" ? "" : Math.floor(
-                                              timeSec / 60) + ":" + timeCorrector(
-                                              Math.floor(timeSec % 60))
+                                               timeSec / 60) + ":" + timeCorrector(
+                                               Math.floor(timeSec % 60))
     property int timeSec: id_track == "" ? 0 : trackData.getDuration(id_track)
     property int bpm: id_track == "" ? 0 : 1
 

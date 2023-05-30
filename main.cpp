@@ -15,6 +15,7 @@
 
 int main(int argc, char *argv[])
 {
+    qDebug() << setHost::getHost() << " HOST";
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
@@ -32,7 +33,11 @@ int main(int argc, char *argv[])
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
-     QCoreApplication::setAttribute( Qt::AA_UseSoftwareOpenGL );
+    QCoreApplication::setAttribute( Qt::AA_UseSoftwareOpenGL );
+
+    qDebug() << setHost::getHost() << " HOST";
+    setHost setHostClass;
+    qDebug() << setHost::getHost() << " HOST";
 
     DataBaseTracks dataBaseTracks;
 
@@ -43,9 +48,9 @@ int main(int argc, char *argv[])
     searchModel *search = new searchModel();
 
     dataBaseTracks.deleteData();
-    setHost *setHostClass = new setHost(&dataBaseTracks, trackDataClass, search);
 
-    engine.rootContext()->setContextProperty("setHost", setHostClass);
+
+    engine.rootContext()->setContextProperty("setHost", &setHostClass);
     engine.rootContext() -> setContextProperty("lastRealisesModel", lastRealisesListModel);
     engine.rootContext() -> setContextProperty("database", &dataBaseTracks);
     engine.rootContext() -> setContextProperty("randomBeatsModel", randomBeatsModel);
@@ -53,6 +58,8 @@ int main(int argc, char *argv[])
 
     engine.rootContext() -> setContextProperty("functionsModel", functionsModel);
     engine.rootContext()->setContextProperty("trackData", trackDataClass);
+
+    qDebug() << setHost::getHost() << " HOST";
 
     engine.load(url);
 

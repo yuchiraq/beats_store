@@ -19,15 +19,17 @@ Rectangle {
     border.color: outline
     border.width: 0.5
 
+    property int style: 0
+
     Text {
         id: headerRandomBeats
         font {
-            weight: Font.Bold
+            //weight: Font.Bold
             family: appFont
             pointSize: blockMargin * 1.3
         }
         color: accent
-        text: "Биты"
+        text: "<b>Биты</b>"
 
         anchors {
             top: parent.top
@@ -462,7 +464,7 @@ Rectangle {
 
         model: 5
 
-        visible: randomBeatsView.count == 0
+        visible: !randomBeatsView.visible
 
         delegate: Item {
             anchors.horizontalCenter: parent.horizontalCenter
@@ -485,7 +487,7 @@ Rectangle {
     ListView {
         id: randomBeatsView
 
-        model: randomBeatsModel
+        model: randomBeatsModel.items
 
         anchors {
             top: headerRandomBeats.bottom
@@ -505,7 +507,7 @@ Rectangle {
                 id: randomBeat
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width
-                id_track: id_db
+                id_track: modelData != "" ? modelData : "empty arg"
             }
 
             Divider {
@@ -513,5 +515,12 @@ Rectangle {
                 anchors.top: randomBeat.bottom
             }
         }
+
+        visible: randomBeatsView.count == 5
+    }
+
+    function updateView() {
+        randomBeatsModel.updateModel("5", blockRandomBeats.style.toString())
+        randomBeatsView.model = randomBeatsModel.items
     }
 }

@@ -15,6 +15,8 @@
 #include <QNetworkReply>
 #include <QEventLoop>
 
+#include "sethost.h"
+
 #define DATABASE_HOSTNAME "DataBase"
 #define DATABASE_NAME ":memory:"
 #define TABLE "tracks"
@@ -26,8 +28,8 @@ class DataBaseTracks : public QObject
 {
     Q_OBJECT
 public:
-    QString host = "172.20.10.7";
-    QString port = ":8080";
+    //QString host = "172.20.10.7";
+    //QString port = ":8080";
 
     explicit DataBaseTracks(QObject *parent = nullptr);
     void connectToDataBase();

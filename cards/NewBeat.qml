@@ -121,7 +121,7 @@ Rectangle {
             rightMargin: blockMargin
         }
         font.bold: true
-        text: title
+        text: newBeatName.text
         font.pointSize: blockMargin * 2
         elide: Text.ElideRight
     }
@@ -141,7 +141,7 @@ Rectangle {
             rightMargin: blockMargin
         }
         font.weight: Font.Bold
-        text: title
+        text: "<b>" + title + "</b>"
         font.pointSize: blockMargin * 2
         elide: Text.ElideRight
     }

@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QSqlQueryModel>
 
+#include "sethost.h"
+
 class functionsDataModel : public QSqlQueryModel
 {
     Q_OBJECT

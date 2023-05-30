@@ -7,6 +7,8 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 
+#include "sethost.h"
+
 class searchModel : public QObject
 {
     Q_OBJECT
@@ -14,9 +16,6 @@ class searchModel : public QObject
     Q_PROPERTY(QStringList items READ model CONSTANT)
 public:
     explicit searchModel(QObject *parent = nullptr);
-
-    QString host = "172.20.10.7";
-    QString port = ":8080";
 
     QStringList model();
 public slots:

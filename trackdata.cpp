@@ -4,14 +4,21 @@ trackData::trackData(QObject *parent) : QObject(parent) {
 
 }
 
-QString trackData::getTitle(int id){
+QString trackData::getTitle(uint id){
+
+    if(this->titles.contains(id)){
+        qDebug() << "title for " << id << " present";
+        return this->titles.value(id);
+    }
+    qDebug() << "title for " << id << " not present" << this->titles;
+
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
     QEventLoop eventloop;
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-    QNetworkRequest req(QUrl(QString("http://" + this->host + this->port + "/tracks/getData?ID=" + QString::number(id) + "&type=title")));
+    QNetworkRequest req(QUrl(QString("http://" + setHost::getHost() + setHost::getPort() + "/tracks/getData?ID=" + QString::number(id) + "&type=title")));
     reply = manager.get(req);
     eventloop.exec();
 
@@ -22,18 +29,25 @@ QString trackData::getTitle(int id){
 
     QString rep = QString(reply->readAll());
 
+    this->titles.insert(id, rep);
+
     return rep;
 }
 
 
-QString trackData::getAuthorTitle(int id){
+QString trackData::getAuthorTitle(uint id){
+
+    if(this->authors.contains(id)){
+        return this->authors.value(id);
+    }
+
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
     QEventLoop eventloop;
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-    QNetworkRequest req(QUrl(QString("http://" + this->host + this->port + "/tracks/getData?ID=" + QString::number(id) + "&type=authorName")));
+    QNetworkRequest req(QUrl(QString("http://" + setHost::getHost() + setHost::getPort() + "/tracks/getData?ID=" + QString::number(id) + "&type=authorName")));
     reply = manager.get(req);
     eventloop.exec();
 
@@ -44,17 +58,24 @@ QString trackData::getAuthorTitle(int id){
 
     QString rep = QString(reply->readAll());
 
+    this->authors.insert(id, rep);
+
     return rep;
 }
 
-int trackData::getAuthorId(int id){
+uint trackData::getAuthorId(uint id){
+
+    if(this->authorsID.contains(id)){
+        return this->authorsID.value(id);
+    }
+
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
     QEventLoop eventloop;
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-   QNetworkRequest req(QUrl(QString("http://" + this->host + this->port + "/tracks/getData?ID=" + QString::number(id) + "&type=author")));
+   QNetworkRequest req(QUrl(QString("http://" + setHost::getHost() + setHost::getPort() + "/tracks/getData?ID=" + QString::number(id) + "&type=author")));
     reply = manager.get(req);
     eventloop.exec();
 
@@ -65,17 +86,24 @@ int trackData::getAuthorId(int id){
 
     QString rep = QString(reply->readAll());
 
+    this->authorsID.insert(id, rep.toUInt());
+
     return rep.toInt();
 }
 
-QString trackData::getAlbumTitle(int id){
+QString trackData::getAlbumTitle(uint id){
+
+    if(this->albums.contains(id)){
+        return this->albums.value(id);
+    }
+
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
     QEventLoop eventloop;
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-    QNetworkRequest req(QUrl(QString("http://" + this->host + this->port + "/tracks/getData?ID=" + QString::number(id) + "&type=albumTitle")));
+    QNetworkRequest req(QUrl(QString("http://" + setHost::getHost() + setHost::getPort() + "/tracks/getData?ID=" + QString::number(id) + "&type=albumTitle")));
     reply = manager.get(req);
     eventloop.exec();
 
@@ -86,17 +114,23 @@ QString trackData::getAlbumTitle(int id){
 
     QString rep = QString(reply->readAll());
 
+    this->albums.insert(id, rep);
+
     return rep;
 }
 
-int trackData::getAlbumId(int id){
+uint trackData::getAlbumId(uint id){
+
+    if(this->albumsID.contains(id))
+        return this->albumsID.value(id);
+
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
     QEventLoop eventloop;
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-    QNetworkRequest req(QUrl(QString("http://" + this->host + this->port + "/tracks/getData?ID=" + QString::number(id) + "&type=album")));
+    QNetworkRequest req(QUrl(QString("http://" + setHost::getHost() + setHost::getPort() + "/tracks/getData?ID=" + QString::number(id) + "&type=album")));
     reply = manager.get(req);
     eventloop.exec();
 
@@ -107,17 +141,24 @@ int trackData::getAlbumId(int id){
 
     QString rep = QString(reply->readAll());
 
-    return rep.toInt();
+    this->albumsID.insert(id, rep.toUInt());
+
+    return rep.toUInt();
 }
 
-int trackData::getDuration(int id){
+int trackData::getDuration(uint id){
+
+    if(this->duration.contains(id)){
+        return this->duration.value(id);
+    }
+
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
     QEventLoop eventloop;
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-    QNetworkRequest req(QUrl(QString("http://" + this->host + this->port + "/tracks/getData?ID=" + QString::number(id) + "&type=duration")));
+    QNetworkRequest req(QUrl(QString("http://" + setHost::getHost() + setHost::getPort() + "/tracks/getData?ID=" + QString::number(id) + "&type=duration")));
     reply = manager.get(req);
     eventloop.exec();
 
@@ -128,17 +169,23 @@ int trackData::getDuration(int id){
 
     QString rep = QString(reply->readAll());
 
+    this->duration.insert(id, rep.toUInt());
+
     return rep.toInt();
 }
 
-int trackData::getBPM(int id){
+int trackData::getBPM(uint id){
+
+    if(this->bpm.contains(id))
+        return this->bpm.value(id);
+
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
     QEventLoop eventloop;
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-    QNetworkRequest req(QUrl(QString("http://" + this->host + this->port + "/tracks/getData?ID=" + QString::number(id) + "&type=BPM")));
+    QNetworkRequest req(QUrl(QString("http://" + setHost::getHost() + setHost::getPort() + "/tracks/getData?ID=" + QString::number(id) + "&type=BPM")));
     reply = manager.get(req);
     eventloop.exec();
 
@@ -149,17 +196,23 @@ int trackData::getBPM(int id){
 
     QString rep = QString(reply->readAll());
 
+    this->bpm.insert(id, rep.toInt());
+
     return rep.toInt();
 }
 
-QString trackData::getTags(int id){
+QString trackData::getTags(uint id){
+
+    if(this->tags.contains(id))
+        return this->tags.value(id);
+
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
     QEventLoop eventloop;
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-    QNetworkRequest req(QUrl(QString("http://" + this->host + this->port + "/tracks/getData?ID=" + QString::number(id) + "&type=tags")));
+    QNetworkRequest req(QUrl(QString("http://" + setHost::getHost() + setHost::getPort() + "/tracks/getData?ID=" + QString::number(id) + "&type=tags")));
     reply = manager.get(req);
     eventloop.exec();
 
@@ -170,17 +223,23 @@ QString trackData::getTags(int id){
 
     QString rep = QString(reply->readAll());
 
+    this->tags.insert(id, rep);
+
     return rep;
 }
 
-int trackData::getPrice(int id){
+int trackData::getPrice(uint id){
+
+    if(this->prices.contains(id))
+        return this->prices.value(id);
+
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
     QEventLoop eventloop;
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-    QNetworkRequest req(QUrl(QString("http://" + this->host + this->port + "/tracks/getData?ID=" + QString::number(id) + "&type=price")));
+    QNetworkRequest req(QUrl(QString("http://" + setHost::getHost() + setHost::getPort() + "/tracks/getData?ID=" + QString::number(id) + "&type=price")));
     reply = manager.get(req);
     eventloop.exec();
 
@@ -190,6 +249,8 @@ int trackData::getPrice(int id){
     }
 
     QString rep = QString(reply->readAll());
+
+    this->prices.insert(id, rep.toInt());
 
     return rep.toInt();
 }

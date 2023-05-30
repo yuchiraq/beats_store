@@ -13,7 +13,7 @@ QStringList searchModel::model(){
 bool searchModel::updateModel(QString title, QString type, QString what){
     QEventLoop eventloop;
 
-    QString url = "http://" + host + port + "/" + what + "/search?request=" + title + "&type=" + type;
+    QString url = "http://" + setHost::getHost() + setHost::getPort() + "/" + what + "/search?request=" + title + "&type=" + type;
     qDebug() << "searching... " << url;
 
     QNetworkReply *reply;

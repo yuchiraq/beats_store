@@ -42,7 +42,7 @@ Rectangle {
         }
         color: accent
 
-        text: "Альбомы"
+        text: "<b>Альбомы</b>"
         anchors {
             top: parent.top
             topMargin: blockMargin

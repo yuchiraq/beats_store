@@ -1,33 +1,29 @@
 #ifndef SETHOST_H
 #define SETHOST_H
 
-#include "databasetracks.h"
-#include "trackdata.h"
-#include "searchmodel.h"
 #include <QObject>
 #include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QEventLoop>
 
 class setHost : public QObject
 {
     Q_OBJECT
 public:
     explicit setHost(QObject *parent = nullptr);
-    setHost(DataBaseTracks* database, trackData* trackDataCur, searchModel* searchClassCur);
-
-signals:
+    static QString getHost();
+    static QString getPort();
 
 public slots:
-    void getHost(QString newHost);
-    bool connect();
-    QString checkNotification();
-    bool connectDB();
+    static void setNewHost(QString newHost, QString newPort = ":8080");
+    static bool connect();
+    static QString checkNotification();
 
 private:
-    bool conectionDB = false;
-    bool conectionServer = false;
-    DataBaseTracks* database;
-    trackData* trackDataClass;
-    searchModel* searchClass;
+    static inline QString host = "172.20.10.7";
+    static inline QString port = ":8080";
+    static inline bool conectionServer = false;
 };
 
 #endif // SETHOST_H

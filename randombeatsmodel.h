@@ -4,28 +4,23 @@
 #include <QObject>
 #include <QSqlQueryModel>
 
-class RandomBeatsModel : public QSqlQueryModel {
+#include "sethost.h"
+
+class RandomBeatsModel : public QObject {
     Q_OBJECT
+
+    Q_PROPERTY(QStringList items READ model CONSTANT)
 public:
-    enum Roles {
-        IdRole = Qt::UserRole + 1, // idFNameRole,
-        TitleRole,
-        AuthorRole,
-        timeRole,
-        coverRole
-    };
     // Объявляем конструктор класса
     explicit RandomBeatsModel(QObject *parent = nullptr);
     // Переопределяем метод, который будет возвращать данные
-    QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-
-protected:
-    QHash<int, QByteArray> roleNames() const;
+    QStringList model();
 
 public slots:
-    void updateModel(int type);
-    int getId(int row);
+    void updateModel(QString quantity, QString type = "");
 
+private:
+    QStringList results;
 };
 
 #endif // RANDOMBEATSMODEL_H

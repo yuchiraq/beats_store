@@ -43,7 +43,7 @@ Rectangle {
         }
         color: accent
 
-        text: "Авторы"
+        text: "<b>Авторы</b>"
         anchors {
             top: parent.top
             topMargin: blockMargin

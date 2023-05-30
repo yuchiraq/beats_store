@@ -1,44 +1,60 @@
 #include "randombeatsmodel.h"
 #include "databasetracks.h"
 
-RandomBeatsModel::RandomBeatsModel(QObject *parent) : QSqlQueryModel(parent) {
-    this->updateModel(0);
+RandomBeatsModel::RandomBeatsModel(QObject *parent){
+    //this->updateModel("5");
 }
 
-QVariant RandomBeatsModel::data(const QModelIndex & index, int role) const {
-    // Определяем номер колонки, адрес так сказать, по номеру роли
-    int columnId = role - Qt::UserRole - 1;
-    // Создаем индекс с помощью новоиспеченного ID колонки
-    QModelIndex modelIndex = this->index(index.row(), columnId);
-    /* И с помощью уже метода data() базового класса
-* берем данные для таблицы из модели
-* */
-    return QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+QStringList RandomBeatsModel::model(){
+    return this->results;
 }
 
-QHash<int, QByteArray> RandomBeatsModel::roleNames() const {
-    /* Сохраняем в хеш-таблицу названия ролей
-* по их номеру
-* */
-    QHash<int, QByteArray> roles;
-    roles[IdRole] = "id_db";
-//    roles[TitleRole] = "Title";
-//    roles[AuthorRole] = "Author";
-//    roles[timeRole] = "TimeSec";
-//    roles[coverRole] = "coverURL";
-    return roles;
-}
+void RandomBeatsModel::updateModel(QString quantity, QString style) {
+    QEventLoop eventloop;
 
-// Метод обновления таблицы в модели представления данных
-void RandomBeatsModel::updateModel(int style) {
-    // Обновление производится SQL-запросом к базе данных
-    //this->setQuery("SELECT id, " TABLE_TITLE ", " TABLE_AUTHOR ", "
-    //             TABLE_TIME " FROM " TABLE);
-    this->setQuery("SELECT * FROM " TABLE " ORDER BY RANDOM() LIMIT 5");
+    QString url = "http://" + setHost::getHost() + setHost::getPort() + "/tracks/random?quantity=" + quantity;
 
-}
+    if(style != "")
+        url += "&style=" + style;
 
-// Получение id из строки в модели представления данных
-int RandomBeatsModel::getId(int row) {
-    return this->data(this->index(row, 0), IdRole).toInt();
+    QNetworkReply *reply;
+    QNetworkAccessManager manager;
+
+    manager.setTransferTimeout(1000);
+
+    QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
+
+    QNetworkRequest request((QUrl(url)));
+
+    reply = manager.get(request);
+    eventloop.exec();
+
+    if(reply->error() == QNetworkReply::NoError) {
+        qDebug() << "NO EROOR";
+
+
+
+        QString str = QString(reply->readAll());
+
+        QStringList *replyList = new QStringList(QString(str).split("|||"));
+
+        delete reply;
+
+        qDebug() << "connected = true";
+
+        this->results = *replyList;
+        this->model();
+
+        return;
+    }else {
+        qDebug() << "ERROR" << reply->error() << QUrl();
+
+        qDebug() << "connected = false";
+        delete reply;
+        this->results = QStringList("0");
+        return;
+    }
+
+    this->results = QStringList("0");
+    return;
 }

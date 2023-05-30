@@ -4,9 +4,13 @@
 #include <QObject>
 #include <QSqlQueryModel>
 
+#include "sethost.h"
+
 class LastRealisesListModel : public QSqlQueryModel
 {
     Q_OBJECT
+
+
 public:
     // Перечисляем все роли, которые будут использоваться в TableView
     enum Roles {

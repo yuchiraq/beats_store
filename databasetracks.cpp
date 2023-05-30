@@ -74,7 +74,7 @@ bool DataBaseTracks::createTable() {
     QEventLoop eventloop;
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-    QNetworkRequest req(QUrl(QString("http://" + this->host + this->port + "/")));
+    QNetworkRequest req(QUrl(QString("http://" + setHost::getHost() + setHost::getPort() + "/")));
     reply = manager.get(req);
     eventloop.exec();
 
@@ -108,7 +108,7 @@ bool DataBaseTracks::insertData(){
 
     QEventLoop eventloop;
 
-    QString url = "http://" + host + port + "/tracks/all";
+    QString url = "http://" + setHost::getHost() + setHost::getPort() + "/tracks/all";
 
     QNetworkReply *reply;
     QNetworkAccessManager manager;
@@ -148,28 +148,6 @@ bool DataBaseTracks::insertData(){
                 qDebug() << "error insert into " << TABLE;
                 qDebug() << query.lastError().text();
             }
-
-            /*reply = manager.get(QNetworkRequest(QUrl(url)));
-            eventloop.exec();
-
-            if(reply->error() == QNetworkReply::NoError) {
-                str = QString(reply->readAll());
-
-                QStringList replyData = str.split(divider);
-
-                qDebug() << "GOT " << replyData[0] << replyData[1] << replyData[2] << replyData[3];
-                query.prepare("INSERT INTO " TABLE " ( id, " TABLE_TITLE ", " TABLE_AUTHOR ", " TABLE_TIME ") VALUES (:id, :title, :author, :time)");
-                query.bindValue(":id", replyData[0].toInt());
-                query.bindValue(":title", replyData[1]);
-                query.bindValue(":author", replyData[2].toInt());
-                query.bindValue(":time", replyData[3].toInt());
-
-                if(!query.exec()){
-                    qDebug() << query.lastQuery();
-                    qDebug() << "error insert into " << TABLE;
-                    qDebug() << query.lastError().text();
-                }
-            }*/
 
         }
         delete reply;
