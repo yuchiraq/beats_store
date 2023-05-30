@@ -13,7 +13,7 @@ Rectangle {
     height: blockMargin * 16
     width: blockMargin * 12
     radius: blockMargin
-    border.color: outline
+    border.color: authorMouseArea.pressed ? secondary : outline
     border.width: 0.5
 
     color: container
@@ -147,6 +147,7 @@ Rectangle {
     }
 
     MouseArea {
+        id: authorMouseArea
         anchors.fill: parent
 
         onClicked: {

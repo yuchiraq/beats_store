@@ -14,6 +14,9 @@ Rectangle {
 
     radius: blockMargin
 
+    border.width: 0 //selected && id_track != "" ? 0.5 : 0
+    border.color: secondary
+
     clip: true
 
     Connections {
@@ -33,7 +36,7 @@ Rectangle {
     property int timeSec: id_track == "" ? 0 : trackData.getDuration(id_track)
     property int bpm: id_track == "" ? 0 : 1
 
-    property bool selected: musicPlayer.track_id == id_track
+    property bool selected: musicPlayer.track_id.toString() == id_track
 
     function timeCorrector(number) {
         if (number <= 9)
@@ -57,7 +60,19 @@ Rectangle {
         x: backX - width / 2
         y: backY - width / 2
 
-        visible: selected && id_track != ""
+        visible: selected //&& id_track != ""
+    }
+
+    Rectangle {
+        id: backgrounBorder
+        anchors.fill: parent
+        border.width: 0.5
+        border.color: secondary
+        color: "transparent"
+        radius: parent.radius
+
+        //opacity: selected ? 1 : 0
+        visible: selected
     }
 
     ParallelAnimation {
@@ -70,6 +85,15 @@ Rectangle {
             easing.type: Easing.InOutQuad
             from: 0
             to: beatLine.width * 3
+        }
+
+        NumberAnimation {
+            target: backgrounBorder
+            property: "opacity"
+            duration: 1000
+            easing.type: Easing.InOutQuad
+            from: 0
+            to: 1
         }
 
         onFinished: {
@@ -86,14 +110,24 @@ Rectangle {
         running: false
     }
 
-    NumberAnimation {
-        id: touchAnimOff
-        target: beatLineBackground
-        property: "opacity"
-        duration: 300
-        easing.type: Easing.InOutQuad
-        from: 0.7
-        to: 0
+    ParallelAnimation {
+        NumberAnimation {
+            id: touchAnimOff
+            target: beatLineBackground
+            property: "opacity"
+            duration: 300
+            easing.type: Easing.InOutQuad
+            from: 0.7
+            to: 0
+        }
+        NumberAnimation {
+            target: backgrounBorder
+            property: "opacity"
+            duration: 300
+            easing.type: Easing.InOutQuad
+            from: 1
+            to: 0
+        }
         onFinished: {
             beatLineBackground.width = 0
             beatLineBackground.visible = false
@@ -375,31 +409,32 @@ Rectangle {
         anchors.fill: parent
 
         Timer {
-            id: timer
-            interval: 250
-            onTriggered: singleClick()
+            id: timerPress
+            interval: 40
+            onTriggered: {
+                if (beatLineMouseArea.pressed)
+                    touchAnimOn.restart()
+            }
         }
 
         onPressed: {
             backX = mouseX
             backY = mouseY
             console.log("Beat pressed")
-            touchAnimOn.restart()
+            timerPress.restart()
+            //touchAnimOn.restart()
         }
         onReleased: {
+            if (timer.running) {
+                timer.stop()
+                return
+            }
             if (!touchAnimOn.running) {
                 needBack = true
             }
             console.log("Beat released")
         }
         onClicked: {
-            //            if (timer.running) {
-            //                doubleClick()
-            //                console.log("Beat liked")
-            //                timer.stop()
-            //            } else {
-            //                timer.restart()
-            //            }
             singleClick()
         }
         onDoubleClicked: likeBeat.running = true

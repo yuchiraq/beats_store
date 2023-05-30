@@ -16,10 +16,15 @@ Rectangle {
     radius: blockMargin * 1.5
     //color: "#333333"
     color: container
-    border.color: outline
+    border.color: randomBeatsMouse.pressed ? secondary : outline
     border.width: 0.5
 
     property int style: 0
+
+    MouseArea {
+        id: randomBeatsMouse
+        anchors.fill: parent
+    }
 
     Text {
         id: headerRandomBeats
