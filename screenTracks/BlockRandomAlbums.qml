@@ -21,17 +21,6 @@ Rectangle {
 
     clip: true
 
-    GaussianBlur {
-        source: randomAlbumsFlicable
-        anchors.fill: randomAlbumsFlicable
-        radius: 16
-        samples: 16
-        transparentBorder: true
-        opacity: 0.5
-
-        visible: false
-    }
-
     Text {
         id: headerRandomAlbums
 
@@ -112,10 +101,11 @@ Rectangle {
         //        }
     }
 
-    Flickable {
-        id: randomAlbumsFlicable
+    ListView {
+        id: randomAlbumsList
 
-        contentWidth: AlbumMiniCard.width * 8 + blockMargin * 7
+        orientation: ListView.Horizontal
+
         anchors {
             top: headerRandomAlbums.bottom
             topMargin: blockMargin
@@ -127,59 +117,35 @@ Rectangle {
 
         clip: true
 
+        header: Rectangle {
+            width: blockMargin
+        }
+
+        footer: Button {
+            onClicked: {
+                var i = 0
+                while (i < 1000) {
+                    i++
+                    myModel.append({
+                                       "titleNew": "162 pack 2"
+                                   })
+                }
+            }
+        }
         width: parent.width - 2
         height: parent.height - headerRandomAlbums.height - 20
 
-        Row {
-            id: randomAlbums
-            anchors.fill: parent
-            anchors.leftMargin: blockMargin
-            anchors.rightMargin: blockMargin
-            spacing: blockMargin
+        model: ListModel {
+            id: myModel
+            ListElement {
+                titleNew: ""
+            }
+        }
 
-            AlbumMiniCard {
-                title: "162 pack 2"
-                style: "Trap/EDM"
-                author: "Niki-Y On Da Track & Scotty On Da Track"
-                cover: "http://" + ip + "/coversMini/1.jpg"
-            }
+        spacing: blockMargin
 
-            AlbumMiniCard {
-                style: "Boss design"
-                author: "Chiraq Concept"
-                cover: "http://" + ip + "/coversMini/2.jpg"
-            }
-
-            AlbumMiniCard {
-                style: "Shit"
-                author: "ogbogtoy"
-                cover: "http://" + ip + "/coversMini/3.jpg"
-            }
-
-            AlbumMiniCard {
-                style: "Shit"
-                title: "ogbogdsalkdsald toykjadiojdajdosad"
-                cover: "http://" + ip + "/coversMini/4.jpg"
-            }
-            AlbumMiniCard {
-                cover: "http://" + ip + "/coversMini/5.jpg"
-            }
-            AlbumMiniCard {
-                style: "Music"
-                title: "162 pack 2"
-                author: "Niki-Y On Da Track"
-                cover: "http://" + ip + "/coversMini/6.jpg"
-            }
-            AlbumMiniCard {
-                style: "Music"
-                title: "CLASSIC PACK III"
-                author: "Niki-Y On Da Track"
-                cover: "http://" + ip + "/coversMini/7.jpg"
-            }
-            AlbumMiniCard {
-                cover: "http://" + ip + "/coversMini/13.jpg"
-            }
-            AlbumMiniCard {}
+        delegate: AlbumMiniCard {
+            title: titleNew
         }
     }
 }

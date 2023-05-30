@@ -113,11 +113,9 @@ Page {
             id: albumContent
             width: parent.width
             radius: blockMargin * 2
-            height: database.getQuantity(
-                        ) * (blockMargin * 7 + 0.5) + blockMargin * 2 + 4 + blockMargin * 30
 
             anchors.top: albumTop.bottom
-            //anchors.topMargin: albumCover.height - blockMargin * 2
+
             anchors.horizontalCenter: parent.horizontalCenter
 
             color: surface
@@ -136,38 +134,6 @@ Page {
                     top: parent.top
                     topMargin: blockMargin
                     horizontalCenter: parent.horizontalCenter
-                }
-            }
-
-            ListView {
-                id: lastRealises
-
-                model: lastRealisesModel
-                anchors.top: topLineAlbum.bottom
-                anchors.topMargin: blockMargin
-                anchors.right: parent.right
-                anchors.left: parent.left
-                height: database.getQuantity(
-                            ) * (blockMargin * 7 + 0.5) * blockMargin * 7
-
-                delegate: Item {
-                    id: lastRealise
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    width: parent.width - blockMargin
-                    height: lastRealiseBeat.height + 0.5
-
-                    BeatLine {
-                        id: lastRealiseBeat
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        width: parent.width
-                        //title: Title
-                        author: albumPage.album_author
-                        //timeSec: TimeSec
-                        id_track: id_db
-                        cover: albumPage.album_cover
-                    }
-
-                    Divider {}
                 }
             }
         }

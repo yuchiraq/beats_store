@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     setHost setHostClass;
     qDebug() << setHost::getHost() << " HOST";
 
-    DataBaseTracks dataBaseTracks;
+    //DataBaseTracks dataBaseTracks;
 
     LastRealisesListModel *lastRealisesListModel = new LastRealisesListModel();
     RandomBeatsModel *randomBeatsModel = new RandomBeatsModel();
@@ -47,12 +47,12 @@ int main(int argc, char *argv[])
     trackData *trackDataClass = new trackData();
     searchModel *search = new searchModel();
 
-    dataBaseTracks.deleteData();
+    //dataBaseTracks.deleteData();
 
 
     engine.rootContext()->setContextProperty("setHost", &setHostClass);
-    engine.rootContext() -> setContextProperty("lastRealisesModel", lastRealisesListModel);
-    engine.rootContext() -> setContextProperty("database", &dataBaseTracks);
+    engine.rootContext() -> setContextProperty("lastRealises", lastRealisesListModel);
+    //engine.rootContext() -> setContextProperty("database", &dataBaseTracks);
     engine.rootContext() -> setContextProperty("randomBeatsModel", randomBeatsModel);
     engine.rootContext()->setContextProperty("search", search);
 
@@ -63,9 +63,7 @@ int main(int argc, char *argv[])
 
     engine.load(url);
 
-    dataBaseTracks.connectToDataBase();
-    //lastRealisesListModel->updateModel(0);
-    //randomBeatsModel->updateModel(0);
+    //dataBaseTracks.connectToDataBase();
 
     return app.exec();
 }

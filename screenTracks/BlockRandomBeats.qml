@@ -499,8 +499,12 @@ Rectangle {
             topMargin: blockMargin
             left: parent.left
             right: parent.right
-            bottom: parent.bottom
+            //bottom: parent.bottom
         }
+
+        flickableDirection: Flickable.AutoFlickDirection
+
+        height: contentHeight
 
         delegate: Item {
             id: randomBeatButton

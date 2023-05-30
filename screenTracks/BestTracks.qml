@@ -151,61 +151,64 @@ StackView {
         }
 
         ListView {
-            id: lastRealises
+            id: lastRealisesView
 
-            model: lastRealisesModel
             anchors.top: lastRealisesTitle.bottom
             anchors.topMargin: blockMargin
             anchors.right: parent.right
             anchors.left: parent.left
-            height: database.getQuantity() * (blockMargin * 7 + 0.5)
+
+            height: contentHeight
+
+            model: ListModel {
+                id: lastTracksModel
+            }
 
             property int maxRows: 5
 
             clip: true
 
-            delegate: Item {
+            flickableDirection: Flickable.AutoFlickDirection
 
-                id: lastRealise
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width - blockMargin
-                height: lastRealiseBeat.height + 0.5
-
+            delegate: Component {
                 BeatLine {
-                    id: lastRealiseBeat
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    width: parent.width
-                    //title: Title
-                    //author: Author
-                    //timeSec: TimeSec
-                    id_track: id_db
+                    id_track: trackID
+                    Divider {
+                        anchors.bottom: parent.bottom
+                    }
+                }
+            }
+
+            header: Divider {}
+
+            footer: Button {
+                id: moreButton
+                anchors {
+                    //top: lastRealises.bottom
+                    horizontalCenter: parent.horizontalCenter
                 }
 
-                Divider {}
+                Material.theme: Material.System
+
+                onClicked: {
+                    if (lastRealisesView.model.count < lastRealisesView.maxRows) {
+                        notification.notificationText = "Это всё"
+                        notification.start()
+                        return
+                    }
+
+                    lastRealisesView.maxRows += 10
+
+                    console.log("addClick " + lastRealisesView.model.count + " "
+                                + (lastRealisesView.model.count
+                                   < lastRealisesView.maxRows).toString())
+
+                    updateLastTracks()
+
+                    //visible = lastRealisesView.model.count >= lastRealisesView.maxRows
+                }
+                visible: true //lastRealisesView.model.count == lastRealisesView.maxRows
             }
-        }
-
-        Button {
-            id: moreButton
-            anchors {
-                top: lastRealises.bottom
-                horizontalCenter: parent.horizontalCenter
-            }
-
-            Material.theme: Material.Dark
-            onClicked: {
-                lastRealises.maxRows += 10
-                lastRealisesModel.updateModel(lastRealises.maxRows)
-                if (database.getQuantity() > lastRealises.maxRows)
-                    lastRealises.height = lastRealises.maxRows * (blockMargin * 7 + 0.5)
-                else
-                    lastRealises.height = database.getQuantity(
-                                ) * (blockMargin * 7 + 0.5)
-
-                visible = database.getQuantity() > lastRealises.maxRows
-            }
-
-            visible: database.getQuantity() > lastRealises.maxRows
         }
 
         Text {
@@ -216,7 +219,7 @@ StackView {
 
             anchors {
                 topMargin: blockMargin
-                top: lastRealises.bottom
+                top: lastRealisesView.bottom
                 right: parent.right
                 rightMargin: blockMargin
                 bottomMargin: bottomBar.height + 20
@@ -226,17 +229,34 @@ StackView {
 
     function update() {
 
-        lastRealises.maxRows = 25
-        lastRealisesModel.updateModel(lastRealises.maxRows)
+        moveUP()
+
+        lastTracksModel.clear()
+        lastRealises.reload()
+
+        lastRealisesView.maxRows = 5
+        console.log("add " + lastRealisesView.model.count)
+        updateLastTracks()
+
         blockRandomBeats.updateView()
+    }
 
-        if (database.getQuantity() > lastRealises.maxRows)
-            lastRealises.height = lastRealises.maxRows * (blockMargin * 7 + 0.5)
-        else
-            lastRealises.height = database.getQuantity(
-                        ) * (blockMargin * 7 + 0.5)
+    Connections {
+        target: lastRealises
+    }
 
-        moreButton.visible = database.getQuantity() > lastRealises.maxRows
+    function updateLastTracks() {
+        var curCount = lastRealisesView.model.count
+        var curID = "0"
+        while (curCount < lastRealisesView.maxRows) {
+            curID = lastRealises.addRow(++curCount)
+            if (curID != "0") {
+                console.log("add " + curCount + "|" + curID + " | " + lastRealisesView.model.count)
+                lastTracksModel.append({
+                                           "trackID": curID
+                                       })
+            }
+        }
     }
 
     function moveUP() {

@@ -46,14 +46,16 @@ Item {
             title: "«162 pack 2»"
             cover: "http://" + ip + "/newRealises/" + "6" + ".jpg"
         }
-
-        NewBeat {}
+        Repeater {
+            model: 50
+            NewBeat {}
+        }
     }
 
-//    PageIndicator {
-//        count: view.count
-//        currentIndex: view.currentIndex
-//        anchors.bottom: parent.bottom
-//        anchors.horizontalCenter: parent.horizontalCenter
-//    }
+    //    PageIndicator {
+    //        count: view.count
+    //        currentIndex: view.currentIndex
+    //        anchors.bottom: parent.bottom
+    //        anchors.horizontalCenter: parent.horizontalCenter
+    //    }
 }

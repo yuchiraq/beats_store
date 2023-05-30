@@ -80,9 +80,8 @@ Rectangle {
         } else {
             updated = true
             notification.notificationText = setHost.checkNotification()
-        }
-        if (setHost.connect())
             centralScreen.update()
+        }
         closeSplash()
     }
 

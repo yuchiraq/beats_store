@@ -118,8 +118,7 @@ Page {
             id: authorContent
             width: parent.width
             radius: blockMargin * 2
-            height: database.getQuantity(
-                        ) * (blockMargin * 7 + 0.5) + blockMargin * 2 + 4 + blockMargin * 30
+            height: blockMargin * 2 + 4 + blockMargin * 30
 
             anchors.top: authorTop.bottom
 
@@ -185,7 +184,7 @@ Page {
 
                     font {
                         bold: false
-                        pointSize: blockMargin * 0.9
+                        pointSize: blockMargin * 1.2
                         family: appFont
                     }
 
@@ -213,35 +212,6 @@ Page {
                 }
             }
 
-            ListView {
-                id: lastRealises
-
-                model: lastRealisesModel
-                anchors.top: blockAuthorAlbums.bottom
-                anchors.topMargin: blockMargin
-                anchors.right: parent.right
-                anchors.left: parent.left
-                height: database.getQuantity() * (blockMargin * 7 + 0.5)
-
-                delegate: Item {
-                    id: lastRealise
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    width: parent.width - blockMargin
-                    height: lastRealiseBeat.height + 0.5
-
-                    BeatLine {
-                        id: lastRealiseBeat
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        width: parent.width
-                        //title: Title
-                        //author: Author
-                        //timeSec: TimeSec
-                        id_track: id_db
-                    }
-
-                    Divider {}
-                }
-            }
         }
     }
 }

@@ -72,6 +72,10 @@ Window {
         }
     }
 
+    Loader{
+
+    }
+
     BestTracks {
         id: centralScreen
     }
