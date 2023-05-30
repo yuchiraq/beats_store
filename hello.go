@@ -219,19 +219,19 @@ func lastTracks(w http.ResponseWriter, r *http.Request) {
 	}*/
 	if quantity != "" {
 		if style == "" || style == "0" {
-			DBrequest = "SELECT id FROM tracks LIMIT " + quantity
+			DBrequest = "SELECT id FROM tracks ORDER BY realise_date DESC LIMIT " + quantity
 		} else {
-			DBrequest = "SELECT id FROM tracks WHERE music_style = " + style + " LIMIT " + quantity
+			DBrequest = "SELECT id FROM tracks ORDER BY realise_date DESC WHERE music_style = " + style + " LIMIT " + quantity
 		}
 	} else {
 		if style == "" || style == "0" {
-			DBrequest = "SELECT id FROM tracks"
+			DBrequest = "SELECT id FROM tracks ORDER BY realise_date DESC"
 		} else {
-			DBrequest = "SELECT id FROM tracks WHERE music_style = " + style
+			DBrequest = "SELECT id FROM tracks WHERE music_style = " + style + " ORDER BY realise_date DESC "
 		}
 	}
 
-	DBrequest += " ORDER BY realise_date DESC"
+	//DBrequest += " ORDER BY realise_date DESC"
 
 	results, err := db.Query(DBrequest)
 
