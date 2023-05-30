@@ -53,6 +53,8 @@ func main() {
 		fmt.Fprintf(w, "All is good, bro")
 	})
 	http.HandleFunc("/tracks/all", allTracks)
+	http.HandleFunc("/tracks/lastRealises", lastTracks)
+	http.HandleFunc("/tracks/random", randomTracks)
 	http.HandleFunc("/tracks/getData", getDataTrack)
 	http.HandleFunc("/tracks/search", searchTrack)
 	http.HandleFunc("/stream", func(w http.ResponseWriter, r *http.Request) {
@@ -113,6 +115,125 @@ func allTracks(w http.ResponseWriter, r *http.Request) {
 
 	defer db.Close()
 	results, err := db.Query("SELECT id FROM tracks")
+
+	if err != nil {
+		fmt.Println("Err > ", err.Error())
+		return
+	}
+
+	var tracks []Track
+	for results.Next() {
+		var trackCur Track
+		err = results.Scan(&trackCur.ID)
+		if err != nil {
+			panic(err.Error())
+		}
+		tracks = append(tracks, trackCur)
+	}
+
+	for i := 0; i < len(tracks); i++ {
+		fmt.Fprintf(w, strconv.FormatUint(tracks[i].ID, 10))
+		if i != len(tracks)-1 {
+			fmt.Fprintf(w, endl)
+		}
+	}
+}
+
+func randomTracks(w http.ResponseWriter, r *http.Request) {
+	go fmt.Println(timeNow() + "||-->>" + r.RemoteAddr + " GET randomTracks")
+	endl := "|||"
+	//code := r.URL.Query().Get("code")
+
+	style := r.URL.Query().Get("style")
+	quantity := r.URL.Query().Get("quantity")
+
+	if quantity == "" {
+		fmt.Fprintf(w, "empty arg")
+		return
+	}
+
+	db, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
+
+	if err != nil {
+		fmt.Println("Err > ", err.Error())
+		return
+	}
+
+	defer db.Close()
+
+	var DBrequest = ""
+
+	if style == "" || style == "0" {
+		DBrequest = "SELECT id FROM tracks ORDER BY RAND() LIMIT " + quantity
+	} else {
+		DBrequest = "SELECT id FROM tracks WHERE music_style = " + style + " ORDER BY RAND() LIMIT " + quantity
+	}
+
+	results, err := db.Query(DBrequest)
+
+	if err != nil {
+		fmt.Println("Err > ", err.Error())
+		return
+	}
+
+	var tracks []Track
+	for results.Next() {
+		var trackCur Track
+		err = results.Scan(&trackCur.ID)
+		if err != nil {
+			panic(err.Error())
+		}
+		tracks = append(tracks, trackCur)
+	}
+
+	for i := 0; i < len(tracks); i++ {
+		fmt.Fprintf(w, strconv.FormatUint(tracks[i].ID, 10))
+		if i != len(tracks)-1 {
+			fmt.Fprintf(w, endl)
+		}
+	}
+}
+
+func lastTracks(w http.ResponseWriter, r *http.Request) {
+	go fmt.Println(timeNow() + "||-->>" + r.RemoteAddr + " GET lastTracks")
+	endl := "|||"
+	//code := r.URL.Query().Get("code")
+
+	style := r.URL.Query().Get("style")
+	quantity := r.URL.Query().Get("quantity")
+
+	db, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
+
+	if err != nil {
+		fmt.Println("Err > ", err.Error())
+		return
+	}
+
+	defer db.Close()
+
+	var DBrequest = ""
+
+	/*if quantity == "" {
+		fmt.Fprintf(w, "empty arg")
+		return
+	}*/
+	if quantity != "" {
+		if style == "" || style == "0" {
+			DBrequest = "SELECT id FROM tracks LIMIT " + quantity
+		} else {
+			DBrequest = "SELECT id FROM tracks WHERE music_style = " + style + " LIMIT " + quantity
+		}
+	} else {
+		if style == "" || style == "0" {
+			DBrequest = "SELECT id FROM tracks"
+		} else {
+			DBrequest = "SELECT id FROM tracks WHERE music_style = " + style
+		}
+	}
+
+	DBrequest += " ORDER BY realise_date DESC"
+
+	results, err := db.Query(DBrequest)
 
 	if err != nil {
 		fmt.Println("Err > ", err.Error())
