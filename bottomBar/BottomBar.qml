@@ -15,7 +15,13 @@ Rectangle {
     height: blockMargin * 5
     width: mainScreen.width
 
-    color: surface
+    color: "transparent"
+
+    Rectangle {
+        anchors.fill: parent
+        color: container //surface
+        opacity: .6
+    }
 
     property int buttonMin: height * 0.4
     property int buttonMax: height * 0.43
@@ -39,21 +45,21 @@ Rectangle {
             property: "height"
             from: leftBottomBarButtonImg.height
             to: buttonMin
-            easing.type: Easing.InOutBounce
+            easing.type: Easing.InOutCirc
         }
         NumberAnimation {
             target: centralBottomBarButtonImg
             property: "height"
             from: centralBottomBarButtonImg.height
             to: buttonMin
-            easing.type: Easing.InOutBounce
+            easing.type: Easing.InOutCirc
         }
         NumberAnimation {
             target: rightBottomBarButtonImg
             property: "height"
             from: rightBottomBarButtonImg.height
             to: buttonMin
-            easing.type: Easing.InOutBounce
+            easing.type: Easing.InOutCirc
         }
         running: false
     }
@@ -204,10 +210,10 @@ Rectangle {
 
             //rightOverlay.color = accent
             if (active == 1) {
-                leftScreen.clearStack()
+                leftScreen.clearStack(StackView.ReplaceTransition)
             } else {
                 stackView.clear()
-                stackView.push(leftScreen)
+                stackView.push(leftScreen, StackView.ReplaceTransition)
             }
 
             active = 1
@@ -312,10 +318,10 @@ Rectangle {
 
             //rightOverlay.color = accent
             if (active == 2) {
-                centralScreen.clearStack()
+                centralScreen.clearStack(StackView.ReplaceTransition)
             } else {
                 stackView.clear()
-                stackView.push(centralScreen)
+                stackView.push(centralScreen, StackView.ReplaceTransition)
             }
 
             active = 2
@@ -422,7 +428,7 @@ Rectangle {
             rightBottomBarButtonImg.source = "qrc:/ui_icons/solid/heart.svg"
 
             stackView.clear()
-            stackView.push(rightScreen)
+            stackView.push(rightScreen, StackView.ReplaceTransition)
             active = 3
             topBar.backSwitch()
         }

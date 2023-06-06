@@ -22,7 +22,7 @@ Rectangle {
     height: blockMargin * 5
     width: parent.width
 
-    color: darkestTransparency
+    color: "transparent"
 
     property bool searching: false
 
@@ -35,7 +35,8 @@ Rectangle {
         height: topBar.height
         width: parent.width
 
-        color: darkestTransparency
+        color: container
+        opacity: 1
 
         visible: true
     }
@@ -44,8 +45,8 @@ Rectangle {
         source: stackView
         anchors.fill: topBarBackground
 
-        radius: 100
-        samples: 128
+        radius: 120
+        samples: 64
         transparentBorder: false
 
         visible: topBarBackground.visible
@@ -53,7 +54,8 @@ Rectangle {
 
     Rectangle {
         anchors.fill: topBarBackground
-        color: darkestTransparency
+        color: container
+        opacity: .6
         visible: topBarBackground.visible
 
         Divider {
@@ -114,7 +116,7 @@ Rectangle {
         target: leftScreen.get(leftScreen.depth - 1)
         property: "contentY"
         //duration: 200
-        easing.type: Easing.InOutQuad
+        easing.type: Easing.InOutCirc
         from: leftScreen.get(leftScreen.depth - 1).contentY
         to: 0
     }
@@ -124,7 +126,7 @@ Rectangle {
         target: centralScreen.get(centralScreen.depth - 1)
         property: "contentY"
         //duration: 200
-        easing.type: Easing.InOutQuad
+        easing.type: Easing.InOutCirc
         from: centralScreen.get(centralScreen.depth - 1).contentY
         to: 0
     }
@@ -146,8 +148,9 @@ Rectangle {
 
         search.updateModel(searchInputField.text, searchInputField.searchType,
                            searchInputField.searchWhat)
-        stackView.pop()
-        stackView.push("qrc:/topBar/SearchPage.qml")
+        stackView.pop(StackView.ReplaceTransition)
+        stackView.push("qrc:/topBar/SearchPage.qml",
+                       StackView.ReplaceTransition)
     }
 
     Rectangle {
@@ -163,12 +166,11 @@ Rectangle {
         height: blockMargin * 3.5
         radius: blockMargin * 1.5
         //radius: height / 2
-        color: searchInputField.focus ? container : container
+        color: surface
         border.width: 0.5
         border.color: searchInputField.focus ? accent : outline
 
-        Material.theme: Material.Dark
-
+        //Material.theme: Material.Dark
         Rectangle {
             id: searchTopBarCleanerBack
             anchors.centerIn: searchTopBarCleaner
@@ -249,12 +251,14 @@ Rectangle {
                 property: "opacity"
                 from: 0
                 to: 1
+                easing.type: Easing.InOutCirc
             }
             NumberAnimation {
                 target: searchTopBarCleanerBack
                 property: "opacity"
                 from: 1
                 to: 0
+                easing.type: Easing.InOutCirc
             }
             running: false
         }
@@ -308,12 +312,14 @@ Rectangle {
             property: "opacity"
             from: 0
             to: 1
+            easing.type: Easing.InOutCirc
         }
         NumberAnimation {
             target: searchTopBarBack
             property: "opacity"
             from: 1
             to: 0
+            easing.type: Easing.InOutCirc
         }
         running: false
     }
@@ -376,6 +382,7 @@ Rectangle {
         to: topBar.width - searchTopBar.width + blockMargin / 4
 
         running: false
+        easing.type: Easing.InOutCirc
 
         onFinished: {
             searchInput.visible = true
@@ -390,6 +397,7 @@ Rectangle {
         property: "anchors.rightMargin"
         from: topBar.width - searchTopBar.width + blockMargin / 4
         to: 0
+        easing.type: Easing.InOutCirc
 
         running: false
 
@@ -541,7 +549,7 @@ Rectangle {
             target: selectorType
             property: "height"
             duration: 200
-            easing.type: Easing.InOutQuad
+            easing.type: Easing.InOutCirc
             from: 0
             to: (selectorTypeRows + 1) * searchSelector.height
             onStarted: {
@@ -563,7 +571,7 @@ Rectangle {
             target: selectorType
             property: "height"
             duration: 200
-            easing.type: Easing.InOutQuad
+            easing.type: Easing.InOutCirc
             from: selectorType.height
             to: 0
             onStarted: selectorToOne.restart()
@@ -709,7 +717,7 @@ Rectangle {
             id: selectorToLeft
             target: selector
             property: "anchors.leftMargin"
-            easing.type: Easing.InOutQuad
+            easing.type: Easing.InOutCirc
             from: selector.anchors.leftMargin
             to: blockMargin / 4
 
@@ -730,7 +738,7 @@ Rectangle {
             id: selectorToCenter
             target: selector
             property: "anchors.leftMargin"
-            easing.type: Easing.InOutQuad
+            easing.type: Easing.InOutCirc
             from: selector.anchors.leftMargin
             to: blockMargin / 2 + blockMargin / 4 + selector.width
 
@@ -750,7 +758,7 @@ Rectangle {
             id: selectorToRight
             target: selector
             property: "anchors.leftMargin"
-            easing.type: Easing.InOutQuad
+            easing.type: Easing.InOutCirc
             from: selector.anchors.leftMargin
             to: blockMargin + blockMargin / 4 + selector.width * 2
 
@@ -900,7 +908,7 @@ Rectangle {
             property: "height"
             from: 0
             to: blockMargin * 3
-            easing.type: Easing.OutBack
+            easing.type: Easing.InOutCirc
         }
 
         NumberAnimation {
@@ -908,7 +916,7 @@ Rectangle {
             property: "width"
             from: 0
             to: parent.width - blockMargin
-            easing.type: Easing.InOutBack
+            easing.type: Easing.InOutCirc
         }
 
         NumberAnimation {
@@ -916,13 +924,13 @@ Rectangle {
             property: "anchors.topMargin"
             from: 0
             to: blockMargin * 5
-            easing.type: Easing.InOutQuad
+            easing.type: Easing.InOutCirc
         }
 
         NumberAnimation {
             target: topBarBackground
             property: "height"
-            easing.type: Easing.OutInBack
+            easing.type: Easing.InOutCirc
             from: topBar.height
             to: blockMargin * 3 + blockMargin * 3 + blockMargin * 3
         }
@@ -942,7 +950,7 @@ Rectangle {
             property: "height"
             from: blockMargin * 3
             to: 0
-            easing.type: Easing.OutBack
+            easing.type: Easing.InOutCirc
         }
 
         NumberAnimation {
@@ -950,7 +958,7 @@ Rectangle {
             property: "width"
             from: searchSelector.width
             to: 0
-            easing.type: Easing.InOutBack
+            easing.type: Easing.InOutCirc
         }
 
         NumberAnimation {
@@ -958,13 +966,13 @@ Rectangle {
             property: "anchors.topMargin"
             from: blockMargin * 5
             to: 0
-            easing.type: Easing.InOutQuad
+            easing.type: Easing.InOutCirc
         }
 
         NumberAnimation {
             target: topBarBackground
             property: "height"
-            easing.type: Easing.OutInBack
+            easing.type: Easing.InOutCirc
             from: blockMargin * 3 + blockMargin * 3 + blockMargin * 3
             to: topBar.height
         }
@@ -982,8 +990,9 @@ Rectangle {
         bottomBar.close()
         searchOnAnimation.running = true
         searchSelectorOn.running = true
-        stackView.push("qrc:/primitive/Splash.qml")
-        stackView.push("qrc:/topBar/SearchPage.qml")
+        stackView.push("qrc:/primitive/Splash.qml", StackView.ReplaceTransition)
+        stackView.push("qrc:/topBar/SearchPage.qml",
+                       StackView.ReplaceTransition)
     }
 
     function searchOff() {
@@ -994,8 +1003,8 @@ Rectangle {
         searchSelectorOff.running = true
         topLogo.visible = true
         bottomBar.open()
-        stackView.pop()
-        stackView.pop()
+        stackView.pop(StackView.ReplaceTransition)
+        stackView.pop(StackView.ReplaceTransition)
         backSwitch()
     }
 
@@ -1056,11 +1065,11 @@ Rectangle {
 
         onClicked: {
             if (bottomBar.active == 1 && leftScreen.depth > 1) {
-                leftScreen.pop()
+                leftScreen.pop(StackView.Immediate)
                 if (leftScreen.depth == 1)
                     backOff.running = true
             } else if (bottomBar.active == 2 && centralScreen.depth > 1) {
-                centralScreen.pop()
+                centralScreen.pop(StackView.Immediate)
                 if (centralScreen.depth == 1)
                     backOff.running = true
             }
@@ -1083,6 +1092,7 @@ Rectangle {
             duration: timeAnimation
             from: blockMargin * 1
             to: (topBar.width - topLogo.width) / 2
+            easing.type: Easing.InOutCirc
         }
 
         NumberAnimation {
@@ -1091,6 +1101,7 @@ Rectangle {
             duration: timeAnimation
             from: 0
             to: topBar.height
+            easing.type: Easing.InOutCirc
         }
 
         onStarted: backTopBar.visible = true
@@ -1107,6 +1118,7 @@ Rectangle {
             duration: timeAnimation
             from: topBar.height
             to: 0
+            easing.type: Easing.InOutCirc
         }
 
         NumberAnimation {
@@ -1115,6 +1127,7 @@ Rectangle {
             duration: timeAnimation
             from: (topBar.width - topLogo.width) / 2
             to: blockMargin * 1.5
+            easing.type: Easing.InOutCirc
         }
 
         onFinished: backSwitch()

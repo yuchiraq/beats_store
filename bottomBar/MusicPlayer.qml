@@ -62,7 +62,8 @@ Rectangle {
         width: mainScreen.width
         height: blockMargin * 3
 
-        color: darkestTransparency
+        color: container
+        opacity: .8
 
         anchors {
             bottom: parent.bottom

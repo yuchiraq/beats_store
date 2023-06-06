@@ -34,7 +34,7 @@ Window {
 
     //cols by CQ
     property string container: darkTheme ? "#171519" : "#F0EFF4"
-    property string surface: darkTheme ? "#0D0C0D" : "#F1F0EA"
+    property string surface: darkTheme ? "#0D0C0D" : "#fef"
 
     property string darkestTransparency: darkTheme ? "#C80F0A0F" : "#81F1F0EA"
 
@@ -72,9 +72,7 @@ Window {
         }
     }
 
-    Loader{
-
-    }
+    Loader {}
 
     BestTracks {
         id: centralScreen
@@ -102,13 +100,20 @@ Window {
         visible: false
     }
 
+    DropShadow {
+        anchors.fill: blurMask
+        radius: 8
+        color: "black"
+        source: blurMask
+    }
+
     Rectangle {
         id: blurMask
 
         width: parent.width
         anchors.bottom: parent.bottom
         height: musicPlayer.visible ? blockMargin * 8 : blockMargin * 5
-        color: darkestTransparency
+        color: container
         visible: true
     }
 
@@ -116,8 +121,8 @@ Window {
         source: stackView
         anchors.fill: blurMask
 
-        radius: 100
-        samples: 128
+        radius: 120
+        samples: 64
         transparentBorder: false
 
         visible: blurMask.visible
@@ -125,7 +130,14 @@ Window {
 
     BottomBar {
         id: bottomBar
-        color: darkestTransparency
+        //color: darkestTransparency
+    }
+
+    DropShadow {
+        anchors.fill: topBar
+        radius: 8
+        color: "black"
+        source: topBar
     }
 
     TopLogo {
@@ -243,5 +255,4 @@ Window {
     Keys.onBackPressed: {
         topBar.standartBack()
     }
-
 }

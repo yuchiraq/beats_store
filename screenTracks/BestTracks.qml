@@ -30,7 +30,8 @@ StackView {
     initialItem: Flickable {
         id: bestTracksInitial
         contentHeight: blockNewRealise.height * 2 + blockRandomBeats.height
-                       + blockRandomAlbums.height + blockRandomAuthors.height + lastRealises.height
+                       + blockRandomAlbums.height + blockRandomAuthors.height
+                       + lastRealisesView.height
 
         anchors.fill: parent
         anchors.topMargin: topBar.height
@@ -188,7 +189,9 @@ StackView {
                     horizontalCenter: parent.horizontalCenter
                 }
 
-                Material.theme: Material.System
+                Material.theme: Material.Dark
+                text: "..."
+                width: parent.width / 3
 
                 onClicked: {
                     if (lastRealisesView.model.count < lastRealisesView.maxRows) {

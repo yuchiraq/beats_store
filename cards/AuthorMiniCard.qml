@@ -155,9 +155,9 @@ Rectangle {
             authorPage.author_name = name
             authorPage.author_id = id
             if (bottomBar.active == 1) {
-                leftScreen.push(authorPage)
+                leftScreen.push(authorPage, StackView.Immediate)
             } else if (bottomBar.active == 2) {
-                centralScreen.push(authorPage)
+                centralScreen.push(authorPage, StackView.Immediate)
             } //else if (bottomBar.active == 3) {
             //leftScreen.push("qrc:/ui/Pages/AlbumPage.qml")
             //}

@@ -42,20 +42,21 @@ Item {
         }
 
         NewBeat {
+            id: test
             author: "Niki-Y On Da Track"
             title: "«162 pack 2»"
             cover: "http://" + ip + "/newRealises/" + "6" + ".jpg"
         }
         Repeater {
-            model: 50
-            NewBeat {}
+            model: 60
+            Loader {
+                active: SwipeView.isCurrentItem || SwipeView.isNextItem
+                        || SwipeView.isPreviousItem
+                sourceComponent: NewBeat {
+                    Component.onCompleted: console.log("created:", index)
+                    Component.onDestruction: console.log("destroyed:", index)
+                }
+            }
         }
     }
-
-    //    PageIndicator {
-    //        count: view.count
-    //        currentIndex: view.currentIndex
-    //        anchors.bottom: parent.bottom
-    //        anchors.horizontalCenter: parent.horizontalCenter
-    //    }
 }

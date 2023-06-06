@@ -58,19 +58,6 @@ Rectangle {
             color: container
         }
 
-        delegate: Text {
-
-            id: randomAlbumsSelectorText
-            text: modelData
-            font.pointSize: blockMargin * 1.3
-            font.family: appFont
-            color: secondary
-
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
-            anchors.leftMargin: 10
-        }
-
         indicator: Image {
             source: "qrc:/ui_icons/basic/angle-small-right.svg"
             anchors.verticalCenter: parent.verticalCenter
@@ -92,7 +79,7 @@ Rectangle {
         height: blockMargin * 1.6
 
         //width: randomAlbumsSelectorText.width + height + 20
-        model: ["Trap", "R\&B", "Rock", "Rap", "Drill", "Pop"]
+        model: ["Trap", "R\&B", "Rock", "Rap", "Drill", "Pop", "Trap", "R\&B", "Rock", "Rap", "Drill", "Pop", "Trap", "R\&B", "Rock", "Rap", "Drill", "Pop", "Trap", "R\&B", "Rock", "Rap", "Drill", "Pop"]
 
         //        onClicked: {
         //            styleChooser.styleFor = 3
@@ -146,6 +133,8 @@ Rectangle {
 
         delegate: AlbumMiniCard {
             title: titleNew
+            Component.onCompleted: console.log("created:", index)
+            Component.onDestruction: console.log("destroyed:", index)
         }
     }
 }

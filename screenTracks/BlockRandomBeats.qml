@@ -24,6 +24,14 @@ Rectangle {
     MouseArea {
         id: randomBeatsMouse
         anchors.fill: parent
+
+        onClicked: {
+            if (bottomBar.active == 2) {
+                centralScreen.push("qrc:/screenTracks/RandomBeatsPage.qml",
+                                   StackView.Immediate)
+                topBar.backSwitch()
+            }
+        }
     }
 
     Text {
@@ -74,13 +82,19 @@ Rectangle {
             }
 
             Image {
-                source: "qrc:/png/interface/next.png"
+                source: "qrc:/ui_icons/basic/angle-small-right.svg"
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.right: parent.right
                 anchors.rightMargin: 10
 
+                ColorOverlay {
+                    source: parent
+                    color: secondary
+                    anchors.fill: parent
+                }
+
                 rotation: 90
-                height: parent.height / 2
+                height: parent.height
                 width: height
             }
         }

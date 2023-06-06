@@ -163,9 +163,9 @@ Rectangle {
             albumPage.album_title = title
             albumPage.album_author = author
             if (bottomBar.active == 1) {
-                leftScreen.push(albumPage)
+                leftScreen.push(albumPage, StackView.Immediate)
             } else if (bottomBar.active == 2) {
-                centralScreen.push(albumPage)
+                centralScreen.push(albumPage, StackView.Immediate)
             } //else if (bottomBar.active == 3) {
             //leftScreen.push("qrc:/ui/Pages/AlbumPage.qml")
             //}
