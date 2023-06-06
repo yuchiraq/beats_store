@@ -158,6 +158,7 @@ Window {
         anchors.fill: stackView
         color: surface
         visible: stackMaskedBackground.visible
+        opacity: stackMaskedBackground.opacity
     }
 
     GaussianBlur {
@@ -168,6 +169,14 @@ Window {
         samples: 128
         transparentBorder: false
 
+        opacity: 1
+        visible: false
+    }
+
+    Image {
+        anchors.fill: stackMaskedBackground
+        source: "qrc:/ui_icons/мягкийСвет20.jpg"
+        opacity: .01
         visible: false
     }
 
@@ -243,9 +252,10 @@ Window {
         visible: notification.visible
         anchors.fill: notification
         radius: 8
-        color: outline
+        color: "black"
         source: notification
         transparentBorder: true
+        opacity: .2
     }
 
     Notification {

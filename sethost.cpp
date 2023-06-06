@@ -33,7 +33,7 @@ bool setHost::connect(){
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
-    manager.setTransferTimeout(1000);
+    manager.setTransferTimeout(5000);
 
     QEventLoop eventloop;
 

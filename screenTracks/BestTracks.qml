@@ -232,8 +232,7 @@ StackView {
 
     function update() {
 
-        moveUP()
-
+        //moveUP()
         lastTracksModel.clear()
         lastRealises.reload()
 

@@ -1,4 +1,4 @@
-QT += qml quick quickcontrols2 widgets core svg sql multimedia
+QT += qml quick quickcontrols2 widgets core svg sql multimedia xml
 
 greaterThan(QT_MAJOR_VERSION,5): QT += core5compat
 

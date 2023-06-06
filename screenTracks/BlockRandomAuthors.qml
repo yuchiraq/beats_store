@@ -22,17 +22,6 @@ Rectangle {
 
     clip: true
 
-    GaussianBlur {
-        source: randomAuthorsFlicable
-        anchors.fill: randomAuthorsFlicable
-        radius: 16
-        samples: 16
-        transparentBorder: true
-        opacity: 0.5
-
-        visible: false
-    }
-
     Text {
         id: headerRandomAuthors
 

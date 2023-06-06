@@ -39,6 +39,8 @@ Item {
             author: "Niki-Y On Da Track"
             title: "«162 pack 3»"
             cover: "http://" + ip + "/newRealises/" + "4" + ".jpg"
+            Component.onCompleted: console.log("created:")
+            Component.onDestruction: console.log("destroyed:")
         }
 
         NewBeat {
@@ -46,6 +48,8 @@ Item {
             author: "Niki-Y On Da Track"
             title: "«162 pack 2»"
             cover: "http://" + ip + "/newRealises/" + "6" + ".jpg"
+            Component.onCompleted: console.log("created:")
+            Component.onDestruction: console.log("destroyed:")
         }
         Repeater {
             model: 60

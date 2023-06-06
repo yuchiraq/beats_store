@@ -20,7 +20,7 @@ void RandomBeatsModel::updateModel(QString quantity, QString style) {
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
-    manager.setTransferTimeout(1000);
+    manager.setTransferTimeout(5000);
 
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 

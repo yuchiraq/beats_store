@@ -19,7 +19,7 @@ bool searchModel::updateModel(QString title, QString type, QString what){
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
-    manager.setTransferTimeout(1000);
+    manager.setTransferTimeout(5000);
 
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
