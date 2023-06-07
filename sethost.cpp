@@ -59,10 +59,26 @@ QString setHost::checkNotification(){
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
+    manager.setTransferTimeout(5000);
+
     QEventLoop eventloop;
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-    QNetworkRequest req(QUrl(QString("http://" + getHost() + getPort() + "/notify")));
+    QNetworkRequest req(QUrl(QString("http://" + getHost() + getPort() + "/")));
+    reply = manager.get(req);
+    eventloop.exec();
+
+    if(reply->error() != QNetworkReply::NoError)
+        qDebug() << "CONNECT ERROR " << reply->error();
+
+    QString rep = QString(reply->readAll());
+
+    if(rep != "availible"){
+        qDebug() << "ERROR " << rep;
+        return rep;
+    }
+    req.setUrl(QUrl(QString("http://" + getHost() + getPort() + "/notify")));
+
     reply = manager.get(req);
     eventloop.exec();
 
@@ -71,7 +87,7 @@ QString setHost::checkNotification(){
         return "Error of connection";
     }
 
-    QString rep = QString(reply->readAll());
+    rep = QString(reply->readAll());
 
     qDebug() << rep << "CHECK NOTIFY";
 

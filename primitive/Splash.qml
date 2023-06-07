@@ -113,12 +113,21 @@ Rectangle {
         if (splashScreen.opacity != 1)
             splashOn.restart()
 
+        var textCur = setHost.checkNotification()
+        console.log(textCur)
+
         if (!setHost.connect()) {
+
             notification.notificationText = "Нет подключения к серверу"
+            console.log("setNotify", notification.notificationText)
         } else {
             updated = true
-            notification.notificationText = setHost.checkNotification()
             centralScreen.update()
+        }
+
+        if (textCur != "") {
+            notification.notificationText = textCur
+            console.log("setNotify" + notification.notificationText)
         }
 
         bottomBar.bottomBarCorrector()
