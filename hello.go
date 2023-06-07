@@ -36,14 +36,19 @@ type Track struct {
 func main() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		_, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
+		db, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
 		if err != nil {
-			fmt.Fprintf(w, "unavailable database Tracks")
+			fmt.Fprintf(w, "unavailable database beats")
 			return
 		}
-		go fmt.Println(timeNow() + "||-->>" + r.RemoteAddr + " check connection")
+		defer db.Close()
+		_, err = db.Query("SELECT * from tracks LIMIT 1")
+		if err != nil {
+			fmt.Fprintf(w, "unavailable database beats")
+			return
+		}
 		fmt.Fprintf(w, "availible")
-	}) // each request calls handler
+	})
 	http.HandleFunc("/notify", func(w http.ResponseWriter, r *http.Request) {
 		_, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
 		if err != nil {
@@ -62,7 +67,7 @@ func main() {
 
 		go fmt.Println(timeNow() + "||-->>" + r.RemoteAddr + " STREAM > " + trackID)
 
-		file, err := os.Open("55.mp3")
+		file, err := os.Open("Snowlub.wav")
 		if err != nil {
 			panic(err)
 			return
@@ -70,7 +75,7 @@ func main() {
 
 		defer file.Close()
 
-		addr, err := net.ResolveUDPAddr("udp", "127.0.0.1:1234")
+		addr, err := net.ResolveUDPAddr("udp", "localhost:9000")
 		if err != nil {
 			panic(err)
 			return
@@ -82,7 +87,6 @@ func main() {
 			return
 		}
 	})
-
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
