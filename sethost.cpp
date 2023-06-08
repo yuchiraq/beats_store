@@ -8,7 +8,7 @@ QString setHost::getHost(){
     if(host.isNull())
         qDebug() << "HOST NULL";
     if(host.isNull())
-        return "172.20.10.7";
+        return "http://localhost";
     else
         return host;
 }
@@ -18,6 +18,10 @@ QString setHost::getPort(){
         return ":8080";
     else
         return port;
+}
+
+int setHost::getTimeout(){
+    return timeout;
 }
 
 void setHost::setNewHost(QString newHost, QString newPort){
@@ -33,13 +37,13 @@ bool setHost::connect(){
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
-    manager.setTransferTimeout(5000);
+    manager.setTransferTimeout(timeout);
 
     QEventLoop eventloop;
 
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-    QNetworkRequest req(QUrl(QString("http://" + getHost() + getPort() + "/")));
+    QNetworkRequest req(QUrl(QString(getHost() + getPort() + "/check")));
     reply = manager.get(req);
     eventloop.exec();
 
@@ -59,12 +63,12 @@ QString setHost::checkNotification(){
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
-    manager.setTransferTimeout(5000);
+    manager.setTransferTimeout(timeout);
 
     QEventLoop eventloop;
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-    QNetworkRequest req(QUrl(QString("http://" + getHost() + getPort() + "/")));
+    QNetworkRequest req(QUrl(QString(getHost() + getPort() + "/check")));
     reply = manager.get(req);
     eventloop.exec();
 
@@ -77,7 +81,7 @@ QString setHost::checkNotification(){
         qDebug() << "ERROR " << rep;
         return rep;
     }
-    req.setUrl(QUrl(QString("http://" + getHost() + getPort() + "/notify")));
+    req.setUrl(QUrl(QString(getHost() + getPort() + "/notify")));
 
     reply = manager.get(req);
     eventloop.exec();

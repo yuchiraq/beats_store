@@ -17,7 +17,7 @@ Rectangle {
     //color: "#333333"
     color: container
     border.color: randomBeatsMouse.pressed ? secondary : outline
-    border.width: 0.5
+    border.width: px(1)
 
     property int style: 0
 
@@ -495,11 +495,6 @@ Rectangle {
                 width: parent.width
                 id_track: ""
             }
-
-            Divider {
-                width: parent.width - blockMargin
-                anchors.top: parent.bottom
-            }
         }
     }
 
@@ -531,11 +526,6 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width
                 id_track: modelData != "" ? modelData : "empty arg"
-            }
-
-            Divider {
-                width: parent.width - blockMargin
-                anchors.top: randomBeat.bottom
             }
         }
 

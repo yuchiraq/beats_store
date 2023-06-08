@@ -3,6 +3,8 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 import Qt5Compat.GraphicalEffects
 
+import "qrc:/primitive"
+
 Rectangle {
     id: bottomBar
 
@@ -15,12 +17,24 @@ Rectangle {
     height: blockMargin * 5
     width: mainScreen.width
 
-    color: "transparent"
+    color: container
+
+    clip: true
+
+    FastBlur {
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        height: mainScreen.height
+        width: mainScreen.width
+        source: stackView
+        radius: 80
+        visible: parent.visible
+    }
 
     Rectangle {
         anchors.fill: parent
         color: container //surface
-        opacity: .6
+        opacity: .7
     }
 
     property int buttonMin: height * 0.4
@@ -434,11 +448,7 @@ Rectangle {
         }
     }
 
-    Rectangle {
-        height: 1
-        width: parent.width
-        color: outline
-
+    Divider {
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
     }

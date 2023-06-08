@@ -10,12 +10,11 @@ Rectangle {
     height: blockMargin * 20
     width: blockMargin * 15
     radius: blockMargin
-    border.color: albumMouseArea.pressed ? secondary : outline
 
     color: container
 
-    border.width: 0.5
-
+    //border.color: albumMouseArea.pressed ? secondary : outline
+    //border.width: px(1)
     property string cover: ""
     property string title: ""
     property string style: ""
@@ -154,6 +153,30 @@ Rectangle {
         }
     }
 
+    Rectangle {
+        anchors.fill: parent
+        color: "transparent"
+        radius: parent.radius
+        border.color: outline
+        border.width: px(1)
+
+        ColorAnimation on border.color {
+            id: borderColorOn
+            from: outline
+            to: secondary
+            duration: 200
+            running: false
+            onFinished: borderColorOff.restart()
+        }
+        ColorAnimation on border.color {
+            id: borderColorOff
+            from: secondary
+            to: outline
+            duration: 200
+            running: false
+        }
+    }
+
     MouseArea {
         id: albumMouseArea
         anchors.fill: parent
@@ -170,6 +193,11 @@ Rectangle {
             //leftScreen.push("qrc:/ui/Pages/AlbumPage.qml")
             //}
             topBar.backSwitch()
+        }
+
+        onPressed: {
+            if (!borderColorOn.running && !borderColorOff.running)
+                borderColorOn.restart()
         }
     }
 }

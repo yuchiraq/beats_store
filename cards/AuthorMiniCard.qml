@@ -13,9 +13,9 @@ Rectangle {
     height: blockMargin * 16
     width: blockMargin * 12
     radius: blockMargin
-    border.color: authorMouseArea.pressed ? secondary : outline
-    border.width: 0.5
 
+    //border.color: authorMouseArea.pressed ? secondary : outline
+    //border.width: px(1)
     color: container
 
     property int id: 0
@@ -38,16 +38,23 @@ Rectangle {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
         }
+
+        Rectangle {
+            anchors {
+                bottom: parent.bottom
+                horizontalCenter: parent.horizontalCenter
+            }
+            color: parent.color
+            width: parent.width
+            height: parent.radius
+        }
     }
 
     Image {
         id: coverImg
         source: authorMiniCard.cover
 
-        width: parent.width
-        height: width
-
-        anchors.centerIn: coverMask
+        anchors.fill: coverMask
 
         visible: false
     }
@@ -146,6 +153,30 @@ Rectangle {
         }
     }
 
+    Rectangle {
+        anchors.fill: parent
+        color: "transparent"
+        radius: parent.radius
+        border.color: outline
+        border.width: px(1)
+
+        ColorAnimation on border.color {
+            id: borderColorOn
+            from: outline
+            to: secondary
+            duration: 200
+            running: false
+            onFinished: borderColorOff.restart()
+        }
+        ColorAnimation on border.color {
+            id: borderColorOff
+            from: secondary
+            to: outline
+            duration: 200
+            running: false
+        }
+    }
+
     MouseArea {
         id: authorMouseArea
         anchors.fill: parent
@@ -162,6 +193,11 @@ Rectangle {
             //leftScreen.push("qrc:/ui/Pages/AlbumPage.qml")
             //}
             topBar.backSwitch()
+        }
+
+        onPressed: {
+            if (!borderColorOn.running && !borderColorOff.running)
+                borderColorOn.restart()
         }
     }
 }

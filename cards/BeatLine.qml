@@ -4,6 +4,8 @@ import Qt5Compat.GraphicalEffects
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 
+import "qrc:/primitive"
+
 Rectangle {
     id: beatLine
 
@@ -18,6 +20,11 @@ Rectangle {
     border.color: secondary
 
     clip: true
+
+    Divider {
+        anchors.bottom: parent.bottom
+        width: parent.width - blockMargin
+    }
 
     Connections {
         target: trackData
@@ -64,15 +71,31 @@ Rectangle {
     }
 
     Rectangle {
-        id: backgrounBorder
+        id: backgroundBorder
         anchors.fill: parent
-        border.width: 0.5
+        border.width: px(1)
         border.color: secondary
         color: "transparent"
         radius: parent.radius
 
         //opacity: selected ? 1 : 0
         visible: selected
+
+        ColorAnimation on border.color {
+            id: borderColorOn
+            from: surface
+            to: accent
+            duration: 1000
+            running: false
+        }
+
+        ColorAnimation on border.color {
+            id: borderColorOff
+            from: accent
+            to: surface
+            duration: 500
+            running: false
+        }
     }
 
     ParallelAnimation {
@@ -88,7 +111,7 @@ Rectangle {
         }
 
         NumberAnimation {
-            target: backgrounBorder
+            target: backgroundBorder
             property: "opacity"
             duration: 1000
             easing.type: Easing.InOutQuad
@@ -103,6 +126,7 @@ Rectangle {
         }
 
         onStarted: {
+            borderColorOn.restart()
             beatLineBackground.visible = true
             beatLineBackground.opacity = 0.7
         }
@@ -115,19 +139,21 @@ Rectangle {
             id: touchAnimOff
             target: beatLineBackground
             property: "opacity"
-            duration: 300
+            duration: 500
             easing.type: Easing.InOutQuad
             from: 0.7
             to: 0
         }
         NumberAnimation {
-            target: backgrounBorder
+            target: backgroundBorder
             property: "opacity"
-            duration: 300
+            duration: 500
             easing.type: Easing.InOutQuad
             from: 1
             to: 0
         }
+
+        onStarted: borderColorOff.restart()
         onFinished: {
             beatLineBackground.width = 0
             beatLineBackground.visible = false
@@ -408,27 +434,28 @@ Rectangle {
         id: beatLineMouseArea
         anchors.fill: parent
 
-        Timer {
+
+        /*Timer {
             id: timerPress
             interval: 40
             onTriggered: {
                 if (beatLineMouseArea.pressed)
                     touchAnimOn.restart()
             }
-        }
-
+        }*/
         onPressed: {
             backX = mouseX
             backY = mouseY
             console.log("Beat pressed")
-            timerPress.restart()
-            //touchAnimOn.restart()
+            //timerPress.restart()
+            touchAnimOn.restart()
         }
         onReleased: {
-            if (timer.running) {
+
+            /*if (timer.running) {
                 timer.stop()
                 return
-            }
+            }*/
             if (!touchAnimOn.running) {
                 needBack = true
             }

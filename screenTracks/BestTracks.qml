@@ -146,11 +146,11 @@ StackView {
             }
         }
 
-        Divider {
+
+        /* Divider {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: lastRealises.top
-        }
-
+        }*/
         ListView {
             id: lastRealisesView
 
@@ -172,11 +172,9 @@ StackView {
             flickableDirection: Flickable.AutoFlickDirection
 
             delegate: Component {
+
                 BeatLine {
                     id_track: trackID
-                    Divider {
-                        anchors.bottom: parent.bottom
-                    }
                 }
             }
 

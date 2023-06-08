@@ -17,7 +17,7 @@ Rectangle {
     color: container
 
     border.color: outline
-    border.width: 0.5
+    border.width: px(1)
 
     clip: true
 

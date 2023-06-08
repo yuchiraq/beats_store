@@ -1,5 +1,4 @@
 #include "randombeatsmodel.h"
-#include "databasetracks.h"
 
 RandomBeatsModel::RandomBeatsModel(QObject *parent){
     //this->updateModel("5");
@@ -12,7 +11,7 @@ QStringList RandomBeatsModel::model(){
 void RandomBeatsModel::updateModel(QString quantity, QString style) {
     QEventLoop eventloop;
 
-    QString url = "http://" + setHost::getHost() + setHost::getPort() + "/tracks/random?quantity=" + quantity;
+    QString url = setHost::getHost() + setHost::getPort() + "/tracks/random?quantity=" + quantity;
 
     if(style != "")
         url += "&style=" + style;
@@ -20,7 +19,7 @@ void RandomBeatsModel::updateModel(QString quantity, QString style) {
     QNetworkReply *reply;
     QNetworkAccessManager manager;
 
-    manager.setTransferTimeout(5000);
+    manager.setTransferTimeout(setHost::getTimeout());
 
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 

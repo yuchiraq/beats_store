@@ -42,17 +42,18 @@ Rectangle {
     function playerPPclick() {
         if (!play) {
             play = true
+            mediaPlayer.play()
             musicPlayerMinPPImg.source = "qrc:/png/interface/pause.svg"
             musicPlayerMaxPPImg.source = "qrc:/png/interface/pause.svg"
             musicPLayerMaxPPShadow.radius = 4
         } else {
             play = false
+            mediaPlayer.pause()
             musicPlayerMinPPImg.source = "qrc:/ui_icons/solid/play.svg"
             musicPlayerMaxPPImg.source = "qrc:/ui_icons/solid/play.svg"
             musicPLayerMaxPPShadow.radius = 7
         }
     }
-
 
     property int timeAnimation: 100
 

@@ -35,29 +35,29 @@ Rectangle {
         height: topBar.height
         width: parent.width
 
-        color: container
+        color: surface
         opacity: 1
 
         visible: true
-    }
 
-    GaussianBlur {
-        source: stackView
-        anchors.fill: topBarBackground
+        clip: true
 
-        radius: 120
-        samples: 64
-        transparentBorder: false
+        FastBlur {
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: mainScreen.height
+            width: mainScreen.width
+            source: stackView
+            radius: 80
+            visible: parent.visible
+        }
 
-        visible: topBarBackground.visible
-    }
-
-    Rectangle {
-        anchors.fill: topBarBackground
-        color: container
-        opacity: .6
-        visible: topBarBackground.visible
-
+        Rectangle {
+            anchors.fill: parent
+            color: surface
+            opacity: .7
+            visible: parent.visible
+        }
         Divider {
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
@@ -639,7 +639,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
 
             height: blockMargin
-            width: 1
+            width: px(1)
 
             color: outline
         }
@@ -650,7 +650,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
 
             height: blockMargin
-            width: 1
+            width: px(1)
 
             color: outline
         }

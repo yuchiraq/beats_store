@@ -12,7 +12,7 @@ Page {
 
     //contentHeight: randomBeatsColumn.height * 1.5
     anchors.fill: centralScreen
-    anchors.topMargin: topBar.height //+ blockMargin
+    //anchors.topMargin: topBar.height //+ blockMargin
     anchors.bottomMargin: bottomBar.height
 
     Rectangle {
@@ -20,34 +20,76 @@ Page {
         color: surface
     }
 
-    header: Rectangle {
+    ListView {
+        id: randomBeatsView
 
-        DropShadow {
-            anchors.fill: parent
-            radius: 8
-            color: "black"
-            source: parent
+        model: 50
+
+        anchors.fill: parent
+        anchors.topMargin: topBar.height //+ randomBeatsHeader.height //+ blockMargin
+
+        //flickableDirection: Flickable.AutoFlickDirection
+        height: contentHeight
+
+        header: Rectangle {
+            height: randomBeatsHeader.height
+            width: parent.width
+            color: "transparent"
         }
 
-        id: headerBackground
+        delegate: Item {
+            id: randomBeatButton
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            height: randomBeat.height + 0.5
+
+            BeatLine {
+                id: randomBeat
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: parent.width
+                //id_track: modelData != "" ? modelData : "empty arg"
+            }
+        }
+
+        //visible: randomBeatsView.count == 5
+    }
+
+    DropShadow {
+        anchors.fill: randomBeatsHeader
+        radius: 8
+        color: "black"
+        source: randomBeatsHeader
+    }
+
+    Rectangle {
+        id: randomBeatsHeader
+
+        anchors {
+            top: parent.top
+            topMargin: topBar.height
+            horizontalCenter: parent.horizontalCenter
+        }
 
         width: parent.width
-        height: blockMargin * 2 + headerRandomBeats.height
-        color: container
+        height: blockMargin * 2 + headerTextField.height
 
-        GaussianBlur {
-            source: stackView
-            anchors.fill: parent1
+        color: surface
+        clip: true
 
-            radius: 120
-            samples: 64
-            transparentBorder: false
+        FastBlur {
+            anchors.top: parent.top
+            //anchors.topMargin: topBar.height + parent.height * 2
+            height: randomBeatsView.height
+            width: randomBeatsView.width
+            source: randomBeatsView
+            radius: 80
+            visible: parent.visible
         }
 
         Rectangle {
             anchors.fill: parent
-            color: container
-            opacity: .6
+            color: surface
+            opacity: 0.7
 
             Divider {
                 anchors.bottom: parent.bottom
@@ -55,7 +97,7 @@ Page {
         }
 
         Text {
-            id: headerRandomBeats
+            id: headerTextField
             font {
                 //weight: Font.Bold
                 family: appFont
@@ -76,7 +118,7 @@ Page {
             id: blockRandomBeatsStyleButton
 
             anchors {
-                verticalCenter: headerRandomBeats.verticalCenter
+                verticalCenter: parent.verticalCenter
                 right: parent.right
                 rightMargin: blockMargin
             }
@@ -92,7 +134,7 @@ Page {
 
                     id: randomBeatsSelectorText
                     text: "Случайные"
-                    font.pointSize: blockMargin * 1.3
+                    font.pointSize: blockMargin * 1.2
                     font.family: appFont
                     color: secondary
 
@@ -119,44 +161,8 @@ Page {
                 }
             }
 
-            height: blockMargin * 1.6
+            height: blockMargin * 2.3
             width: randomBeatsSelectorText.width + height + 20
-
-            onClicked: {
-
-            }
         }
-    }
-
-    ListView {
-        id: randomBeatsView
-
-        model: 50
-
-        anchors.fill: parent
-
-        //flickableDirection: Flickable.AutoFlickDirection
-        height: contentHeight
-
-        delegate: Item {
-            id: randomBeatButton
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
-            height: randomBeat.height + 0.5
-
-            BeatLine {
-                id: randomBeat
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width
-                //id_track: modelData != "" ? modelData : "empty arg"
-            }
-
-            Divider {
-                width: parent.width - blockMargin
-                anchors.top: randomBeat.bottom
-            }
-        }
-
-        //visible: randomBeatsView.count == 5
     }
 }

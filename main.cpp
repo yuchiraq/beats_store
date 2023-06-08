@@ -3,7 +3,6 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
-#include "databasetracks.h"
 #include "lastrealiseslistModel.h"
 #include "randombeatsmodel.h"
 #include "functionsdatamodel.h"
@@ -39,20 +38,15 @@ int main(int argc, char *argv[])
     setHost setHostClass;
     qDebug() << setHost::getHost() << " HOST";
 
-    //DataBaseTracks dataBaseTracks;
-
     LastRealisesListModel *lastRealisesListModel = new LastRealisesListModel();
     RandomBeatsModel *randomBeatsModel = new RandomBeatsModel();
     functionsDataModel * functionsModel = new functionsDataModel();
     trackData *trackDataClass = new trackData();
     searchModel *search = new searchModel();
 
-    //dataBaseTracks.deleteData();
-
 
     engine.rootContext()->setContextProperty("setHost", &setHostClass);
     engine.rootContext() -> setContextProperty("lastRealises", lastRealisesListModel);
-    //engine.rootContext() -> setContextProperty("database", &dataBaseTracks);
     engine.rootContext() -> setContextProperty("randomBeatsModel", randomBeatsModel);
     engine.rootContext()->setContextProperty("search", search);
 
@@ -62,8 +56,6 @@ int main(int argc, char *argv[])
     qDebug() << setHost::getHost() << " HOST";
 
     engine.load(url);
-
-    //dataBaseTracks.connectToDataBase();
 
     return app.exec();
 }

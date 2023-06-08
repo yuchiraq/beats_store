@@ -1,5 +1,4 @@
 #include "functionsdatamodel.h"
-#include "databasetracks.h"
 
 functionsDataModel::functionsDataModel(QObject *parent) : QSqlQueryModel(parent) {
     this->updateModel(0);
@@ -25,7 +24,7 @@ QHash<int, QByteArray> functionsDataModel::roleNames() const {
 }
 
 void functionsDataModel::updateModel(int id) {
-    QString sql = QString("SELECT id, title, author_id, album_id, duration, bpm FROM " TABLE " WHERE id = '%1'").arg(id);
-
-    this->setQuery(sql);
+    //QString sql = QString("SELECT id, title, author_id, album_id, duration, bpm FROM " TABLE " WHERE id = '%1'").arg(id);
+return;
+    //this->setQuery(sql);
 }

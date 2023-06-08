@@ -15,7 +15,7 @@ bool LastRealisesListModel::updateList(int quantity){
         QEventLoop eventloop;
         QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
 
-        QNetworkRequest req(QUrl(QString("http://" + setHost::getHost() + setHost::getPort() + "/tracks/lastRealises?quantity=" + QString::number(quantity))));
+        QNetworkRequest req(QUrl(QString(setHost::getHost() + setHost::getPort() + "/tracks/lastRealises?quantity=" + QString::number(quantity))));
         reply = manager.get(req);
         eventloop.exec();
 

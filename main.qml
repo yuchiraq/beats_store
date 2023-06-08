@@ -52,6 +52,10 @@ Window {
     property string ip: "raw.githubusercontent.com/yuchiraq/beats_store"
     property bool updated: false
 
+    function px(value) {
+        return value / Screen.devicePixelRatio
+    }
+
     width: 1080 / 2
     height: 1920 / 2
     visible: true
@@ -105,27 +109,7 @@ Window {
         radius: 8
         color: "black"
         source: blurMask
-    }
-
-    Rectangle {
-        id: blurMask
-
-        width: parent.width
-        anchors.bottom: parent.bottom
-        height: musicPlayer.visible ? blockMargin * 8 : blockMargin * 5
-        color: container
-        visible: true
-    }
-
-    GaussianBlur {
-        source: stackView
-        anchors.fill: blurMask
-
-        radius: 120
-        samples: 64
-        transparentBorder: false
-
-        visible: blurMask.visible
+        visible: false
     }
 
     BottomBar {
@@ -138,6 +122,7 @@ Window {
         radius: 8
         color: "black"
         source: topBar
+        visible: false
     }
 
     TopLogo {
@@ -154,23 +139,24 @@ Window {
     }
 
     Rectangle {
-        id: stackMaskedDarkBackground
-        anchors.fill: stackView
-        color: surface
-        visible: stackMaskedBackground.visible
-        opacity: stackMaskedBackground.opacity
-    }
-
-    GaussianBlur {
         id: stackMaskedBackground
-        source: stackView
-        anchors.fill: stackView
-        radius: 64
-        samples: 128
-        transparentBorder: false
-
-        opacity: 1
+        anchors.fill: parent
+        color: surface
         visible: false
+
+        FastBlur {
+            anchors.centerIn: parent
+            height: mainScreen.height
+            width: mainScreen.width
+            source: stackView
+            radius: 80
+        }
+
+        Rectangle {
+            anchors.fill: parent
+            color: surface
+            opacity: 0.5
+        }
     }
 
     Image {
