@@ -33,10 +33,12 @@ type Track struct {
 	KBPS        uint   `json:"kbps"`
 }
 
+var DataBaseConn = "beatuser:p@ssword123Beats_User@tcp(34.69.28.110)/beats"
+
 func main() {
 
 	http.HandleFunc("/check", func(w http.ResponseWriter, r *http.Request) {
-		db, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
+		db, err := sql.Open("mysql", DataBaseConn)
 		if err != nil {
 			fmt.Fprintf(w, "unavailable database beats")
 			return
@@ -54,7 +56,7 @@ func main() {
 		fmt.Fprintf(w, "availible")
 	})
 	http.HandleFunc("/notify", func(w http.ResponseWriter, r *http.Request) {
-		db, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
+		db, err := sql.Open("mysql", DataBaseConn)
 		if err != nil {
 			fmt.Fprintf(w, "unavailable database Tracks")
 			return
@@ -116,7 +118,7 @@ func allTracks(w http.ResponseWriter, r *http.Request) {
 	endl := "|||"
 	//code := r.URL.Query().Get("code")
 
-	db, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
+	db, err := sql.Open("mysql", DataBaseConn)
 
 	if err != nil {
 		fmt.Println("Err > ", err.Error())
@@ -162,7 +164,7 @@ func randomTracks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	db, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
+	db, err := sql.Open("mysql", DataBaseConn)
 
 	if err != nil {
 		fmt.Println("Err > ", err.Error())
@@ -212,7 +214,7 @@ func lastTracks(w http.ResponseWriter, r *http.Request) {
 	style := r.URL.Query().Get("style")
 	quantity := r.URL.Query().Get("quantity")
 
-	db, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
+	db, err := sql.Open("mysql", DataBaseConn)
 
 	if err != nil {
 		fmt.Println("Err > ", err.Error())
@@ -286,7 +288,7 @@ func getDataTrack(w http.ResponseWriter, r *http.Request) {
 
 	go fmt.Println(timeNow() + "||-->>" + r.RemoteAddr + " GET data for " + id + " track->" + dataType)
 
-	db, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
+	db, err := sql.Open("mysql", DataBaseConn)
 
 	if err != nil {
 		fmt.Println("Err > ", err.Error())
@@ -348,7 +350,7 @@ func searchTrack(w http.ResponseWriter, r *http.Request) {
 
 	endl := "|||"
 
-	db, err := sql.Open("mysql", "beat_user:p@ssword123Beats_User@/beats")
+	db, err := sql.Open("mysql", DataBaseConn)
 
 	if err != nil {
 		fmt.Println("Err > ", err.Error())
