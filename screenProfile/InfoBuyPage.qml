@@ -29,7 +29,7 @@ Flickable {
             anchors.left: parent.left
             anchors.leftMargin: blockMargin * 2
 
-            font.family: appFont
+            //font.family: appFont
             font.bold: true
 
             horizontalAlignment: Text.AlignLeft
@@ -42,7 +42,7 @@ Flickable {
         }
 
         Text {
-            font.family: appFont
+            //font.family: appFont
             anchors.left: parent.left
             anchors.leftMargin: blockMargin
             //    anchors.horizontalCenter: parent.horizontalCenter
@@ -62,7 +62,7 @@ Flickable {
             anchors.leftMargin: blockMargin * 2
             anchors.topMargin: blockMargin
 
-            font.family: appFont
+            //font.family: appFont
             font.bold: true
 
             horizontalAlignment: Text.AlignLeft
@@ -75,7 +75,7 @@ Flickable {
         }
 
         Text {
-            font.family: appFont
+            //font.family: appFont
             anchors.left: parent.left
             anchors.leftMargin: blockMargin
             //    anchors.horizontalCenter: parent.horizontalCenter
@@ -94,7 +94,7 @@ Flickable {
         }
 
         Text {
-            font.family: appFont
+            //font.family: appFont
             font.italic: true
 
             anchors.left: parent.left

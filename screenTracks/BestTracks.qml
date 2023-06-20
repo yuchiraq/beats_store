@@ -90,7 +90,7 @@ StackView {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font {
-                family: appFont
+                //family: appFont
                 weight: Font.Bold
                 pointSize: blockMargin * 1.3
             }
@@ -117,7 +117,7 @@ StackView {
                     id: lastRealisesSorterText
                     text: "Случайные"
                     font.pointSize: blockMargin * 1.3
-                    font.family: appFont
+                    //font.family: appFont
                     color: secondary
 
                     anchors.verticalCenter: parent.verticalCenter
@@ -213,7 +213,7 @@ StackView {
         }
 
         Text {
-            font.family: appFont
+            //font.family: appFont
             color: secondary
             text: "<strong>by Chiraq Concept</strong>\n" + mainScreen.height
                   + " * " + mainScreen.width

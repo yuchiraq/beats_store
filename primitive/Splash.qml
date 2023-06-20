@@ -297,7 +297,7 @@ Rectangle {
         id: textConnection
         text: "Подключение..."
 
-        font.family: appFont
+        //font.family: appFont
         font.bold: true
 
         color: accent

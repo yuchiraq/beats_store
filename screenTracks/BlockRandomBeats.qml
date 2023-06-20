@@ -16,10 +16,26 @@ Rectangle {
     radius: blockMargin * 1.5
     //color: "#333333"
     color: container
-    border.color: randomBeatsMouse.pressed ? secondary : outline
+    border.color: outline
     border.width: px(1)
 
     property int style: 0
+
+    ColorAnimation on border.color {
+        id: borderColorOn
+        from: outline
+        to: secondary
+        duration: 200
+        running: false
+        onFinished: borderColorOff.restart()
+    }
+    ColorAnimation on border.color {
+        id: borderColorOff
+        from: secondary
+        to: outline
+        duration: 200
+        running: false
+    }
 
     MouseArea {
         id: randomBeatsMouse
@@ -32,13 +48,18 @@ Rectangle {
                 topBar.backSwitch()
             }
         }
+
+        onPressed: {
+            if (!borderColorOn.running && !borderColorOff.running)
+                borderColorOn.restart()
+        }
     }
 
     Text {
         id: headerRandomBeats
         font {
             //weight: Font.Bold
-            family: appFont
+            //family: appFont
             pointSize: blockMargin * 1.3
         }
         color: accent
@@ -73,7 +94,7 @@ Rectangle {
                 id: randomBeatsSelectorText
                 text: "Случайные"
                 font.pointSize: blockMargin * 1.3
-                font.family: appFont
+                //font.family: appFont
                 color: secondary
 
                 anchors.verticalCenter: parent.verticalCenter
@@ -129,7 +150,7 @@ Rectangle {
 
         font {
             pointSize: blockMargin * 1.4
-            family: appFont
+            //family: appFont
         }
 
         MenuItem {
@@ -146,7 +167,7 @@ Rectangle {
             text: "K-Pop"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             onClicked: {
                 randomBeatsSelectorText.text = text
@@ -173,7 +194,7 @@ Rectangle {
             text: "UK Drill"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -196,7 +217,7 @@ Rectangle {
             text: "Drill"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -219,7 +240,7 @@ Rectangle {
             text: "Pop"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -242,7 +263,7 @@ Rectangle {
             text: "Rock"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -258,7 +279,7 @@ Rectangle {
             text: "Trap"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -274,7 +295,7 @@ Rectangle {
             text: "Rap"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -290,7 +311,7 @@ Rectangle {
             text: "R\&B"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -306,7 +327,7 @@ Rectangle {
             text: "Jazz"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -322,7 +343,7 @@ Rectangle {
             text: "K-Pop"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -338,7 +359,7 @@ Rectangle {
             text: "Russian Rock"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -354,7 +375,7 @@ Rectangle {
             text: "UK Drill"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -370,7 +391,7 @@ Rectangle {
             text: "Drill"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -386,7 +407,7 @@ Rectangle {
             text: "Pop"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -402,7 +423,7 @@ Rectangle {
             text: "Rock"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -418,7 +439,7 @@ Rectangle {
             text: "Trap"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -434,7 +455,7 @@ Rectangle {
             text: "Rap"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container
@@ -450,7 +471,7 @@ Rectangle {
             text: "R\&B"
             font {
                 pointSize: blockMargin * 1.4
-                family: appFont
+                //family: appFont
             }
             background: Rectangle {
                 color: container

@@ -90,7 +90,7 @@ Page {
 
             font {
                 bold: true
-                family: appFont
+                //family: appFont
                 pointSize: blockMargin * 2
             }
         }
@@ -108,7 +108,7 @@ Page {
             color: accent
 
             font {
-                family: appFont
+                //family: appFont
                 pointSize: blockMargin //* 2.5
                 bold: true
             }
@@ -165,7 +165,7 @@ Page {
                     font {
                         bold: true
                         pointSize: blockMargin
-                        family: appFont
+                        //family: appFont
                     }
                     color: secondary
 
@@ -185,7 +185,7 @@ Page {
                     font {
                         bold: false
                         pointSize: blockMargin * 1.2
-                        family: appFont
+                        //family: appFont
                     }
 
                     color: secondary

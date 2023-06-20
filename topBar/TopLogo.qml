@@ -55,7 +55,7 @@ Rectangle {
         Rectangle {
             anchors.fill: parent
             color: surface
-            opacity: .7
+            opacity: .5
             visible: parent.visible
         }
         Divider {
@@ -187,7 +187,7 @@ Rectangle {
             anchors.fill: parent
 
             //placeholderText: "Поиск..."
-            font.family: appFont
+            //font.family: appFont
             font.pointSize: blockMargin * 2
 
             placeholderTextColor: outline
@@ -465,7 +465,7 @@ Rectangle {
                 text: parent.text
 
                 font {
-                    family: appFont
+                    //family: appFont
                     pointSize: searchSelector.height - blockMargin * 2
                     bold: selectorSelectedRow == 1
                 }
@@ -519,7 +519,7 @@ Rectangle {
                 text: parent.text
 
                 font {
-                    family: appFont
+                    //family: appFont
                     pointSize: searchSelector.height - blockMargin * 2
                     bold: selectorSelectedRow == 2
                 }
@@ -617,7 +617,7 @@ Rectangle {
                 anchors.centerIn: parent
 
                 font {
-                    family: appFont
+                    //family: appFont
                     pointSize: searchSelector.height - blockMargin * 2
                     bold: true
                 }
@@ -661,7 +661,7 @@ Rectangle {
             text: "Треки"
 
             font {
-                family: appFont
+                //family: appFont
                 pointSize: parent.height - blockMargin * 2
                 bold: true
             }
@@ -681,7 +681,7 @@ Rectangle {
             text: "Альбомы"
 
             font {
-                family: appFont
+                //family: appFont
                 pointSize: parent.height - blockMargin * 2
                 bold: false
             }
@@ -699,7 +699,7 @@ Rectangle {
             text: "Авторы"
 
             font {
-                family: appFont
+                //family: appFont
                 pointSize: parent.height - blockMargin * 2
                 bold: false
             }

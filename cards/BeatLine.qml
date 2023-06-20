@@ -215,8 +215,7 @@ Rectangle {
             id: beatLineName
             text: beatLine.title
 
-            font.family: appFont
-
+            //font.family: appFont
             color: accent
 
             font.weight: Font.Medium
@@ -228,7 +227,7 @@ Rectangle {
 
             id: beatLineAuthor
             text: beatLine.author
-            font.family: appFont
+            //font.family: appFont
             font.pointSize: blockMargin * 1.4
             color: secondary
             anchors.top: beatLineName.bottom
@@ -305,8 +304,8 @@ Rectangle {
     Text {
         id: beatLineBPMTime
         text: time + "\nid: " + id_track
-        font.family: appFont
 
+        //font.family: appFont
         anchors.right: parent.right
         anchors.rightMargin: blockMargin
         anchors.verticalCenter: parent.verticalCenter
@@ -451,6 +450,7 @@ Rectangle {
             touchAnimOn.restart()
         }
         onReleased: {
+
 
             /*if (timer.running) {
                 timer.stop()

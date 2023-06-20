@@ -26,7 +26,7 @@ Rectangle {
 
         font {
             weight: Font.Bold
-            family: appFont
+            //family: appFont
             pointSize: blockMargin * 1.3
         }
         color: accent

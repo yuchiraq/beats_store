@@ -39,7 +39,7 @@ Rectangle {
     }
 
     Text {
-        font.family: appFont
+        //font.family: appFont
         text: "<strong>Account Name</strong>"
         anchors.left: avaMask.right
         anchors.verticalCenter: parent.verticalCenter

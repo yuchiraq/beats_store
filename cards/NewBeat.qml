@@ -68,8 +68,8 @@ Rectangle {
     }
 
     Text {
-        font.family: localFont.name
 
+        //font.family: localFont.name
         color: "black"
         opacity: 0.7
         anchors {
@@ -88,7 +88,7 @@ Rectangle {
 
     Text {
         id: newBeatAuthor
-        font.family: appFont
+        //font.family: appFont
         font.pointSize: blockMargin * 1.7
         font.weight: Font.Medium
 
@@ -107,8 +107,8 @@ Rectangle {
     }
 
     Text {
-        font.family: appFont
 
+        //font.family: appFont
         color: "black"
         opacity: 0.7
 
@@ -128,8 +128,8 @@ Rectangle {
 
     Text {
         id: newBeatName
-        font.family: appFont
 
+        //font.family: appFont
         color: accent
 
         anchors {

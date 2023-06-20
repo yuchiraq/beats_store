@@ -76,7 +76,7 @@ Page {
             color: secondary
 
             font {
-                family: appFont
+                //family: appFont
                 pointSize: blockMargin * 2
             }
         }
@@ -103,7 +103,7 @@ Page {
             color: accent
 
             font {
-                family: appFont
+                //family: appFont
                 pointSize: blockMargin * 2.5
                 bold: true
             }

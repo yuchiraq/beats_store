@@ -182,7 +182,7 @@ Rectangle {
                         }
 
                         Text {
-                            font.family: appFont
+                            //font.family: appFont
                             text: "Информация о покупках"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: infoBuyImg.right
@@ -223,7 +223,7 @@ Rectangle {
                         height: blockMargin * 5
 
                         Text {
-                            font.family: appFont
+                            //font.family: appFont
                             text: "Удалить трек"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: parent.left

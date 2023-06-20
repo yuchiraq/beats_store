@@ -34,7 +34,7 @@ Rectangle {
     Rectangle {
         anchors.fill: parent
         color: container //surface
-        opacity: .7
+        opacity: .5
     }
 
     property int buttonMin: height * 0.4

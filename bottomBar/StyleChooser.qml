@@ -157,7 +157,7 @@ Rectangle {
                         width: parent.width
                         height: blockMargin * 5
                         Text {
-                            font.family: appFont
+                            //font.family: appFont
                             text: "Сначала старые"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: parent.left
@@ -207,7 +207,7 @@ Rectangle {
                         height: blockMargin * 5
 
                         Text {
-                            font.family: appFont
+                            //font.family: appFont
                             text: "Сначала новые"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: parent.left
@@ -258,7 +258,7 @@ Rectangle {
                         height: blockMargin * 5
 
                         Text {
-                            font.family: appFont
+                            //font.family: appFont
                             text: "По названию"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: parent.left
@@ -314,7 +314,7 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.pointSize: blockMargin * 2
-            font.family: appFont
+            //font.family: appFont
             font.bold: true
             wrapMode: Label.Wrap
             color: accent

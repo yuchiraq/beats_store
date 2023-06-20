@@ -116,7 +116,7 @@ Rectangle {
 
             font {
                 weight: Font.Medium
-                family: appFont
+                //family: appFont
                 bold: false
                 pointSize: parent.height * 0.35 //blockMargin * 1.5
             }
@@ -138,7 +138,7 @@ Rectangle {
             text: albumMiniCard.author
 
             font {
-                family: appFont
+                //family: appFont
                 bold: false
                 pointSize: parent.height * 0.25 //blockMargin * 1
             }

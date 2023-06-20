@@ -171,7 +171,7 @@ Rectangle {
 
                 text: titlePlayer
 
-                font.family: appFont
+                //font.family: appFont
                 font.pointSize: blockMargin * 1.5
 
                 color: accent
@@ -188,7 +188,7 @@ Rectangle {
 
                 text: authorPlayer
 
-                font.family: appFont
+                //font.family: appFont
                 font.pointSize: blockMargin * 1.5
 
                 color: secondary
@@ -487,7 +487,7 @@ Rectangle {
                 text: titlePlayer
 
                 color: "#FFF"
-                font.family: appFont
+                //font.family: appFont
                 font.bold: true
                 font.pointSize: blockMargin * 2
 
@@ -503,7 +503,7 @@ Rectangle {
                 text: authorPlayer
 
                 color: secondary
-                font.family: appFont
+                //font.family: appFont
                 font.bold: false
                 font.pointSize: blockMargin * 1.7
                 anchors {

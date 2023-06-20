@@ -22,7 +22,7 @@ Page {
         }
         TextField {
             id: titleField
-            font.family: appFont
+            //font.family: appFont
             font.pointSize: 25
             placeholderTextColor: outline
             selectedTextColor: secondary
@@ -35,7 +35,7 @@ Page {
         }
         TextField {
             id: authorField
-            font.family: appFont
+            //font.family: appFont
             font.pointSize: 25
             placeholderTextColor: outline
             selectedTextColor: secondary
@@ -51,7 +51,7 @@ Page {
             validator: RegularExpressionValidator {
                 regularExpression: /[\d\s \Q(+)\E]{0,32}$/
             }
-            font.family: appFont
+            //font.family: appFont
             font.pointSize: 25
             placeholderTextColor: outline
             selectedTextColor: secondary

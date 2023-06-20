@@ -123,7 +123,7 @@ Rectangle {
 
             font {
                 weight: Font.Medium
-                family: appFont
+                //family: appFont
                 bold: false
                 pointSize: parent.height * 0.35 //blockMargin
             }
@@ -143,7 +143,7 @@ Rectangle {
             width: blockMargin * 11
 
             font {
-                family: appFont
+                //family: appFont
                 bold: false
                 pointSize: parent.height * 0.25 //blockMargin * 0.7
             }

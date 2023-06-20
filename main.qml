@@ -23,13 +23,13 @@ import "qrc:/cards"
 Window {
     id: mainScreen
 
-    property string appFont: "SF Pro Display"
+    //property string appFont: "SF Pro Display"
 
-    FontLoader {
+
+    /*FontLoader {
         id: localFont
         source: "qrc:/fonts/SFPRODISPLAYREGULAR.OTF"
-    }
-
+    }*/
     property string alert: "#E91E63"
 
     //cols by CQ
@@ -155,7 +155,7 @@ Window {
         Rectangle {
             anchors.fill: parent
             color: surface
-            opacity: 0.5
+            opacity: 0.3
         }
     }
 

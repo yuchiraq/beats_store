@@ -27,7 +27,7 @@ Rectangle {
         anchors.centerIn: parent
 
         font {
-            family: appFont
+            //family: appFont
             pointSize: blockMargin
         }
 

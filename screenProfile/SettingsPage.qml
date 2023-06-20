@@ -47,7 +47,7 @@ Flickable {
 
             //anchors.topMargin: blockMargin * 2
             Text {
-                font.family: appFont
+                //font.family: appFont
                 text: "Тёмная тема"
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
@@ -94,7 +94,7 @@ Flickable {
             anchors.topMargin: blockMargin * 2
 
             Text {
-                font.family: appFont
+                //font.family: appFont
                 text: "Удалить данные"
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
@@ -119,7 +119,7 @@ Flickable {
             anchors.topMargin: blockMargin
             anchors.horizontalCenter: parent.horizontalCenter
 
-            font.family: appFont
+            //font.family: appFont
             placeholderText: "IP server"
             font.pointSize: blockMargin * 2
             placeholderTextColor: outline
@@ -151,7 +151,7 @@ Flickable {
             anchors.topMargin: blockMargin
             anchors.horizontalCenter: parent.horizontalCenter
 
-            font.family: appFont
+            //font.family: appFont
             placeholderText: "avatar's URL"
             font.pointSize: blockMargin * 2
             placeholderTextColor: outline

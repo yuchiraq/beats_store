@@ -89,7 +89,7 @@ Page {
         Rectangle {
             anchors.fill: parent
             color: surface
-            opacity: 0.7
+            opacity: 0.5
 
             Divider {
                 anchors.bottom: parent.bottom
@@ -100,7 +100,7 @@ Page {
             id: headerTextField
             font {
                 //weight: Font.Bold
-                family: appFont
+                //family: appFont
                 pointSize: blockMargin * 1.3
             }
             color: accent
@@ -135,7 +135,7 @@ Page {
                     id: randomBeatsSelectorText
                     text: "Случайные"
                     font.pointSize: blockMargin * 1.2
-                    font.family: appFont
+                    //font.family: appFont
                     color: secondary
 
                     anchors.verticalCenter: parent.verticalCenter

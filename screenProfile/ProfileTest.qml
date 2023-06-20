@@ -101,7 +101,7 @@ StackView {
                         }
 
                         Text {
-                            font.family: appFont
+                            //font.family: appFont
                             text: "Информация о сервисе"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: infoServiceImg.right
@@ -157,7 +157,7 @@ StackView {
                         }
 
                         Text {
-                            font.family: appFont
+                            //font.family: appFont
                             text: "Информация о покупках"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: infoBuyImg.right
@@ -218,7 +218,7 @@ StackView {
                         }
 
                         Text {
-                            font.family: appFont
+                            //font.family: appFont
                             text: "Настройки"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: settingsImg.right
@@ -278,7 +278,7 @@ StackView {
                         }
 
                         Text {
-                            font.family: appFont
+                            //font.family: appFont
                             text: "Хранящиеся данные пользователя"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: infoProfileImg.right
@@ -337,7 +337,7 @@ StackView {
                 }
 
                 Text {
-                    font.family: appFont
+                    //font.family: appFont
                     text: "Выход"
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: exitImg.right
@@ -369,7 +369,7 @@ StackView {
             }
 
             Text {
-                font.family: appFont
+                //font.family: appFont
                 color: secondary
                 text: "<strong>by Chiraq Concept</strong>"
                 font.pointSize: 15

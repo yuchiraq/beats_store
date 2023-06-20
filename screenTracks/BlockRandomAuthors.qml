@@ -27,7 +27,7 @@ Rectangle {
 
         font {
             weight: Font.Bold
-            family: appFont
+            //family: appFont
             pointSize: blockMargin * 1.3
         }
         color: accent
@@ -62,7 +62,7 @@ Rectangle {
                 id: randomAuthorsSelectorText
                 text: "Случайные"
                 font.pointSize: blockMargin * 1.3
-                font.family: appFont
+                //font.family: appFont
                 color: secondary
 
                 anchors.verticalCenter: parent.verticalCenter
@@ -117,7 +117,7 @@ Rectangle {
 
         font {
             pointSize: blockMargin * 1.4
-            family: appFont
+            //family: appFont
         }
 
         MenuItem {
