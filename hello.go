@@ -8,7 +8,6 @@ import (
 	_ "github.com/gordonklaus/portaudio"
 	"io"
 	"log"
-	"net"
 	"net/http"
 	"os"
 	"strconv"
@@ -33,11 +32,13 @@ type Track struct {
 	KBPS        uint   `json:"kbps"`
 }
 
-var DataBaseConn = "beatuser:p@ssword123Beats_User@tcp(34.69.28.110)/beats"
+/*tcp(34.69.28.110)*/
+var DataBaseConn = "beat_user:p@ssword123Beats_User@/beats"
 
 func main() {
 
 	http.HandleFunc("/check", func(w http.ResponseWriter, r *http.Request) {
+		go fmt.Println(timeNow() + "||-->>" + r.RemoteAddr + " CHECK /")
 		db, err := sql.Open("mysql", DataBaseConn)
 		if err != nil {
 			fmt.Fprintf(w, "unavailable database beats")
@@ -56,6 +57,7 @@ func main() {
 		fmt.Fprintf(w, "availible")
 	})
 	http.HandleFunc("/notify", func(w http.ResponseWriter, r *http.Request) {
+		go fmt.Println(timeNow() + "||-->>" + r.RemoteAddr + " GET notify")
 		db, err := sql.Open("mysql", DataBaseConn)
 		if err != nil {
 			fmt.Fprintf(w, "unavailable database Tracks")
@@ -69,32 +71,7 @@ func main() {
 	http.HandleFunc("/tracks/random", randomTracks)
 	http.HandleFunc("/tracks/getData", getDataTrack)
 	http.HandleFunc("/tracks/search", searchTrack)
-	http.HandleFunc("/stream", func(w http.ResponseWriter, r *http.Request) {
-		trackID := r.URL.Query().Get("ID")
-
-		go fmt.Println(timeNow() + "||-->>" + r.RemoteAddr + " STREAM > " + trackID)
-
-		file, err := os.Open("Snowlub.wav")
-		if err != nil {
-			panic(err)
-			return
-		}
-
-		defer file.Close()
-
-		addr, err := net.ResolveUDPAddr("udp", "localhost:9000")
-		if err != nil {
-			panic(err)
-			return
-		}
-
-		err = streamAudioUDP(file, addr)
-		if err != nil {
-			panic(err)
-			return
-		}
-	})
-	http.HandleFunc("/streamHTTP", streamAudio)
+	http.HandleFunc("/stream", streamAudio)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
@@ -390,32 +367,6 @@ func searchTrack(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w, endl)
 		}
 	}
-}
-
-func streamAudioUDP(audioFile io.Reader, addr *net.UDPAddr) error {
-	conn, err := net.DialUDP("udp", nil, addr)
-	chk(err)
-
-	defer conn.Close()
-
-	buf := make([]byte, 1024)
-
-	for {
-		n, err := audioFile.Read(buf)
-		if err != nil {
-			if err != io.EOF {
-				panic(err)
-				return err
-			}
-			break
-		}
-
-		_, err = conn.Write(buf[:n])
-		chk(err)
-
-	}
-
-	return nil
 }
 
 func streamAudio(w http.ResponseWriter, r *http.Request) {
