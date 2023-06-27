@@ -238,7 +238,7 @@ StackView {
         console.log("add " + lastRealisesView.model.count)
         updateLastTracks()
 
-        blockRandomBeats.updateView()
+        blockRandomBeats.updateView(5)
     }
 
     Connections {
@@ -259,8 +259,4 @@ StackView {
         }
     }
 
-    function moveUP() {
-
-        bestTracksInitial.contentY = 0
-    }
 }

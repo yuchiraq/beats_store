@@ -35,7 +35,7 @@ Rectangle {
     property string id_track: ""
     property string cover: id_track == "" ? "" : "http://" + ip + "/coversMini/" + id_track + ".jpg"
     property string title: id_track == "" ? "" : trackData.getTitle(id_track)
-    property string author: id_track == "" ? "" : trackData.getAuthorId(
+    property string author: id_track == "" ? "" : trackData.getAuthorTitle(
                                                  id_track)
     property string time: id_track == "" ? "" : Math.floor(
                                                timeSec / 60) + ":" + timeCorrector(

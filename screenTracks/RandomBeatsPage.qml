@@ -23,7 +23,7 @@ Page {
     ListView {
         id: randomBeatsView
 
-        model: 50
+        model: randomBeatsModel.items
 
         anchors.fill: parent
         anchors.topMargin: topBar.height //+ randomBeatsHeader.height //+ blockMargin
@@ -47,12 +47,17 @@ Page {
                 id: randomBeat
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width
-                //id_track: modelData != "" ? modelData : "empty arg"
+                id_track: modelData != "" ? modelData : "empty arg"
             }
         }
 
         //visible: randomBeatsView.count == 5
     }
+
+    /*function updatePage() {
+        randomBeatsModel.updateModel("0", blockRandomBeats.style.toString())
+        randomBeatsPageView.model = randomBeatsModel.items
+    }*/
 
     DropShadow {
         anchors.fill: randomBeatsHeader

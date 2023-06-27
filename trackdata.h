@@ -20,10 +20,8 @@ public slots:
     QString getTitle(uint id);
 
     QString getAuthorTitle(uint id);
-    uint getAuthorId(uint id);
 
     QString getAlbumTitle(uint id);
-    uint getAlbumId(uint id);
 
     int getDuration(uint id);
 
@@ -40,9 +38,6 @@ private:
 
     QMap<uint, int> duration;
     QMap<uint, int> bpm;
-
-    QMap<uint, uint> authorsID;
-    QMap<uint, uint> albumsID;
 
     QMap<uint, QString> tags;
 

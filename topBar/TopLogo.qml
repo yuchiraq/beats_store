@@ -281,6 +281,11 @@ Rectangle {
                 width: parent.height * 0.4 //(searchInput.height - blockMargin / 2) * 0.5
                 height: width
                 smooth: true
+                ColorOverlay {
+                    anchors.fill: parent
+                    source: parent
+                    color: alert
+                }
             }
 
             onPressed: searchTopBarCleanerBackAnim.running = true
