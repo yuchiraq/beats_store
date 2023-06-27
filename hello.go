@@ -10,26 +10,48 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strconv"
 	"strings"
 	"time"
 )
 
 type Track struct {
-	ID          uint64 `json:"id"`
+	ID          string `json:"id"`
 	Title       string `json:"title"`
-	Album       uint64 `json:"album_id"`
-	Author      uint64 `json:"author_id"`
-	Style       uint   `json:"music_style"`
+	Album       string `json:"album_id"`
+	Author      string `json:"author_id"`
+	Style       string `json:"music_style"`
 	Tags        string `json:"tags"`
-	Price       uint   `json:"price"`
+	Price       string `json:"price"`
 	Currency    string `json:"price_currency"`
-	Duration    int    `json:"duration"`
+	Duration    string `json:"duration"`
 	RealiseDate string `json:"realise_date"`
-	SaleType    uint   `json:"sale_type"`
-	BPM         uint   `json:"bpm"`
-	ForSale     bool   `json:"for_sale"`
-	KBPS        uint   `json:"kbps"`
+	SaleType    string `json:"sale_type"`
+	BPM         string `json:"bpm"`
+	ForSale     string `json:"for_sale"`
+	KBPS        string `json:"kbps"`
+}
+
+type Author struct {
+	ID        string `json:"id"`
+	Name      string `json:"name"`
+	Style     string `json:"music_style"`
+	AboutInfo string `json:"about_info"`
+}
+
+type Album struct {
+	ID          string `json:"id"`
+	Title       string `json:"title"`
+	Author      string `json:"author_id"`
+	Quantity    string `json:"quantity"`
+	Style       string `json:"music_style"`
+	AboutInfo   string `json:"tags"`
+	Price       string `json:"price"`
+	Currency    string `json:"price_currency"`
+	Duration    string `json:"duration"`
+	RealiseDate string `json:"realise_date"`
+	SaleType    string `json:"sale_type"`
+	ForSale     string `json:"for_sale"`
+	Preview     string `json:"preview"`
 }
 
 /*tcp(34.69.28.110)*/
@@ -121,7 +143,7 @@ func allTracks(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for i := 0; i < len(tracks); i++ {
-		fmt.Fprintf(w, strconv.FormatUint(tracks[i].ID, 10))
+		fmt.Fprintf(w, tracks[i].ID)
 		if i != len(tracks)-1 {
 			fmt.Fprintf(w, endl)
 		}
@@ -176,7 +198,7 @@ func randomTracks(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for i := 0; i < len(tracks); i++ {
-		fmt.Fprintf(w, strconv.FormatUint(tracks[i].ID, 10))
+		fmt.Fprintf(w, tracks[i].ID)
 		if i != len(tracks)-1 {
 			fmt.Fprintf(w, endl)
 		}
@@ -240,7 +262,7 @@ func lastTracks(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for i := 0; i < len(tracks); i++ {
-		fmt.Fprintf(w, strconv.FormatUint(tracks[i].ID, 10))
+		fmt.Fprintf(w, tracks[i].ID)
 		if i != len(tracks)-1 {
 			fmt.Fprintf(w, endl)
 		}
@@ -289,24 +311,35 @@ func getDataTrack(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if dataType == "" {
-		fmt.Fprintf(w, strconv.FormatUint(tracks[0].ID, 10)+endl)
+		fmt.Fprintf(w, tracks[0].ID+endl)
 		fmt.Fprintf(w, tracks[0].Title+endl)
-		fmt.Fprintf(w, strconv.FormatUint(tracks[0].Author, 10)+endl)
-		fmt.Fprintf(w, strconv.FormatInt(int64(tracks[0].Duration), 10))
+		fmt.Fprintf(w, tracks[0].Author+endl)
+		fmt.Fprintf(w, tracks[0].Duration)
 	} else if dataType == "title" {
 		fmt.Fprintf(w, tracks[0].Title)
 	} else if dataType == "author" {
-		fmt.Fprintf(w, strconv.FormatUint(tracks[0].Author, 10))
+		results, err := db.Query("SELECT name FROM authors where id = " + "'" + tracks[0].Author + "'")
+		chk(err)
+
+		var authors []Author
+		for results.Next() {
+			var authorCur Author
+			err = results.Scan(&authorCur.Name)
+			chk(err)
+			authors = append(authors, authorCur)
+		}
+
+		fmt.Fprintf(w, authors[0].Name)
 	} else if dataType == "album" {
-		fmt.Fprintf(w, strconv.FormatUint(tracks[0].Album, 10))
+		fmt.Fprintf(w, tracks[0].Album)
 	} else if dataType == "duration" {
-		fmt.Fprintf(w, strconv.FormatUint(uint64(tracks[0].Duration), 10))
+		fmt.Fprintf(w, tracks[0].Duration)
 	} else if dataType == "full" {
-		fmt.Fprintf(w, strconv.FormatUint(tracks[0].ID, 10)+endl+tracks[0].Title+endl+strconv.FormatUint(tracks[0].Album, 10)+
-			endl+strconv.FormatUint(tracks[0].Author, 10)+endl+strconv.FormatUint(uint64(tracks[0].Style), 10)+endl+tracks[0].Tags+endl+
-			strconv.FormatUint(uint64(tracks[0].Price), 10)+endl+tracks[0].Currency+endl+strconv.FormatUint(uint64(tracks[0].Duration), 10)+endl+
-			tracks[0].RealiseDate+endl+strconv.FormatUint(uint64(tracks[0].SaleType), 10)+endl+strconv.FormatUint(uint64(tracks[0].BPM), 10)+endl+
-			strconv.FormatBool(tracks[0].ForSale)+endl+strconv.FormatUint(uint64(tracks[0].KBPS), 10))
+		fmt.Fprintf(w, tracks[0].ID+endl+tracks[0].Title+endl+tracks[0].Album+
+			endl+tracks[0].Author+endl+tracks[0].Style+endl+tracks[0].Tags+endl+
+			tracks[0].Price+endl+tracks[0].Currency+endl+tracks[0].Duration+endl+
+			tracks[0].RealiseDate+endl+tracks[0].SaleType+endl+tracks[0].BPM+endl+
+			tracks[0].ForSale+endl+tracks[0].KBPS)
 	} else {
 		fmt.Fprintf(w, "your error 2")
 	}
@@ -362,7 +395,7 @@ func searchTrack(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for i := 0; i < len(tracks); i++ {
-		fmt.Fprintf(w, strconv.FormatUint(tracks[i].ID, 10))
+		fmt.Fprintf(w, tracks[i].ID)
 		if i != len(tracks)-1 {
 			fmt.Fprintf(w, endl)
 		}
