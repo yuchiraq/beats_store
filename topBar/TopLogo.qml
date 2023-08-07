@@ -55,7 +55,7 @@ Rectangle {
         Rectangle {
             anchors.fill: parent
             color: surface
-            opacity: .5
+            opacity: .6
             visible: parent.visible
         }
         Divider {

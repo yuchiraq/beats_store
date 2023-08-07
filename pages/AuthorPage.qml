@@ -12,7 +12,7 @@ Page {
     id: authorService
     anchors.fill: mainScreen
 
-    property string author_cover: ""
+    property string author_cover: "http://" + ip + "/coversFull/" + author_id + ".jpg"
     property int author_id: 0
 
     property string author_name: ""
@@ -23,6 +23,20 @@ Page {
     Rectangle {
         anchors.fill: parent
         color: surface
+    }
+
+    FastBlur {
+        anchors.fill: parent
+        source: authorCover
+        radius: 80
+        opacity: 0.1
+    }
+
+    FastBlur {
+        anchors.fill: authorCover
+        source: authorCover
+        radius: 30
+        transparentBorder: true
     }
 
     Image {
@@ -211,7 +225,6 @@ Page {
                     horizontalCenter: parent.horizontalCenter
                 }
             }
-
         }
     }
 }

@@ -187,7 +187,7 @@ StackView {
                     horizontalCenter: parent.horizontalCenter
                 }
 
-                Material.theme: Material.Dark
+                Material.theme: Material.LightBlue
                 text: "..."
                 width: parent.width / 3
 
@@ -252,11 +252,20 @@ StackView {
             curID = lastRealises.addRow(++curCount)
             if (curID != "0") {
                 console.log("add " + curCount + "|" + curID + " | " + lastRealisesView.model.count)
-                lastTracksModel.append({
+
+
+                /*lastTracksModel.append({
                                            "trackID": curID
-                                       })
+                                       })*/
+                insertBeat(curID)
+                //sleep(200)
             }
         }
     }
 
+    function insertBeat(curID) {
+        lastTracksModel.append({
+                                   "trackID": curID
+                               })
+    }
 }

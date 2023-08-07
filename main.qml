@@ -56,6 +56,13 @@ Window {
         return value / Screen.devicePixelRatio
     }
 
+    function sleep(millis) {
+        var t = (new Date()).getTime()
+        while (((new Date()).getTime() - t) < millis) {
+
+        }
+    }
+
     width: 1080 / 2
     height: 1920 / 2
     visible: true

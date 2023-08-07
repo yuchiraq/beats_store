@@ -18,8 +18,8 @@ Rectangle {
     //border.width: px(1)
     color: container
 
-    property int id: 0
-    property string cover: ""
+    property string author_id: ""
+    property string cover: "http://" + ip + "/coversMini/" + author_id + ".jpg"
     property string name: ""
     property string style: ""
 
@@ -182,9 +182,9 @@ Rectangle {
         anchors.fill: parent
 
         onClicked: {
-            authorPage.author_cover = cover
+            //authorPage.author_cover = cover
             authorPage.author_name = name
-            authorPage.author_id = id
+            authorPage.author_id = author_id
             if (bottomBar.active == 1) {
                 leftScreen.push(authorPage, StackView.Immediate)
             } else if (bottomBar.active == 2) {

@@ -11,13 +11,13 @@ Rectangle {
     id: blockRandomBeats
 
     width: mainScreen.width - (blockMargin * 2)
-    height: blockMargin * 7 * 5 + 3 + headerRandomBeats.height + blockMargin * 2 + blockMargin
+    height: blockMargin * 7 * 5 + 3 + header.height + blockMargin
     //radius: width / 20
     radius: blockMargin * 1.5
     //color: "#333333"
     color: container
     border.color: outline
-    border.width: px(1)
+    border.width: page ? 0 : px(1)
     clip: true
 
     property int style: 0
@@ -65,7 +65,7 @@ Rectangle {
     }
 
     Divider {
-        width: parent.width
+        width: parent.width - blockMargin
         color: outline
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: header.bottom
@@ -111,7 +111,7 @@ Rectangle {
         flickableDirection: Flickable.AutoFlickDirection
         reuseItems: true
 
-        height: contentHeight
+        height: blockMargin * 7 * 5 + 3 + headerRandomBeats.height + blockMargin * 2 + blockMargin
 
         delegate: Item {
             id: randomBeatButton
@@ -184,18 +184,19 @@ Rectangle {
         }
 
         onFinished: {
-            updateView(0)
-
             blockRandomBeats.page = true
+            //startSplashScreen.visible = false
         }
 
         onStarted: {
+            //startSplashScreen.startSplash()
             randomBeatsView.interactive = true
             prevPosView = bestTracksInitial.contentY
             headerOnColor.start()
             colorToSurface.start()
             bestTracksInitial.interactive = false
             randomBeatsView.clip = false
+            updateView(0)
         }
 
         running: false
@@ -240,14 +241,6 @@ Rectangle {
             to: prevPosView
         }
 
-        //        NumberAnimation {
-        //            target: randomBeatsView
-        //            property: "height"
-        //            duration: 400
-        //            easing.type: Easing.InOutQuad
-        //            from: randomBeatsView.contentHeight
-        //            to: (blockMargin * 7 + px(1)) * 5
-        //        }
         NumberAnimation {
             target: randomBeatsView
             property: "contentY"
@@ -255,6 +248,12 @@ Rectangle {
             easing.type: Easing.InOutQuad
             from: randomBeatsView.contentY
             to: 0
+            onStarted: {
+                console.log("count " + randomBeatsView.count)
+                while (randomBeatsView.count > 5) {
+                    randomBeatsView.remove(randomBeatsView.count - 1)
+                }
+            }
         }
 
         onFinished: {
@@ -262,7 +261,6 @@ Rectangle {
             //updateView(5)
             randomBeatsView.height = (blockMargin * 7 + px(1)) * 5
 
-            randomBeatsView.positionViewAtBeginning()
             blockRandomBeats.page = false
 
             randomBeatsView.clip = true
@@ -273,6 +271,10 @@ Rectangle {
             headerOnTransparent.start()
             colorToContainer.start()
             bestTracksInitial.interactive = true
+            while (randomBeatsView.count > 5) {
+                console.log("count " + randomBeatsView.count)
+                randomBeatsView.remove(randomBeatsView.count - 1)
+            }
         }
 
         running: false
@@ -322,7 +324,7 @@ Rectangle {
         width: parent.width
         color: "transparent"
 
-        height: blockMargin * 4
+        height: headerRandomBeats.height + blockMargin * 2
 
         MouseArea {
             anchors.fill: parent
@@ -351,8 +353,7 @@ Rectangle {
             text: "<b>Биты</b>"
 
             anchors {
-                top: parent.top
-                topMargin: blockMargin
+                verticalCenter: parent.verticalCenter
                 left: parent.left
                 leftMargin: blockMargin
             }
