@@ -60,7 +60,7 @@ var DataBaseConn = "beat_user:p@ssword123Beats_User@/beats"
 func main() {
 
 	http.HandleFunc("/check", func(w http.ResponseWriter, r *http.Request) {
-		go fmt.Println(timeNow() + "||-->>" + r.RemoteAddr + " CHECK /")
+		go fmt.Println(timeNow() + "||-->>" + r.RemoteAddr + " CHECK")
 		db, err := sql.Open("mysql", DataBaseConn)
 		if err != nil {
 			fmt.Fprintf(w, "unavailable database beats")
@@ -174,10 +174,18 @@ func randomTracks(w http.ResponseWriter, r *http.Request) {
 
 	var DBrequest = ""
 
-	if style == "" || style == "0" {
-		DBrequest = "SELECT id FROM tracks ORDER BY RAND() LIMIT " + quantity
+	if quantity != "0" {
+		if style == "" || style == "0" {
+			DBrequest = "SELECT id FROM tracks ORDER BY RAND() LIMIT " + quantity
+		} else {
+			DBrequest = "SELECT id FROM tracks WHERE music_style = " + style + " ORDER BY RAND() LIMIT " + quantity
+		}
 	} else {
-		DBrequest = "SELECT id FROM tracks WHERE music_style = " + style + " ORDER BY RAND() LIMIT " + quantity
+		if style == "" || style == "0" {
+			DBrequest = "SELECT id FROM tracks ORDER BY RAND()"
+		} else {
+			DBrequest = "SELECT id FROM tracks WHERE music_style = " + style + " ORDER BY RAND()"
+		}
 	}
 
 	results, err := db.Query(DBrequest)
