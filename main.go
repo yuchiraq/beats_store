@@ -17,7 +17,7 @@ import (
 )
 
 // DataBaseConn /*tcp(34.69.28.110)*/
-var DataBaseConn = "beat_user:p@ssword123Beats_User@/beats"
+var DataBaseConn = "root:ekran11series@/beats"
 
 func main() {
 
